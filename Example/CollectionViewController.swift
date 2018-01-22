@@ -18,37 +18,40 @@ import ReactiveLists
 import UIKit
 
 @objc
-class ViewController: UIViewController {
+class CollectionViewController: UIViewController {
 
-    lazy var tableView: UITableView = {
-        UITableView()
+    lazy var collectionView: UICollectionView = {
+        UICollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
     }()
 
-    var tableViewDataSource: FluxTableViewDataSource?
+    var collectionViewDataSource: FluxCollectionViewDataSource?
     var groups: [UserGroup] = [] {
         didSet {
-            self.tableViewDataSource?.tableViewModel.value = tableViewModel(
+            let model = collectionViewModel(
                 forState: groups,
                 onDeleteClosure: { deletedUser in
                     // Iterate through the user groups and find the deleted user.
                     for (index, group) in self.groups.enumerated() {
                         self.groups[index].users = group.users.filter { $0.uuid != deletedUser.uuid }
                     }
-                }
+            }
             )
+            self.collectionViewDataSource?.collectionViewModel.value = model
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Table View Example"
+        self.title = "Collection View Example"
 
-        self.tableView.frame = self.view.frame
-        self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(self.tableView)
-        self.tableViewDataSource = FluxTableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
+        self.collectionView.frame = self.view.frame
+        self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(self.collectionView)
+
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionUserCell")
+        self.collectionViewDataSource = FluxCollectionViewDataSource(shouldDeselectUponSelection: true)
+        self.collectionViewDataSource?.collectionView = self.collectionView
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Flip", style: .plain, target: self, action: #selector(self.swapSections)
