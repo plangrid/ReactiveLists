@@ -25,7 +25,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
     func testDoubleBlankSupplementaryViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
             let sectionModel = FluxCollectionViewModel.SectionModel(
-                cellViewModels: [generateRandomTestCollectionCellViewModel()],
+                cellViewModels: [generateTestCollectionCellViewModel()],
                 headerHeight: $0,
                 footerHeight: $1)
 
@@ -40,7 +40,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
     func testBlankSupplementaryHeaderViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
             let sectionModel = FluxCollectionViewModel.SectionModel(
-                cellViewModels: [generateRandomTestCollectionCellViewModel()],
+                cellViewModels: [generateTestCollectionCellViewModel()],
                 headerHeight: $0,
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: $1, viewKind: .footer, sectionLabel: "A"))
 
@@ -60,7 +60,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
     func testBlankSupplementaryFooterViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
             let sectionModel = FluxCollectionViewModel.SectionModel(
-                cellViewModels: [generateRandomTestCollectionCellViewModel()],
+                cellViewModels: [generateTestCollectionCellViewModel()],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: $0, viewKind: .header, sectionLabel: "A"),
                 footerHeight: $1)
 
@@ -80,7 +80,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
     func testDoubleCustomSupplementaryViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
             let sectionModel = FluxCollectionViewModel.SectionModel(
-                cellViewModels: [generateRandomTestCollectionCellViewModel()],
+                cellViewModels: [generateTestCollectionCellViewModel()],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: $0, viewKind: .header, sectionLabel: "A"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: $1, viewKind: .footer, sectionLabel: "A"))
 
@@ -109,9 +109,9 @@ final class FluxCollectionViewModelTests: XCTestCase {
                 footerHeight: nil),
             FluxCollectionViewModel.SectionModel(
                 cellViewModels: [
-                    generateRandomTestCollectionCellViewModel("A"),
-                    generateRandomTestCollectionCellViewModel("B"),
-                    generateRandomTestCollectionCellViewModel("C"),
+                    generateTestCollectionCellViewModel("A"),
+                    generateTestCollectionCellViewModel("B"),
+                    generateTestCollectionCellViewModel("C"),
                 ],
                 headerHeight: 43,
                 footerHeight: nil),
