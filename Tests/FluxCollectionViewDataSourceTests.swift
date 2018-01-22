@@ -14,7 +14,6 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Nimble
 @testable import ReactiveLists
 import ReactiveSwift
 import UIKit
@@ -257,13 +256,13 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
                 footerViewModel: nil),
         ])
 
-        expect(item?.label).toEventually(equal("X"))
-        expect(header?.label).toEventually(equal("label_header+X"))
-        expect(footer?.label).toEventually(equal("label_footer+X"))
+        XCTAssertEqual(item?.label, "X")
+        XCTAssertEqual(header?.label, "label_header+X")
+        XCTAssertEqual(footer?.label, "label_footer+X")
 
-        expect(item?.accessibilityIdentifier).toEventually(equal("access-1.0"))
-        expect(header?.accessibilityIdentifier).toEventually(equal("access_header+0"))
-        expect(footer?.accessibilityIdentifier).toEventually(equal("access_footer+0"))
+        XCTAssertEqual(item?.accessibilityIdentifier, "access-1.0")
+        XCTAssertEqual(header?.accessibilityIdentifier, "access_header+0")
+        XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
     }
 
     private func _getItem(_ path: IndexPath) -> TestFluxCollectionViewCell? {

@@ -14,7 +14,6 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Nimble
 @testable import ReactiveLists
 import ReactiveSwift
 import XCTest
@@ -212,19 +211,30 @@ final class FluxTableViewDataSourceTests: XCTestCase {
         header1 = ftvds?._getHeader(1)
         footer1 = ftvds?._getFooter(1)
 
-        expect(cell10?.label).toEventually(equal("Y"))
-        expect(header0?.label).toEventually(equal("title_header+X"))
-        expect(footer0?.label).toEventually(equal("title_footer+X"))
-        expect(cell00?.label).toEventually(equal("X"))
-        expect(header1?.label).toEventually(equal("title_header+Y"))
-        expect(footer1?.label).toEventually(equal("title_footer+Y"))
+        XCTAssertEqual(cell10?.label, "Y")
 
-        expect(cell00?.accessibilityIdentifier).toEventually(equal("access-0.0"))
-        expect(cell10?.accessibilityIdentifier).toEventually(equal("access-1.0"))
-        expect(header0?.accessibilityIdentifier).toEventually(equal("access_header+0"))
-        expect(footer0?.accessibilityIdentifier).toEventually(equal("access_footer+0"))
-        expect(header1?.accessibilityIdentifier).toEventually(equal("access_header+1"))
-        expect(footer1?.accessibilityIdentifier).toEventually(equal("access_footer+1"))
+        let headerPredicate = NSPredicate { (header, _) -> Bool in
+            return (header as! TestFluxTableViewSectionHeaderFooter).label == "title_header+X"
+        }
+        let headerExpectation = XCTNSPredicateExpectation(predicate: headerPredicate, object: header0)
+
+        let footerPredicate = NSPredicate { (footer, _) -> Bool in
+            return (footer as! TestFluxTableViewSectionHeaderFooter).label == "title_footer+X"
+        }
+        let footerExpectation = XCTNSPredicateExpectation(predicate: footerPredicate, object: footer0)
+
+        wait(for: [headerExpectation, footerExpectation], timeout: 5)
+
+        XCTAssertEqual(cell00?.label, "X")
+        XCTAssertEqual(header1?.label, "title_header+Y")
+        XCTAssertEqual(footer1?.label, "title_footer+Y")
+
+        XCTAssertEqual(cell00?.accessibilityIdentifier, "access-0.0")
+        XCTAssertEqual(cell10?.accessibilityIdentifier, "access-1.0")
+        XCTAssertEqual(header0?.accessibilityIdentifier, "access_header+0")
+        XCTAssertEqual(footer0?.accessibilityIdentifier, "access_footer+0")
+        XCTAssertEqual(header1?.accessibilityIdentifier, "access_header+1")
+        XCTAssertEqual(footer1?.accessibilityIdentifier, "access_footer+1")
     }
 
     func testShouldDeselectUponSelection() {
