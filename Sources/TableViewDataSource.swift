@@ -23,7 +23,7 @@ public typealias ViewLocationFilter = (ViewLocation) -> Bool
 
 /// A Data Source that drives a dynamic table view's appereance and behavior in terms of view models for the individual cells.
 @objc
-open class FluxTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     /// Communicates information useful for refreshing the tableview
     ///
@@ -37,11 +37,11 @@ open class FluxTableViewDataSource: NSObject, UITableViewDataSource, UITableView
         case rowsModified
     }
 
-    public var tableViewModel: MutableProperty<FluxTableViewModel?> = MutableProperty(nil)
+    public var tableViewModel: MutableProperty<TableViewModel?> = MutableProperty(nil)
 
     var headersOnScreen: [IndexPath: UIView] = [:]
     var footersOnScreen: [IndexPath: UIView] = [:]
-    var _tableViewModel: FluxTableViewModel? { return self.tableViewModel.value }
+    var _tableViewModel: TableViewModel? { return self.tableViewModel.value }
     var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
 
     // internal for testing
@@ -186,7 +186,7 @@ open class FluxTableViewDataSource: NSObject, UITableViewDataSource, UITableView
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
-        if let cellViewModel = self._tableViewModel?[indexPath] as? FluxTableViewCellModelEditActions {
+        if let cellViewModel = self._tableViewModel?[indexPath] as? TableViewCellModelEditActions {
             return cellViewModel.editActions(indexPath)
         }
 
@@ -224,7 +224,7 @@ open class FluxTableViewDataSource: NSObject, UITableViewDataSource, UITableView
         let visibleIndexPaths = self._tableView.indexPathsForVisibleRows ?? []
 
         // Collect the index paths and views models to reload
-        let indexPathsAndViewModelsToReload: [(IndexPath, FluxTableViewCellViewModel)]
+        let indexPathsAndViewModelsToReload: [(IndexPath, TableViewCellViewModel)]
         indexPathsAndViewModelsToReload = visibleIndexPaths.flatMap { indexPath in
             if locationFilter?(.cell(indexPath)) ?? true {
                 return self._tableViewModel?[indexPath].map { (indexPath, $0) }

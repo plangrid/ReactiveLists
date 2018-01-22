@@ -19,7 +19,7 @@ import UIKit
 
 /// A Data Source that drives the Collection Views appereance and behavior in terms of view models for the individual cells.
 @objc
-public class FluxCollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
 
@@ -32,11 +32,11 @@ public class FluxCollectionViewDataSource: NSObject, UICollectionViewDataSource,
         }
     }
 
-    public var collectionViewModel: MutableProperty<FluxCollectionViewModel?> = MutableProperty(nil)
+    public var collectionViewModel: MutableProperty<CollectionViewModel?> = MutableProperty(nil)
     var _cellsOnScreen: [IndexPath: UICollectionViewCell] = [:]
     var _headersOnScreen: [IndexPath: UICollectionReusableView] = [:]
     var _footersOnScreen: [IndexPath: UICollectionReusableView] = [:]
-    private var _collectionViewModel: FluxCollectionViewModel? { return self.collectionViewModel.value }
+    private var _collectionViewModel: CollectionViewModel? { return self.collectionViewModel.value }
     private var _shouldDeselectUponSelection: Bool
 
     public init(shouldDeselectUponSelection: Bool = true) {
@@ -78,7 +78,7 @@ public class FluxCollectionViewDataSource: NSObject, UICollectionViewDataSource,
             viewModel.applyViewModelToView(view)
             view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
         } else {
-            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: FluxCollectionViewDataSource._hiddenSupplementaryViewIdentifier, for: indexPath)
+            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewDataSource._hiddenSupplementaryViewIdentifier, for: indexPath)
         }
 
         let indexPathKey = self._indexPathForSupplementaryViewInSection(section)
@@ -195,7 +195,7 @@ public class FluxCollectionViewDataSource: NSObject, UICollectionViewDataSource,
         [UICollectionElementKindSectionHeader, UICollectionElementKindSectionFooter].forEach {
             collectionView?.register(UICollectionReusableView.self,
                                      forSupplementaryViewOfKind: $0,
-                                     withReuseIdentifier: FluxCollectionViewDataSource._hiddenSupplementaryViewIdentifier)
+                                     withReuseIdentifier: CollectionViewDataSource._hiddenSupplementaryViewIdentifier)
         }
     }
 

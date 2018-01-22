@@ -18,13 +18,13 @@
 import ReactiveSwift
 import XCTest
 
-final class FluxCollectionViewModelTests: XCTestCase {
+final class CollectionViewModelTests: XCTestCase {
 
-    private var _collectionViewModel: FluxCollectionViewModel!
+    private var _collectionViewModel: CollectionViewModel!
 
     func testDoubleBlankSupplementaryViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
-            let sectionModel = FluxCollectionViewModel.SectionModel(
+            let sectionModel = CollectionViewModel.SectionModel(
                 cellViewModels: [generateTestCollectionCellViewModel()],
                 headerHeight: $0,
                 footerHeight: $1)
@@ -39,7 +39,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
 
     func testBlankSupplementaryHeaderViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
-            let sectionModel = FluxCollectionViewModel.SectionModel(
+            let sectionModel = CollectionViewModel.SectionModel(
                 cellViewModels: [generateTestCollectionCellViewModel()],
                 headerHeight: $0,
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: $1, viewKind: .footer, sectionLabel: "A"))
@@ -59,7 +59,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
 
     func testBlankSupplementaryFooterViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
-            let sectionModel = FluxCollectionViewModel.SectionModel(
+            let sectionModel = CollectionViewModel.SectionModel(
                 cellViewModels: [generateTestCollectionCellViewModel()],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: $0, viewKind: .header, sectionLabel: "A"),
                 footerHeight: $1)
@@ -79,7 +79,7 @@ final class FluxCollectionViewModelTests: XCTestCase {
 
     func testDoubleCustomSupplementaryViewModelInitalizer() {
         parameterize(cases: (nil as CGFloat?, nil as CGFloat?), (42, nil), (nil, 43), (42, 43)) {
-            let sectionModel = FluxCollectionViewModel.SectionModel(
+            let sectionModel = CollectionViewModel.SectionModel(
                 cellViewModels: [generateTestCollectionCellViewModel()],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: $0, viewKind: .header, sectionLabel: "A"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: $1, viewKind: .footer, sectionLabel: "A"))
@@ -102,12 +102,12 @@ final class FluxCollectionViewModelTests: XCTestCase {
     }
 
     func testSubscripts() {
-        let collectionViewModel = FluxCollectionViewModel(sectionModels: [
-            FluxCollectionViewModel.SectionModel(
+        let collectionViewModel = CollectionViewModel(sectionModels: [
+            CollectionViewModel.SectionModel(
                 cellViewModels: nil,
                 headerHeight: 42,
                 footerHeight: nil),
-            FluxCollectionViewModel.SectionModel(
+            CollectionViewModel.SectionModel(
                 cellViewModels: [
                     generateTestCollectionCellViewModel("A"),
                     generateTestCollectionCellViewModel("B"),

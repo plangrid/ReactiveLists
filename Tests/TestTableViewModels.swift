@@ -17,7 +17,7 @@
 import Foundation
 @testable import ReactiveLists
 
-struct TestCellViewModel: FluxTableViewCellViewModel {
+struct TestCellViewModel: TableViewCellViewModel {
     let rowHeight: CGFloat = 42
     let editingStyle = UITableViewCellEditingStyle.delete
     let shouldHighlight = false
@@ -46,13 +46,13 @@ struct TestCellViewModel: FluxTableViewCellViewModel {
     }
 
     func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
-        guard let testCell = cell as? TestFluxTableViewCell else { return cell }
+        guard let testCell = cell as? TestTableViewCell else { return cell }
         testCell.label = self.label
         return testCell
     }
 }
 
-class TestFluxTableViewCell: UITableViewCell {
+class TestTableViewCell: UITableViewCell {
     var identifier: String?
     var label: String?
 
@@ -79,7 +79,7 @@ func generateTestCellViewModel(_ label: String? = nil) -> TestCellViewModel {
     )
 }
 
-struct TestHeaderFooterViewModel: FluxTableViewSectionHeaderFooterViewModel {
+struct TestHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
     let title: String?
     let height: CGFloat?
     let viewInfo: SupplementaryViewInfo?
@@ -103,12 +103,12 @@ struct TestHeaderFooterViewModel: FluxTableViewSectionHeaderFooterViewModel {
     }
 
     func applyViewModelToView(_ view: UIView) {
-        guard let view = view as? TestFluxTableViewSectionHeaderFooter else { return }
+        guard let view = view as? TestTableViewSectionHeaderFooter else { return }
         view.label = self.title
     }
 }
 
-class TestFluxTableViewSectionHeaderFooter: UITableViewHeaderFooterView {
+class TestTableViewSectionHeaderFooter: UITableViewHeaderFooterView {
     var identifier: String?
     var label: String?
 

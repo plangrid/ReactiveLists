@@ -20,7 +20,7 @@ import UIKit
 @objc
 class TableViewController: UITableViewController {
 
-    var tableViewDataSource: FluxTableViewDataSource?
+    var tableViewDataSource: TableViewDataSource?
     var groups: [UserGroup] = [] {
         didSet {
             self.tableViewDataSource?.tableViewModel.value = TableViewController.viewModel(
@@ -38,7 +38,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableViewDataSource = FluxTableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
+        self.tableViewDataSource = TableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
 
         self.groups = [
@@ -68,18 +68,18 @@ class TableViewController: UITableViewController {
 
 extension TableViewController {
 
-    /// Pure function mapping new state to a new `FluxTableViewModel`.  This is invoked each time the state updates
+    /// Pure function mapping new state to a new `TableViewModel`.  This is invoked each time the state updates
     /// in order for ReactiveLists to update the UI.
-    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> FluxTableViewModel {
-        let sections: [FluxTableViewModel.SectionModel] = groups.map { group in
+    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> TableViewModel {
+        let sections: [TableViewModel.SectionModel] = groups.map { group in
             let cellViewModels = group.users.map { UserCell(user: $0, onDeleteClosure: onDeleteClosure) }
-            return FluxTableViewModel.SectionModel(
+            return TableViewModel.SectionModel(
                 headerTitle: group.name,
                 headerHeight: 20,
                 cellViewModels: cellViewModels,
                 diffingKey: group.name
             )
         }
-        return FluxTableViewModel(sectionModels: sections)
+        return TableViewModel(sectionModels: sections)
     }
 }

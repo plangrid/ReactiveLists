@@ -20,7 +20,7 @@ import UIKit
 @objc
 class CollectionViewController: UICollectionViewController {
 
-    var collectionViewDataSource: FluxCollectionViewDataSource?
+    var collectionViewDataSource: CollectionViewDataSource?
     var groups: [UserGroup] = [] {
         didSet {
             let model = CollectionViewController.viewModel(
@@ -40,7 +40,7 @@ class CollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionUserCell")
-        self.collectionViewDataSource = FluxCollectionViewDataSource()
+        self.collectionViewDataSource = CollectionViewDataSource()
         self.collectionViewDataSource?.collectionView = self.collectionView
 
         self.groups = [
@@ -59,14 +59,14 @@ class CollectionViewController: UICollectionViewController {
 // MARK: View Model Provider
 
 extension CollectionViewController {
-    /// Pure function mapping new state to a new `FluxCollectionViewModel`.  This is invoked each time the state updates
+    /// Pure function mapping new state to a new `CollectionViewModel`.  This is invoked each time the state updates
     /// in order for ReactiveLists to update the UI.
-    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> FluxCollectionViewModel {
-        let sections: [FluxCollectionViewModel.SectionModel] = groups.map { group in
+    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> CollectionViewModel {
+        let sections: [CollectionViewModel.SectionModel] = groups.map { group in
             let cellViewModels = group.users.map { CollectionUserCell(user: $0, onDeleteClosure: onDeleteClosure) }
-            return FluxCollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: nil, footerHeight: nil)
+            return CollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: nil, footerHeight: nil)
         }
-        return FluxCollectionViewModel(sectionModels: sections)
+        return CollectionViewModel(sectionModels: sections)
     }
 }
 

@@ -16,8 +16,8 @@
 
 import UIKit
 
-public protocol FluxCollectionViewCellViewModel {
-    /// `FluxCollectionViewDataSource` will automatically apply an `accessibilityIdentifier` to the cell based on this format
+public protocol CollectionViewCellViewModel {
+    /// `CollectionViewDataSource` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
 
     var cellIdentifier: String { get }
@@ -29,7 +29,7 @@ public protocol FluxCollectionViewCellViewModel {
     func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell
 }
 
-public extension FluxCollectionViewCellViewModel {
+public extension CollectionViewCellViewModel {
     var shouldHighlight: Bool { return true }
 
     var didSelectClosure: DidSelectClosure? { return nil }
@@ -37,7 +37,7 @@ public extension FluxCollectionViewCellViewModel {
     var didDeselectClosure: DidDeselectClosure? { return nil }
 }
 
-public protocol FluxCollectionViewSupplementaryViewModel {
+public protocol CollectionViewSupplementaryViewModel {
     var viewInfo: SupplementaryViewInfo? { get }
     var height: CGFloat? { get }
 
@@ -45,7 +45,7 @@ public protocol FluxCollectionViewSupplementaryViewModel {
     func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView
 }
 
-public extension FluxCollectionViewSupplementaryViewModel {
+public extension CollectionViewSupplementaryViewModel {
     var viewInfo: SupplementaryViewInfo? { return nil }
     var height: CGFloat? { return nil }
 
@@ -54,9 +54,9 @@ public extension FluxCollectionViewSupplementaryViewModel {
     }
 }
 
-public struct FluxCollectionViewModel {
+public struct CollectionViewModel {
     public struct SectionModel {
-        private struct BlankSupplementaryViewModel: FluxCollectionViewSupplementaryViewModel {
+        private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
             let height: CGFloat?
             let viewInfo: SupplementaryViewInfo? = nil
 
@@ -65,12 +65,12 @@ public struct FluxCollectionViewModel {
             }
         }
 
-        let cellViewModels: [FluxCollectionViewCellViewModel]?
-        let headerViewModel: FluxCollectionViewSupplementaryViewModel?
-        let footerViewModel: FluxCollectionViewSupplementaryViewModel?
+        let cellViewModels: [CollectionViewCellViewModel]?
+        let headerViewModel: CollectionViewSupplementaryViewModel?
+        let footerViewModel: CollectionViewSupplementaryViewModel?
 
-        public init(cellViewModels: [FluxCollectionViewCellViewModel]?, headerViewModel: FluxCollectionViewSupplementaryViewModel? = nil,
-                    footerViewModel: FluxCollectionViewSupplementaryViewModel? = nil) {
+        public init(cellViewModels: [CollectionViewCellViewModel]?, headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+                    footerViewModel: CollectionViewSupplementaryViewModel? = nil) {
             self.cellViewModels = cellViewModels
             self.headerViewModel = headerViewModel
             self.footerViewModel = footerViewModel
@@ -88,7 +88,7 @@ public struct FluxCollectionViewModel {
         return sectionModels[section]
     }
 
-    public subscript(indexPath: IndexPath) -> FluxCollectionViewCellViewModel? {
+    public subscript(indexPath: IndexPath) -> CollectionViewCellViewModel? {
         guard let section = self[indexPath.section],
             let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.item else { return nil }
         return cellViewModels[indexPath.item]
@@ -97,21 +97,21 @@ public struct FluxCollectionViewModel {
 
 // MARK: Initializers without header/footer view models
 
-extension FluxCollectionViewModel.SectionModel {
+extension CollectionViewModel.SectionModel {
 
-    public init(cellViewModels: [FluxCollectionViewCellViewModel]?, headerHeight: CGFloat? = nil, footerViewModel: FluxCollectionViewSupplementaryViewModel? = nil) {
+    public init(cellViewModels: [CollectionViewCellViewModel]?, headerHeight: CGFloat? = nil, footerViewModel: CollectionViewSupplementaryViewModel? = nil) {
         self.init(cellViewModels: cellViewModels,
                   headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
                   footerViewModel: footerViewModel)
     }
 
-    public init(cellViewModels: [FluxCollectionViewCellViewModel]?, headerViewModel: FluxCollectionViewSupplementaryViewModel? = nil, footerHeight: CGFloat? = nil) {
+    public init(cellViewModels: [CollectionViewCellViewModel]?, headerViewModel: CollectionViewSupplementaryViewModel? = nil, footerHeight: CGFloat? = nil) {
         self.init(cellViewModels: cellViewModels,
                   headerViewModel: headerViewModel,
                   footerViewModel: BlankSupplementaryViewModel(height: footerHeight))
     }
 
-    public init(cellViewModels: [FluxCollectionViewCellViewModel]?, headerHeight: CGFloat? = nil, footerHeight: CGFloat? = nil) {
+    public init(cellViewModels: [CollectionViewCellViewModel]?, headerHeight: CGFloat? = nil, footerHeight: CGFloat? = nil) {
         self.init(cellViewModels: cellViewModels,
                   headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
                   footerViewModel: BlankSupplementaryViewModel(height: footerHeight))
