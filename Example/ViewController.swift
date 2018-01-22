@@ -47,8 +47,7 @@ class ViewController: UIViewController {
         self.tableView.frame = self.view.frame
         self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.tableView)
-        self.tableViewDataSource = FluxTableViewDataSource(automaticDiffEnabled: true)
-        self.tableViewDataSource?.tableView = self.tableView
+        self.tableViewDataSource = FluxTableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(

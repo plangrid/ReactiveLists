@@ -29,6 +29,16 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "258E31971F0D8CBC00D6F324"
+               BuildableName = "ReactiveListsTests.xctest"
+               BlueprintName = "ReactiveListsTests"
+               ReferencedContainer = "container:ReactiveLists.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
