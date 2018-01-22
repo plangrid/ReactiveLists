@@ -70,7 +70,7 @@ func path(_ section: Int, _ row: Int = 0) -> IndexPath {
     return IndexPath(row: row, section: section)
 }
 
-func generateRandomTestCellViewModel(_ label: String? = nil) -> TestCellViewModel {
+func generateTestCellViewModel(_ label: String? = nil) -> TestCellViewModel {
     return TestCellViewModel(label: label ?? UUID().uuidString,
                              willBeginEditing: nil,
                              didEndEditing: nil,

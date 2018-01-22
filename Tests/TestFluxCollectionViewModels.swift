@@ -89,7 +89,7 @@ class TestFluxCollectionReusableView: UICollectionReusableView {
     }
 }
 
-func generateRandomTestCollectionCellViewModel(_ label: String? = nil) -> TestCollectionCellViewModel {
+func generateTestCollectionCellViewModel(_ label: String? = nil) -> TestCollectionCellViewModel {
     return TestCollectionCellViewModel(
         label: label ?? UUID().uuidString,
         didSelectClosure: nil,
