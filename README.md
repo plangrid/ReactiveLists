@@ -4,7 +4,7 @@
 
 ## About
 
-> TODO
+For long-term goals and direction, please see [`VISION.md`](https://github.com/plangrid/ReactiveLists/blob/master/Guides/VISION.md).
 
 ## Requirements
 
@@ -32,7 +32,7 @@ Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy
 
 ## Contribute
 
-Please read and follow our [Contributing Guide](https://github.com/plangrid/ReactiveLists/blob/master/CONTRIBUTING.md) and our [Code of Conduct](https://github.com/plangrid/ReactiveLists/blob/master/CODE_OF_CONDUCT.md).
+Please read and follow our [Contributing Guide](https://github.com/plangrid/ReactiveLists/blob/master/.github/CONTRIBUTING.md) and our [Code of Conduct](https://github.com/plangrid/ReactiveLists/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
