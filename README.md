@@ -34,6 +34,8 @@ Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy
 
 > TODO
 
+Please read and follow our [Code of Conduct](https://github.com/plangrid/ReactiveLists/blob/master/CODE_OF_CONDUCT.md).
+
 ## License
 
 `ReactiveLists` is released under an [MIT License][mitLink]. See `LICENSE` for details.
