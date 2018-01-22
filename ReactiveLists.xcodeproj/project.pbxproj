@@ -164,14 +164,14 @@
 		2576640C1F29075C00C037E3 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				351B7E292016A0100026A2C8 /* CollectionViewExample */,
-				351B7E2A2016A0240026A2C8 /* TableViewExample */,
 				2576640D1F29075C00C037E3 /* AppDelegate.swift */,
 				257664141F29075C00C037E3 /* Assets.xcassets */,
+				351B7E292016A0100026A2C8 /* CollectionViewExample */,
 				257664191F29075C00C037E3 /* Info.plist */,
 				257664161F29075C00C037E3 /* LaunchScreen.storyboard */,
 				257664111F29075C00C037E3 /* Main.storyboard */,
 				2541B7311F298A69002C3090 /* Models.swift */,
+				351B7E2A2016A0240026A2C8 /* TableViewExample */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -179,12 +179,12 @@
 		258E31851F0D8CBC00D6F324 = {
 			isa = PBXGroup;
 			children = (
+				258E31911F0D8CBC00D6F324 /* Sources */,
+				258E319C1F0D8CBC00D6F324 /* Tests */,
 				2576640C1F29075C00C037E3 /* Example */,
 				8A086C86CDAC4FC2B5C538EE /* Frameworks */,
 				136C8458006693CEEEB97438 /* Pods */,
 				258E31901F0D8CBC00D6F324 /* Products */,
-				258E31911F0D8CBC00D6F324 /* Sources */,
-				258E319C1F0D8CBC00D6F324 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,16 +201,16 @@
 		258E31911F0D8CBC00D6F324 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2541B73C1F29A13B002C3090 /* Diffing.swift */,
-				258E31D91F0D8FB800D6F324 /* Extensions.swift */,
 				258E31D11F0D8F3100D6F324 /* AccessibilityFormats.swift */,
 				258E31AC1F0D8D9C00D6F324 /* CollectionViewDataSource.swift */,
 				258E31AD1F0D8D9C00D6F324 /* CollectionViewModel.swift */,
-				258E31AE1F0D8D9C00D6F324 /* TableViewDataSource.swift */,
-				258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */,
+				2541B73C1F29A13B002C3090 /* Diffing.swift */,
+				258E31D91F0D8FB800D6F324 /* Extensions.swift */,
 				258E31931F0D8CBC00D6F324 /* Info.plist */,
 				258E31921F0D8CBC00D6F324 /* ReactiveLists.h */,
 				258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */,
+				258E31AE1F0D8D9C00D6F324 /* TableViewDataSource.swift */,
+				258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */,
 				258E31B01F0D8D9C00D6F324 /* ViewLocation.swift */,
 			);
 			path = Sources;
@@ -221,11 +221,11 @@
 			children = (
 				258E31DB1F0D90BC00D6F324 /* CollectionViewDataSourceTests.swift */,
 				258E31DC1F0D90BC00D6F324 /* CollectionViewModelTests.swift */,
+				258E319F1F0D8CBC00D6F324 /* Info.plist */,
+				258E31E01F0D90BC00D6F324 /* SharedTableViewDataSourceMocks.swift */,
 				258E31DE1F0D90BC00D6F324 /* TableViewDataSourceTests.swift */,
 				25D0D4311F2952EA00596AED /* TableViewDiffingTests.swift */,
 				258E31DF1F0D90BC00D6F324 /* TableViewModelTests.swift */,
-				258E319F1F0D8CBC00D6F324 /* Info.plist */,
-				258E31E01F0D90BC00D6F324 /* SharedTableViewDataSourceMocks.swift */,
 				258E31E11F0D90BC00D6F324 /* TestCollectionViewModels.swift */,
 				258E31E21F0D90BC00D6F324 /* TestTableViewModels.swift */,
 				2537A649201671F20044469D /* XCTest+Parameterized.swift */,
