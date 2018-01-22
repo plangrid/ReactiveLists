@@ -17,15 +17,15 @@
 @testable import ReactiveLists
 import XCTest
 
-final class FluxTableViewDiffingTests: XCTestCase {
+final class TableViewDiffingTests: XCTestCase {
 
-    var fluxTableViewDataSource: FluxTableViewDataSource!
-    var mockTableView: TestFluxTableView!
+    var tableViewDataSource: TableViewDataSource!
+    var mockTableView: TestTableView!
 
     override func setUp() {
         super.setUp()
-        self.mockTableView = TestFluxTableView()
-        self.fluxTableViewDataSource = FluxTableViewDataSource(
+        self.mockTableView = TestTableView()
+        self.tableViewDataSource = TableViewDataSource(
             tableView: self.mockTableView,
             automaticDiffEnabled: true,
             shouldDeselectUponSelection: false
@@ -39,17 +39,17 @@ final class FluxTableViewDiffingTests: XCTestCase {
     ///   communication between the diffing lib and the table view. The diffing lib itself has
     ///   extensive tests for the various diffing scenarios.
     func testChangingRows() {
-        let initialModel = FluxTableViewModel(
+        let initialModel = TableViewModel(
             cellViewModels: []
         )
 
-        self.fluxTableViewDataSource.tableViewModel.value = initialModel
+        self.tableViewDataSource.tableViewModel.value = initialModel
 
-        let updatedModel = FluxTableViewModel(
+        let updatedModel = TableViewModel(
             cellViewModels: [UserCell(user: "TestUser")]
         )
 
-        self.fluxTableViewDataSource.tableViewModel.value = updatedModel
+        self.tableViewDataSource.tableViewModel.value = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 1)
         XCTAssertEqual(
@@ -65,27 +65,27 @@ final class FluxTableViewDiffingTests: XCTestCase {
     ///   communication between the diffing lib and the table view. The diffing lib itself has
     ///   extensive tests for the various diffing scenarios.
     func testChangingSections() {
-        let initialModel = FluxTableViewModel(sectionModels: [
-            FluxTableViewModel.SectionModel(
+        let initialModel = TableViewModel(sectionModels: [
+            TableViewModel.SectionModel(
                 cellViewModels: [],
                 diffingKey: "1"
             ),
-            FluxTableViewModel.SectionModel(
+            TableViewModel.SectionModel(
                 cellViewModels: [],
                 diffingKey: "2"
             ),
         ])
 
-        self.fluxTableViewDataSource.tableViewModel.value = initialModel
+        self.tableViewDataSource.tableViewModel.value = initialModel
 
-        let updatedModel = FluxTableViewModel(sectionModels: [
-            FluxTableViewModel.SectionModel(
+        let updatedModel = TableViewModel(sectionModels: [
+            TableViewModel.SectionModel(
                 cellViewModels: [],
                 diffingKey: "2"
             ),
         ])
 
-        self.fluxTableViewDataSource.tableViewModel.value = updatedModel
+        self.tableViewDataSource.tableViewModel.value = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 1)
         XCTAssertEqual(
@@ -95,7 +95,7 @@ final class FluxTableViewDiffingTests: XCTestCase {
     }
 }
 
-struct UserCell: FluxTableViewCellViewModel, DiffableViewModel {
+struct UserCell: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
     let cellIdentifier = "UserCell"
 

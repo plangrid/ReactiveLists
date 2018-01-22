@@ -17,11 +17,11 @@
 @testable import ReactiveLists
 import XCTest
 
-final class FluxTableViewModelTests: XCTestCase {
-    private var _tableViewModel: FluxTableViewModel!
+final class TableViewModelTests: XCTestCase {
+    private var _tableViewModel: TableViewModel!
 
     func testPlainHeaderFooterSectionModelInitalizer() {
-        let sectionModel = FluxTableViewModel.SectionModel(
+        let sectionModel = TableViewModel.SectionModel(
             headerTitle: "foo",
             headerHeight: 42,
             cellViewModels: [generateTestCellViewModel()],
@@ -39,7 +39,7 @@ final class FluxTableViewModelTests: XCTestCase {
     }
 
     func testCustomHeaderFooterSectionModelInitalizer() {
-        let sectionModel = FluxTableViewModel.SectionModel(
+        let sectionModel = TableViewModel.SectionModel(
             cellViewModels: [generateTestCellViewModel()],
             headerViewModel: TestHeaderFooterViewModel(height: 42, viewKind: .header, label: "A"),
             footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"),
@@ -68,12 +68,12 @@ final class FluxTableViewModelTests: XCTestCase {
     /// If the section or cell at the index does not exist, the table view
     /// model returns `nil`.
     func testSubscripts() {
-        let tableViewModel = FluxTableViewModel(sectionModels: [
-            FluxTableViewModel.SectionModel(
+        let tableViewModel = TableViewModel(sectionModels: [
+            TableViewModel.SectionModel(
                 headerTitle: "section_1",
                 headerHeight: 42,
                 cellViewModels: nil),
-            FluxTableViewModel.SectionModel(
+            TableViewModel.SectionModel(
                 headerTitle: "section_2",
                 headerHeight: 43,
                 cellViewModels: [
@@ -97,11 +97,11 @@ final class FluxTableViewModelTests: XCTestCase {
     /// The `.isEmpty` property of the table view returns `true` when the table view
     /// contains no sections or one section with no cells.
     func testIsEmpty() {
-        let tableViewModel1 = FluxTableViewModel(sectionModels: [])
+        let tableViewModel1 = TableViewModel(sectionModels: [])
         XCTAssertTrue(tableViewModel1.isEmpty)
 
-        let tableViewModel2 = FluxTableViewModel(
-            sectionModels: [FluxTableViewModel.SectionModel(
+        let tableViewModel2 = TableViewModel(
+            sectionModels: [TableViewModel.SectionModel(
                 cellViewModels: []
             )]
         )
@@ -110,7 +110,7 @@ final class FluxTableViewModelTests: XCTestCase {
         XCTAssertTrue(tableViewModel2.isEmpty)
     }
 
-    func runCommonSectionModelAttributeTests(_ sectionModel: FluxTableViewModel.SectionModel) {
+    func runCommonSectionModelAttributeTests(_ sectionModel: TableViewModel.SectionModel) {
         XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 43)

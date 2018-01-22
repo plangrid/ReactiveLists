@@ -18,7 +18,7 @@ import Foundation
 import ReactiveLists
 import UIKit
 
-struct CollectionUserCell: FluxCollectionViewCellViewModel, DiffableViewModel {
+struct CollectionUserCell: CollectionViewCellViewModel, DiffableViewModel {
 
     var accessibilityFormat: CellAccessibilityFormat = ""
     let cellIdentifier = "CollectionUserCell"

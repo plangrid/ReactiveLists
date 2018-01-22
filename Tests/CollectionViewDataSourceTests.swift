@@ -19,38 +19,38 @@ import ReactiveSwift
 import UIKit
 import XCTest
 
-final class FluxCollectionViewDataSourceTests: XCTestCase {
+final class CollectionViewDataSourceTests: XCTestCase {
 
-    private var _collectionView: TestFluxCollectionView!
-    private var _collectionViewModel: FluxCollectionViewModel!
-    private var _fluxCollectionViewDataSource: TestFluxCollectionViewDataSource!
+    private var _collectionView: TestCollectionView!
+    private var _collectionViewModel: CollectionViewModel!
+    private var _collectionViewDataSource: TestCollectionViewDataSource!
 
     private var _lastSelectClosureCaller: String?
     private var _lastDeselectClosureCaller: String?
 
     override func setUp() {
         super.setUp()
-        self._collectionView = TestFluxCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
-        self._collectionViewModel = FluxCollectionViewModel(sectionModels: [
-            FluxCollectionViewModel.SectionModel(
+        self._collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
+        self._collectionViewModel = CollectionViewModel(sectionModels: [
+            CollectionViewModel.SectionModel(
                 cellViewModels: nil,
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "A"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "A")),
-            FluxCollectionViewModel.SectionModel(
+            CollectionViewModel.SectionModel(
                 cellViewModels: ["A", "B", "C"].map { self._generateTestCollectionCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestCollectionViewSupplementaryViewModel(label: "footer_B", height: 21)),
-            FluxCollectionViewModel.SectionModel(
+            CollectionViewModel.SectionModel(
                 cellViewModels: ["D", "E", "F"].map { self._generateTestCollectionCellViewModel($0) },
                 headerViewModel: TestCollectionViewSupplementaryViewModel(label: "header_C", height: 30),
                 footerViewModel: nil),
-            FluxCollectionViewModel.SectionModel(
+            CollectionViewModel.SectionModel(
                 cellViewModels: nil,
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
         ])
-        self._fluxCollectionViewDataSource = TestFluxCollectionViewDataSource()
-        self._fluxCollectionViewDataSource.collectionViewModel.value = self._collectionViewModel
+        self._collectionViewDataSource = TestCollectionViewDataSource()
+        self._collectionViewDataSource.collectionViewModel.value = self._collectionViewModel
     }
 
     func testCollectionViewSetup() {
@@ -58,11 +58,11 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
         XCTAssertNil(self._collectionView.delegate)
         XCTAssertNil(self._collectionView.dataSource)
 
-        self._fluxCollectionViewDataSource.label = "baz"
-        self._fluxCollectionViewDataSource.collectionView = self._collectionView
+        self._collectionViewDataSource.label = "baz"
+        self._collectionViewDataSource.collectionView = self._collectionView
 
-        XCTAssertEqual((self._collectionView.delegate as? TestFluxCollectionViewDataSource)?.label, "baz")
-        XCTAssertEqual((self._collectionView.dataSource as? TestFluxCollectionViewDataSource)?.label, "baz")
+        XCTAssertEqual((self._collectionView.delegate as? TestCollectionViewDataSource)?.label, "baz")
+        XCTAssertEqual((self._collectionView.dataSource as? TestCollectionViewDataSource)?.label, "baz")
 
         // Test that header and footer view classes explicitly provided in the view model are registered
         let registerCalls = self._collectionView.callsToRegisterClass
@@ -79,10 +79,10 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
     }
 
     func testCollectionViewSections() {
-        XCTAssertEqual(self._fluxCollectionViewDataSource.numberOfSections(in: self._collectionView), 4)
+        XCTAssertEqual(self._collectionViewDataSource.numberOfSections(in: self._collectionView), 4)
 
         parameterize(cases: (section: 0, numberOfItemsInSection: 0), (1, 3), (2, 3), (3, 0), (9, 0)) {
-            XCTAssertEqual(self._fluxCollectionViewDataSource.collectionView(self._collectionView, numberOfItemsInSection: $0), $1)
+            XCTAssertEqual(self._collectionViewDataSource.collectionView(self._collectionView, numberOfItemsInSection: $0), $1)
         }
 
         // If the collection view's layout is a FlowLayout, the header/footerReferenceSize will be used if the
@@ -92,13 +92,13 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
         layout.footerReferenceSize = CGSize(width: 0, height: 51)
 
         parameterize(cases: (layout: nil, section: 0, headerHeight: 10), (nil, 1, 0), (nil, 2, 30), (nil, 3, 0), (nil, 9, 0), (layout, 3, 50)) {
-            XCTAssertEqual(self._fluxCollectionViewDataSource.collectionView(self._collectionView,
+            XCTAssertEqual(self._collectionViewDataSource.collectionView(self._collectionView,
                                                                              layout: $0 ?? UICollectionViewLayout(),
                                                                              referenceSizeForHeaderInSection: $1).height, $2)
         }
 
         parameterize(cases: (layout: nil, section: 0, footerHeight: 11), (nil, 1, 21), (nil, 2, 0), (nil, 3, 0), (nil, 9, 0), (layout, 3, 51)) {
-            XCTAssertEqual(self._fluxCollectionViewDataSource.collectionView(self._collectionView,
+            XCTAssertEqual(self._collectionViewDataSource.collectionView(self._collectionView,
                                                                              layout: $0 ?? UICollectionViewLayout(),
                                                                              referenceSizeForFooterInSection: $1).height, $2)
         }
@@ -106,7 +106,7 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
 
     func testCollectionViewItems() {
         parameterize(cases: (section: 0, shouldHighlight: true), (1, false), (2, false), (9, true)) {
-            XCTAssertEqual(self._fluxCollectionViewDataSource.collectionView(self._collectionView, shouldHighlightItemAt: path($0)), $1)
+            XCTAssertEqual(self._collectionViewDataSource.collectionView(self._collectionView, shouldHighlightItemAt: path($0)), $1)
         }
     }
 
@@ -130,18 +130,18 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
             XCTAssertEqual(header?.identifier, $3)
 
             // Test that the header is marked as on screen
-            guard let onScreenHeader = self._fluxCollectionViewDataSource._headersOnScreen[indexKey] as? TestFluxCollectionReusableView else {
-                XCTFail("Did not find the on screen TestFluxCollectionReusableView header")
+            guard let onScreenHeader = self._collectionViewDataSource._headersOnScreen[indexKey] as? TestCollectionReusableView else {
+                XCTFail("Did not find the on screen TestCollectionReusableView header")
                 return
             }
             XCTAssertEqual(onScreenHeader.label, $2)
 
             // Test that the header is no longer marked as on screen after didEndDisplaying is called
-            self._fluxCollectionViewDataSource.collectionView(self._collectionView,
+            self._collectionViewDataSource.collectionView(self._collectionView,
                                                               didEndDisplayingSupplementaryView: onScreenHeader,
                                                               forElementOfKind: UICollectionElementKindSectionHeader,
                                                               at: indexPath)
-            XCTAssertNil(self._fluxCollectionViewDataSource._headersOnScreen[indexKey])
+            XCTAssertNil(self._collectionViewDataSource._headersOnScreen[indexKey])
         }
     }
 
@@ -165,18 +165,18 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
             XCTAssertEqual(footer?.identifier, $3)
 
             // Test that the footer is marked as on screen
-            guard let onScreenFooter = self._fluxCollectionViewDataSource._footersOnScreen[indexKey] as? TestFluxCollectionReusableView else {
-                XCTFail("Did not find the on screen TestFluxCollectionReusableView header")
+            guard let onScreenFooter = self._collectionViewDataSource._footersOnScreen[indexKey] as? TestCollectionReusableView else {
+                XCTFail("Did not find the on screen TestCollectionReusableView header")
                 return
             }
             XCTAssertEqual(onScreenFooter.label, $2)
 
             // Test that the footer is no longer marked as on screen after didEndDisplaying is called
-            self._fluxCollectionViewDataSource.collectionView(self._collectionView,
+            self._collectionViewDataSource.collectionView(self._collectionView,
                                                               didEndDisplayingSupplementaryView: onScreenFooter,
                                                               forElementOfKind: UICollectionElementKindSectionFooter,
                                                               at: indexPath)
-            XCTAssertNil(self._fluxCollectionViewDataSource._footersOnScreen[indexKey])
+            XCTAssertNil(self._collectionViewDataSource._footersOnScreen[indexKey])
         }
     }
 
@@ -193,24 +193,24 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
         XCTAssertEqual(cell?.accessibilityIdentifier, "access-1.2")
 
         // Test that the item is marked as on screen
-        guard let onScreenCell = self._fluxCollectionViewDataSource._cellsOnScreen[indexPath] as? TestFluxCollectionViewCell else {
-            XCTFail("Did not find the on screen TestFluxCollectionViewCell")
+        guard let onScreenCell = self._collectionViewDataSource._cellsOnScreen[indexPath] as? TestCollectionViewCell else {
+            XCTFail("Did not find the on screen TestCollectionViewCell")
             return
         }
         XCTAssertEqual(onScreenCell.label, "C")
 
         // Test that the item is no longer marked as on screen after didEndDisplaying is called
-        self._fluxCollectionViewDataSource.collectionView(self._collectionView, didEndDisplaying: onScreenCell, forItemAt: indexPath)
-        XCTAssertNil(self._fluxCollectionViewDataSource._cellsOnScreen[indexPath])
+        self._collectionViewDataSource.collectionView(self._collectionView, didEndDisplaying: onScreenCell, forItemAt: indexPath)
+        XCTAssertNil(self._collectionViewDataSource._cellsOnScreen[indexPath])
     }
 
     func testCellCallbacks() {
-        let fluxDataSource = self._fluxCollectionViewDataSource
+        let dataSource = self._collectionViewDataSource
 
         parameterize(cases: (0, nil), (9, nil), (1, "A")) { (section: Int, caller: String?) in
             let indexPath = path(section)
-            fluxDataSource?.collectionView(self._collectionView, didSelectItemAt: indexPath)
-            fluxDataSource?.collectionView(self._collectionView, didDeselectItemAt: indexPath)
+            dataSource?.collectionView(self._collectionView, didSelectItemAt: indexPath)
+            dataSource?.collectionView(self._collectionView, didDeselectItemAt: indexPath)
 
             XCTAssertEqual(self._lastSelectClosureCaller, caller)
             XCTAssertEqual(self._lastDeselectClosureCaller, caller)
@@ -219,8 +219,8 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
 
     func testShouldDeselectUponSelection() {
         // Default is to deselect upong selection
-        let dataSource = TestFluxCollectionViewDataSource()
-        let collectionView = TestFluxCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
+        let dataSource = TestCollectionViewDataSource()
+        let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         dataSource.collectionView = collectionView
         XCTAssertEqual(collectionView.callsToDeselect, 0)
         dataSource.collectionView(collectionView, didSelectItemAt: path(0))
@@ -228,8 +228,8 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
     }
 
     func testShouldNotDeselectUponSelection() {
-        let dataSource = TestFluxCollectionViewDataSource(shouldDeselectUponSelection: false)
-        let collectionView = TestFluxCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
+        let dataSource = TestCollectionViewDataSource(shouldDeselectUponSelection: false)
+        let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         dataSource.collectionView = collectionView
         XCTAssertEqual(collectionView.callsToDeselect, 0)
         dataSource.collectionView(collectionView, didSelectItemAt: path(0))
@@ -245,12 +245,12 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
         XCTAssertEqual(header?.label, "label_header+A")
         XCTAssertEqual(footer?.label, "label_footer+A")
 
-        self._fluxCollectionViewDataSource.collectionViewModel.value = FluxCollectionViewModel(sectionModels: [
-            FluxCollectionViewModel.SectionModel(
+        self._collectionViewDataSource.collectionViewModel.value = CollectionViewModel(sectionModels: [
+            CollectionViewModel.SectionModel(
                 cellViewModels: nil,
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "X"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "X")),
-            FluxCollectionViewModel.SectionModel(
+            CollectionViewModel.SectionModel(
                 cellViewModels: [self._generateTestCollectionCellViewModel("X")],
                 headerViewModel: nil,
                 footerViewModel: nil),
@@ -265,18 +265,18 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
         XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
     }
 
-    private func _getItem(_ path: IndexPath) -> TestFluxCollectionViewCell? {
-        guard let cell = self._fluxCollectionViewDataSource.collectionView(self._collectionView,
-                                                                           cellForItemAt: path) as? TestFluxCollectionViewCell else { return nil }
+    private func _getItem(_ path: IndexPath) -> TestCollectionViewCell? {
+        guard let cell = self._collectionViewDataSource.collectionView(self._collectionView,
+                                                                           cellForItemAt: path) as? TestCollectionViewCell else { return nil }
         return cell
     }
 
-    private func _getSupplementaryView(section: Int, kind: SupplementaryViewKind) -> TestFluxCollectionReusableView? {
-        guard let view = self._fluxCollectionViewDataSource.collectionView(
+    private func _getSupplementaryView(section: Int, kind: SupplementaryViewKind) -> TestCollectionReusableView? {
+        guard let view = self._collectionViewDataSource.collectionView(
             self._collectionView,
             viewForSupplementaryElementOfKind: kind == .header ? UICollectionElementKindSectionHeader : UICollectionElementKindSectionFooter,
             at: path(section)
-        ) as? TestFluxCollectionReusableView else { return nil }
+        ) as? TestCollectionReusableView else { return nil }
 
         return view
     }
@@ -295,17 +295,17 @@ final class FluxCollectionViewDataSourceTests: XCTestCase {
 }
 
 private typealias _RegisterClassCallInfo = (viewClass: AnyClass?, viewKind: SupplementaryViewKind?, reuseIdentifier: String)
-private class TestFluxCollectionView: UICollectionView {
+private class TestCollectionView: UICollectionView {
 
     var callsToRegisterClass: [_RegisterClassCallInfo?] = []
     var callsToDeselect: Int = 0
 
     override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
-        return TestFluxCollectionViewCell(identifier: identifier)
+        return TestCollectionViewCell(identifier: identifier)
     }
 
     override func dequeueReusableSupplementaryView(ofKind elementKind: String, withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionReusableView {
-        return TestFluxCollectionReusableView(identifier: identifier)
+        return TestCollectionReusableView(identifier: identifier)
     }
 
     override func register(_ viewClass: AnyClass?, forSupplementaryViewOfKind elementKind: String, withReuseIdentifier identifier: String) {
@@ -321,6 +321,6 @@ private class TestFluxCollectionView: UICollectionView {
     }
 }
 
-private class TestFluxCollectionViewDataSource: FluxCollectionViewDataSource {
+private class TestCollectionViewDataSource: CollectionViewDataSource {
     var label: String?
 }

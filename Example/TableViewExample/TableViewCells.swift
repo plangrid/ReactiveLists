@@ -17,7 +17,7 @@
 import Foundation
 import ReactiveLists
 
-struct UserCell: FluxTableViewCellViewModel, DiffableViewModel {
+struct UserCell: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
     let cellIdentifier = "UserCell"
 

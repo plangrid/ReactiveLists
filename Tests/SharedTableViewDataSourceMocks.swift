@@ -19,7 +19,7 @@
 class HeaderView: UITableViewHeaderFooterView {}
 class FooterView: UITableViewHeaderFooterView {}
 
-class TestFluxTableView: UITableView {
+class TestTableView: UITableView {
     var callsToRegisterClass: [(viewClass: AnyClass?, identifier: String)] = []
     var callsToDeselect: Int = 0
     var callsToInsertRowAtIndexPaths: [(indexPaths: [IndexPath], animation: UITableViewRowAnimation)] = []
@@ -36,11 +36,11 @@ class TestFluxTableView: UITableView {
     }
 
     override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
-        return TestFluxTableViewCell(identifier: identifier)
+        return TestTableViewCell(identifier: identifier)
     }
 
     override func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView? {
-        return TestFluxTableViewSectionHeaderFooter(identifier: identifier)
+        return TestTableViewSectionHeaderFooter(identifier: identifier)
     }
 
     override func register(_ aClass: AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String) {
@@ -62,26 +62,26 @@ class TestFluxTableView: UITableView {
     }
 }
 
-class TestFluxTableViewDataSource: FluxTableViewDataSource {
+class TestTableViewDataSource: TableViewDataSource {
     var label: String?
 }
 
-extension FluxTableViewDataSource {
-    func _getCell(_ path: IndexPath) -> TestFluxTableViewCell? {
+extension TableViewDataSource {
+    func _getCell(_ path: IndexPath) -> TestTableViewCell? {
         let tableView = self._tableView
-        guard let cell = self.tableView(tableView, cellForRowAt: path) as? TestFluxTableViewCell else { return nil }
+        guard let cell = self.tableView(tableView, cellForRowAt: path) as? TestTableViewCell else { return nil }
         return cell
     }
 
-    func _getHeader(_ section: Int) -> TestFluxTableViewSectionHeaderFooter? {
+    func _getHeader(_ section: Int) -> TestTableViewSectionHeaderFooter? {
         let tableView = self._tableView
-        guard let cell = self.tableView(tableView, viewForHeaderInSection: section) as? TestFluxTableViewSectionHeaderFooter else { return nil }
+        guard let cell = self.tableView(tableView, viewForHeaderInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
         return cell
     }
 
-    func _getFooter(_ section: Int) -> TestFluxTableViewSectionHeaderFooter? {
+    func _getFooter(_ section: Int) -> TestTableViewSectionHeaderFooter? {
         let tableView = self._tableView
-        guard let cell = self.tableView(tableView, viewForFooterInSection: section) as? TestFluxTableViewSectionHeaderFooter else { return nil }
+        guard let cell = self.tableView(tableView, viewForFooterInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
         return cell
     }
 }

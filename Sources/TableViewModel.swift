@@ -25,9 +25,9 @@ public typealias WillBeginEditingClosure = () -> Void
 public typealias DidEndEditingClosure = () -> Void
 public typealias AccessoryButtonTappedClosure = () -> Void
 
-/// View models for the individual cells of a `FluxTableViewDataSource` driven table view
-public protocol FluxTableViewCellViewModel {
-    /// `FluxTableViewDataSource` will automatically apply an `accessibilityIdentifier` to the cell based on this format
+/// View models for the individual cells of a `TableViewDataSource` driven table view
+public protocol TableViewCellViewModel {
+    /// `TableViewDataSource` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
 
     var cellIdentifier: String { get }
@@ -46,7 +46,7 @@ public protocol FluxTableViewCellViewModel {
 }
 
 /// Default implementations for the protocol
-public extension FluxTableViewCellViewModel {
+public extension TableViewCellViewModel {
     var rowHeight: CGFloat {
         return 44.0
     }
@@ -61,11 +61,11 @@ public extension FluxTableViewCellViewModel {
     var shouldIndentWhileEditing: Bool { return false }
 }
 
-public protocol FluxTableViewCellModelEditActions {
+public protocol TableViewCellModelEditActions {
     func editActions(_ indexPath: IndexPath) -> [UITableViewRowAction]
 }
 
-public protocol FluxTableViewSectionHeaderFooterViewModel {
+public protocol TableViewSectionHeaderFooterViewModel {
     var title: String? { get }
     var height: CGFloat? { get }
     var viewInfo: SupplementaryViewInfo? { get }
@@ -73,7 +73,7 @@ public protocol FluxTableViewSectionHeaderFooterViewModel {
     func applyViewModelToView(_ view: UIView)
 }
 
-public struct FluxTableViewModel {
+public struct TableViewModel {
     public let sectionIndexTitles: [String]?
     public let sectionModels: [SectionModel]?
 
@@ -94,7 +94,7 @@ public struct FluxTableViewModel {
         self.sectionIndexTitles = sectionIndexTitles
     }
 
-    public init(cellViewModels: [FluxTableViewCellViewModel]?) {
+    public init(cellViewModels: [TableViewCellViewModel]?) {
         let section = SectionModel(cellViewModels: cellViewModels, diffingKey: "default_section")
         self.init(sectionModels: [section])
     }
@@ -104,7 +104,7 @@ public struct FluxTableViewModel {
         return sectionModels[ifExists: section]
     }
 
-    public subscript(indexPath: IndexPath) -> FluxTableViewCellViewModel? {
+    public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
         guard let section = self[indexPath.section],
             let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.row else { return nil }
         return cellViewModels[ifExists: indexPath.row]
@@ -135,10 +135,10 @@ public struct FluxTableViewModel {
     }
 }
 
-extension FluxTableViewModel {
+extension TableViewModel {
 
     public struct SectionModel {
-        private struct PlainHeaderFooterViewModel: FluxTableViewSectionHeaderFooterViewModel {
+        private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
             let title: String?
             let height: CGFloat?
             let viewInfo: SupplementaryViewInfo? = nil
@@ -146,16 +146,16 @@ extension FluxTableViewModel {
             func applyViewModelToView(_ view: UIView) {}
         }
 
-        public let cellViewModels: [FluxTableViewCellViewModel]?
-        public let headerViewModel: FluxTableViewSectionHeaderFooterViewModel?
-        public let footerViewModel: FluxTableViewSectionHeaderFooterViewModel?
+        public let cellViewModels: [TableViewCellViewModel]?
+        public let headerViewModel: TableViewSectionHeaderFooterViewModel?
+        public let footerViewModel: TableViewSectionHeaderFooterViewModel?
         public var collapsed: Bool = false
         public var diffingKey: String?
 
         public init(
-            cellViewModels: [FluxTableViewCellViewModel]?,
-            headerViewModel: FluxTableViewSectionHeaderFooterViewModel? = nil,
-            footerViewModel: FluxTableViewSectionHeaderFooterViewModel? = nil,
+            cellViewModels: [TableViewCellViewModel]?,
+            headerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
+            footerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
             collapsed: Bool = false,
             diffingKey: String? = nil
         ) {
@@ -169,7 +169,7 @@ extension FluxTableViewModel {
         public init(
             headerTitle: String?,
             headerHeight: CGFloat?,
-            cellViewModels: [FluxTableViewCellViewModel]?,
+            cellViewModels: [TableViewCellViewModel]?,
             footerTitle: String? = nil,
             footerHeight: CGFloat? = 0,
             diffingKey: String? = nil

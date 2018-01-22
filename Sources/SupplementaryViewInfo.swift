@@ -39,7 +39,7 @@ public struct SupplementaryViewInfo {
 
     let registrationMethod: RegistrationMethod
     let reuseIdentifier: String
-    /// `FluxTableViewDataSource` and `FluxCollectionViewDataSource` will automatically apply an `accessibilityIdentifier` to the supplementary view based on this format
+    /// `TableViewDataSource` and `CollectionViewDataSource` will automatically apply an `accessibilityIdentifier` to the supplementary view based on this format
     let accessibilityFormat: SupplementaryAccessibilityFormat
 
     public init(

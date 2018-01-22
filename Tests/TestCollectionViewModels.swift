@@ -17,7 +17,7 @@
 import Foundation
 @testable import ReactiveLists
 
-struct TestCollectionCellViewModel: FluxCollectionViewCellViewModel {
+struct TestCollectionCellViewModel: CollectionViewCellViewModel {
     let label: String
     let didSelectClosure: DidSelectClosure?
     let didDeselectClosure: DidDeselectClosure?
@@ -27,13 +27,13 @@ struct TestCollectionCellViewModel: FluxCollectionViewCellViewModel {
     let shouldHighlight = false
 
     func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell {
-        guard let testCell = cell as? TestFluxCollectionViewCell else { return cell }
+        guard let testCell = cell as? TestCollectionViewCell else { return cell }
         testCell.label = self.label
         return testCell
     }
 }
 
-struct TestCollectionViewSupplementaryViewModel: FluxCollectionViewSupplementaryViewModel {
+struct TestCollectionViewSupplementaryViewModel: CollectionViewSupplementaryViewModel {
     let label: String?
     let height: CGFloat?
     let viewInfo: SupplementaryViewInfo?
@@ -55,13 +55,13 @@ struct TestCollectionViewSupplementaryViewModel: FluxCollectionViewSupplementary
     }
 
     func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
-        guard let testView = view as? TestFluxCollectionReusableView else { return view }
+        guard let testView = view as? TestCollectionReusableView else { return view }
         testView.label = self.label
         return testView
     }
 }
 
-class TestFluxCollectionViewCell: UICollectionViewCell {
+class TestCollectionViewCell: UICollectionViewCell {
     var identifier: String?
     var label: String?
 
@@ -75,7 +75,7 @@ class TestFluxCollectionViewCell: UICollectionViewCell {
     }
 }
 
-class TestFluxCollectionReusableView: UICollectionReusableView {
+class TestCollectionReusableView: UICollectionReusableView {
     var identifier: String?
     var label: String?
 
