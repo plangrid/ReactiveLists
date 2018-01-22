@@ -32,7 +32,7 @@ Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy
 
 ## Contribute
 
-> TODO
+Please read and follow our [Contributing Guide](https://github.com/plangrid/ReactiveLists/blob/master/CONTRIBUTING.md) and our [Code of Conduct](https://github.com/plangrid/ReactiveLists/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
