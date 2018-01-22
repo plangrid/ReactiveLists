@@ -1,19 +1,20 @@
 //
-//  ReactiveLists.h
-//  ReactiveLists
+//  PlanGrid
+//  https://www.plangrid.com
+//  https://medium.com/plangrid-technology
 //
-//  Created by Benji Encz on 7/5/17.
-//  Copyright © 2017 PlanGrid. All rights reserved.
+//  Documentation
+//  https://plangrid.github.io/ReactiveLists
+//
+//  GitHub
+//  https://github.com/plangrid/ReactiveLists
+//
+//  License
+//  Copyright © 2018-present PlanGrid, Inc.
+//  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for ReactiveLists.
 FOUNDATION_EXPORT double ReactiveListsVersionNumber;
-
-//! Project version string for ReactiveLists.
 FOUNDATION_EXPORT const unsigned char ReactiveListsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <ReactiveLists/PublicHeader.h>
-
-

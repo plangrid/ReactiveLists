@@ -1,9 +1,17 @@
 //
-//  Extensions.swift
-//  ReactiveLists
+//  PlanGrid
+//  https://www.plangrid.com
+//  https://medium.com/plangrid-technology
 //
-//  Created by Benji Encz on 7/5/17.
-//  Copyright © 2017 PlanGrid. All rights reserved.
+//  Documentation
+//  https://plangrid.github.io/ReactiveLists
+//
+//  GitHub
+//  https://github.com/plangrid/ReactiveLists
+//
+//  License
+//  Copyright © 2018-present PlanGrid, Inc.
+//  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
 import ReactiveSwift

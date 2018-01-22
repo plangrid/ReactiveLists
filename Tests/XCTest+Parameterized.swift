@@ -1,3 +1,19 @@
+//
+//  PlanGrid
+//  https://www.plangrid.com
+//  https://medium.com/plangrid-technology
+//
+//  Documentation
+//  https://plangrid.github.io/ReactiveLists
+//
+//  GitHub
+//  https://github.com/plangrid/ReactiveLists
+//
+//  License
+//  Copyright © 2018-present PlanGrid, Inc.
+//  Released under an MIT license: https://opensource.org/licenses/MIT
+//
+
 /**
  Allows to perform a parameterized tests, in which each test case can  have different inputs and
  expecations but in which the test preparation & execution code are shared.
