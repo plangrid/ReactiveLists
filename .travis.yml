@@ -1,0 +1,60 @@
+language: objective-c
+osx_image: xcode9.2
+
+cache:
+  - cocoapods
+
+env:
+   global:
+   - LANG=en_US.UTF-8
+
+   - WORKSPACE="ReactiveLists.xcworkspace"
+
+   - FRAMEWORK_SCHEME="ReactiveLists"
+   - EXAMPLE_SCHEME="Example"
+
+   - IOS_SDK=iphonesimulator11.2
+
+   matrix:
+   - DESTINATION="OS=9.0,name=iPhone 6 Plus"  SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES"
+   - DESTINATION="OS=9.1,name=iPhone 6s"      SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.2,name=iPhone 6s Plus" SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.3,name=iPad Air 2"     SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+
+   - DESTINATION="OS=10.0,name=iPhone 6s"  SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+   - DESTINATION="OS=10.1,name=iPhone 7"   SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=10.2,name=iPad Air 2" SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=10.3.1,name=iPhone 7" SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+
+   - DESTINATION="OS=11.0.1,name=iPhone X" SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+   - DESTINATION="OS=11.1,name=iPhone X"   SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=11.2,name=iPhone X"   SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+
+before_install:
+- gem install cocoapods --no-rdoc --no-ri --no-document --quiet
+
+script:
+- set -o pipefail
+- xcodebuild -version -sdk
+
+- if [ $POD_LINT == "YES" ]; then
+      pod lib lint;
+  fi
+
+- if [ $BUILD_EXAMPLE == "YES" ]; then
+      xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+  fi
+
+- if [ $RUN_TESTS == "YES" ]; then
+      xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+  else
+      xcodebuild build -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+  fi
+
+# Build for reporting test coverage
+- if [ $RUN_TESTS == "YES" ]; then
+      xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -destination "platform=iOS Simulator,name=iPhone 7" CODE_SIGNING_REQUIRED=NO;
+  fi
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
