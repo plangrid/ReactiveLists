@@ -18,16 +18,12 @@ import ReactiveLists
 import UIKit
 
 @objc
-class CollectionViewController: UIViewController {
-
-    lazy var collectionView: UICollectionView = {
-        UICollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
-    }()
+class CollectionViewController: UICollectionViewController {
 
     var collectionViewDataSource: FluxCollectionViewDataSource?
     var groups: [UserGroup] = [] {
         didSet {
-            let model = collectionViewModel(
+            let model = CollectionViewController.viewModel(
                 forState: groups,
                 onDeleteClosure: { deletedUser in
                     // Iterate through the user groups and find the deleted user.
@@ -43,22 +39,9 @@ class CollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Collection View Example"
-
-        self.collectionView.frame = self.view.frame
-        self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(self.collectionView)
-
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionUserCell")
-        self.collectionViewDataSource = FluxCollectionViewDataSource(shouldDeselectUponSelection: true)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionUserCell")
+        self.collectionViewDataSource = FluxCollectionViewDataSource()
         self.collectionViewDataSource?.collectionView = self.collectionView
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Flip", style: .plain, target: self, action: #selector(self.swapSections)
-        )
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(self.addUser)
-        )
 
         self.groups = [
             UserGroup(
@@ -71,16 +54,20 @@ class CollectionViewController: UIViewController {
             ),
         ]
     }
+}
 
-    @objc
-    func addUser() {
-        self.groups[0].users.append(User(name: "New User!"))
-    }
+// MARK: View Model Provider
 
-    @objc
-    func swapSections() {
-        let group0 = self.groups[0]
-        self.groups[0] = self.groups[1]
-        self.groups[1] = group0
+extension CollectionViewController {
+    /// Pure function mapping new state to a new `FluxCollectionViewModel`.  This is invoked each time the state updates
+    /// in order for ReactiveLists to update the UI.
+    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> FluxCollectionViewModel {
+        let sections: [FluxCollectionViewModel.SectionModel] = groups.map { group in
+            let cellViewModels = group.users.map { CollectionUserCell(user: $0, onDeleteClosure: onDeleteClosure) }
+            return FluxCollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: nil, footerHeight: nil)
+        }
+        return FluxCollectionViewModel(sectionModels: sections)
     }
 }
+
+

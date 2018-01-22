@@ -18,16 +18,12 @@ import ReactiveLists
 import UIKit
 
 @objc
-class ViewController: UIViewController {
-
-    lazy var tableView: UITableView = {
-        UITableView()
-    }()
+class TableViewController: UITableViewController {
 
     var tableViewDataSource: FluxTableViewDataSource?
     var groups: [UserGroup] = [] {
         didSet {
-            self.tableViewDataSource?.tableViewModel.value = tableViewModel(
+            self.tableViewDataSource?.tableViewModel.value = TableViewController.viewModel(
                 forState: groups,
                 onDeleteClosure: { deletedUser in
                     // Iterate through the user groups and find the deleted user.
@@ -42,20 +38,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Table View Example"
-
-        self.tableView.frame = self.view.frame
-        self.tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(self.tableView)
         self.tableViewDataSource = FluxTableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Flip", style: .plain, target: self, action: #selector(self.swapSections)
-        )
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(self.addUser)
-        )
 
         self.groups = [
             UserGroup(
@@ -69,15 +53,33 @@ class ViewController: UIViewController {
         ]
     }
 
-    @objc
-    func addUser() {
-        self.groups[0].users.append(User(name: "New User!"))
-    }
-
-    @objc
-    func swapSections() {
+    @IBAction func swapSections(_ sender: Any) {
         let group0 = self.groups[0]
         self.groups[0] = self.groups[1]
         self.groups[1] = group0
+    }
+
+    @IBAction func addUser(_ sender: Any) {
+        self.groups[0].users.append(User(name: "New User!"))
+    }
+}
+
+// MARK: View Model Provider
+
+extension TableViewController {
+
+    /// Pure function mapping new state to a new `FluxTableViewModel`.  This is invoked each time the state updates
+    /// in order for ReactiveLists to update the UI.
+    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> FluxTableViewModel {
+        let sections: [FluxTableViewModel.SectionModel] = groups.map { group in
+            let cellViewModels = group.users.map { UserCell(user: $0, onDeleteClosure: onDeleteClosure) }
+            return FluxTableViewModel.SectionModel(
+                headerTitle: group.name,
+                headerHeight: 20,
+                cellViewModels: cellViewModels,
+                diffingKey: group.name
+            )
+        }
+        return FluxTableViewModel(sectionModels: sections)
     }
 }
