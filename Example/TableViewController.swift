@@ -63,3 +63,23 @@ class TableViewController: UITableViewController {
         self.groups[0].users.append(User(name: "New User!"))
     }
 }
+
+// MARK: View Model Provider
+
+extension TableViewController {
+
+    /// Pure function mapping new state to a new `FluxTableViewModel`.  This is invoked each time the state updates
+    /// in order for ReactiveLists to update the UI.
+    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> FluxTableViewModel {
+        let sections: [FluxTableViewModel.SectionModel] = groups.map { group in
+            let cellViewModels = group.users.map { UserCell(user: $0, onDeleteClosure: onDeleteClosure) }
+            return FluxTableViewModel.SectionModel(
+                headerTitle: group.name,
+                headerHeight: 20,
+                cellViewModels: cellViewModels,
+                diffingKey: group.name
+            )
+        }
+        return FluxTableViewModel(sectionModels: sections)
+    }
+}

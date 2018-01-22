@@ -16,7 +16,6 @@
 		257664151F29075C00C037E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257664141F29075C00C037E3 /* Assets.xcassets */; };
 		257664181F29075C00C037E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257664161F29075C00C037E3 /* LaunchScreen.storyboard */; };
 		2576641F1F2907DB00C037E3 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576641E1F2907DB00C037E3 /* TableViewController.swift */; };
-		257664211F2907F300C037E3 /* TableViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257664201F2907F300C037E3 /* TableViewModelProvider.swift */; };
 		257664231F2907FE00C037E3 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257664221F2907FE00C037E3 /* Cells.swift */; };
 		258E31991F0D8CBC00D6F324 /* ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E318F1F0D8CBC00D6F324 /* ReactiveLists.framework */; };
 		258E31A01F0D8CBC00D6F324 /* ReactiveLists.h in Headers */ = {isa = PBXBuildFile; fileRef = 258E31921F0D8CBC00D6F324 /* ReactiveLists.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,7 +37,6 @@
 		25D0D4321F2952EA00596AED /* FluxTableViewDiffingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0D4311F2952EA00596AED /* FluxTableViewDiffingTests.swift */; };
 		351B0BB920168E2E0034569D /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB420168D2E0034569D /* CollectionViewCells.swift */; };
 		351B0BBA20168E2E0034569D /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB320168D2E0034569D /* CollectionViewController.swift */; };
-		351B0BBB20168E2E0034569D /* CollectionViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB520168D2F0034569D /* CollectionViewModelProvider.swift */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
 		C11B2E5FBD1253C9FFA431A1 /* Pods_ReactiveListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */; };
 /* End PBXBuildFile section */
@@ -84,7 +82,6 @@
 		257664171F29075C00C037E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		257664191F29075C00C037E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2576641E1F2907DB00C037E3 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		257664201F2907F300C037E3 /* TableViewModelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelProvider.swift; sourceTree = "<group>"; };
 		257664221F2907FE00C037E3 /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		258E318F1F0D8CBC00D6F324 /* ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveLists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		258E31921F0D8CBC00D6F324 /* ReactiveLists.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveLists.h; sourceTree = "<group>"; };
@@ -113,7 +110,6 @@
 		2F35530D29268B112F99A187 /* Pods_ReactiveLists_ReactiveListsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveLists_ReactiveListsExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		351B0BB320168D2E0034569D /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		351B0BB420168D2E0034569D /* CollectionViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
-		351B0BB520168D2F0034569D /* CollectionViewModelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewModelProvider.swift; sourceTree = "<group>"; };
 		42A9724B45F9E14DD1B210D1 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
 		45132CB591F9F96746AF8E96 /* Pods-ReactiveListsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveListsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveListsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,7 +166,6 @@
 			children = (
 				351B0BB420168D2E0034569D /* CollectionViewCells.swift */,
 				351B0BB320168D2E0034569D /* CollectionViewController.swift */,
-				351B0BB520168D2F0034569D /* CollectionViewModelProvider.swift */,
 				2576640D1F29075C00C037E3 /* AppDelegate.swift */,
 				257664141F29075C00C037E3 /* Assets.xcassets */,
 				257664221F2907FE00C037E3 /* Cells.swift */,
@@ -179,7 +174,6 @@
 				257664111F29075C00C037E3 /* Main.storyboard */,
 				2541B7311F298A69002C3090 /* Models.swift */,
 				2576641E1F2907DB00C037E3 /* TableViewController.swift */,
-				257664201F2907F300C037E3 /* TableViewModelProvider.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -556,10 +550,8 @@
 			files = (
 				351B0BB920168E2E0034569D /* CollectionViewCells.swift in Sources */,
 				351B0BBA20168E2E0034569D /* CollectionViewController.swift in Sources */,
-				351B0BBB20168E2E0034569D /* CollectionViewModelProvider.swift in Sources */,
 				2576641F1F2907DB00C037E3 /* TableViewController.swift in Sources */,
 				257664231F2907FE00C037E3 /* Cells.swift in Sources */,
-				257664211F2907F300C037E3 /* TableViewModelProvider.swift in Sources */,
 				2541B7321F298A69002C3090 /* Models.swift in Sources */,
 				2576640E1F29075C00C037E3 /* AppDelegate.swift in Sources */,
 			);
