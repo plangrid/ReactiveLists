@@ -6,7 +6,6 @@
 //  Copyright © 2016 PlanGrid. All rights reserved.
 //
 
-import PGSharedTestUtils
 @testable import ReactiveLists
 import ReactiveSwift
 import XCTest

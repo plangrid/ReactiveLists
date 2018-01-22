@@ -7,7 +7,6 @@
 //
 
 import Nimble
-import PGSharedTestUtils
 @testable import ReactiveLists
 import ReactiveSwift
 import UIKit

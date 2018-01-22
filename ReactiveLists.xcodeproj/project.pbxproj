@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0ABAC2EBC76C5C0A6354C8F6 /* Pods_ReactiveLists_ReactiveListsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F35530D29268B112F99A187 /* Pods_ReactiveLists_ReactiveListsExample.framework */; };
-		2540F4A21F0DA46B003B4C66 /* PlanLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2540F4A01F0DA395003B4C66 /* PlanLib.framework */; };
-		2540F4A91F0DB018003B4C66 /* PlanLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2540F4A01F0DA395003B4C66 /* PlanLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2537A64B201672B80044469D /* XCTest+Parameterized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2537A649201671F20044469D /* XCTest+Parameterized.swift */; };
 		2541B7321F298A69002C3090 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541B7311F298A69002C3090 /* Models.swift */; };
 		2541B73D1F29A13B002C3090 /* Diffing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541B73C1F29A13B002C3090 /* Diffing.swift */; };
 		2576640E1F29075C00C037E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2576640D1F29075C00C037E3 /* AppDelegate.swift */; };
@@ -36,7 +35,6 @@
 		258E31E81F0D90BC00D6F324 /* SharedFluxTableViewDataSourceMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31E01F0D90BC00D6F324 /* SharedFluxTableViewDataSourceMocks.swift */; };
 		258E31E91F0D90BC00D6F324 /* TestFluxCollectionViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31E11F0D90BC00D6F324 /* TestFluxCollectionViewModels.swift */; };
 		258E31EA1F0D90BC00D6F324 /* TestFluxTableViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31E21F0D90BC00D6F324 /* TestFluxTableViewModels.swift */; };
-		258E31EE1F0D9A3600D6F324 /* PGSharedTestUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258E31ED1F0D9A3600D6F324 /* PGSharedTestUtils.framework */; };
 		25D0D4321F2952EA00596AED /* FluxTableViewDiffingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D0D4311F2952EA00596AED /* FluxTableViewDiffingTests.swift */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
 		BB2B5FDE1BFA1903A6750AD3 /* Pods_ReactiveListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */; };
@@ -66,13 +64,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2540F4A91F0DB018003B4C66 /* PlanLib.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2537A649201671F20044469D /* XCTest+Parameterized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Parameterized.swift"; sourceTree = "<group>"; };
 		2540F4A01F0DA395003B4C66 /* PlanLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PlanLib.framework; path = "../Debug-iphonesimulator/PlanLib.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2541B7311F298A69002C3090 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		2541B73C1F29A13B002C3090 /* Diffing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diffing.swift; sourceTree = "<group>"; };
@@ -141,8 +139,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				258E31991F0D8CBC00D6F324 /* ReactiveLists.framework in Frameworks */,
-				2540F4A21F0DA46B003B4C66 /* PlanLib.framework in Frameworks */,
-				258E31EE1F0D9A3600D6F324 /* PGSharedTestUtils.framework in Frameworks */,
 				BB2B5FDE1BFA1903A6750AD3 /* Pods_ReactiveListsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +218,7 @@
 		258E319C1F0D8CBC00D6F324 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				2537A649201671F20044469D /* XCTest+Parameterized.swift */,
 				258E31DB1F0D90BC00D6F324 /* FluxCollectionViewDataSourceTests.swift */,
 				258E31DC1F0D90BC00D6F324 /* FluxCollectionViewModelTests.swift */,
 				258E31DE1F0D90BC00D6F324 /* FluxTableViewDataSourceTests.swift */,
@@ -585,6 +582,7 @@
 				258E31E81F0D90BC00D6F324 /* SharedFluxTableViewDataSourceMocks.swift in Sources */,
 				25D0D4321F2952EA00596AED /* FluxTableViewDiffingTests.swift in Sources */,
 				258E31E91F0D90BC00D6F324 /* TestFluxCollectionViewModels.swift in Sources */,
+				2537A64B201672B80044469D /* XCTest+Parameterized.swift in Sources */,
 				258E31E71F0D90BC00D6F324 /* FluxTableViewModelTests.swift in Sources */,
 				258E31E61F0D90BC00D6F324 /* FluxTableViewDataSourceTests.swift in Sources */,
 				258E31EA1F0D90BC00D6F324 /* TestFluxTableViewModels.swift in Sources */,
