@@ -17,8 +17,7 @@
 import ReactiveLists
 import UIKit
 
-@objc
-class CollectionViewController: UICollectionViewController {
+final class CollectionViewController: UICollectionViewController {
 
     var collectionViewDataSource: CollectionViewDataSource?
     var groups: [UserGroup] = [] {
@@ -39,7 +38,7 @@ class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionUserCell")
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UserCell")
         self.collectionViewDataSource = CollectionViewDataSource()
         self.collectionViewDataSource?.collectionView = self.collectionView
 
@@ -63,11 +62,9 @@ extension CollectionViewController {
     /// in order for ReactiveLists to update the UI.
     static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> CollectionViewModel {
         let sections: [CollectionViewModel.SectionModel] = groups.map { group in
-            let cellViewModels = group.users.map { CollectionUserCell(user: $0, onDeleteClosure: onDeleteClosure) }
+            let cellViewModels = group.users.map { CollectionUserCellModel(user: $0, onDeleteClosure: onDeleteClosure) }
             return CollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: nil, footerHeight: nil)
         }
         return CollectionViewModel(sectionModels: sections)
     }
 }
-
-

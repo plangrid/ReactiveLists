@@ -17,7 +17,7 @@
 import Foundation
 import ReactiveLists
 
-struct UserCell: TableViewCellViewModel, DiffableViewModel {
+struct TableUserCellModel: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
     let cellIdentifier = "UserCell"
 
@@ -37,7 +37,6 @@ struct UserCell: TableViewCellViewModel, DiffableViewModel {
 
     func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
         cell.textLabel?.text = self.user.name
-
         return cell
     }
 

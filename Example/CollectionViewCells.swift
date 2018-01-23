@@ -18,10 +18,10 @@ import Foundation
 import ReactiveLists
 import UIKit
 
-struct CollectionUserCell: CollectionViewCellViewModel, DiffableViewModel {
+struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
 
     var accessibilityFormat: CellAccessibilityFormat = ""
-    let cellIdentifier = "CollectionUserCell"
+    let cellIdentifier = "UserCell"
 
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete

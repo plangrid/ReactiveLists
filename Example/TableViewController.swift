@@ -17,8 +17,7 @@
 import ReactiveLists
 import UIKit
 
-@objc
-class TableViewController: UITableViewController {
+final class TableViewController: UITableViewController {
 
     var tableViewDataSource: TableViewDataSource?
     var groups: [UserGroup] = [] {
@@ -72,7 +71,7 @@ extension TableViewController {
     /// in order for ReactiveLists to update the UI.
     static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> TableViewModel {
         let sections: [TableViewModel.SectionModel] = groups.map { group in
-            let cellViewModels = group.users.map { UserCell(user: $0, onDeleteClosure: onDeleteClosure) }
+            let cellViewModels = group.users.map { TableUserCellModel(user: $0, onDeleteClosure: onDeleteClosure) }
             return TableViewModel.SectionModel(
                 headerTitle: group.name,
                 headerHeight: 20,
