@@ -190,9 +190,9 @@
 		257A97C32017A80B00164403 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				257A97C42017A80B00164403 /* TableViewMocks.swift */,
 				257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */,
 				257A97C62017A80B00164403 /* TableViewDiffingTests.swift */,
+				257A97C42017A80B00164403 /* TableViewMocks.swift */,
 				257A97C72017A80B00164403 /* TableViewModelTests.swift */,
 			);
 			path = TableView;
@@ -201,9 +201,9 @@
 		257A97C82017A80B00164403 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				257A97DB2017AA3500164403 /* CollectionViewDataSourceMocks.swift */,
 				257A97C92017A80B00164403 /* CollectionViewDataSourceTests.swift */,
 				257A97CA2017A80B00164403 /* CollectionViewModelTests.swift */,
-				257A97DB2017AA3500164403 /* CollectionViewDataSourceMocks.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -260,10 +260,10 @@
 			isa = PBXGroup;
 			children = (
 				257A97C82017A80B00164403 /* CollectionView */,
-				257A97C32017A80B00164403 /* TableView */,
-				257A97CB2017A80B00164403 /* Utils */,
 				257A97BB2017A5AA00164403 /* Fixtures */,
 				258E319F1F0D8CBC00D6F324 /* Info.plist */,
+				257A97C32017A80B00164403 /* TableView */,
+				257A97CB2017A80B00164403 /* Utils */,
 			);
 			path = Tests;
 			sourceTree = "<group>";

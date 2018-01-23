@@ -113,8 +113,6 @@ final class TableViewDataSourceTests: XCTestCase {
             return
         }
         XCTAssertEqual(onScreenHeader.label, "title_header+A")
-
-        self._tableViewDataSource.tableView(self._tableView, didEndDisplayingHeaderView: onScreenHeader, forSection: section)
         XCTAssertNil(self._tableView.headerView(forSection: indexKey.section))
     }
 
@@ -130,8 +128,6 @@ final class TableViewDataSourceTests: XCTestCase {
             return
         }
         XCTAssertEqual(onScreenFooter.label, "title_footer+A")
-
-        self._tableViewDataSource.tableView(self._tableView, didEndDisplayingFooterView: onScreenFooter, forSection: section)
         XCTAssertNil(self._tableView.footerView(forSection: indexKey.section))
     }
 
