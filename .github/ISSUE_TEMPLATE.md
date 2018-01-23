@@ -1,6 +1,6 @@
 ## New issue checklist
 
-- [ ] I have reviewed the [`README`](https://github.com/plangrid/ReactiveLists/blob/master/README.md) and [documentation](https://github.com/plangrid/ReactiveLists/tree/master/Docs)
+- [ ] I have reviewed the [`README`](https://github.com/plangrid/ReactiveLists/blob/master/README.md) and [documentation](https://plangrid.github.io/ReactiveLists)
 - [ ] I have searched [existing issues](https://github.com/plangrid/ReactiveLists/issues) and this is not a duplicate
 
 ### General information
