@@ -24,11 +24,6 @@ final class TableViewDataSourceTests: XCTestCase {
     private var _tableViewModel: TableViewModel!
     private var _tableViewDataSource: TableViewDataSource!
 
-    private var _lastBeginEditingClosureCaller: String?
-    private var _lastEndEditingClosureCaller: String?
-    private var _lastCommitEditingStyleClosureCaller: String?
-    private var _lastSelectClosureCaller: String?
-
     override func setUp() {
         super.setUp()
         self._tableView = TestTableView()
@@ -43,30 +38,18 @@ final class TableViewDataSourceTests: XCTestCase {
                 footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A"),
                 collapsed: false),
             TableViewModel.SectionModel(
-                cellViewModels: ["A", "B", "C"].map { self._generateTestCellViewModel($0) },
+                cellViewModels: ["A", "B", "C"].map { _generateTestCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21),
                 collapsed: false),
             TableViewModel.SectionModel(
-                cellViewModels: ["D", "E", "F"].map { self._generateTestCellViewModel($0) },
+                cellViewModels: ["D", "E", "F"].map { _generateTestCellViewModel($0) },
                 headerViewModel: TestHeaderFooterViewModel(title: "header_3", height: 30),
                 footerViewModel: nil,
                 collapsed: true),
             ], sectionIndexTitles: ["A", "Z", "Z"])
         self._tableViewDataSource = TableViewDataSource(tableView: tableView)
         self._tableViewDataSource.tableViewModel.value = self._tableViewModel
-    }
-
-    func testTableViewSetup() {
-        // Unset the table view from `setUp` and use a different table view for this test
-        let tableView = TestTableView()
-        self.setupWithTableView(tableView)
-
-        XCTAssertEqual(tableView.callsToRegisterClass.count, 2)
-        XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "reuse_header+A")
-        XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "reuse_footer+A")
-        XCTAssert(tableView.callsToRegisterClass[0].viewClass === HeaderView.self)
-        XCTAssert(tableView.callsToRegisterClass[1].viewClass === FooterView.self)
     }
 
     func testTableViewSections() {
@@ -165,23 +148,6 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(cell?.accessibilityIdentifier, "access-1.2")
     }
 
-    func testCellCallbacks() {
-        let dataSource = self._tableViewDataSource
-
-        parameterize(cases: (0, nil), (9, nil), (1, "A")) { (section: Int, caller: String?) in
-            let indexPath = path(section)
-            dataSource?.tableView(self._tableView, willBeginEditingRowAt: indexPath)
-            dataSource?.tableView(self._tableView, didEndEditingRowAt: indexPath)
-            dataSource?.tableView(self._tableView, commit: .delete, forRowAt: indexPath)
-            dataSource?.tableView(self._tableView, didSelectRowAt: indexPath)
-
-            XCTAssertEqual(self._lastBeginEditingClosureCaller, caller)
-            XCTAssertEqual(self._lastEndEditingClosureCaller, caller)
-            XCTAssertEqual(self._lastCommitEditingStyleClosureCaller, caller)
-            XCTAssertEqual(self._lastSelectClosureCaller, caller)
-        }
-    }
-
     func testRefreshAllViewsOnTableViewModelChange() {
         let ftvds = self._tableViewDataSource
         var cell10 = ftvds?._getCell(path(1, 0))
@@ -199,7 +165,7 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertNil(footer1?.label)
 
         // Changing the table view model should refresh all views
-        self._tableViewDataSource.tableViewModel.value = self._generateTestTableViewModelForRefreshingViews()
+        self._tableViewDataSource.tableViewModel.value = _generateTestTableViewModelForRefreshingViews()
 
         cell10 = ftvds?._getCell(path(1, 0))
         cell00 = ftvds?._getCell(path(0, 0))
@@ -251,24 +217,68 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(tableView.callsToDeselect, 0)
     }
 
-    private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
-        return TestCellViewModel(label: label,
-                                 willBeginEditing: { [weak self] in self?._lastBeginEditingClosureCaller = label },
-                                 didEndEditing: { [weak self] in self?._lastEndEditingClosureCaller = label },
-                                 commitEditingStyle: { [weak self] _ in self?._lastCommitEditingStyleClosureCaller = label },
-                                 didSelectClosure: { [weak self] in self?._lastSelectClosureCaller = label })
+    /// Header and footer views should be registered after assigning a `UITableView` to
+    /// the `TableViewDataSource`.
+    func testRegisteringHeaderAndFooterViewsOnSetup() {
+        // Unset the table view from `setUp` and use a different table view for this test
+        let tableView = TestTableView()
+        self.setupWithTableView(tableView)
+
+        XCTAssertEqual(tableView.callsToRegisterClass.count, 2)
+        XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "reuse_header+A")
+        XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "reuse_footer+A")
+        XCTAssert(tableView.callsToRegisterClass[0].viewClass === HeaderView.self)
+        XCTAssert(tableView.callsToRegisterClass[1].viewClass === FooterView.self)
     }
 
-    private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
-        return TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
-                cellViewModels: [self._generateTestCellViewModel("X")],
-                headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "X"),
-                footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "X")),
-            TableViewModel.SectionModel(
-                cellViewModels: ["Y", "Z"].map { self._generateTestCellViewModel($0) },
-                headerViewModel: TestHeaderFooterViewModel(height: 20, viewKind: .header, label: "Y"),
-                footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),
-        ])
+    /// Tests that the table view forwards calls it receives for a given row to the affected cell.
+    /// Also ensures that cells that don't have a matching index path are not called.
+    func testCellCallbacks() {
+        // Set up a new table view that contains two mock cells
+        let tableView = UITableView()
+        let dataSource = TableViewDataSource(tableView: tableView)
+        let cell1 = MockCellViewModel()
+        let cell2 = MockCellViewModel()
+        let tableViewModel = TableViewModel(cellViewModels: [cell1, cell2])
+        dataSource.tableViewModel.value = tableViewModel
+
+        // Invoke various callbacks for one of the cells
+        let indexPath = IndexPath(row: 0, section: 0)
+        dataSource.tableView(tableView, willBeginEditingRowAt: indexPath)
+        dataSource.tableView(tableView, didEndEditingRowAt: indexPath)
+        dataSource.tableView(tableView, commit: .delete, forRowAt: indexPath)
+        dataSource.tableView(tableView, didSelectRowAt: indexPath)
+
+        // Ensure that the affected cell gets all calls forwarded
+        XCTAssertTrue(cell1.willBeginEditingCalled)
+        XCTAssertTrue(cell1.didEndEditingCalled)
+        XCTAssertEqual(cell1.commitEditingStyleCalled, .delete)
+        XCTAssertTrue(cell1.didSelectCalled)
+
+        // Ensure that the unaffected cell does not receive any calls
+        XCTAssertFalse(cell2.willBeginEditingCalled)
+        XCTAssertFalse(cell2.didEndEditingCalled)
+        XCTAssertNil(cell2.commitEditingStyleCalled)
+        XCTAssertFalse(cell2.didSelectCalled)
     }
 }
+
+// MARK: Test data generation
+
+private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
+    return TestCellViewModel(label: label)
+}
+
+private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
+    return TableViewModel(sectionModels: [
+        TableViewModel.SectionModel(
+            cellViewModels: [_generateTestCellViewModel("X")],
+            headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "X"),
+            footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "X")),
+        TableViewModel.SectionModel(
+            cellViewModels: ["Y", "Z"].map { _generateTestCellViewModel($0) },
+            headerViewModel: TestHeaderFooterViewModel(height: 20, viewKind: .header, label: "Y"),
+            footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),
+        ])
+}
+

@@ -26,17 +26,18 @@ struct TestCellViewModel: TableViewCellViewModel {
 
     let cellIdentifier: String
     let label: String
-    let willBeginEditing: WillBeginEditingClosure?
-    let didEndEditing: DidEndEditingClosure?
-    let commitEditingStyle: CommitEditingStyleClosure?
-    let didSelectClosure: DidSelectClosure?
+    var willBeginEditing: WillBeginEditingClosure?
+    var didEndEditing: DidEndEditingClosure?
+    var commitEditingStyle: CommitEditingStyleClosure?
+    var didSelectClosure: DidSelectClosure?
 
     init(label: String,
          cellIdentifier: String? = nil,
          willBeginEditing: WillBeginEditingClosure? = nil,
          didEndEditing: DidEndEditingClosure? = nil,
          commitEditingStyle: CommitEditingStyleClosure? = nil,
-         didSelectClosure: DidSelectClosure? = nil) {
+         didSelectClosure: DidSelectClosure? = nil
+    ) {
         self.cellIdentifier = cellIdentifier ?? label
         self.label = label
         self.willBeginEditing = willBeginEditing

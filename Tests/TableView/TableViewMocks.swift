@@ -81,3 +81,25 @@ extension TableViewDataSource {
         return cell
     }
 }
+
+class MockCellViewModel: TableViewCellViewModel {
+    var accessibilityFormat: CellAccessibilityFormat = "_"
+    var cellIdentifier = "_"
+    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell { return cell }
+
+    var didSelectClosure: DidSelectClosure?
+    var didSelectCalled = false
+    var willBeginEditing: WillBeginEditingClosure?
+    var willBeginEditingCalled = false
+    var didEndEditing: DidEndEditingClosure?
+    var didEndEditingCalled = false
+    var commitEditingStyle: CommitEditingStyleClosure?
+    var commitEditingStyleCalled: UITableViewCellEditingStyle?
+
+    init() {
+        self.didSelectClosure = { [unowned self] in self.didSelectCalled = true }
+        self.willBeginEditing = { [unowned self] in self.willBeginEditingCalled = true }
+        self.didEndEditing = { [unowned self] in self.didEndEditingCalled = true }
+        self.commitEditingStyle = { [unowned self] in self.commitEditingStyleCalled = $0 }
+    }
+}

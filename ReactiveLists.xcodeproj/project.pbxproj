@@ -18,7 +18,7 @@
 		257664231F2907FE00C037E3 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257664221F2907FE00C037E3 /* TableViewCells.swift */; };
 		257A97C02017A5D300164403 /* TestCollectionViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97BC2017A5AA00164403 /* TestCollectionViewModels.swift */; };
 		257A97C12017A5D300164403 /* TestTableViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97BD2017A5AA00164403 /* TestTableViewModels.swift */; };
-		257A97D42017A82900164403 /* TableViewDataSourceMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C42017A80B00164403 /* TableViewDataSourceMocks.swift */; };
+		257A97D42017A82900164403 /* TableViewMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C42017A80B00164403 /* TableViewMocks.swift */; };
 		257A97D52017A82900164403 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */; };
 		257A97D62017A82900164403 /* TableViewDiffingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C62017A80B00164403 /* TableViewDiffingTests.swift */; };
 		257A97D72017A82900164403 /* TableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C72017A80B00164403 /* TableViewModelTests.swift */; };
@@ -85,7 +85,7 @@
 		257664221F2907FE00C037E3 /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		257A97BC2017A5AA00164403 /* TestCollectionViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewModels.swift; sourceTree = "<group>"; };
 		257A97BD2017A5AA00164403 /* TestTableViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewModels.swift; sourceTree = "<group>"; };
-		257A97C42017A80B00164403 /* TableViewDataSourceMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceMocks.swift; sourceTree = "<group>"; };
+		257A97C42017A80B00164403 /* TableViewMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewMocks.swift; sourceTree = "<group>"; };
 		257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
 		257A97C62017A80B00164403 /* TableViewDiffingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDiffingTests.swift; sourceTree = "<group>"; };
 		257A97C72017A80B00164403 /* TableViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelTests.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 		257A97C32017A80B00164403 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				257A97C42017A80B00164403 /* TableViewDataSourceMocks.swift */,
+				257A97C42017A80B00164403 /* TableViewMocks.swift */,
 				257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */,
 				257A97C62017A80B00164403 /* TableViewDiffingTests.swift */,
 				257A97C72017A80B00164403 /* TableViewModelTests.swift */,
@@ -634,7 +634,7 @@
 				257A97C02017A5D300164403 /* TestCollectionViewModels.swift in Sources */,
 				257A97D92017A82F00164403 /* CollectionViewModelTests.swift in Sources */,
 				257A97DA2017A83400164403 /* XCTest+Parameterized.swift in Sources */,
-				257A97D42017A82900164403 /* TableViewDataSourceMocks.swift in Sources */,
+				257A97D42017A82900164403 /* TableViewMocks.swift in Sources */,
 				257A97DD2017AA9000164403 /* CollectionViewDataSourceMocks.swift in Sources */,
 				257A97D52017A82900164403 /* TableViewDataSourceTests.swift in Sources */,
 				257A97C12017A5D300164403 /* TestTableViewModels.swift in Sources */,
