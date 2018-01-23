@@ -62,10 +62,6 @@ class TestTableView: UITableView {
     }
 }
 
-class TestTableViewDataSource: TableViewDataSource {
-    var label: String?
-}
-
 extension TableViewDataSource {
     func _getCell(_ path: IndexPath) -> TestTableViewCell? {
         let tableView = self._tableView

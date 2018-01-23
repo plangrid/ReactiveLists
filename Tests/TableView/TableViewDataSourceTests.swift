@@ -22,7 +22,7 @@ final class TableViewDataSourceTests: XCTestCase {
 
     private var _tableView: TestTableView!
     private var _tableViewModel: TableViewModel!
-    private var _tableViewDataSource: TestTableViewDataSource!
+    private var _tableViewDataSource: TableViewDataSource!
 
     private var _lastBeginEditingClosureCaller: String?
     private var _lastEndEditingClosureCaller: String?
@@ -53,7 +53,7 @@ final class TableViewDataSourceTests: XCTestCase {
                 footerViewModel: nil,
                 collapsed: true),
             ], sectionIndexTitles: ["A", "Z", "Z"])
-        self._tableViewDataSource = TestTableViewDataSource(tableView: tableView)
+        self._tableViewDataSource = TableViewDataSource(tableView: tableView)
         self._tableViewDataSource.tableViewModel.value = self._tableViewModel
     }
 
@@ -61,11 +61,6 @@ final class TableViewDataSourceTests: XCTestCase {
         // Unset the table view from `setUp` and use a different table view for this test
         let tableView = TestTableView()
         self.setupWithTableView(tableView)
-
-        self._tableViewDataSource.label = "baz"
-
-        XCTAssertEqual((tableView.delegate as? TestTableViewDataSource)?.label, "baz")
-        XCTAssertEqual((tableView.dataSource as? TestTableViewDataSource)?.label, "baz")
 
         XCTAssertEqual(tableView.callsToRegisterClass.count, 2)
         XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "reuse_header+A")
@@ -239,7 +234,7 @@ final class TableViewDataSourceTests: XCTestCase {
 
     func testShouldDeselectUponSelection() {
         let tableView = TestTableView()
-        let dataSource = TestTableViewDataSource(tableView: tableView)
+        let dataSource = TableViewDataSource(tableView: tableView)
         XCTAssertEqual(tableView.callsToDeselect, 0)
         dataSource.tableView(tableView, didSelectRowAt: path(0))
         XCTAssertEqual(tableView.callsToDeselect, 1)
@@ -247,7 +242,7 @@ final class TableViewDataSourceTests: XCTestCase {
 
     func testShouldNotDeselectUponSelection() {
         let tableView = TestTableView()
-        let dataSource = TestTableViewDataSource(
+        let dataSource = TableViewDataSource(
             tableView: tableView,
             shouldDeselectUponSelection: false
         )

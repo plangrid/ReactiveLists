@@ -23,7 +23,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
     private var _collectionView: TestCollectionView!
     private var _collectionViewModel: CollectionViewModel!
-    private var _collectionViewDataSource: TestCollectionViewDataSource!
+    private var _collectionViewDataSource: CollectionViewDataSource!
 
     private var _lastSelectClosureCaller: String?
     private var _lastDeselectClosureCaller: String?
@@ -49,7 +49,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
         ])
-        self._collectionViewDataSource = TestCollectionViewDataSource()
+        self._collectionViewDataSource = CollectionViewDataSource()
         self._collectionViewDataSource.collectionViewModel.value = self._collectionViewModel
     }
 
@@ -58,11 +58,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
         XCTAssertNil(self._collectionView.delegate)
         XCTAssertNil(self._collectionView.dataSource)
 
-        self._collectionViewDataSource.label = "baz"
         self._collectionViewDataSource.collectionView = self._collectionView
-
-        XCTAssertEqual((self._collectionView.delegate as? TestCollectionViewDataSource)?.label, "baz")
-        XCTAssertEqual((self._collectionView.dataSource as? TestCollectionViewDataSource)?.label, "baz")
 
         // Test that header and footer view classes explicitly provided in the view model are registered
         let registerCalls = self._collectionView.callsToRegisterClass
@@ -219,7 +215,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
     func testShouldDeselectUponSelection() {
         // Default is to deselect upong selection
-        let dataSource = TestCollectionViewDataSource()
+        let dataSource = CollectionViewDataSource()
         let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         dataSource.collectionView = collectionView
         XCTAssertEqual(collectionView.callsToDeselect, 0)
@@ -228,7 +224,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
     }
 
     func testShouldNotDeselectUponSelection() {
-        let dataSource = TestCollectionViewDataSource(shouldDeselectUponSelection: false)
+        let dataSource = CollectionViewDataSource(shouldDeselectUponSelection: false)
         let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         dataSource.collectionView = collectionView
         XCTAssertEqual(collectionView.callsToDeselect, 0)
@@ -292,35 +288,4 @@ final class CollectionViewDataSourceTests: XCTestCase {
         XCTAssertEqual(info?.viewKind, kind)
         XCTAssertEqual(info?.reuseIdentifier, identifier)
     }
-}
-
-private typealias _RegisterClassCallInfo = (viewClass: AnyClass?, viewKind: SupplementaryViewKind?, reuseIdentifier: String)
-private class TestCollectionView: UICollectionView {
-
-    var callsToRegisterClass: [_RegisterClassCallInfo?] = []
-    var callsToDeselect: Int = 0
-
-    override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
-        return TestCollectionViewCell(identifier: identifier)
-    }
-
-    override func dequeueReusableSupplementaryView(ofKind elementKind: String, withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionReusableView {
-        return TestCollectionReusableView(identifier: identifier)
-    }
-
-    override func register(_ viewClass: AnyClass?, forSupplementaryViewOfKind elementKind: String, withReuseIdentifier identifier: String) {
-        if let viewClass = viewClass {
-            self.callsToRegisterClass.append((viewClass, SupplementaryViewKind(collectionElementKindString: elementKind), identifier))
-        } else {
-            self.callsToRegisterClass.append(nil)
-        }
-    }
-
-    override func deselectItem(at indexPath: IndexPath, animated: Bool) {
-        self.callsToDeselect += 1
-    }
-}
-
-private class TestCollectionViewDataSource: CollectionViewDataSource {
-    var label: String?
 }
