@@ -50,7 +50,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
     }
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self._collectionViewModel?.sectionModels?.count ?? 0
+        return self._collectionViewModel?.sectionModels.count ?? 0
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -169,7 +169,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
 
     private func _registerSupplementaryViews() {
         guard let collectionView = self.collectionView else { return }
-        self._collectionViewModel?.sectionModels?.forEach {
+        self._collectionViewModel?.sectionModels.forEach {
             if let header = $0.headerViewModel?.viewInfo {
                 switch header.registrationMethod {
                 case let .nib(name, bundle):

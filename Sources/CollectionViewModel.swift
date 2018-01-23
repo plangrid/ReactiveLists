@@ -80,14 +80,14 @@ public struct CollectionViewModel {
         }
     }
 
-    public let sectionModels: [SectionModel]?
+    public let sectionModels: [SectionModel]
 
-    public init(sectionModels: [SectionModel]?) {
+    public init(sectionModels: [SectionModel]) {
         self.sectionModels = sectionModels
     }
 
     public subscript(section: Int) -> SectionModel? {
-        guard let sectionModels = self.sectionModels, sectionModels.count > section else { return nil }
+        guard self.sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
 

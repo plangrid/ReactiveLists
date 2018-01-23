@@ -108,7 +108,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return self._tableViewModel?.sectionModels?.count ?? 0
+        return self._tableViewModel?.sectionModels.count ?? 0
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -291,7 +291,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     func _registerHeaderFooterViews() {
-        self._tableViewModel?.sectionModels?.forEach {
+        self._tableViewModel?.sectionModels.forEach {
             if let header = $0.headerViewModel?.viewInfo {
                 switch header.registrationMethod {
                 case let .nib(name, bundle):

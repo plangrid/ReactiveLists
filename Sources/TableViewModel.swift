@@ -75,21 +75,17 @@ public protocol TableViewSectionHeaderFooterViewModel {
 
 public struct TableViewModel {
     public let sectionIndexTitles: [String]?
-    public let sectionModels: [SectionModel]?
+    public let sectionModels: [SectionModel]
 
     public var isEmpty: Bool {
-        guard let models = self.sectionModels else {
-            return true
+        guard let cellViewModels = self.sectionModels.first?.cellViewModels else {
+            return self.sectionModels.isEmpty
         }
 
-        guard let cellViewModels = models.first?.cellViewModels else {
-            return models.isEmpty
-        }
-
-        return models.count == 1 && cellViewModels.isEmpty
+        return self.sectionModels.count == 1 && cellViewModels.isEmpty
     }
 
-    public init(sectionModels: [SectionModel]?, sectionIndexTitles: [String]? = nil) {
+    public init(sectionModels: [SectionModel], sectionIndexTitles: [String]? = nil) {
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
     }
@@ -100,7 +96,7 @@ public struct TableViewModel {
     }
 
     public subscript(section: Int) -> SectionModel? {
-        guard let sectionModels = self.sectionModels, sectionModels.count > section else { return nil }
+        guard sectionModels.count > section else { return nil }
         return sectionModels[ifExists: section]
     }
 
@@ -113,9 +109,8 @@ public struct TableViewModel {
     /// Provides a description of the table view content in terms of diffing keys. These diffing keys
     /// are used to calculate changesets in the table and animate changes automatically.
     var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
-        guard let sections = self.sectionModels else { return SectionedValues() }
         return SectionedValues(
-            sections.map { section in
+            self.sectionModels.map { section in
                 // Ensure we have a diffing key for the current section
                 guard let sectionDiffingKey = section.diffingKey else {
                     fatalError("When diffing is enabled you need to provide a non-nil diffingKey for each section.")
