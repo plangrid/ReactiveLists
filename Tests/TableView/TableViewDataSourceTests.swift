@@ -108,14 +108,14 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(header?.label, "title_header+A")
         XCTAssertEqual(header?.accessibilityIdentifier, "access_header+0")
 
-        guard let onScreenHeader = self._tableViewDataSource.headersOnScreen[indexKey] as? TestTableViewSectionHeaderFooter else {
+        guard let onScreenHeader = self._tableViewDataSource.tableView(self._tableView, viewForHeaderInSection: indexKey.section) as? TestTableViewSectionHeaderFooter else {
             XCTFail("Did not find the on screen TestTableViewSectionHeaderFooter header")
             return
         }
         XCTAssertEqual(onScreenHeader.label, "title_header+A")
 
         self._tableViewDataSource.tableView(self._tableView, didEndDisplayingHeaderView: onScreenHeader, forSection: section)
-        XCTAssertNil(self._tableViewDataSource.headersOnScreen[indexKey])
+        XCTAssertNil(self._tableView.headerView(forSection: indexKey.section))
     }
 
     func testExistingSectionFooters() {
@@ -125,14 +125,14 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(footer?.label, "title_footer+A")
         XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
 
-        guard let onScreenFooter = self._tableViewDataSource.footersOnScreen[indexKey] as? TestTableViewSectionHeaderFooter else {
+        guard let onScreenFooter = self._tableViewDataSource.tableView(self._tableView, viewForFooterInSection: indexKey.section) as? TestTableViewSectionHeaderFooter else {
             XCTFail("Did not find the on screen TestTableViewSectionHeaderFooter footer")
             return
         }
         XCTAssertEqual(onScreenFooter.label, "title_footer+A")
 
         self._tableViewDataSource.tableView(self._tableView, didEndDisplayingFooterView: onScreenFooter, forSection: section)
-        XCTAssertNil(self._tableViewDataSource.footersOnScreen[indexKey])
+        XCTAssertNil(self._tableView.footerView(forSection: indexKey.section))
     }
 
     func testNonExistingTableViewCells() {
@@ -149,53 +149,50 @@ final class TableViewDataSourceTests: XCTestCase {
     }
 
     func testRefreshAllViewsOnTableViewModelChange() {
-        let ftvds = self._tableViewDataSource
-        var cell10 = ftvds?._getCell(path(1, 0))
-        let header0 = ftvds?._getHeader(0)
-        let footer0 = ftvds?._getFooter(0)
-        var cell00 = ftvds?._getCell(path(0, 0))
-        var header1 = ftvds?._getHeader(1)
-        var footer1 = ftvds?._getFooter(1)
+        let dataSource = self._tableViewDataSource
 
-        XCTAssertEqual(cell10?.label, "A")
+        var header0 = dataSource?._getHeader(0)
+        var footer0 = dataSource?._getFooter(0)
+        var cell00 = dataSource?._getCell(path(0, 0))
+
         XCTAssertEqual(header0?.label, "title_header+A")
         XCTAssertEqual(footer0?.label, "title_footer+A")
         XCTAssertNil(cell00?.label)
+
+        var header1 = dataSource?._getHeader(1)
+        var footer1 = dataSource?._getFooter(1)
+        var cell10 = dataSource?._getCell(path(1, 0))
+
         XCTAssertNil(header1?.label)
         XCTAssertNil(footer1?.label)
+        XCTAssertEqual(cell10?.label, "A")
 
         // Changing the table view model should refresh all views
         self._tableViewDataSource.tableViewModel.value = _generateTestTableViewModelForRefreshingViews()
 
-        cell10 = ftvds?._getCell(path(1, 0))
-        cell00 = ftvds?._getCell(path(0, 0))
-        header1 = ftvds?._getHeader(1)
-        footer1 = ftvds?._getFooter(1)
+        header0 = dataSource?._getHeader(0)
+        footer0 = dataSource?._getFooter(0)
+        cell00 = dataSource?._getCell(path(0, 0))
 
-        XCTAssertEqual(cell10?.label, "Y")
-
-        let headerPredicate = NSPredicate { (header, _) -> Bool in
-            return (header as! TestTableViewSectionHeaderFooter).label == "title_header+X"
-        }
-        let headerExpectation = XCTNSPredicateExpectation(predicate: headerPredicate, object: header0)
-
-        let footerPredicate = NSPredicate { (footer, _) -> Bool in
-            return (footer as! TestTableViewSectionHeaderFooter).label == "title_footer+X"
-        }
-        let footerExpectation = XCTNSPredicateExpectation(predicate: footerPredicate, object: footer0)
-
-        wait(for: [headerExpectation, footerExpectation], timeout: 5)
-
+        XCTAssertEqual(header0?.label, "title_header+X")
+        XCTAssertEqual(footer0?.label, "title_footer+X")
         XCTAssertEqual(cell00?.label, "X")
-        XCTAssertEqual(header1?.label, "title_header+Y")
-        XCTAssertEqual(footer1?.label, "title_footer+Y")
 
-        XCTAssertEqual(cell00?.accessibilityIdentifier, "access-0.0")
-        XCTAssertEqual(cell10?.accessibilityIdentifier, "access-1.0")
         XCTAssertEqual(header0?.accessibilityIdentifier, "access_header+0")
         XCTAssertEqual(footer0?.accessibilityIdentifier, "access_footer+0")
+        XCTAssertEqual(cell00?.accessibilityIdentifier, "access-0.0")
+
+        header1 = dataSource?._getHeader(1)
+        footer1 = dataSource?._getFooter(1)
+        cell10 = dataSource?._getCell(path(1, 0))
+
+        XCTAssertEqual(header1?.label, "title_header+Y")
+        XCTAssertEqual(footer1?.label, "title_footer+Y")
+        XCTAssertEqual(cell10?.label, "Y")
+
         XCTAssertEqual(header1?.accessibilityIdentifier, "access_header+1")
         XCTAssertEqual(footer1?.accessibilityIdentifier, "access_footer+1")
+        XCTAssertEqual(cell10?.accessibilityIdentifier, "access-1.0")
     }
 
     func testShouldDeselectUponSelection() {
