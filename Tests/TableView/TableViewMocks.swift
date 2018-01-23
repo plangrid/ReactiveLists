@@ -64,20 +64,17 @@ class TestTableView: UITableView {
 
 extension TableViewDataSource {
     func _getCell(_ path: IndexPath) -> TestTableViewCell? {
-        let tableView = self._tableView
-        guard let cell = self.tableView(tableView, cellForRowAt: path) as? TestTableViewCell else { return nil }
+        guard let cell = self.tableView(self.tableView, cellForRowAt: path) as? TestTableViewCell else { return nil }
         return cell
     }
 
     func _getHeader(_ section: Int) -> TestTableViewSectionHeaderFooter? {
-        let tableView = self._tableView
-        guard let cell = self.tableView(tableView, viewForHeaderInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
+        guard let cell = self.tableView(self.tableView, viewForHeaderInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
         return cell
     }
 
     func _getFooter(_ section: Int) -> TestTableViewSectionHeaderFooter? {
-        let tableView = self._tableView
-        guard let cell = self.tableView(tableView, viewForFooterInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
+        guard let cell = self.tableView(self.tableView, viewForFooterInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
         return cell
     }
 }

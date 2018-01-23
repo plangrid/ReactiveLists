@@ -38,14 +38,10 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     public var tableViewModel: MutableProperty<TableViewModel?> = MutableProperty(nil)
+    public let tableView: UITableView
 
-    var headersOnScreen: [IndexPath: UIView] = [:]
-    var footersOnScreen: [IndexPath: UIView] = [:]
-    var _tableViewModel: TableViewModel? { return self.tableViewModel.value }
-    var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
-
-    // internal for testing
-    internal let _tableView: UITableView
+    private var _tableViewModel: TableViewModel? { return self.tableViewModel.value }
+    private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
 
     private let _shouldDeselectUponSelection: Bool
     private let _automaticDiffEnabled: Bool
@@ -53,10 +49,10 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     private var _didReceiveFirstNonNilValue = false
 
     public init(tableView: UITableView, automaticDiffEnabled: Bool = false, shouldDeselectUponSelection: Bool = true, fullyReloadCells: Bool = false) {
+        self.tableView = tableView
         self._automaticDiffEnabled = automaticDiffEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         self._fullyReloadCellsEnabled = fullyReloadCells
-        self._tableView = tableView
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -75,13 +71,13 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
                 if let newState = newState, !self._didReceiveFirstNonNilValue {
                     // For the first non-nil value, we want to reload data, to avoid a weird
                     // animation where we animate in the initial state
-                    self._tableView.reloadData()
+                    self.tableView.reloadData()
                     self._didReceiveFirstNonNilValue = true
 
                     // Now that we have this initial state, setup the differ with that initial state,
                     // so that the diffing works properly from here on out
                     self._tableViewDiffer = TableViewDiffCalculator<DiffingKey, DiffingKey>(
-                        tableView: self._tableView,
+                        tableView: self.tableView,
                         initialSectionedValues: newState.diffingKeys
                     )
                 } else if self._didReceiveFirstNonNilValue {
@@ -135,11 +131,11 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self._tableView(tableView, viewForHeaderInSection: section, viewKind: .header)
+        return self._tableView(tableView, viewForSection: section, viewKind: .header)
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return self._tableView(tableView, viewForHeaderInSection: section, viewKind: .footer)
+        return self._tableView(tableView, viewForSection: section, viewKind: .footer)
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,16 +150,6 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         }
 
         return cell
-    }
-
-    public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        let indexPathKey = self._indexPathForHeaderFooterInSection(section)
-        self.headersOnScreen.removeValue(forKey: indexPathKey)
-    }
-
-    public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        let indexPathKey = self._indexPathForHeaderFooterInSection(section)
-        self.footersOnScreen.removeValue(forKey: indexPathKey)
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -221,7 +207,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             return
         }
 
-        let visibleIndexPaths = self._tableView.indexPathsForVisibleRows ?? []
+        let visibleIndexPaths = self.tableView.indexPathsForVisibleRows ?? []
 
         // Collect the index paths and views models to reload
         let indexPathsAndViewModelsToReload: [(IndexPath, TableViewCellViewModel)]
@@ -238,7 +224,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             // inadvertently cause a crash because we may not know that some rows are being
             // added/deleted
             for (indexPath, viewModel) in indexPathsAndViewModelsToReload {
-                guard let cell = self._tableView.cellForRow(at: indexPath) else { continue }
+                guard let cell = self.tableView.cellForRow(at: indexPath) else { continue }
                 viewModel.applyViewModelToCell(cell)
                 cell.accessibilityIdentifier = viewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
             }
@@ -248,45 +234,38 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
                 // call begin/end updates to ensure that row heights get a chance to update
                 // Note: begin/end updates sometimes re-queries the data source, but not always,
                 //       which is why we have to force refresh cells individually above
-                self._tableView.beginUpdates()
-                self._tableView.endUpdates()
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             }
         }
 
-        for (index, view) in self.headersOnScreen {
-            guard locationFilter?(.header(index.section)) ?? true else { continue }
-            guard let sectionModel = self._tableViewModel?[index.section],
-                let viewModel = sectionModel.headerViewModel else { continue }
-            viewModel.applyViewModelToView(view)
-            view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(index.section)
-        }
+        let visibleSections = Set<Int>(visibleIndexPaths.map { $0.section })
+        for section in visibleSections {
+            guard let sectionModel = self._tableViewModel?[section] else { continue }
 
-        for (index, view) in self.footersOnScreen {
-            guard locationFilter?(.footer(index.section)) ?? true else { continue }
-            guard let sectionModel = self._tableViewModel?[index.section],
-                let viewModel = sectionModel.footerViewModel else { continue }
-            viewModel.applyViewModelToView(view)
-            view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(index.section)
+            if let headerView = self.tableView.headerView(forSection: section),
+                let headerViewModel = sectionModel.headerViewModel {
+                headerViewModel.applyViewModelToView(headerView)
+                headerView.accessibilityIdentifier = headerViewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
+            }
+
+            if let footerView = self.tableView.footerView(forSection: section),
+                let footerViewModel = sectionModel.footerViewModel {
+                footerViewModel.applyViewModelToView(footerView)
+                footerView.accessibilityIdentifier = footerViewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
+            }
         }
     }
 
-    open func _tableView(_ tableView: UITableView, viewForHeaderInSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
+    open func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
         guard let sectionModel = self._tableViewModel?[section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.reuseIdentifier,
-            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else { return nil }
-
+            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
+                return nil
+        }
         viewModel.applyViewModelToView(view)
         view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
-
-        let indexPathKey = self._indexPathForHeaderFooterInSection(section)
-        switch viewKind {
-        case .header:
-            self.headersOnScreen[indexPathKey] = view
-        case .footer:
-            self.footersOnScreen[indexPathKey] = view
-        }
-
         return view
     }
 
@@ -295,23 +274,19 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             if let header = $0.headerViewModel?.viewInfo {
                 switch header.registrationMethod {
                 case let .nib(name, bundle):
-                    self._tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
+                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
                 case let .viewClass(viewClass):
-                    self._tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
+                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
                 }
             }
             if let footer = $0.footerViewModel?.viewInfo {
                 switch footer.registrationMethod {
                 case let .nib(name, bundle):
-                    self._tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
+                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
                 case let .viewClass(viewClass):
-                    self._tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
+                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
                 }
             }
         }
-    }
-
-    func _indexPathForHeaderFooterInSection(_ section: Int) -> IndexPath {
-        return IndexPath(row: 0, section: section)
     }
 }
