@@ -69,8 +69,11 @@ public struct CollectionViewModel {
         let headerViewModel: CollectionViewSupplementaryViewModel?
         let footerViewModel: CollectionViewSupplementaryViewModel?
 
-        public init(cellViewModels: [CollectionViewCellViewModel]?, headerViewModel: CollectionViewSupplementaryViewModel? = nil,
-                    footerViewModel: CollectionViewSupplementaryViewModel? = nil) {
+        public init(
+            cellViewModels: [CollectionViewCellViewModel]?,
+            headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+            footerViewModel: CollectionViewSupplementaryViewModel? = nil
+        ) {
             self.cellViewModels = cellViewModels
             self.headerViewModel = headerViewModel
             self.footerViewModel = footerViewModel
