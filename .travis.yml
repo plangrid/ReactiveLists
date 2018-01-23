@@ -1,5 +1,6 @@
 language: objective-c
 osx_image: xcode9.2
+gemfile: Gemfile
 
 branches:
   only:
@@ -49,6 +50,8 @@ script:
 - if [ $RUN_TESTS == "YES" ]; then
       xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -destination "platform=iOS Simulator,name=iPhone 7" CODE_SIGNING_REQUIRED=NO;
   fi
+
+- bundle exec danger
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
