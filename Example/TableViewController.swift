@@ -22,7 +22,7 @@ final class TableViewController: UITableViewController {
     var tableViewDataSource: TableViewDataSource?
     var groups: [UserGroup] = [] {
         didSet {
-            self.tableViewDataSource?.tableViewModel.value = TableViewController.viewModel(
+            self.tableViewDataSource?.tableViewModel = TableViewController.viewModel(
                 forState: groups,
                 onDeleteClosure: { deletedUser in
                     // Iterate through the user groups and find the deleted user.
@@ -74,7 +74,7 @@ extension TableViewController {
             let cellViewModels = group.users.map { TableUserCellModel(user: $0, onDeleteClosure: onDeleteClosure) }
             return TableViewModel.SectionModel(
                 headerTitle: group.name,
-                headerHeight: 20,
+                headerHeight: 44,
                 cellViewModels: cellViewModels,
                 diffingKey: group.name
             )

@@ -15,7 +15,6 @@
 //
 
 import Dwifft
-import ReactiveSwift
 import Result
 import UIKit
 
@@ -37,10 +36,18 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         case rowsModified
     }
 
-    public var tableViewModel: MutableProperty<TableViewModel?> = MutableProperty(nil)
     public let tableView: UITableView
 
-    private var _tableViewModel: TableViewModel? { return self.tableViewModel.value }
+    public var tableViewModel: TableViewModel? {
+        willSet {
+            assert(Thread.isMainThread, "Must set \(#function) on main thread")
+        }
+        didSet {
+            self._registerHeaderFooterViews()
+            self.setUpTableViewModelChangeHandlers(self.tableViewModel)
+        }
+    }
+
     private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
 
     private let _shouldDeselectUponSelection: Bool
@@ -56,77 +63,68 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
-        self.setUpTableViewModelChangeHandlers()
     }
 
-    open func setUpTableViewModelChangeHandlers() {
-        // Immediately register header footer views (don't bother switching to main thread)
-        self.tableViewModel.producer.startWithValues { [weak self] _ in self?._registerHeaderFooterViews() }
-
+    private func setUpTableViewModelChangeHandlers(_ newState: TableViewModel?) {
         if self._automaticDiffEnabled {
-            // Subscribe to updates to the table view model and inform the differ on each update
-            // by providing the latest set of diffing keys.
-            self.tableViewModel.producer.startWithValues { [weak self] newState in
-                guard let `self` = self else { return }
-                if let newState = newState, !self._didReceiveFirstNonNilValue {
-                    // For the first non-nil value, we want to reload data, to avoid a weird
-                    // animation where we animate in the initial state
-                    self.tableView.reloadData()
-                    self._didReceiveFirstNonNilValue = true
+            if let newState = newState, !self._didReceiveFirstNonNilValue {
+                // For the first non-nil value, we want to reload data, to avoid a weird
+                // animation where we animate in the initial state
+                self.tableView.reloadData()
+                self._didReceiveFirstNonNilValue = true
 
-                    // Now that we have this initial state, setup the differ with that initial state,
-                    // so that the diffing works properly from here on out
-                    self._tableViewDiffer = TableViewDiffCalculator<DiffingKey, DiffingKey>(
-                        tableView: self.tableView,
-                        initialSectionedValues: newState.diffingKeys
-                    )
-                } else if self._didReceiveFirstNonNilValue {
-                    // If the current table view model is empty, default to an empty set of diffing keys
-                    if let differ = self._tableViewDiffer {
-                        let diffingKeys = newState?.diffingKeys ?? SectionedValues()
-                        let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
-                        differ.sectionedValues = diffingKeys
-                        let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
-                        self.refreshViews(refreshContext: context)
-                    } else {
-                        self.refreshViews()
-                    }
+                // Now that we have this initial state, setup the differ with that initial state,
+                // so that the diffing works properly from here on out
+                self._tableViewDiffer = TableViewDiffCalculator<DiffingKey, DiffingKey>(
+                    tableView: self.tableView,
+                    initialSectionedValues: newState.diffingKeys
+                )
+            } else if self._didReceiveFirstNonNilValue {
+                // If the current table view model is empty, default to an empty set of diffing keys
+                if let differ = self._tableViewDiffer {
+                    let diffingKeys = newState?.diffingKeys ?? SectionedValues()
+                    let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
+                    differ.sectionedValues = diffingKeys
+                    let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
+                    self.refreshViews(refreshContext: context)
+                } else {
+                    self.refreshViews()
                 }
             }
+
         } else {
-            // Refresh views on the main thread whenever table view model changes
-            self.tableViewModel.producer.onMainQueue().startWithValues { [weak self] _ in self?.refreshViews() }
+            self.refreshViews()
         }
     }
 
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self._tableViewModel?.sectionIndexTitles
+        return self.tableViewModel?.sectionIndexTitles
     }
 
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return self._tableViewModel?.sectionModels.count ?? 0
+        return self.tableViewModel?.sectionModels.count ?? 0
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = self._tableViewModel?[section], !sectionModel.collapsed else { return 0 }
+        guard let sectionModel = self.tableViewModel?[section], !sectionModel.collapsed else { return 0 }
         return sectionModel.cellViewModels?.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self._tableViewModel?[section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
     }
 
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self._tableViewModel?[section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let header = self._tableViewModel?[section]?.headerViewModel, header.viewInfo == nil else { return nil }
+        guard let header = self.tableViewModel?[section]?.headerViewModel, header.viewInfo == nil else { return nil }
         return header.title
     }
 
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        guard let footer = self._tableViewModel?[section]?.footerViewModel, footer.viewInfo == nil else { return nil }
+        guard let footer = self.tableViewModel?[section]?.footerViewModel, footer.viewInfo == nil else { return nil }
         return footer.title
     }
 
@@ -141,7 +139,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell
 
-        if let cellViewModel = self._tableViewModel?[indexPath] {
+        if let cellViewModel = self.tableViewModel?[indexPath] {
             cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
             cellViewModel.applyViewModelToCell(cell)
             cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
@@ -153,26 +151,26 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self._tableViewModel?[indexPath]?.rowHeight ?? 44
+        return self.tableViewModel?[indexPath]?.rowHeight ?? 44
     }
 
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        self._tableViewModel?[indexPath]?.willBeginEditing?()
+        self.tableViewModel?[indexPath]?.willBeginEditing?()
     }
 
     public func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         if let indexPath = indexPath {
-            self._tableViewModel?[indexPath]?.didEndEditing?()
+            self.tableViewModel?[indexPath]?.didEndEditing?()
         }
     }
 
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return self._tableViewModel?[indexPath]?.editingStyle ?? .none
+        return self.tableViewModel?[indexPath]?.editingStyle ?? .none
     }
 
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
-        if let cellViewModel = self._tableViewModel?[indexPath] as? TableViewCellModelEditActions {
+        if let cellViewModel = self.tableViewModel?[indexPath] as? TableViewCellModelEditActions {
             return cellViewModel.editActions(indexPath)
         }
 
@@ -180,30 +178,30 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        self._tableViewModel?[indexPath]?.accessoryButtonTappedClosure?()
+        self.tableViewModel?[indexPath]?.accessoryButtonTappedClosure?()
     }
 
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return self._tableViewModel?[indexPath]?.shouldHighlight ?? true
+        return self.tableViewModel?[indexPath]?.shouldHighlight ?? true
     }
 
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        self._tableViewModel?[indexPath]?.commitEditingStyle?(editingStyle)
+        self.tableViewModel?[indexPath]?.commitEditingStyle?(editingStyle)
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self._shouldDeselectUponSelection {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        self._tableViewModel?[indexPath]?.didSelectClosure?()
+        self.tableViewModel?[indexPath]?.didSelectClosure?()
     }
 
     public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return self._tableViewModel?[indexPath]?.shouldIndentWhileEditing ?? true
+        return self.tableViewModel?[indexPath]?.shouldIndentWhileEditing ?? true
     }
 
     public func refreshViews(_ locationFilter: ViewLocationFilter? = nil, refreshContext: TableRefreshContext = .unknown) {
-        guard let sections = self._tableViewModel?.sectionModels, !sections.isEmpty else {
+        guard let sections = self.tableViewModel?.sectionModels, !sections.isEmpty else {
             return
         }
 
@@ -213,7 +211,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         let indexPathsAndViewModelsToReload: [(IndexPath, TableViewCellViewModel)]
         indexPathsAndViewModelsToReload = visibleIndexPaths.flatMap { indexPath in
             if locationFilter?(.cell(indexPath)) ?? true {
-                return self._tableViewModel?[indexPath].map { (indexPath, $0) }
+                return self.tableViewModel?[indexPath].map { (indexPath, $0) }
             }
             return nil
         }
@@ -241,7 +239,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
 
         let visibleSections = Set<Int>(visibleIndexPaths.map { $0.section })
         for section in visibleSections {
-            guard let sectionModel = self._tableViewModel?[section] else { continue }
+            guard let sectionModel = self.tableViewModel?[section] else { continue }
 
             if let headerView = self.tableView.headerView(forSection: section),
                 let headerViewModel = sectionModel.headerViewModel {
@@ -258,7 +256,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     open func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
-        guard let sectionModel = self._tableViewModel?[section],
+        guard let sectionModel = self.tableViewModel?[section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.reuseIdentifier,
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
@@ -270,7 +268,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     }
 
     func _registerHeaderFooterViews() {
-        self._tableViewModel?.sectionModels.forEach {
+        self.tableViewModel?.sectionModels.forEach {
             if let header = $0.headerViewModel?.viewInfo {
                 switch header.registrationMethod {
                 case let .nib(name, bundle):
