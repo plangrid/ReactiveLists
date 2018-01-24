@@ -18,10 +18,14 @@ import Foundation
 import ReactiveLists
 import UIKit
 
+final class CollectionUserCell: UICollectionViewCell {
+    @IBOutlet weak var usernameLabel: UILabel!
+}
+
 struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
 
-    var accessibilityFormat: CellAccessibilityFormat = ""
-    let cellIdentifier = "UserCell"
+    var accessibilityFormat: CellAccessibilityFormat = "CollectionUserCell"
+    let cellIdentifier = "CollectionUserCell"
 
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete
@@ -38,8 +42,9 @@ struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
     }
 
     func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell {
-        cell.backgroundColor = .blue
-        return cell
+        guard let collectionUserCell = cell as? CollectionUserCell else { return cell }
+        collectionUserCell.usernameLabel.text = self.user.name
+        return collectionUserCell
     }
 
     var diffingKey: String {
