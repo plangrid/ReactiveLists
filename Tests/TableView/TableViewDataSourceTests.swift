@@ -30,6 +30,10 @@ final class TableViewDataSourceTests: XCTestCase {
         self.setupWithTableView(self._tableView)
     }
 
+    /// Helper method to configure a `TableViewDataSource`
+    /// and a `UITableView`.
+    /// - Parameter tableView: The `UITableView` that is used to present
+    /// the content described in the `TableViewModel`.
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
             TableViewModel.SectionModel(
@@ -52,6 +56,7 @@ final class TableViewDataSourceTests: XCTestCase {
         self._tableViewDataSource.tableViewModel = self._tableViewModel
     }
 
+    /// Table view sections described in the table view model are converted into views correctly.
     func testTableViewSections() {
 
         XCTAssertEqual(self._tableViewDataSource.sectionIndexTitles(for: self._tableView)!, ["A", "Z", "Z"])
@@ -79,6 +84,7 @@ final class TableViewDataSourceTests: XCTestCase {
         }
     }
 
+    /// Table view rows described in the table view model are converted into views correctly.
     func testTableViewRows() {
         parameterize(cases: (0, 44), (1, 42), (2, 42), (9, 44)) {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, heightForRowAt: path($0)), $1)
@@ -94,13 +100,7 @@ final class TableViewDataSourceTests: XCTestCase {
         }
     }
 
-    func testNonExistingSectionHeaderFooters() {
-        parameterize(cases: 1, 2, 9) {
-            XCTAssertNil(self._tableViewDataSource._getHeader($0))
-            XCTAssertNil(self._tableViewDataSource._getFooter($0))
-        }
-    }
-
+    /// Table view section headers described in the table view model are converted into views correctly.
     func testExistingSectionHeaders() {
         let section = 0
         let indexKey = path(section)
@@ -116,6 +116,7 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertNil(self._tableView.headerView(forSection: indexKey.section))
     }
 
+    /// Table view section footers described in the table view model are converted into views correctly.
     func testExistingSectionFooters() {
         let section = 0
         let indexKey = path(section)
@@ -131,12 +132,7 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertNil(self._tableView.footerView(forSection: indexKey.section))
     }
 
-    func testNonExistingTableViewCells() {
-        parameterize(cases: path(0, 0), path(1, 9), path(9, 0)) {
-            XCTAssertNil(self._tableViewDataSource._getCell($0))
-        }
-    }
-
+    /// Table view cells described in the table view model are converted into views correctly.
     func testExistingTableViewCell() {
         let indexPath = path(1, 2)
         let cell = self._tableViewDataSource._getCell(indexPath)
@@ -144,6 +140,8 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(cell?.accessibilityIdentifier, "access-1.2")
     }
 
+    /// Views are refreshed upon assigning a new table view model to the
+    /// TableViewDataSource.
     func testRefreshAllViewsOnTableViewModelChange() {
         let dataSource = self._tableViewDataSource
 
@@ -191,6 +189,7 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(cell10?.accessibilityIdentifier, "access-1.0")
     }
 
+    /// Selected cells are automatically deselected by default.
     func testShouldDeselectUponSelection() {
         let tableView = TestTableView()
         let dataSource = TableViewDataSource(tableView: tableView)
@@ -199,6 +198,8 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(tableView.callsToDeselect, 1)
     }
 
+    /// When the option is disabled, selected cells are no longer
+    /// immediately deselected.
     func testShouldNotDeselectUponSelection() {
         let tableView = TestTableView()
         let dataSource = TableViewDataSource(
@@ -253,6 +254,28 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertFalse(cell2.didEndEditingCalled)
         XCTAssertNil(cell2.commitEditingStyleCalled)
         XCTAssertFalse(cell2.didSelectCalled)
+    }
+
+    /// When providing a cell that implements the minimum protocol requirements,
+    /// default values for certain properties are provided.
+    func testTableViewCellViewModelDefaults() {
+        struct DefaultCellViewModel: TableViewCellViewModel {
+            var accessibilityFormat: CellAccessibilityFormat = "_"
+            var cellIdentifier: String = "_"
+            func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell { return cell }
+        }
+
+        let defaultCellViewModel = DefaultCellViewModel()
+
+        XCTAssertNil(defaultCellViewModel.willBeginEditing)
+        XCTAssertNil(defaultCellViewModel.didEndEditing)
+        XCTAssertEqual(defaultCellViewModel.editingStyle, .none)
+        XCTAssertEqual(defaultCellViewModel.rowHeight, 44.0)
+        XCTAssertTrue(defaultCellViewModel.shouldHighlight)
+        XCTAssertNil(defaultCellViewModel.commitEditingStyle)
+        XCTAssertNil(defaultCellViewModel.didSelectClosure)
+        XCTAssertNil(defaultCellViewModel.accessoryButtonTappedClosure)
+        XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
     }
 }
 
