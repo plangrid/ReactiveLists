@@ -1,0 +1,44 @@
+# paths to ignore during linting, overridden by `included`
+excluded:
+  - Carthage
+  - Pods
+  - Documentation
+  - fastlane
+  - vendor
+
+# rule identifiers to exclude from running
+disabled_rules:
+  - identifier_name
+  - nesting # don't agree with this one
+  - type_name
+  - trailing_comma
+  - void_return # preference
+
+opt_in_rules:
+  # performance
+  - empty_count
+  - first_where
+  - sorted_first_last
+  - contains_over_first_not_nil
+
+  # idiomatic
+  - fatal_error_message
+
+  # style
+  - number_separator
+  - operator_usage_whitespace
+  - sorted_imports
+
+  # lint
+  - overridden_super_call
+
+file_length: 1000
+line_length: 200
+
+type_body_length:
+  - 600 # warning
+  - 1000 # error
+
+function_body_length:
+  - 200 # warning
+  - 300 # error

@@ -325,6 +325,7 @@
 				258E318C1F0D8CBC00D6F324 /* Headers */,
 				258E318D1F0D8CBC00D6F324 /* Resources */,
 				8FF76AF3B4AECB978935C8A9 /* [CP] Copy Pods Resources */,
+				357B96DD20193EB50000443F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -465,6 +466,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		357B96DD20193EB50000443F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
 		};
 		437FEC491464A7BDC29789F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
