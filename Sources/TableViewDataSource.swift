@@ -15,7 +15,6 @@
 //
 
 import Dwifft
-import Result
 import UIKit
 
 public typealias ViewLocationFilter = (ViewLocation) -> Bool

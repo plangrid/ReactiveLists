@@ -15,7 +15,6 @@
 //
 
 @testable import ReactiveLists
-import ReactiveSwift
 import XCTest
 
 final class CollectionViewModelTests: XCTestCase {

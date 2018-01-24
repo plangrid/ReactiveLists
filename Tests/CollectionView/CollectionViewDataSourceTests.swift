@@ -15,7 +15,6 @@
 //
 
 @testable import ReactiveLists
-import ReactiveSwift
 import UIKit
 import XCTest
 
@@ -49,16 +48,14 @@ final class CollectionViewDataSourceTests: XCTestCase {
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
         ])
-        self._collectionViewDataSource = CollectionViewDataSource()
-        self._collectionViewDataSource.collectionViewModel.value = self._collectionViewModel
+        self._collectionViewDataSource = CollectionViewDataSource(collectionViewModel: self._collectionViewModel,
+                                                                  collectionView: self._collectionView)
     }
 
     func testCollectionViewSetup() {
         // Test that the delegate and dataSource connections are made
-        XCTAssertNil(self._collectionView.delegate)
-        XCTAssertNil(self._collectionView.dataSource)
-
-        self._collectionViewDataSource.collectionView = self._collectionView
+        XCTAssertNotNil(self._collectionView.delegate)
+        XCTAssertNotNil(self._collectionView.dataSource)
 
         // Test that header and footer view classes explicitly provided in the view model are registered
         let registerCalls = self._collectionView.callsToRegisterClass
@@ -215,18 +212,16 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
     func testShouldDeselectUponSelection() {
         // Default is to deselect upong selection
-        let dataSource = CollectionViewDataSource()
         let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
-        dataSource.collectionView = collectionView
+        let dataSource = CollectionViewDataSource(collectionView: collectionView)
         XCTAssertEqual(collectionView.callsToDeselect, 0)
         dataSource.collectionView(collectionView, didSelectItemAt: path(0))
         XCTAssertEqual(collectionView.callsToDeselect, 1)
     }
 
     func testShouldNotDeselectUponSelection() {
-        let dataSource = CollectionViewDataSource(shouldDeselectUponSelection: false)
         let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
-        dataSource.collectionView = collectionView
+        let dataSource = CollectionViewDataSource(collectionView: collectionView, shouldDeselectUponSelection: false)
         XCTAssertEqual(collectionView.callsToDeselect, 0)
         dataSource.collectionView(collectionView, didSelectItemAt: path(0))
         XCTAssertEqual(collectionView.callsToDeselect, 0)
@@ -241,7 +236,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
         XCTAssertEqual(header?.label, "label_header+A")
         XCTAssertEqual(footer?.label, "label_footer+A")
 
-        self._collectionViewDataSource.collectionViewModel.value = CollectionViewModel(sectionModels: [
+        self._collectionViewDataSource.collectionViewModel = CollectionViewModel(sectionModels: [
             CollectionViewModel.SectionModel(
                 cellViewModels: nil,
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "X"),
