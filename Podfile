@@ -7,7 +7,6 @@ inhibit_all_warnings!
 target 'ReactiveLists' do
     project 'ReactiveLists.xcodeproj'
 
-    pod 'ReactiveSwift', '~> 3.0'
     pod 'Dwifft', '0.7.0'
 
     target 'ReactiveListsExample' do

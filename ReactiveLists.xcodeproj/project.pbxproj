@@ -438,14 +438,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Dwifft/Dwifft.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dwifft.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -460,14 +456,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Dwifft/Dwifft.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dwifft.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
