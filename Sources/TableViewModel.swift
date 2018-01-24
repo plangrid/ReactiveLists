@@ -97,13 +97,16 @@ public struct TableViewModel {
 
     public subscript(section: Int) -> SectionModel? {
         guard sectionModels.count > section else { return nil }
-        return sectionModels[ifExists: section]
+        return sectionModels[section]
     }
 
     public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
         guard let section = self[indexPath.section],
-            let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.row else { return nil }
-        return cellViewModels[ifExists: indexPath.row]
+            let cellViewModels = section.cellViewModels,
+            cellViewModels.count > indexPath.row else {
+                return nil
+        }
+        return cellViewModels[indexPath.row]
     }
 
     /// Provides a description of the table view content in terms of diffing keys. These diffing keys

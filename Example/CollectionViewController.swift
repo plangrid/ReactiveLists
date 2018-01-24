@@ -31,7 +31,7 @@ final class CollectionViewController: UICollectionViewController {
                     }
             }
             )
-            self.collectionViewDataSource?.collectionViewModel.value = model
+            self.collectionViewDataSource?.collectionViewModel = model
         }
     }
 
@@ -39,8 +39,7 @@ final class CollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UserCell")
-        self.collectionViewDataSource = CollectionViewDataSource()
-        self.collectionViewDataSource?.collectionView = self.collectionView
+        self.collectionViewDataSource = CollectionViewDataSource(collectionView: self.collectionView!)
 
         self.groups = [
             UserGroup(
