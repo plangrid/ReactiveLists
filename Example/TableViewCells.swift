@@ -17,9 +17,9 @@
 import Foundation
 import ReactiveLists
 
-struct TableUserCellModel: TableViewCellViewModel, DiffableViewModel {
+struct UserCellModel: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
-    let cellIdentifier = "UserCell"
+    let cellIdentifier = "TableUserCell"
 
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete

@@ -32,13 +32,18 @@ final class CollectionViewController: UICollectionViewController {
             }
             )
             self.collectionViewDataSource?.collectionViewModel = model
+            self.collectionView?.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UserCell")
+        self.collectionView!.register(
+            UINib(nibName: "CollectionUserCell", bundle: nil),
+            forCellWithReuseIdentifier: "CollectionUserCell"
+        )
+
         self.collectionViewDataSource = CollectionViewDataSource(collectionView: self.collectionView!)
 
         self.groups = [
@@ -52,6 +57,16 @@ final class CollectionViewController: UICollectionViewController {
             ),
         ]
     }
+
+    @IBAction func swapSections(_ sender: Any) {
+        let group0 = self.groups[0]
+        self.groups[0] = self.groups[1]
+        self.groups[1] = group0
+    }
+
+    @IBAction func addUser(_ sender: Any) {
+        self.groups[0].users.append(User(name: "New User!"))
+    }
 }
 
 // MARK: View Model Provider
@@ -62,7 +77,7 @@ extension CollectionViewController {
     static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> CollectionViewModel {
         let sections: [CollectionViewModel.SectionModel] = groups.map { group in
             let cellViewModels = group.users.map { CollectionUserCellModel(user: $0, onDeleteClosure: onDeleteClosure) }
-            return CollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: nil, footerHeight: nil)
+            return CollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: 44, footerHeight: 44)
         }
         return CollectionViewModel(sectionModels: sections)
     }

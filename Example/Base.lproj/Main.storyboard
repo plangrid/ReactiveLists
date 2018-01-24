@@ -47,8 +47,16 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="ReactiveLists" id="e4L-Qs-yBx">
-                        <barButtonItem key="leftBarButtonItem" title="Flip" id="MIQ-18-xZW"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NNC-E5-DgG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Flip" id="MIQ-18-xZW">
+                            <connections>
+                                <action selector="swapSections:" destination="zbt-zE-Q53" id="kMe-4t-rer"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NNC-E5-DgG">
+                            <connections>
+                                <action selector="addUser:" destination="zbt-zE-Q53" id="t7y-Rg-i17"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Sb-1u-sBK" userLabel="First Responder" sceneMemberID="firstResponder"/>
