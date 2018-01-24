@@ -49,7 +49,7 @@ final class TableViewDataSourceTests: XCTestCase {
                 collapsed: true),
             ], sectionIndexTitles: ["A", "Z", "Z"])
         self._tableViewDataSource = TableViewDataSource(tableView: tableView)
-        self._tableViewDataSource.tableViewModel.value = self._tableViewModel
+        self._tableViewDataSource.tableViewModel = self._tableViewModel
     }
 
     func testTableViewSections() {
@@ -164,7 +164,7 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(cell10?.label, "A")
 
         // Changing the table view model should refresh all views
-        self._tableViewDataSource.tableViewModel.value = _generateTestTableViewModelForRefreshingViews()
+        self._tableViewDataSource.tableViewModel = _generateTestTableViewModelForRefreshingViews()
 
         header0 = dataSource?._getHeader(0)
         footer0 = dataSource?._getFooter(0)
@@ -233,7 +233,7 @@ final class TableViewDataSourceTests: XCTestCase {
         let cell1 = MockCellViewModel()
         let cell2 = MockCellViewModel()
         let tableViewModel = TableViewModel(cellViewModels: [cell1, cell2])
-        dataSource.tableViewModel.value = tableViewModel
+        dataSource.tableViewModel = tableViewModel
 
         // Invoke various callbacks for one of the cells
         let indexPath = IndexPath(row: 0, section: 0)

@@ -43,13 +43,13 @@ final class TableViewDiffingTests: XCTestCase {
             cellViewModels: []
         )
 
-        self.tableViewDataSource.tableViewModel.value = initialModel
+        self.tableViewDataSource.tableViewModel = initialModel
 
         let updatedModel = TableViewModel(
             cellViewModels: [UserCell(user: "TestUser")]
         )
 
-        self.tableViewDataSource.tableViewModel.value = updatedModel
+        self.tableViewDataSource.tableViewModel = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 1)
         XCTAssertEqual(
@@ -76,7 +76,7 @@ final class TableViewDiffingTests: XCTestCase {
             ),
         ])
 
-        self.tableViewDataSource.tableViewModel.value = initialModel
+        self.tableViewDataSource.tableViewModel = initialModel
 
         let updatedModel = TableViewModel(sectionModels: [
             TableViewModel.SectionModel(
@@ -85,7 +85,7 @@ final class TableViewDiffingTests: XCTestCase {
             ),
         ])
 
-        self.tableViewDataSource.tableViewModel.value = updatedModel
+        self.tableViewDataSource.tableViewModel = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 1)
         XCTAssertEqual(

@@ -43,8 +43,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             assert(Thread.isMainThread, "Must set \(#function) on main thread")
         }
         didSet {
-            self._registerHeaderFooterViews()
-            self.setUpTableViewModelChangeHandlers(self.tableViewModel)
+            self._tableViewModelDidChange()
         }
     }
 
@@ -55,7 +54,12 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     private let _fullyReloadCellsEnabled: Bool
     private var _didReceiveFirstNonNilValue = false
 
-    public init(tableView: UITableView, automaticDiffEnabled: Bool = false, shouldDeselectUponSelection: Bool = true, fullyReloadCells: Bool = false) {
+    public init(tableViewModel: TableViewModel? = nil,
+                tableView: UITableView,
+                automaticDiffEnabled: Bool = false,
+                shouldDeselectUponSelection: Bool = true,
+                fullyReloadCells: Bool = false) {
+        self.tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffEnabled = automaticDiffEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
@@ -63,11 +67,19 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
+        self._tableViewModelDidChange()
     }
 
-    private func setUpTableViewModelChangeHandlers(_ newState: TableViewModel?) {
+    private func _tableViewModelDidChange() {
+        self._registerHeaderFooterViews()
+
+        guard let newModel = self.tableViewModel else {
+            self.refreshViews()
+            return
+        }
+
         if self._automaticDiffEnabled {
-            if let newState = newState, !self._didReceiveFirstNonNilValue {
+            if !self._didReceiveFirstNonNilValue {
                 // For the first non-nil value, we want to reload data, to avoid a weird
                 // animation where we animate in the initial state
                 self.tableView.reloadData()
@@ -77,12 +89,12 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
                 // so that the diffing works properly from here on out
                 self._tableViewDiffer = TableViewDiffCalculator<DiffingKey, DiffingKey>(
                     tableView: self.tableView,
-                    initialSectionedValues: newState.diffingKeys
+                    initialSectionedValues: newModel.diffingKeys
                 )
             } else if self._didReceiveFirstNonNilValue {
                 // If the current table view model is empty, default to an empty set of diffing keys
                 if let differ = self._tableViewDiffer {
-                    let diffingKeys = newState?.diffingKeys ?? SectionedValues()
+                    let diffingKeys = newModel.diffingKeys
                     let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
                     differ.sectionedValues = diffingKeys
                     let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
@@ -91,9 +103,29 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
                     self.refreshViews()
                 }
             }
-
         } else {
             self.refreshViews()
+        }
+    }
+
+    private func _registerHeaderFooterViews() {
+        self.tableViewModel?.sectionModels.forEach {
+            if let header = $0.headerViewModel?.viewInfo {
+                switch header.registrationMethod {
+                case let .nib(name, bundle):
+                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
+                case let .viewClass(viewClass):
+                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
+                }
+            }
+            if let footer = $0.footerViewModel?.viewInfo {
+                switch footer.registrationMethod {
+                case let .nib(name, bundle):
+                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
+                case let .viewClass(viewClass):
+                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
+                }
+            }
         }
     }
 
@@ -265,26 +297,5 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         viewModel.applyViewModelToView(view)
         view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
         return view
-    }
-
-    func _registerHeaderFooterViews() {
-        self.tableViewModel?.sectionModels.forEach {
-            if let header = $0.headerViewModel?.viewInfo {
-                switch header.registrationMethod {
-                case let .nib(name, bundle):
-                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
-                }
-            }
-            if let footer = $0.footerViewModel?.viewInfo {
-                switch footer.registrationMethod {
-                case let .nib(name, bundle):
-                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
-                }
-            }
-        }
     }
 }
