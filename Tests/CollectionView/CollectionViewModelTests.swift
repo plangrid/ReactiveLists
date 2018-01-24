@@ -151,6 +151,4 @@ final class CollectionViewModelTests: XCTestCase {
             as? TestCollectionCellViewModel
         XCTAssertEqual(cell_row_0_section_1?.label, "A")
     }
-
 }
-

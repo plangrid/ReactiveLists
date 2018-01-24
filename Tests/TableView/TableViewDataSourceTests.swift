@@ -296,4 +296,3 @@ private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
             footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),
         ])
 }
-
