@@ -30,7 +30,7 @@ pod 'ReactiveLists', :git => 'https://github.com/plangrid/ReactiveLists.git', :b
 
 ## Documentation
 
-Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
+Read our [documentation here][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
 ## Contribute
 
