@@ -316,7 +316,7 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        self.tableViewModel?[indexPath]?.accessoryButtonTappedClosure?()
+        self.tableViewModel?[indexPath]?.accessoryButtonTapped?()
     }
 
     /// :nodoc:
@@ -324,7 +324,7 @@ extension TableViewDriver: UITableViewDelegate {
         if self._shouldDeselectUponSelection {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        self.tableViewModel?[indexPath]?.didSelectClosure?()
+        self.tableViewModel?[indexPath]?.didSelect?()
     }
 
     /// :nodoc:

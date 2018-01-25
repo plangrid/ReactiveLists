@@ -35,9 +35,8 @@ struct ToolTableCellModel: TableViewCellViewModel, DiffableViewModel {
         }
     }
 
-    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
+    func applyViewModelToCell(_ cell: UITableViewCell) {
         cell.textLabel?.text = "\(self.tool.type.emoji) \(self.tool.type.name)"
-        return cell
     }
 
     var diffingKey: String {

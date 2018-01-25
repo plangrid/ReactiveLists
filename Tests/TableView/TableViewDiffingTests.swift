@@ -105,9 +105,7 @@ struct UserCell: TableViewCellViewModel, DiffableViewModel {
         self.user = user
     }
 
-    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
-        return cell
-    }
+    func applyViewModelToCell(_ cell: UITableViewCell) {}
 
     var diffingKey: String {
         return self.user

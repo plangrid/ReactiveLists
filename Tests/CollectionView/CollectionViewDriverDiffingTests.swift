@@ -133,9 +133,7 @@ struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
         self.user = user
     }
 
-    func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell {
-        return cell
-    }
+    func applyViewModelToCell(_ cell: UICollectionViewCell) { }
 
     var diffingKey: String {
         return self.user.uuid.uuidString

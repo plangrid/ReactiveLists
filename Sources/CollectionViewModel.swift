@@ -26,8 +26,7 @@ public protocol CollectionViewCellViewModel {
     var didSelectClosure: DidSelectClosure? { get }
     var didDeselectClosure: DidDeselectClosure? { get }
 
-    @discardableResult
-    func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell
+    func applyViewModelToCell(_ cell: UICollectionViewCell)
 }
 
 public extension CollectionViewCellViewModel {
