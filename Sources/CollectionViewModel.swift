@@ -23,65 +23,36 @@ public protocol CollectionViewCellViewModel {
 
     var cellIdentifier: String { get }
     var shouldHighlight: Bool { get }
-    var didSelectClosure: DidSelectClosure? { get }
-    var didDeselectClosure: DidDeselectClosure? { get }
+    var didSelect: DidSelectClosure? { get }
+    var didDeselect: DidDeselectClosure? { get }
 
     func applyViewModelToCell(_ cell: UICollectionViewCell)
 }
 
+/// Default implementations for `CollectionViewCellViewModel`.
 public extension CollectionViewCellViewModel {
     var shouldHighlight: Bool { return true }
-
-    var didSelectClosure: DidSelectClosure? { return nil }
-
-    var didDeselectClosure: DidDeselectClosure? { return nil }
+    var didSelect: DidSelectClosure? { return nil }
+    var didDeselect: DidDeselectClosure? { return nil }
 }
 
+/// View model for supplementary views in collection views.
 public protocol CollectionViewSupplementaryViewModel {
     var viewInfo: SupplementaryViewInfo? { get }
     var height: CGFloat? { get }
 
-    @discardableResult
-    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView
+    func applyViewModelToView(_ view: UICollectionReusableView)
 }
 
+/// Default implementations for `CollectionViewSupplementaryViewModel`.
 public extension CollectionViewSupplementaryViewModel {
     var viewInfo: SupplementaryViewInfo? { return nil }
     var height: CGFloat? { return nil }
 
-    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
-        return view
-    }
+    func applyViewModelToView(_ view: UICollectionReusableView) {}
 }
 
 public struct CollectionViewModel {
-    public struct SectionModel {
-        private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
-            let height: CGFloat?
-            let viewInfo: SupplementaryViewInfo? = nil
-
-            func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
-                return view
-            }
-        }
-
-        let cellViewModels: [CollectionViewCellViewModel]?
-        let headerViewModel: CollectionViewSupplementaryViewModel?
-        let footerViewModel: CollectionViewSupplementaryViewModel?
-        public var diffingKey: String?
-
-        public init(
-            cellViewModels: [CollectionViewCellViewModel]?,
-            headerViewModel: CollectionViewSupplementaryViewModel? = nil,
-            footerViewModel: CollectionViewSupplementaryViewModel? = nil,
-            diffingKey: String? = nil
-        ) {
-            self.cellViewModels = cellViewModels
-            self.headerViewModel = headerViewModel
-            self.footerViewModel = footerViewModel
-            self.diffingKey = diffingKey
-        }
-    }
 
     public let sectionModels: [SectionModel]
 
@@ -121,6 +92,34 @@ public struct CollectionViewModel {
                 return (sectionDiffingKey, cellDiffingKeys)
             }
         )
+    }
+}
+
+extension CollectionViewModel {
+    public struct SectionModel {
+        private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
+            let height: CGFloat?
+            let viewInfo: SupplementaryViewInfo? = nil
+
+            func applyViewModelToView(_ view: UICollectionReusableView) { }
+        }
+
+        let cellViewModels: [CollectionViewCellViewModel]?
+        let headerViewModel: CollectionViewSupplementaryViewModel?
+        let footerViewModel: CollectionViewSupplementaryViewModel?
+        public var diffingKey: String?
+
+        public init(
+            cellViewModels: [CollectionViewCellViewModel]?,
+            headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+            footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+            diffingKey: String? = nil
+            ) {
+            self.cellViewModels = cellViewModels
+            self.headerViewModel = headerViewModel
+            self.footerViewModel = footerViewModel
+            self.diffingKey = diffingKey
+        }
     }
 }
 

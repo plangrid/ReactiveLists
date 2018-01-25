@@ -68,9 +68,8 @@ struct CollectionViewHeaderModel: CollectionViewSupplementaryViewModel {
         self.viewInfo = viewInfo
     }
 
-    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
-        guard let collectionHeaderView = view as? CollectionViewHeaderView else { return view }
+    func applyViewModelToView(_ view: UICollectionReusableView) {
+        guard let collectionHeaderView = view as? CollectionViewHeaderView else { return }
         collectionHeaderView.headerLabel.text = self.title
-        return collectionHeaderView
     }
 }
