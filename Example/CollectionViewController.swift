@@ -38,15 +38,11 @@ final class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let collectionView = self.collectionView, let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        guard let collectionView = self.collectionView else { return }
         collectionView.register(
             UINib(nibName: "CollectionToolCell", bundle: nil),
             forCellWithReuseIdentifier: "CollectionToolCell"
         )
-
-
-        collectionView.register(UINib(nibName: "CollectionViewHeaderView", bundle: nil), forCellWithReuseIdentifier: "CollectionViewHeaderView")
-        flowLayout.headerReferenceSize = CGSize(width: 375, height: 25)
 
         self.collectionViewDataSource = CollectionViewDataSource(
             collectionView: self.collectionView!,
@@ -86,7 +82,7 @@ extension CollectionViewController {
             let cellViewModels = group.tools.map { CollectionToolCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
             let headerViewModel = CollectionViewHeaderModel(
                 title: group.name,
-                height: nil,
+                height: 44,
                 viewInfo: SupplementaryViewInfo(
                     registrationMethod: .nib(name: "CollectionViewHeaderView", bundle: nil),
                     reuseIdentifier: "CollectionViewHeaderView",
