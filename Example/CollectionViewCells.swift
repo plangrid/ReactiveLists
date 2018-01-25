@@ -42,11 +42,10 @@ struct CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
         }
     }
 
-    func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell {
-        guard let collectionToolCell = cell as? CollectionToolCell else { return cell }
+    func applyViewModelToCell(_ cell: UICollectionViewCell) {
+        guard let collectionToolCell = cell as? CollectionToolCell else { return }
         collectionToolCell.toolNameLabel.text = self.tool.type.name
         collectionToolCell.emojiLabel.text = self.tool.type.emoji
-        return collectionToolCell
     }
 
     var diffingKey: String {

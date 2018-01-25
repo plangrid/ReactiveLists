@@ -82,9 +82,9 @@ extension TableViewDriver {
 class MockCellViewModel: TableViewCellViewModel {
     var accessibilityFormat: CellAccessibilityFormat = "_"
     var cellIdentifier = "_"
-    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell { return cell }
+    func applyViewModelToCell(_ cell: UITableViewCell) { }
 
-    var didSelectClosure: DidSelectClosure?
+    var didSelect: DidSelectClosure?
     var didSelectCalled = false
     var willBeginEditing: WillBeginEditingClosure?
     var willBeginEditingCalled = false
@@ -94,7 +94,7 @@ class MockCellViewModel: TableViewCellViewModel {
     var commitEditingStyleCalled: UITableViewCellEditingStyle?
 
     init() {
-        self.didSelectClosure = { [unowned self] in self.didSelectCalled = true }
+        self.didSelect = { [unowned self] in self.didSelectCalled = true }
         self.willBeginEditing = { [unowned self] in self.willBeginEditingCalled = true }
         self.didEndEditing = { [unowned self] in self.didEndEditingCalled = true }
         self.commitEditingStyle = { [unowned self] in self.commitEditingStyleCalled = $0 }

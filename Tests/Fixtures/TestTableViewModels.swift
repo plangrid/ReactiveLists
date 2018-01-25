@@ -46,10 +46,9 @@ struct TestCellViewModel: TableViewCellViewModel {
         self.didSelectClosure = didSelectClosure
     }
 
-    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
-        guard let testCell = cell as? TestTableViewCell else { return cell }
+    func applyViewModelToCell(_ cell: UITableViewCell) {
+        guard let testCell = cell as? TestTableViewCell else { return }
         testCell.label = self.label
-        return testCell
     }
 }
 

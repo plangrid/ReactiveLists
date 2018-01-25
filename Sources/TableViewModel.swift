@@ -17,32 +17,35 @@
 import Dwifft
 import UIKit
 
-public typealias CommitEditingStyleClosure = (UITableViewCellEditingStyle) -> Void
-public typealias DidSelectClosure = () -> Void
-public typealias DidDeleteClosure = () -> Void
-public typealias DidDeselectClosure = () -> Void
-public typealias WillBeginEditingClosure = () -> Void
-public typealias DidEndEditingClosure = () -> Void
-public typealias AccessoryButtonTappedClosure = () -> Void
-
-/// View models for the individual cells of a `TableViewDataSource` driven table view
+/// View models for the individual cells of a `TableViewModel`.
 public protocol TableViewCellViewModel {
-    /// `TableViewDataSource` will automatically apply an `accessibilityIdentifier` to the cell based on this format
+    /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
-
+    /// The reuse identifier for this cell.
     var cellIdentifier: String { get }
+    /// The height of this cell.
     var rowHeight: CGFloat { get }
-    var willBeginEditing: WillBeginEditingClosure? { get }
-    var didEndEditing: DidEndEditingClosure? { get }
+    /// The editing style for this cell.
     var editingStyle: UITableViewCellEditingStyle { get }
+    /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
-    var commitEditingStyle: CommitEditingStyleClosure? { get }
-    var didSelectClosure: DidSelectClosure? { get }
-    var accessoryButtonTappedClosure: AccessoryButtonTappedClosure? { get }
+    /// Whether or not this cell should be indented while editing.
     var shouldIndentWhileEditing: Bool { get }
+    /// Invoked when a cell will begin being edited.
+    var willBeginEditing: WillBeginEditingClosure? { get }
+    /// Invoked when cell editing has ended.
+    var didEndEditing: DidEndEditingClosure? { get }
+    /// Asks the cell to commit the insertion/deletion.
+    var commitEditingStyle: CommitEditingStyleClosure? { get }
+    /// Invoked when a cell has been selected.
+    var didSelect: DidSelectClosure? { get }
+    /// Invoked when an accessory button is tapped.
+    var accessoryButtonTapped: AccessoryButtonTappedClosure? { get }
 
-    @discardableResult
-    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell
+    /// Asks the cell model to update the `UITableViewCell` with the content
+    /// in the cell model and return the updated cell.
+    /// - Parameter cell: the cell which contents need to be updated.
+    func applyViewModelToCell(_ cell: UITableViewCell)
 }
 
 /// Default implementations for the protocol
@@ -51,14 +54,14 @@ public extension TableViewCellViewModel {
         return 44.0
     }
 
-    var willBeginEditing: WillBeginEditingClosure? { return nil }
-    var didEndEditing: DidEndEditingClosure? { return nil }
     var editingStyle: UITableViewCellEditingStyle { return .none }
     var shouldHighlight: Bool { return true }
-    var commitEditingStyle: CommitEditingStyleClosure? { return nil }
-    var didSelectClosure: DidSelectClosure? { return nil }
-    var accessoryButtonTappedClosure: AccessoryButtonTappedClosure? { return nil }
     var shouldIndentWhileEditing: Bool { return false }
+    var willBeginEditing: WillBeginEditingClosure? { return nil }
+    var didEndEditing: DidEndEditingClosure? { return nil }
+    var commitEditingStyle: CommitEditingStyleClosure? { return nil }
+    var didSelect: DidSelectClosure? { return nil }
+    var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
 }
 
 public protocol TableViewCellModelEditActions {
@@ -69,7 +72,6 @@ public protocol TableViewSectionHeaderFooterViewModel {
     var title: String? { get }
     var height: CGFloat? { get }
     var viewInfo: SupplementaryViewInfo? { get }
-
     func applyViewModelToView(_ view: UIView)
 }
 

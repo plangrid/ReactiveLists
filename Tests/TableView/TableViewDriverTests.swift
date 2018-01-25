@@ -264,7 +264,7 @@ final class TableViewDriverTests: XCTestCase {
         struct DefaultCellViewModel: TableViewCellViewModel {
             var accessibilityFormat: CellAccessibilityFormat = "_"
             var cellIdentifier: String = "_"
-            func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell { return cell }
+            func applyViewModelToCell(_ cell: UITableViewCell) { }
         }
 
         let defaultCellViewModel = DefaultCellViewModel()
@@ -275,8 +275,8 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertEqual(defaultCellViewModel.rowHeight, 44.0)
         XCTAssertTrue(defaultCellViewModel.shouldHighlight)
         XCTAssertNil(defaultCellViewModel.commitEditingStyle)
-        XCTAssertNil(defaultCellViewModel.didSelectClosure)
-        XCTAssertNil(defaultCellViewModel.accessoryButtonTappedClosure)
+        XCTAssertNil(defaultCellViewModel.didSelect)
+        XCTAssertNil(defaultCellViewModel.accessoryButtonTapped)
         XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
     }
 }
