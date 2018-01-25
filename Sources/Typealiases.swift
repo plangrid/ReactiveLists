@@ -16,8 +16,6 @@
 
 import Foundation
 
-public typealias Section = Int
-
 public typealias CommitEditingStyleClosure = (UITableViewCellEditingStyle) -> Void
 public typealias DidSelectClosure = () -> Void
 public typealias DidDeleteClosure = () -> Void

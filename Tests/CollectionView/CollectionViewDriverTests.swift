@@ -62,16 +62,11 @@ final class CollectionViewDriverTests: XCTestCase {
 
         // Test that header and footer view classes explicitly provided in the view model are registered
         let registerCalls = self._collectionView.callsToRegisterClass
-        XCTAssertEqual(registerCalls.count, 6)
+        XCTAssertEqual(registerCalls.count, 4)
         self._testRegisterClassCallInfo(registerCalls[0], viewClass: HeaderView.self, kind: .header, identifier: "reuse_header+A")
         self._testRegisterClassCallInfo(registerCalls[1], viewClass: FooterView.self, kind: .footer, identifier: "reuse_footer+A")
         self._testRegisterClassCallInfo(registerCalls[2], viewClass: HeaderView.self, kind: .header, identifier: "reuse_header+D")
         self._testRegisterClassCallInfo(registerCalls[3], viewClass: FooterView.self, kind: .footer, identifier: "reuse_footer+D")
-
-        // Test that the a blank header and footer view class is registered for hidden headers and footers
-        // Used for headers and footers that are not explicitly provided in the view model
-        self._testRegisterClassCallInfo(registerCalls[4], viewClass: UICollectionReusableView.self, kind: .header, identifier: "hidden-supplementary-view")
-        self._testRegisterClassCallInfo(registerCalls[5], viewClass: UICollectionReusableView.self, kind: .footer, identifier: "hidden-supplementary-view")
     }
 
     func testCollectionViewSections() {
