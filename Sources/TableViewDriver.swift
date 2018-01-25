@@ -19,7 +19,7 @@ import UIKit
 
 /// A Data Source that drives a dynamic table view's appereance and behavior in terms of view models for the individual cells.
 @objc
-final public class TableViewDriver: NSObject {
+open class TableViewDriver: NSObject {
 
     // MARK: Properties
 
