@@ -73,7 +73,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         collectionView: UICollectionView,
         collectionViewModel: CollectionViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
-        automaticDiffingEnabled: Bool = false
+        automaticDiffingEnabled: Bool = true
     ) {
         self.collectionViewModel = collectionViewModel
         self.collectionView = collectionView

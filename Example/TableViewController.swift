@@ -19,7 +19,7 @@ import UIKit
 
 final class TableViewController: UITableViewController {
 
-    var tableViewDataSource: TableViewDataSource?
+    var tableViewDataSource: TableViewDriver?
     var groups: [ToolGroup] = [] {
         didSet {
             self.tableViewDataSource?.tableViewModel = TableViewController.viewModel(
@@ -37,7 +37,7 @@ final class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableViewDataSource = TableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
+        self.tableViewDataSource = TableViewDriver(tableView: self.tableView)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableUserCell")
 
         self.groups = [
