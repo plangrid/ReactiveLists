@@ -31,9 +31,6 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
         }
     }
 
-    var _cellsOnScreen: [IndexPath: UICollectionViewCell] = [:]
-    var _headersOnScreen: [IndexPath: UICollectionReusableView] = [:]
-    var _footersOnScreen: [IndexPath: UICollectionReusableView] = [:]
     private var _shouldDeselectUponSelection: Bool
 
     private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
@@ -87,17 +84,6 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
         } else {
             view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewDataSource._hiddenSupplementaryViewIdentifier, for: indexPath)
         }
-
-        let indexPathKey = self._indexPathForSupplementaryViewInSection(section)
-        if let elementKind = elementKind {
-            switch elementKind {
-            case .header:
-                self._headersOnScreen[indexPathKey] = view
-            case .footer:
-                self._footersOnScreen[indexPathKey] = view
-            }
-        }
-
         return view
     }
 
@@ -112,24 +98,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
             cell = UICollectionViewCell()
         }
 
-        self._cellsOnScreen[indexPath] = cell
         return cell
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self._cellsOnScreen.removeValue(forKey: indexPath)
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        guard let viewKind = SupplementaryViewKind(collectionElementKindString: elementKind) else { return }
-        let indexPathKey = self._indexPathForSupplementaryViewInSection(indexPath.section)
-
-        switch viewKind {
-        case .header:
-            self._headersOnScreen.removeValue(forKey: indexPathKey)
-        case .footer:
-            self._footersOnScreen.removeValue(forKey: indexPathKey)
-        }
     }
 
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
@@ -152,25 +121,36 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
             return
         }
 
-        for (index, cell) in self._cellsOnScreen {
-            if let viewModel = self.collectionViewModel?[index] {
-                viewModel.applyViewModelToCell(cell)
-                cell.accessibilityIdentifier = viewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(index)
+        let visibleIndexPathsForItems = self.collectionView.indexPathsForVisibleItems
+        for indexPath in visibleIndexPathsForItems {
+            guard let model = self.collectionViewModel?[indexPath] else { continue }
+            guard let cell = self.collectionView.cellForItem(at: indexPath) else { continue }
+            model.applyViewModelToCell(cell)
+            cell.accessibilityIdentifier = model.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
+        }
+
+        let visibleIndexPathsForHeaders = self.collectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionHeader)
+        for indexPath in visibleIndexPathsForHeaders {
+            guard let headerModel = self.collectionViewModel?[indexPath.section]?.headerViewModel else {
+                continue
             }
+            guard let headerView = self.collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath) else {
+                continue
+            }
+            headerModel.applyViewModelToView(headerView)
+            headerView.accessibilityIdentifier = headerModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(indexPath.section)
         }
 
-        for (index, view) in self._headersOnScreen {
-            guard let sectionModel = self.collectionViewModel?[index.section],
-                let viewModel = sectionModel.headerViewModel else { continue }
-            viewModel.applyViewModelToView(view)
-            view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(index.section)
-        }
-
-        for (index, view) in self._footersOnScreen {
-            guard let sectionModel = self.collectionViewModel?[index.section],
-                let viewModel = sectionModel.footerViewModel else { continue }
-            viewModel.applyViewModelToView(view)
-            view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(index.section)
+        let visibleIndexPathsForFooters = self.collectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionFooter)
+        for indexPath in visibleIndexPathsForFooters {
+            guard let footerModel = self.collectionViewModel?[indexPath.section]?.footerViewModel else {
+                continue
+            }
+            guard let footerView = self.collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath) else {
+                continue
+            }
+            footerModel.applyViewModelToView(footerView)
+            footerView.accessibilityIdentifier = footerModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(indexPath.section)
         }
     }
 

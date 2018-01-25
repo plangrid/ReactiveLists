@@ -113,7 +113,6 @@ final class CollectionViewDataSourceTests: XCTestCase {
             (3, "access_header+3", "label_header+D", "reuse_header+D"),
             (9, nil, nil, "hidden-supplementary-view")) {
             let indexPath = path($0)
-            let indexKey = indexPath
 
             // Test that headers are generated with the correct identifiers and have the correct labels,
             // indicating the view models have been applied
@@ -123,18 +122,14 @@ final class CollectionViewDataSourceTests: XCTestCase {
             XCTAssertEqual(header?.identifier, $3)
 
             // Test that the header is marked as on screen
-            guard let onScreenHeader = self._collectionViewDataSource._headersOnScreen[indexKey] as? TestCollectionReusableView else {
+            guard let onScreenHeader = self._collectionViewDataSource.collectionView(self._collectionView,
+                                                                                     viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+                                                                                     at: indexPath) as? TestCollectionReusableView else {
                 XCTFail("Did not find the on screen TestCollectionReusableView header")
                 return
             }
             XCTAssertEqual(onScreenHeader.label, $2)
-
-            // Test that the header is no longer marked as on screen after didEndDisplaying is called
-            self._collectionViewDataSource.collectionView(self._collectionView,
-                                                              didEndDisplayingSupplementaryView: onScreenHeader,
-                                                              forElementOfKind: UICollectionElementKindSectionHeader,
-                                                              at: indexPath)
-            XCTAssertNil(self._collectionViewDataSource._headersOnScreen[indexKey])
+            XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath))
         }
     }
 
@@ -148,7 +143,6 @@ final class CollectionViewDataSourceTests: XCTestCase {
             (3, "access_footer+3", "label_footer+D", "reuse_footer+D"),
             (9, nil, nil, "hidden-supplementary-view")) {
             let indexPath = path($0)
-            let indexKey = indexPath
 
             // Test that footers are generated with the correct identifiers and have the correct labels and accessibilityIdentifiers,
             // indicating the view models have been applied
@@ -158,18 +152,14 @@ final class CollectionViewDataSourceTests: XCTestCase {
             XCTAssertEqual(footer?.identifier, $3)
 
             // Test that the footer is marked as on screen
-            guard let onScreenFooter = self._collectionViewDataSource._footersOnScreen[indexKey] as? TestCollectionReusableView else {
+                guard let onScreenFooter = self._collectionViewDataSource.collectionView(self._collectionView,
+                                                                                         viewForSupplementaryElementOfKind: UICollectionElementKindSectionFooter,
+                                                                                         at: indexPath) as? TestCollectionReusableView else {
                 XCTFail("Did not find the on screen TestCollectionReusableView header")
                 return
             }
             XCTAssertEqual(onScreenFooter.label, $2)
-
-            // Test that the footer is no longer marked as on screen after didEndDisplaying is called
-            self._collectionViewDataSource.collectionView(self._collectionView,
-                                                              didEndDisplayingSupplementaryView: onScreenFooter,
-                                                              forElementOfKind: UICollectionElementKindSectionFooter,
-                                                              at: indexPath)
-            XCTAssertNil(self._collectionViewDataSource._footersOnScreen[indexKey])
+            XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath))
         }
     }
 
@@ -184,17 +174,6 @@ final class CollectionViewDataSourceTests: XCTestCase {
         let cell = self._getItem(indexPath)
         XCTAssertEqual(cell?.label, "C")
         XCTAssertEqual(cell?.accessibilityIdentifier, "access-1.2")
-
-        // Test that the item is marked as on screen
-        guard let onScreenCell = self._collectionViewDataSource._cellsOnScreen[indexPath] as? TestCollectionViewCell else {
-            XCTFail("Did not find the on screen TestCollectionViewCell")
-            return
-        }
-        XCTAssertEqual(onScreenCell.label, "C")
-
-        // Test that the item is no longer marked as on screen after didEndDisplaying is called
-        self._collectionViewDataSource.collectionView(self._collectionView, didEndDisplaying: onScreenCell, forItemAt: indexPath)
-        XCTAssertNil(self._collectionViewDataSource._cellsOnScreen[indexPath])
     }
 
     func testCellCallbacks() {
@@ -228,9 +207,9 @@ final class CollectionViewDataSourceTests: XCTestCase {
     }
 
     func testRefreshViews() {
-        let item = self._getItem(path(1, 0))
-        let header = self._getSupplementaryView(section: 0, kind: .header)
-        let footer = self._getSupplementaryView(section: 0, kind: .footer)
+        var item = self._getItem(path(1, 0))
+        var header = self._getSupplementaryView(section: 0, kind: .header)
+        var footer = self._getSupplementaryView(section: 0, kind: .footer)
 
         XCTAssertEqual(item?.label, "A")
         XCTAssertEqual(header?.label, "label_header+A")
@@ -246,6 +225,10 @@ final class CollectionViewDataSourceTests: XCTestCase {
                 headerViewModel: nil,
                 footerViewModel: nil),
         ])
+
+        item = self._getItem(path(1, 0))
+        header = self._getSupplementaryView(section: 0, kind: .header)
+        footer = self._getSupplementaryView(section: 0, kind: .footer)
 
         XCTAssertEqual(item?.label, "X")
         XCTAssertEqual(header?.label, "label_header+X")
