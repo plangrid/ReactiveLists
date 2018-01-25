@@ -17,13 +17,12 @@
 import Dwifft
 import UIKit
 
-/// A Data Source that drives a dynamic table view's appereance and behavior in terms of view models for the individual cells.
+/// A data source that drives the table views appereance and behavior based on an underlying
+/// `TableViewModel`.
 @objc
 open class TableViewDriver: NSObject {
 
-    // MARK: Properties
-
-    /// Communicates information useful for refreshing the tableview
+    /// Communicates information useful for refreshing the table view
     ///
     /// - unknown: A refresh was requested, but we don't know if rows/sections are being added/removed
     /// - contentOnly: Only the content of cells is being refreshed. No rows/sections will be
@@ -35,8 +34,22 @@ open class TableViewDriver: NSObject {
         case rowsModified
     }
 
+    /// The table view to which the `TableViewModel` is rendered.
     public let tableView: UITableView
 
+    /// Describes the current UI state of the table view.
+    ///
+    /// When this property is set, the UI of the related `UITableView` will be updated.
+    /// If not only the content of individual cells/sections has changed, but instead
+    /// cells/sections were moved/inserted/deleted, the behavior of this setter depends on the
+    /// value of the `automaticDiffingEnabled` property.
+    ///
+    /// If `automaticDiffingEnabled` is set to `true`, and cells/sections have been moved/inserted/deleted,
+    /// updating this property will result in the UI of the table view being updated automatically.
+    ///
+    /// If `automaticDiffingEnabled` is set to `false`, and cells/sections have been moved/inserted/deleted,
+    /// the caller must update the `UITableView` state manually, to bring it back in sync with
+    /// the new model, e.g. by calling `reloadData()` on the table view.
     public var tableViewModel: TableViewModel? {
         willSet {
             assert(Thread.isMainThread, "Must set \(#function) on main thread")
@@ -46,22 +59,36 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
-    private let _automaticDiffingEnabled: Bool
+    /// If this property is set to `true`, updating the `tableViewModel` will always
+    /// automatically lead to updating the UI state of the `UITableView`, even if cells/sections
+    /// were moved/inserted/deleted.
+    ///
+    /// For details, see the documentation for `TableViewDriver.tableViewModel`.
+    private let automaticDiffingEnabled: Bool
+
     private let _shouldDeselectUponSelection: Bool
+    private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
     private var _didReceiveFirstNonNilValue = false
 
-    // MARK: Initialization
-
+    /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
+    ///
+    /// - Parameters:
+    ///   - tableView: the table view to which this data source will render its view models.
+    ///   - tableViewModel: the view model that describes the initial state of this table view.
+    ///   - shouldDeselectUponSelection: indicates if selected cells should immediately be
+    ///                                  deselected. Defaults to `true`.
+    ///   - automaticDiffingEnabled: defines whether or not this data source updates the table
+    ///                              view automatically when cells/sections are moved/inserted/deleted.
+    ///                              Defaults to `true`.
     public init(
         tableView: UITableView,
         tableViewModel: TableViewModel? = nil,
-        automaticDiffingEnabled: Bool = true,
-        shouldDeselectUponSelection: Bool = true
+        shouldDeselectUponSelection: Bool = true,
+        automaticDiffingEnabled: Bool = true
     ) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
-        self._automaticDiffingEnabled = automaticDiffingEnabled
+        self.automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         tableView.dataSource = self
@@ -69,8 +96,12 @@ open class TableViewDriver: NSObject {
         self._tableViewModelDidChange()
     }
 
-    // MARK: Methods
+    // MARK: Change and UI Update Handling
 
+    /// Updates all currently visible cells and sections, such that they reflect the latest
+    /// state decribed in their respective view models. Typically this method should not be
+    /// called directly, as it is called automatically whenever the `tableViewModel` property
+    /// is updated.
     public func refreshViews(refreshContext: TableRefreshContext = .unknown) {
         guard let sections = self.tableViewModel?.sectionModels, !sections.isEmpty else {
             return
@@ -123,8 +154,6 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    // MARK: Private
-
     private func _tableViewModelDidChange() {
         self._registerHeaderFooterViews()
 
@@ -133,7 +162,7 @@ open class TableViewDriver: NSObject {
             return
         }
 
-        if self._automaticDiffingEnabled {
+        if self.automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
                 // For the first non-nil value, we want to reload data, to avoid a weird
                 // animation where we animate in the initial state
@@ -163,6 +192,8 @@ open class TableViewDriver: NSObject {
         }
     }
 
+    // MARK: Private helper methods
+
     private func _registerHeaderFooterViews() {
         self.tableViewModel?.sectionModels.forEach {
             if let header = $0.headerViewModel?.viewInfo {
@@ -184,7 +215,7 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    private func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
+    open func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
         guard let sectionModel = self.tableViewModel?[section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.reuseIdentifier,

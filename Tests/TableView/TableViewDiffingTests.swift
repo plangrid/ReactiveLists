@@ -27,8 +27,8 @@ final class TableViewDiffingTests: XCTestCase {
         self.mockTableView = TestTableView()
         self.tableViewDataSource = TableViewDriver(
             tableView: self.mockTableView,
-            automaticDiffEnabled: true,
-            shouldDeselectUponSelection: false
+            shouldDeselectUponSelection: false,
+            automaticDiffingEnabled: true
         )
     }
 
