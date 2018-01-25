@@ -19,7 +19,7 @@ import UIKit
 
 final class CollectionViewController: UICollectionViewController {
 
-    var collectionViewDataSource: CollectionViewDataSource?
+    var collectionViewDriver: CollectionViewDriver?
     var groups: [ToolGroup] = [] {
         didSet {
             let model = CollectionViewController.viewModel(
@@ -31,7 +31,7 @@ final class CollectionViewController: UICollectionViewController {
                     }
             }
             )
-            self.collectionViewDataSource?.collectionViewModel = model
+            self.collectionViewDriver?.collectionViewModel = model
         }
     }
 
@@ -44,10 +44,7 @@ final class CollectionViewController: UICollectionViewController {
             forCellWithReuseIdentifier: "CollectionToolCell"
         )
 
-        self.collectionViewDataSource = CollectionViewDataSource(
-            collectionView: self.collectionView!,
-            automaticDiffingEnabled: true
-        )
+        self.collectionViewDriver = CollectionViewDriver(collectionView: collectionView)
 
         self.groups = [
             ToolGroup(
