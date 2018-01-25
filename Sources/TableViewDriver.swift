@@ -232,16 +232,11 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
+        guard let cellViewModel = self.tableViewModel?[indexPath] else { return UITableViewCell() }
 
-        if let cellViewModel = self.tableViewModel?[indexPath] {
-            cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
-            cellViewModel.applyViewModelToCell(cell)
-            cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-        } else {
-            cell = UITableViewCell()
-        }
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
+        cellViewModel.applyViewModelToCell(cell)
+        cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
         return cell
     }
 

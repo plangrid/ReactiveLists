@@ -203,16 +203,11 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell: UICollectionViewCell
+        guard let cellViewModel = self.collectionViewModel?[indexPath] else { return UICollectionViewCell() }
 
-        if let cellViewModel = self.collectionViewModel?[indexPath] {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellViewModel.cellIdentifier, for: indexPath)
-            cellViewModel.applyViewModelToCell(cell)
-            cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-        } else {
-            cell = UICollectionViewCell()
-        }
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellViewModel.cellIdentifier, for: indexPath)
+        cellViewModel.applyViewModelToCell(cell)
+        cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
         return cell
     }
 
@@ -265,9 +260,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     }
 
     private func _sizeForSupplementaryViewOfKind(_ elementKind: SupplementaryViewKind, inSection section: Int, collectionViewLayout: UICollectionViewLayout) -> CGSize {
-        guard let sectionModel = self.collectionViewModel?[section] else {
-            return CGSize.zero
-        }
+        guard let sectionModel = self.collectionViewModel?[section] else { return CGSize.zero }
 
         let isHeader = elementKind == .header
         let supplementaryModel = isHeader ? sectionModel.headerViewModel : sectionModel.footerViewModel
