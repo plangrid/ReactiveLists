@@ -37,8 +37,8 @@
 		32124A722019312200EE12FC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32124A712019312200EE12FC /* Utils.swift */; };
 		351B0BB920168E2E0034569D /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB420168D2E0034569D /* CollectionViewCells.swift */; };
 		351B0BBA20168E2E0034569D /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB320168D2E0034569D /* CollectionViewController.swift */; };
-		357B96DA201934C50000443F /* CollectionUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96D9201934C50000443F /* CollectionUserCell.xib */; };
-		357B96DC2019374E0000443F /* CollectionUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96D9201934C50000443F /* CollectionUserCell.xib */; };
+		357B96DA201934C50000443F /* CollectionToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96D9201934C50000443F /* CollectionToolCell.xib */; };
+		357B96DC2019374E0000443F /* CollectionToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96D9201934C50000443F /* CollectionToolCell.xib */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
 		C11B2E5FBD1253C9FFA431A1 /* Pods_ReactiveListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */; };
 /* End PBXBuildFile section */
@@ -112,7 +112,7 @@
 		32124A712019312200EE12FC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		351B0BB320168D2E0034569D /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		351B0BB420168D2E0034569D /* CollectionViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
-		357B96D9201934C50000443F /* CollectionUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionUserCell.xib; sourceTree = "<group>"; };
+		357B96D9201934C50000443F /* CollectionToolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionToolCell.xib; sourceTree = "<group>"; };
 		42A9724B45F9E14DD1B210D1 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
 		45132CB591F9F96746AF8E96 /* Pods-ReactiveListsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveListsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveListsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +177,7 @@
 				2541B7311F298A69002C3090 /* Models.swift */,
 				257664221F2907FE00C037E3 /* TableViewCells.swift */,
 				2576641E1F2907DB00C037E3 /* TableViewController.swift */,
-				357B96D9201934C50000443F /* CollectionUserCell.xib */,
+				357B96D9201934C50000443F /* CollectionToolCell.xib */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -412,7 +412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				357B96DC2019374E0000443F /* CollectionUserCell.xib in Resources */,
+				357B96DC2019374E0000443F /* CollectionToolCell.xib in Resources */,
 				257664181F29075C00C037E3 /* LaunchScreen.storyboard in Resources */,
 				257664151F29075C00C037E3 /* Assets.xcassets in Resources */,
 				257664131F29075C00C037E3 /* Main.storyboard in Resources */,
@@ -423,7 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				357B96DA201934C50000443F /* CollectionUserCell.xib in Resources */,
+				357B96DA201934C50000443F /* CollectionToolCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
