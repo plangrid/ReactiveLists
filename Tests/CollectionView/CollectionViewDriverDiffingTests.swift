@@ -17,9 +17,9 @@
 @testable import ReactiveLists
 import XCTest
 
-final class CollectionViewDiffingTests: XCTestCase {
+final class CollectionViewDriverDiffingTests: XCTestCase {
 
-    var collectionViewDataSource: CollectionViewDataSource!
+    var collectionViewDataSource: CollectionViewDriver!
     var mockCollectionView: TestCollectionView!
 
     override func setUp() {
@@ -28,7 +28,7 @@ final class CollectionViewDiffingTests: XCTestCase {
             frame: .zero,
             collectionViewLayout: UICollectionViewFlowLayout()
         )
-        self.collectionViewDataSource = CollectionViewDataSource(
+        self.collectionViewDataSource = CollectionViewDriver(
             collectionView: self.mockCollectionView,
             automaticDiffingEnabled: true
         )
