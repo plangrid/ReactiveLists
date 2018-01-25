@@ -31,20 +31,34 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghd-yh-5Om">
+                        <rect key="frame" x="122" y="6" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="IoX-M8-mmz"/>
+                            <constraint firstAttribute="width" constant="22" id="hap-8B-64t"/>
+                        </constraints>
+                        <state key="normal" image="close-icon"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="ghd-yh-5Om" firstAttribute="top" secondItem="9Bm-Sb-GNq" secondAttribute="top" constant="6" id="2Zm-7w-4Ec"/>
                 <constraint firstItem="9Bm-Sb-GNq" firstAttribute="trailing" secondItem="QWI-IP-UBT" secondAttribute="trailing" constant="10" id="DYz-3R-Ly1"/>
                 <constraint firstItem="3Vm-G1-zHK" firstAttribute="centerX" secondItem="9Bm-Sb-GNq" secondAttribute="centerX" id="Ivm-n9-ju3"/>
                 <constraint firstItem="QWI-IP-UBT" firstAttribute="leading" secondItem="9Bm-Sb-GNq" secondAttribute="leading" constant="10" id="JX0-Uy-E0O"/>
                 <constraint firstItem="3Vm-G1-zHK" firstAttribute="centerY" secondItem="9Bm-Sb-GNq" secondAttribute="centerY" constant="-5.5" id="cKY-8y-bhJ"/>
+                <constraint firstItem="9Bm-Sb-GNq" firstAttribute="trailing" secondItem="ghd-yh-5Om" secondAttribute="trailing" constant="6" id="dfd-al-Axw"/>
                 <constraint firstItem="QWI-IP-UBT" firstAttribute="centerY" secondItem="ZUu-dS-eKm" secondAttribute="centerY" constant="19.5" id="lUQ-g5-OH4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="9Bm-Sb-GNq"/>
             <connections>
+                <outlet property="closeButton" destination="ghd-yh-5Om" id="hqb-I6-q25"/>
                 <outlet property="emojiLabel" destination="3Vm-G1-zHK" id="2u9-YA-BJU"/>
                 <outlet property="toolNameLabel" destination="QWI-IP-UBT" id="84F-Ru-rbs"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="close-icon" width="14" height="14"/>
+    </resources>
 </document>
