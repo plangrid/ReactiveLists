@@ -241,8 +241,4 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
 
         return isHeader ? flowLayout.headerReferenceSize : flowLayout.footerReferenceSize
     }
-
-    private func _indexPathForSupplementaryViewInSection(_ section: Int) -> IndexPath {
-        return IndexPath(row: 0, section: section)
-    }
 }
