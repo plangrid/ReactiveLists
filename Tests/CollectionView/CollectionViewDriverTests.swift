@@ -18,11 +18,11 @@
 import UIKit
 import XCTest
 
-final class CollectionViewDataSourceTests: XCTestCase {
+final class CollectionViewDriverTests: XCTestCase {
 
     private var _collectionView: TestCollectionView!
     private var _collectionViewModel: CollectionViewModel!
-    private var _collectionViewDataSource: CollectionViewDataSource!
+    private var _collectionViewDataSource: CollectionViewDriver!
 
     private var _lastSelectClosureCaller: String?
     private var _lastDeselectClosureCaller: String?
@@ -48,8 +48,10 @@ final class CollectionViewDataSourceTests: XCTestCase {
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
         ])
-        self._collectionViewDataSource = CollectionViewDataSource(collectionViewModel: self._collectionViewModel,
-                                                                  collectionView: self._collectionView)
+        self._collectionViewDataSource = CollectionViewDriver(
+            collectionView: self._collectionView,
+            collectionViewModel: self._collectionViewModel
+        )
     }
 
     func testCollectionViewSetup() {
@@ -192,7 +194,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
     func testShouldDeselectUponSelection() {
         // Default is to deselect upong selection
         let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
-        let dataSource = CollectionViewDataSource(collectionView: collectionView)
+        let dataSource = CollectionViewDriver(collectionView: collectionView)
         XCTAssertEqual(collectionView.callsToDeselect, 0)
         dataSource.collectionView(collectionView, didSelectItemAt: path(0))
         XCTAssertEqual(collectionView.callsToDeselect, 1)
@@ -200,7 +202,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
     func testShouldNotDeselectUponSelection() {
         let collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
-        let dataSource = CollectionViewDataSource(collectionView: collectionView, shouldDeselectUponSelection: false)
+        let dataSource = CollectionViewDriver(collectionView: collectionView, shouldDeselectUponSelection: false)
         XCTAssertEqual(collectionView.callsToDeselect, 0)
         dataSource.collectionView(collectionView, didSelectItemAt: path(0))
         XCTAssertEqual(collectionView.callsToDeselect, 0)
