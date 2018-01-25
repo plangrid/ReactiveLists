@@ -56,12 +56,12 @@ final public class TableViewDriver: NSObject {
     public init(
         tableView: UITableView,
         tableViewModel: TableViewModel? = nil,
-        automaticDiffEnabled: Bool = false,
+        automaticDiffingEnabled: Bool = true,
         shouldDeselectUponSelection: Bool = true
     ) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
-        self._automaticDiffingEnabled = automaticDiffEnabled
+        self._automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         tableView.dataSource = self
