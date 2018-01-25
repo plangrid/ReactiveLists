@@ -1,18 +1,19 @@
-# paths to ignore during linting, overridden by `included`
+# paths to ignore
 excluded:
   - Carthage
   - Pods
-  - Documentation
+  - Guides
   - fastlane
   - vendor
+  - docs
+  - scripts
 
-# rule identifiers to exclude from running
 disabled_rules:
   - identifier_name
-  - nesting # don't agree with this one
+  - nesting
   - type_name
   - trailing_comma
-  - void_return # preference
+  - void_return
 
 opt_in_rules:
   # performance
@@ -32,13 +33,9 @@ opt_in_rules:
   # lint
   - overridden_super_call
 
-file_length: 1000
+file_length: 650
 line_length: 200
 
-type_body_length:
-  - 600 # warning
-  - 1000 # error
+type_body_length: 400
 
-function_body_length:
-  - 200 # warning
-  - 300 # error
+function_body_length: 150
