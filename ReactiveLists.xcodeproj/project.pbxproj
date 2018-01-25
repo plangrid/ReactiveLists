@@ -19,7 +19,7 @@
 		257A97C02017A5D300164403 /* TestCollectionViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97BC2017A5AA00164403 /* TestCollectionViewModels.swift */; };
 		257A97C12017A5D300164403 /* TestTableViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97BD2017A5AA00164403 /* TestTableViewModels.swift */; };
 		257A97D42017A82900164403 /* TableViewMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C42017A80B00164403 /* TableViewMocks.swift */; };
-		257A97D52017A82900164403 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */; };
+		257A97D52017A82900164403 /* TableViewDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C52017A80B00164403 /* TableViewDriverTests.swift */; };
 		257A97D62017A82900164403 /* TableViewDiffingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C62017A80B00164403 /* TableViewDiffingTests.swift */; };
 		257A97D72017A82900164403 /* TableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C72017A80B00164403 /* TableViewModelTests.swift */; };
 		257A97D82017A82F00164403 /* CollectionViewDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A97C92017A80B00164403 /* CollectionViewDriverTests.swift */; };
@@ -30,7 +30,7 @@
 		258E31A01F0D8CBC00D6F324 /* ReactiveLists.h in Headers */ = {isa = PBXBuildFile; fileRef = 258E31921F0D8CBC00D6F324 /* ReactiveLists.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		258E31B11F0D8D9C00D6F324 /* CollectionViewDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31AC1F0D8D9C00D6F324 /* CollectionViewDriver.swift */; };
 		258E31B21F0D8D9C00D6F324 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31AD1F0D8D9C00D6F324 /* CollectionViewModel.swift */; };
-		258E31B31F0D8D9C00D6F324 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31AE1F0D8D9C00D6F324 /* TableViewDataSource.swift */; };
+		258E31B31F0D8D9C00D6F324 /* TableViewDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31AE1F0D8D9C00D6F324 /* TableViewDriver.swift */; };
 		258E31B41F0D8D9C00D6F324 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */; };
 		258E31D31F0D8F3100D6F324 /* AccessibilityFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31D11F0D8F3100D6F324 /* AccessibilityFormats.swift */; };
 		258E31D41F0D8F3100D6F324 /* SupplementaryViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */; };
@@ -88,7 +88,7 @@
 		257A97BC2017A5AA00164403 /* TestCollectionViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewModels.swift; sourceTree = "<group>"; };
 		257A97BD2017A5AA00164403 /* TestTableViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewModels.swift; sourceTree = "<group>"; };
 		257A97C42017A80B00164403 /* TableViewMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewMocks.swift; sourceTree = "<group>"; };
-		257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
+		257A97C52017A80B00164403 /* TableViewDriverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDriverTests.swift; sourceTree = "<group>"; };
 		257A97C62017A80B00164403 /* TableViewDiffingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDiffingTests.swift; sourceTree = "<group>"; };
 		257A97C72017A80B00164403 /* TableViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelTests.swift; sourceTree = "<group>"; };
 		257A97C92017A80B00164403 /* CollectionViewDriverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDriverTests.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		258E319F1F0D8CBC00D6F324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		258E31AC1F0D8D9C00D6F324 /* CollectionViewDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDriver.swift; sourceTree = "<group>"; };
 		258E31AD1F0D8D9C00D6F324 /* CollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
-		258E31AE1F0D8D9C00D6F324 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
+		258E31AE1F0D8D9C00D6F324 /* TableViewDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDriver.swift; sourceTree = "<group>"; };
 		258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
 		258E31D11F0D8F3100D6F324 /* AccessibilityFormats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityFormats.swift; sourceTree = "<group>"; };
 		258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryViewInfo.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		257A97C32017A80B00164403 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				257A97C52017A80B00164403 /* TableViewDataSourceTests.swift */,
+				257A97C52017A80B00164403 /* TableViewDriverTests.swift */,
 				257A97C62017A80B00164403 /* TableViewDiffingTests.swift */,
 				257A97C42017A80B00164403 /* TableViewMocks.swift */,
 				257A97C72017A80B00164403 /* TableViewModelTests.swift */,
@@ -255,7 +255,7 @@
 				258E31931F0D8CBC00D6F324 /* Info.plist */,
 				258E31921F0D8CBC00D6F324 /* ReactiveLists.h */,
 				258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */,
-				258E31AE1F0D8D9C00D6F324 /* TableViewDataSource.swift */,
+				258E31AE1F0D8D9C00D6F324 /* TableViewDriver.swift */,
 				258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */,
 				32124A712019312200EE12FC /* Utils.swift */,
 			);
@@ -609,7 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2541B73D1F29A13B002C3090 /* Diffing.swift in Sources */,
-				258E31B31F0D8D9C00D6F324 /* TableViewDataSource.swift in Sources */,
+				258E31B31F0D8D9C00D6F324 /* TableViewDriver.swift in Sources */,
 				258E31B11F0D8D9C00D6F324 /* CollectionViewDriver.swift in Sources */,
 				258E31B41F0D8D9C00D6F324 /* TableViewModel.swift in Sources */,
 				258E31D31F0D8F3100D6F324 /* AccessibilityFormats.swift in Sources */,
@@ -632,7 +632,7 @@
 				257A97DA2017A83400164403 /* XCTest+Parameterized.swift in Sources */,
 				257A97D42017A82900164403 /* TableViewMocks.swift in Sources */,
 				257A97DD2017AA9000164403 /* CollectionViewMocks.swift in Sources */,
-				257A97D52017A82900164403 /* TableViewDataSourceTests.swift in Sources */,
+				257A97D52017A82900164403 /* TableViewDriverTests.swift in Sources */,
 				257A97C12017A5D300164403 /* TestTableViewModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

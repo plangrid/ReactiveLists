@@ -19,7 +19,7 @@ import UIKit
 
 /// A Data Source that drives a dynamic table view's appereance and behavior in terms of view models for the individual cells.
 @objc
-open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+open class TableViewDriver: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     /// Communicates information useful for refreshing the tableview
     ///
@@ -48,19 +48,18 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
 
     private let _shouldDeselectUponSelection: Bool
     private let _automaticDiffingEnabled: Bool
-    private let _fullyReloadCellsEnabled: Bool
     private var _didReceiveFirstNonNilValue = false
 
-    public init(tableViewModel: TableViewModel? = nil,
-                tableView: UITableView,
-                automaticDiffEnabled: Bool = false,
-                shouldDeselectUponSelection: Bool = true,
-                fullyReloadCells: Bool = false) {
+    public init(
+        tableView: UITableView,
+        tableViewModel: TableViewModel? = nil,
+        automaticDiffEnabled: Bool = false,
+        shouldDeselectUponSelection: Bool = true
+    ) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
-        self._fullyReloadCellsEnabled = fullyReloadCells
         super.init()
         tableView.dataSource = self
         tableView.delegate = self

@@ -62,7 +62,7 @@ class TestTableView: UITableView {
     }
 }
 
-extension TableViewDataSource {
+extension TableViewDriver {
     func _getCell(_ path: IndexPath) -> TestTableViewCell? {
         guard let cell = self.tableView(self.tableView, cellForRowAt: path) as? TestTableViewCell else { return nil }
         return cell
