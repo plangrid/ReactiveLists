@@ -14,6 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+import Dwifft
 import UIKit
 
 /// A Data Source that drives the Collection Views appereance and behavior in terms of view models for the individual cells.
@@ -36,13 +37,21 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
     var _footersOnScreen: [IndexPath: UICollectionReusableView] = [:]
     private var _shouldDeselectUponSelection: Bool
 
+    private var _collectionViewDiffer: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
+    private let _automaticDiffingEnabled: Bool
+    private var _didReceiveFirstNonNilValue = false
+
     private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
 
-    public init(collectionViewModel: CollectionViewModel? = nil,
-                collectionView: UICollectionView,
-                shouldDeselectUponSelection: Bool = true) {
+    public init(
+        collectionViewModel: CollectionViewModel? = nil,
+        collectionView: UICollectionView,
+        shouldDeselectUponSelection: Bool = true,
+        automaticDiffingEnabled: Bool = false
+    ) {
         self.collectionViewModel = collectionViewModel
         self.collectionView = collectionView
+        self._automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         collectionView.dataSource = self
@@ -53,7 +62,38 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
     private func _collectionViewModelDidChange() {
         self._registerSupplementaryViews()
         self._registerHiddenSupplementaryViews()
-        self.refreshViews()
+
+        guard let newModel = self.collectionViewModel else {
+            self.refreshViews()
+            return
+        }
+
+        if self._automaticDiffingEnabled {
+            if !self._didReceiveFirstNonNilValue {
+                // For the first non-nil value, we want to reload data, to avoid a weird
+                // animation where we animate in the initial state
+                self.collectionView.reloadData()
+                self._didReceiveFirstNonNilValue = true
+
+                // Now that we have this initial state, setup the differ with that initial state,
+                // so that the diffing works properly from here on out
+                self._collectionViewDiffer = CollectionViewDiffCalculator<DiffingKey, DiffingKey>(
+                    collectionView: self.collectionView,
+                    initialSectionedValues: newModel.diffingKeys
+                )
+            } else if self._didReceiveFirstNonNilValue {
+                // If the current collection view model is empty, default to an empty set of diffing keys
+                if let differ = self._collectionViewDiffer {
+                    let diffingKeys = newModel.diffingKeys
+                    differ.sectionedValues = diffingKeys
+                    self.refreshViews()
+                } else {
+                    self.refreshViews()
+                }
+            }
+        } else {
+            self.refreshViews()
+        }
     }
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {

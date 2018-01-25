@@ -32,7 +32,6 @@ final class CollectionViewController: UICollectionViewController {
             }
             )
             self.collectionViewDataSource?.collectionViewModel = model
-            self.collectionView?.reloadData()
         }
     }
 
@@ -44,7 +43,10 @@ final class CollectionViewController: UICollectionViewController {
             forCellWithReuseIdentifier: "CollectionUserCell"
         )
 
-        self.collectionViewDataSource = CollectionViewDataSource(collectionView: self.collectionView!)
+        self.collectionViewDataSource = CollectionViewDataSource(
+            collectionView: self.collectionView!,
+            automaticDiffingEnabled: true
+        )
 
         self.groups = [
             UserGroup(
@@ -77,7 +79,12 @@ extension CollectionViewController {
     static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> CollectionViewModel {
         let sections: [CollectionViewModel.SectionModel] = groups.map { group in
             let cellViewModels = group.users.map { CollectionUserCellModel(user: $0, onDeleteClosure: onDeleteClosure) }
-            return CollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerHeight: 44, footerHeight: 44)
+            return CollectionViewModel.SectionModel(
+                cellViewModels: cellViewModels,
+                headerHeight: 44,
+                footerHeight: 44,
+                diffingKey: group.name
+            )
         }
         return CollectionViewModel(sectionModels: sections)
     }

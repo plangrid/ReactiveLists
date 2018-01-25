@@ -49,7 +49,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
     private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
 
     private let _shouldDeselectUponSelection: Bool
-    private let _automaticDiffEnabled: Bool
+    private let _automaticDiffingEnabled: Bool
     private let _fullyReloadCellsEnabled: Bool
     private var _didReceiveFirstNonNilValue = false
 
@@ -60,7 +60,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
                 fullyReloadCells: Bool = false) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
-        self._automaticDiffEnabled = automaticDiffEnabled
+        self._automaticDiffingEnabled = automaticDiffEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         self._fullyReloadCellsEnabled = fullyReloadCells
         super.init()
@@ -77,7 +77,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             return
         }
 
-        if self._automaticDiffEnabled {
+        if self._automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
                 // For the first non-nil value, we want to reload data, to avoid a weird
                 // animation where we animate in the initial state
