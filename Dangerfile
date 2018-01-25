@@ -26,5 +26,4 @@ if has_doc_changes && !has_doc_gen_title
 end
 
 swiftlint.verbose = true
-swiftlint.config_file = '.swiftlint.yml'
 swiftlint.lint_files(inline_mode: true)
