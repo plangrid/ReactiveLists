@@ -50,7 +50,8 @@ final class CollectionViewDriverTests: XCTestCase {
         ])
         self._collectionViewDataSource = CollectionViewDriver(
             collectionView: self._collectionView,
-            collectionViewModel: self._collectionViewModel
+            collectionViewModel: self._collectionViewModel,
+            automaticDiffingEnabled: false
         )
     }
 

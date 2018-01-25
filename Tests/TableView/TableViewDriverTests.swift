@@ -51,7 +51,10 @@ final class TableViewDriverTests: XCTestCase {
                 footerViewModel: nil,
                 collapsed: true),
             ], sectionIndexTitles: ["A", "Z", "Z"])
-        self._tableViewDataSource = TableViewDriver(tableView: tableView)
+        self._tableViewDataSource = TableViewDriver(
+            tableView: tableView,
+            automaticDiffingEnabled: false
+        )
         self._tableViewDataSource.tableViewModel = self._tableViewModel
     }
 
@@ -229,7 +232,7 @@ final class TableViewDriverTests: XCTestCase {
     func testCellCallbacks() {
         // Set up a new table view that contains two mock cells
         let tableView = UITableView()
-        let dataSource = TableViewDriver(tableView: tableView)
+        let dataSource = TableViewDriver(tableView: tableView, automaticDiffingEnabled: false)
         let cell1 = MockCellViewModel()
         let cell2 = MockCellViewModel()
         let tableViewModel = TableViewModel(cellViewModels: [cell1, cell2])
