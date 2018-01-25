@@ -38,10 +38,15 @@ final class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView!.register(
+        guard let collectionView = self.collectionView, let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        collectionView.register(
             UINib(nibName: "CollectionToolCell", bundle: nil),
             forCellWithReuseIdentifier: "CollectionToolCell"
         )
+
+
+        collectionView.register(UINib(nibName: "CollectionViewHeaderView", bundle: nil), forCellWithReuseIdentifier: "CollectionViewHeaderView")
+        flowLayout.headerReferenceSize = CGSize(width: 375, height: 25)
 
         self.collectionViewDataSource = CollectionViewDataSource(
             collectionView: self.collectionView!,
@@ -50,11 +55,11 @@ final class CollectionViewController: UICollectionViewController {
 
         self.groups = [
             ToolGroup(
-                name: "Old Tools",
+                name: "OLD TOOLS",
                 tools: [Tool(type: .wrench), Tool(type: .hammer), Tool(type: .clamp), Tool(type: .nutBolt), Tool(type: .crane)]
             ),
             ToolGroup(
-                name: "New Tool",
+                name: "NEW TOOLS",
                 tools: [Tool(type: .wrench), Tool(type: .hammer), Tool(type: .clamp), Tool(type: .nutBolt), Tool(type: .crane)]
             ),
         ]
@@ -79,12 +84,16 @@ extension CollectionViewController {
     static func viewModel(forState groups: [ToolGroup], onDeleteClosure: @escaping (Tool) -> Void) -> CollectionViewModel {
         let sections: [CollectionViewModel.SectionModel] = groups.map { group in
             let cellViewModels = group.tools.map { CollectionToolCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
-            return CollectionViewModel.SectionModel(
-                cellViewModels: cellViewModels,
-                headerHeight: 44,
-                footerHeight: 44,
-                diffingKey: group.name
+            let headerViewModel = CollectionViewHeaderModel(
+                title: group.name,
+                height: nil,
+                viewInfo: SupplementaryViewInfo(
+                    registrationMethod: .nib(name: "CollectionViewHeaderView", bundle: nil),
+                    reuseIdentifier: "CollectionViewHeaderView",
+                    accessibilityFormat: "CollectionViewHeaderView"
+                )
             )
+            return CollectionViewModel.SectionModel(cellViewModels: cellViewModels, headerViewModel: headerViewModel, footerHeight: nil, diffingKey: group.name)
         }
         return CollectionViewModel(sectionModels: sections)
     }

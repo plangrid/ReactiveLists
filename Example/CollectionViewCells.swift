@@ -53,3 +53,25 @@ struct CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
         return self.tool.uuid.uuidString
     }
 }
+
+final class CollectionViewHeaderView: UICollectionReusableView {
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
+struct CollectionViewHeaderModel: CollectionViewSupplementaryViewModel {
+    var title: String?
+    var height: CGFloat?
+    var viewInfo: SupplementaryViewInfo?
+
+    init(title: String?, height: CGFloat?, viewInfo: SupplementaryViewInfo? = nil) {
+        self.title = title
+        self.height = height
+        self.viewInfo = viewInfo
+    }
+
+    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
+        guard let collectionHeaderView = view as? CollectionViewHeaderView else { return view }
+        collectionHeaderView.headerLabel.text = self.title
+        return collectionHeaderView
+    }
+}

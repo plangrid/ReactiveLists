@@ -42,11 +42,11 @@ final class TableViewController: UITableViewController {
 
         self.groups = [
             ToolGroup(
-                name: "Old Tools",
+                name: "OLD TOOLS",
                 tools: [Tool(type: .wrench), Tool(type: .hammer), Tool(type: .clamp), Tool(type: .nutBolt), Tool(type: .crane)]
             ),
             ToolGroup(
-                name: "New Tools",
+                name: "NEW TOOLS",
                 tools: [Tool(type: .wrench), Tool(type: .hammer), Tool(type: .clamp), Tool(type: .nutBolt), Tool(type: .crane)]
             ),
         ]
