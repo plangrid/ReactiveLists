@@ -15,5 +15,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.requires_arc = true
   
+  s.swift_version = '4.0'
   s.dependency 'Dwifft', '~> 0.7.0'
 end
