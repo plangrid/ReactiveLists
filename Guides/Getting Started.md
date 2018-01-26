@@ -1,7 +1,7 @@
 # Getting Started
 
-ReactiveLists provides a React-like API for `UITableView` and `UICollectionView`.  This goal is to provide a more
-declarative interface on top of your normal table and collection code.  To get started with ReactiveLists, we encourage you to play around with the examples included in the repository.
+ReactiveLists provides a React-like API for `UITableView` and `UICollectionView`.  The goal is to provide a more
+declarative interface on top of your normal table and collection code.  To get started with ReactiveLists, in addition to reading this document, we encourage you to play around with the examples included in the repository.
 
 ### Primary Components
 
@@ -12,7 +12,7 @@ the title and contents of a given section within your `UICollectionView` or `UIT
 
 #### `*CellViewModel`
 
-This is type you make that conforms to either `CollectionViewCellViewModel` or `TableViewCellViewModel`.  This is the type that describes the data that is used to configure a given cell in your `UITableView` or `UICollectionView`.
+This either `CollectionViewCellViewModel` protocol or `TableViewCellViewModel` protocol.  You create types that conform to these protocols, which are used to configure a given cell in your `UITableView` or `UICollectionView`.
 
 
 #### `*ViewModel`
@@ -24,12 +24,11 @@ contains all the data required to render your `UITableView` or `UICollectionView
 #### `*ViewDriver`
 
 This is either a `TableViewDriver` or a `CollectionViewDriver`.  These types are responsible for calling all the methods to update your view when new data is available.  You initialize your `Driver` with a `UITableView` or `UICollectionView` and then
-as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`  From there the `Driver` will figure out the differences in the data and re-render your `UITableView` or `UICollectionView` automatically for you.
+as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`.  From there the `Driver` will figure out the differences in the data and re-render your `UITableView` or `UICollectionView` automatically for you.
 
-To get set up, you first need to add a `Driver` (either a `TableViewDriver` or `CollectionViewDriver`) to your view controller.
+To get set up, you first need to add a `Driver` (either a `TableViewDriver` or `CollectionViewDriver`) to your view controller:
 
 ```swift
-
 struct Person {
   name: String
   uuid = UUID()
@@ -38,9 +37,13 @@ struct Person {
 final class PersonViewController: UITableViewController {
     var people: [Person]
     var tableViewDriver: TableViewDriver?
+                  .
+                  .
+                  .
+}
 ```
 
-This `Driver` will be responsible for updating your view when new data is available.
+`tableViewDriver` will be responsible for updating your view when new data is available.
 
 Next, you'll need to bind your new data to the `Driver` as it comes in.
 
@@ -53,11 +56,12 @@ Great!  But how do you make that `TableViewModel`?  We recommend having a static
 takes in new data and generates the `TableViewModel`.  It might look something like this:
 
 ```swift
-static func viewModel(forState people: [Person]) -> TableViewModel { }
+/// Given a new set of [Person], generates the `TableViewModel` representing that new data
+static func viewModel(forState people: [Person]) -> TableViewModel { ... }
 
 ```
 
-Then any time your data (in this case the `people` property), you can generate your new `TableViewModel`
+Then any time your data (in this case the `people` property) changes, you can generate your new `TableViewModel`
 
 ```swift
 var people: [Person] = [] {
@@ -70,22 +74,23 @@ var people: [Person] = [] {
 
 ```
 
-Okay now lets go back and fill in our `viewModel()` function:
+Okay now lets go back and fill in our `viewModel(forState:)` function:
 
 ```swift
-let sections: [TableViewSectionViewModel] = people.map { person in
-    let personCellViewModels = people.tools.map { PersonCellModel(tool: $0) }
-    return TableViewSectionViewModel(
-        headerTitle: "People",
-        headerHeight: 44,
-        cellViewModels: personCellViewModels,
-        diffingKey: "People" // a unique string for automatically diffing
-    )
+/// Given a new set of [Person], generates the `TableViewModel` representing that new data
+static func viewModel(forState people: [Person]) -> TableViewModel {
+        let personCellViewModels = people.map { PersonCellModel(person: $0) }
+        let section = return TableViewSectionViewModel(
+          headerTitle: "People",
+          headerHeight: 44,
+          cellViewModels: personCellViewModels,
+          diffingKey: "People" // a unique string for automatically diffing
+        )
+    return TableViewModel(sectionModels: [section])
 }
-return TableViewModel(sectionModels: sections)
 ```
 
-This is now called whenever we get an updated to our `people` variable.  This function takes the Latest
+This is now called whenever we get an update to our `people` variable.  This function takes the latest
 `people` data and for each person generates a `PersonCellModel` to display in our table view.  It wraps
 all those models into a single section and then creates a `TableViewModel` from that section.
 
@@ -121,5 +126,5 @@ most important function is `applyViewModelToCell`.  This is where you define how
 mapped onto a `UITableViewCell` or `UICollectionViewCell`.  In this case we are just setting the `textLabel`'s
 `text` property to the person's `name`.
 
-And there you have it!  You now have an automatically refreshing table view which you defined in a clear
+And there you have it!  You now have an automatically refreshing table view which you have defined in a clear,
 declarative manner.
