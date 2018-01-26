@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TableViewDriver Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/TableViewDriver" class="dashAnchor"></a>
+    <a title="TableViewDriver Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ReactiveLists Docs</a> (44% documented)</p>
+        <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ReactiveLists Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TableViewDriver Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../vision.html">VISION</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CollectionViewDriver.html">CollectionViewDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDriver.html">TableViewDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDriver/TableRefreshContext.html">– TableRefreshContext</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CellAccessibilityFormat.html">CellAccessibilityFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionViewModel/SectionModel.html">– SectionModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupplementaryAccessibilityFormat.html">SupplementaryAccessibilityFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupplementaryViewInfo/RegistrationMethod.html">– RegistrationMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableViewModel.html">TableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableViewModel/SectionModel.html">– SectionModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:13ReactiveLists10DiffingKeya">DiffingKey</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TableViewDriver</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">TableViewDriver</span><span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>A data source that drives the table views appereance and behavior based on an underlying
+<code><a href="../Structs/TableViewModel.html">TableViewModel</a></code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists15TableViewDriverC0C14RefreshContextO"></a>
+                    <a name="//apple_ref/swift/Enum/TableRefreshContext" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists15TableViewDriverC0C14RefreshContextO">TableRefreshContext</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Communicates information useful for refreshing the table view</p>
+
+<ul>
+<li>unknown: A refresh was requested, but we don&rsquo;t know if rows/sections are being added/removed</li>
+<li>contentOnly: Only the content of cells is being refreshed. No rows/sections will be
+           added/deleted</li>
+<li>rowsModified: Rows/sections are being added/deleted</li>
+</ul>
+
+                        <a href="../Classes/TableViewDriver/TableRefreshContext.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TableRefreshContext</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists15TableViewDriverC05tableD0So07UITableD0Cv"></a>
+                    <a name="//apple_ref/swift/Property/tableView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists15TableViewDriverC05tableD0So07UITableD0Cv">tableView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The table view to which the <code><a href="../Structs/TableViewModel.html">TableViewModel</a></code> is rendered.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists15TableViewDriverC05tableD5ModelAA0cdG0VSgv"></a>
+                    <a name="//apple_ref/swift/Property/tableViewModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists15TableViewDriverC05tableD5ModelAA0cdG0VSgv">tableViewModel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Describes the current UI state of the table view.</p>
+
+<p>When this property is set, the UI of the related <code>UITableView</code> will be updated.
+If not only the content of individual cells/sections has changed, but instead
+cells/sections were moved/inserted/deleted, the behavior of this setter depends on the
+value of the <code>automaticDiffingEnabled</code> property.</p>
+
+<p>If <code>automaticDiffingEnabled</code> is set to <code>true</code>, and cells/sections have been moved/inserted/deleted,
+updating this property will result in the UI of the table view being updated automatically.</p>
+
+<p>If <code>automaticDiffingEnabled</code> is set to <code>false</code>, and cells/sections have been moved/inserted/deleted,
+the caller must update the <code>UITableView</code> state manually, to bring it back in sync with
+the new model, e.g. by calling <code>reloadData()</code> on the table view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tableViewModel</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableViewModel.html">TableViewModel</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists15TableViewDriverCACSo07UITableD0C05tableD0_AA0cD5ModelVSg0gdH0Sb27shouldDeselectUponSelectionSb23automaticDiffingEnabledtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(tableView:tableViewModel:shouldDeselectUponSelection:automaticDiffingEnabled:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists15TableViewDriverCACSo07UITableD0C05tableD0_AA0cD5ModelVSg0gdH0Sb27shouldDeselectUponSelectionSb23automaticDiffingEnabledtcfc">init(tableView:tableViewModel:shouldDeselectUponSelection:automaticDiffingEnabled:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a data source that drives a <code>UITableView</code> based on a <code><a href="../Structs/TableViewModel.html">TableViewModel</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span>
+    <span class="nv">tableViewModel</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableViewModel.html">TableViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">shouldDeselectUponSelection</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nv">automaticDiffingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tableView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the table view to which this data source will render its view models.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tableViewModel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the view model that describes the initial state of this table view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>shouldDeselectUponSelection</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>indicates if selected cells should immediately be
+                         deselected. Defaults to <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>automaticDiffingEnabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>defines whether or not this data source updates the table
+                     view automatically when cells/sections are moved/inserted/deleted.
+                     Defaults to <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Change%20and%20UI%20Update%20Handling"></a>
+                <a name="//apple_ref/swift/Section/Change and UI Update Handling" class="dashAnchor"></a>
+                <a href="#/Change%20and%20UI%20Update%20Handling">
+                  <h3 class="section-name">Change and UI Update Handling</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists15TableViewDriverC12refreshViewsyAC0C14RefreshContextO0fI0_tF"></a>
+                    <a name="//apple_ref/swift/Method/refreshViews(refreshContext:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists15TableViewDriverC12refreshViewsyAC0C14RefreshContextO0fI0_tF">refreshViews(refreshContext:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates all currently visible cells and sections, such that they reflect the latest
+state decribed in their respective view models. Typically this method should not be
+called directly, as it is called automatically whenever the <code><a href="../Classes/TableViewDriver.html#/s:13ReactiveLists15TableViewDriverC05tableD5ModelAA0cdG0VSgv">tableViewModel</a></code> property
+is updated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">refreshViews</span><span class="p">(</span><span class="nv">refreshContext</span><span class="p">:</span> <span class="kt"><a href="../Classes/TableViewDriver/TableRefreshContext.html">TableRefreshContext</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">unknown</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Private%20helper%20methods"></a>
+                <a name="//apple_ref/swift/Section/Private helper methods" class="dashAnchor"></a>
+                <a href="#/Private%20helper%20methods">
+                  <h3 class="section-name">Private helper methods</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists15TableViewDriverC06_tableD0So6UIViewCSgSo07UITableD0C_Si14viewForSectionAA013SupplementaryD4KindO0iM0tF"></a>
+                    <a name="//apple_ref/swift/Method/_tableView(_:viewForSection:viewKind:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists15TableViewDriverC06_tableD0So6UIViewCSgSo07UITableD0C_Si14viewForSectionAA013SupplementaryD4KindO0iM0tF">_tableView(_:viewForSection:viewKind:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">_tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">viewForSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">viewKind</span><span class="p">:</span> <span class="kt"><a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIView</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

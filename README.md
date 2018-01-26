@@ -1,4 +1,4 @@
-# ReactiveLists :warning: under construction :warning:
+# ReactiveLists
 
 *React-like API for `UITableView` & `UICollectionView`*
 
@@ -32,6 +32,12 @@ pod 'ReactiveLists', :git => 'https://github.com/plangrid/ReactiveLists.git', :b
 
 Read our [documentation here][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
+#### Generating docs
+
+```bash
+$ ./scripts/gen_docs.sh
+```
+
 ## Contribute
 
 Please read and follow our [Contributing Guide](https://github.com/plangrid/ReactiveLists/blob/master/.github/CONTRIBUTING.md) and our [Code of Conduct](https://github.com/plangrid/ReactiveLists/blob/master/CODE_OF_CONDUCT.md).
@@ -40,7 +46,7 @@ Please read and follow our [Contributing Guide](https://github.com/plangrid/Reac
 
 `ReactiveLists` is released under an [MIT License][mitLink]. See `LICENSE` for details.
 
->**Copyright &copy; 2018-present PlanGrid, Inc.**
+> **Copyright &copy; 2018-present PlanGrid, Inc.**
 
 [docsLink]:https://plangrid.github.io/ReactiveLists
 [podLink]:https://cocoapods.org/pods/ReactiveLists
