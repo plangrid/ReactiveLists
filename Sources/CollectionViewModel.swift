@@ -17,15 +17,22 @@
 import Dwifft
 import UIKit
 
+/// View model for the individual cells of a `UICollectionView`.
 public protocol CollectionViewCellViewModel {
-    /// `CollectionViewDataSource` will automatically apply an `accessibilityIdentifier` to the cell based on this format
+    /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
-
+    /// The reuse identifier for this cell.
     var cellIdentifier: String { get }
+    /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
+    /// Invoked when a cell has been selected.
     var didSelect: DidSelectClosure? { get }
+    /// Invoked when an accessory button is tapped.
     var didDeselect: DidDeselectClosure? { get }
 
+    /// Asks the cell model to update the `UICollectionViewCell` with the content
+    /// in the cell model and return the updated cell.
+    /// - Parameter cell: the cell which contents need to be updated.
     func applyViewModelToCell(_ cell: UICollectionViewCell)
 }
 
@@ -52,19 +59,29 @@ public extension CollectionViewSupplementaryViewModel {
     func applyViewModelToView(_ view: UICollectionReusableView) {}
 }
 
+/// The view model that describes a `UICollectionView`.
 public struct CollectionViewModel {
-
+    /// The section view models for this collection view.
     public let sectionModels: [CollectionViewSectionViewModel]
 
+    /// Initializes a collection view model with the sections provided.
+    ///
+    /// - Parameter sectionModels: the sections that need to be shown in this collection view.
     public init(sectionModels: [CollectionViewSectionViewModel]) {
         self.sectionModels = sectionModels
     }
 
+    /// Returns the section model at the specified index or `nil` if no such section exists.
+    ///
+    /// - Parameter section: the index for the section that is being retrieved
     public subscript(section: Int) -> CollectionViewSectionViewModel? {
         guard self.sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
 
+    /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
+    ///
+    /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> CollectionViewCellViewModel? {
         guard let section = self[indexPath.section],
             let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.item else { return nil }
@@ -95,35 +112,60 @@ public struct CollectionViewModel {
     }
 }
 
+/// View model for a collection view section.
 public struct CollectionViewSectionViewModel {
+    /// Cells to be shown in this section.
+    let cellViewModels: [CollectionViewCellViewModel]?
+    /// View model for the header of this section.
+    let headerViewModel: CollectionViewSupplementaryViewModel?
+    /// View model for the footer of this section.
+    let footerViewModel: CollectionViewSupplementaryViewModel?
+    /// The key used by the diffing algorithm to uniquely identify this section.
+    /// If you are using automatic diffing on the `CollectionViewDriver` (which is enabled by default)
+    /// you are required to provide a key that uniquely identifies this section.
+    ///
+    /// Typically you want to base this diffing key on data that is stored in the model.
+    /// For example:
+    ///
+    ///      public var diffingKey = { group.identifier }
+    public var diffingKey: String?
+
+    /// Initializes a collection view section view model.
+    ///
+    /// - Parameters:
+    ///   - cellViewModels: the cells in this section, or `nil`.
+    ///   - headerViewModel: the header view model, or `nil`.
+    ///   - footerViewModel: the footer view model, or `nil`.
+    ///   - diffingKey: the diffing key, required for automated diffing.
+    public init(
+        cellViewModels: [CollectionViewCellViewModel]?,
+        headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        diffingKey: String? = nil
+    ) {
+        self.cellViewModels = cellViewModels
+        self.headerViewModel = headerViewModel
+        self.footerViewModel = footerViewModel
+        self.diffingKey = diffingKey
+    }
+
     private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
         let height: CGFloat?
         let viewInfo: SupplementaryViewInfo? = nil
 
         func applyViewModelToView(_ view: UICollectionReusableView) { }
     }
-
-    let cellViewModels: [CollectionViewCellViewModel]?
-    let headerViewModel: CollectionViewSupplementaryViewModel?
-    let footerViewModel: CollectionViewSupplementaryViewModel?
-    public var diffingKey: String?
-
-    public init(
-        cellViewModels: [CollectionViewCellViewModel]?,
-        headerViewModel: CollectionViewSupplementaryViewModel? = nil,
-        footerViewModel: CollectionViewSupplementaryViewModel? = nil,
-        diffingKey: String? = nil
-        ) {
-        self.cellViewModels = cellViewModels
-        self.headerViewModel = headerViewModel
-        self.footerViewModel = footerViewModel
-        self.diffingKey = diffingKey
-    }
 }
 
 // MARK: Initializers without header/footer view models
 
+// Note: All initializers in this extension are undocumented, because we intend
+// to remove them. We want to get rid of the legacy functionality that creates
+// blank headers & footers instead of using spacing properties available via
+// `UICollectionViewLayout`s.
 extension CollectionViewSectionViewModel {
+
+    /// :nodoc:
     public init(
         cellViewModels: [CollectionViewCellViewModel]?,
         headerHeight: CGFloat? = nil,
@@ -138,6 +180,7 @@ extension CollectionViewSectionViewModel {
         )
     }
 
+    /// :nodoc:
     public init(
         cellViewModels: [CollectionViewCellViewModel]?,
         headerViewModel: CollectionViewSupplementaryViewModel? = nil,
@@ -152,6 +195,7 @@ extension CollectionViewSectionViewModel {
         )
     }
 
+    /// :nodoc:
     public init(
         cellViewModels: [CollectionViewCellViewModel]?,
         headerHeight: CGFloat? = nil,

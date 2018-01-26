@@ -17,6 +17,7 @@
 import Foundation
 import UIKit
 
+/// Metadata thats required for setting up a supplementary view.
 public struct SupplementaryViewInfo {
 
     public let registrationMethod: ViewRegistrationMethod
@@ -40,6 +41,10 @@ public struct SupplementaryViewInfo {
     }
 }
 
+/// Defines the kind of a supplementary view.
+///
+/// - header: indicates that the view is a header
+/// - footer: indicates that the view is a footer
 public enum SupplementaryViewKind {
     case header
     case footer

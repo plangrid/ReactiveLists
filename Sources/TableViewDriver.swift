@@ -305,7 +305,7 @@ extension TableViewDriver: UITableViewDelegate {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let cellViewModel = self.tableViewModel?[indexPath] as? TableViewCellModelEditActions {
-            return cellViewModel.editActions(indexPath)
+            return cellViewModel.editActions
         }
         return nil
     }
