@@ -19,14 +19,19 @@ import UIKit
 
 /// View model for the individual cells of a `UICollectionView`.
 public protocol CollectionViewCellViewModel {
+
     /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
+
     /// The reuse identifier for this cell.
     var cellIdentifier: String { get }
+
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
+
     /// Invoked when a cell has been selected.
     var didSelect: DidSelectClosure? { get }
+
     /// Invoked when an accessory button is tapped.
     var didDeselect: DidDeselectClosure? { get }
 
@@ -61,6 +66,7 @@ public extension CollectionViewSupplementaryViewModel {
 
 /// The view model that describes a `UICollectionView`.
 public struct CollectionViewModel {
+
     /// The section view models for this collection view.
     public let sectionModels: [CollectionViewSectionViewModel]
 
@@ -114,12 +120,16 @@ public struct CollectionViewModel {
 
 /// View model for a collection view section.
 public struct CollectionViewSectionViewModel {
+
     /// Cells to be shown in this section.
     let cellViewModels: [CollectionViewCellViewModel]?
+
     /// View model for the header of this section.
     let headerViewModel: CollectionViewSupplementaryViewModel?
+
     /// View model for the footer of this section.
     let footerViewModel: CollectionViewSupplementaryViewModel?
+
     /// The key used by the diffing algorithm to uniquely identify this section.
     /// If you are using automatic diffing on the `CollectionViewDriver` (which is enabled by default)
     /// you are required to provide a key that uniquely identifies this section.

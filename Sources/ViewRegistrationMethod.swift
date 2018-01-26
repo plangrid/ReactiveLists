@@ -19,8 +19,10 @@ import UIKit
 
 /// The method for registering cells and supplementary views
 public enum ViewRegistrationMethod {
+
     /// Class-based views
     case viewClass(AnyClass)
+
     /// Nib-based views
     case nib(name: String, bundle: Bundle?)
 }
