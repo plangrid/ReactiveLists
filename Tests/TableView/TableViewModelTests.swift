@@ -106,8 +106,8 @@ final class TableViewModelTests: XCTestCase {
         let footerInfo = sectionModel.footerViewModel?.viewInfo
 
         XCTAssertTrue(sectionModel.collapsed)
-        XCTAssertTrue(headerInfo?.registrationMethod == .viewClass(HeaderView.self))
-        XCTAssertTrue(footerInfo?.registrationMethod == .viewClass(FooterView.self))
+        XCTAssertTrue(headerInfo?.registrationMethod == .fromClass(HeaderView.self))
+        XCTAssertTrue(footerInfo?.registrationMethod == .fromClass(FooterView.self))
         XCTAssertEqual(headerInfo?.reuseIdentifier, "reuse_header+A")
         XCTAssertEqual(footerInfo?.reuseIdentifier, "reuse_footer+A")
         XCTAssertEqual(

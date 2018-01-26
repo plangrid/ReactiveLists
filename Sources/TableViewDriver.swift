@@ -214,10 +214,7 @@ extension TableViewDriver: UITableViewDataSource {
         guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[indexPath] else {
             fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
-        cellViewModel.applyViewModelToCell(cell)
-        cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-        return cell
+        return tableView.configuredCell(for: cellViewModel, at: indexPath)
     }
 
     /// :nodoc:

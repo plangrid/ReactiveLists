@@ -23,8 +23,8 @@ public protocol TableViewCellViewModel {
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
 
-    /// The reuse identifier for this cell.
-    var cellIdentifier: String { get }
+    /// The registration info for the cell.
+    var registrationInfo: ViewRegistrationInfo { get }
 
     /// The height of this cell.
     var rowHeight: CGFloat { get }
@@ -84,12 +84,16 @@ public protocol TableViewCellModelEditActions {
 /// Protocol that needs to be implemented by custom header
 /// footer view models.
 public protocol TableViewSectionHeaderFooterViewModel {
+
     /// The title of the header
     var title: String? { get }
+
     /// The height of the header
     var height: CGFloat? { get }
+
     /// Metadata about the custom view type
     var viewInfo: SupplementaryViewInfo? { get }
+
     /// Asks the view model to update the header/footer
     /// view with the content in the model.
     /// - Parameter view: the header/footer view
@@ -158,6 +162,7 @@ public struct TableViewSectionViewModel {
 
 /// The view model that describes a `UITableView`.
 public struct TableViewModel {
+
     /// The section index titles for this table view.
     public let sectionIndexTitles: [String]?
 

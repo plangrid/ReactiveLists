@@ -33,11 +33,11 @@ extension UICollectionView {
     private func _registerSupplementaryViewModel(_ viewModel: CollectionViewSupplementaryViewModel) {
         if let viewInfo = viewModel.viewInfo {
             switch viewInfo.registrationMethod {
-            case let .nib(name, bundle):
+            case let .fromNib(name, bundle):
                 self.register(UINib(nibName: name, bundle: bundle),
                               forSupplementaryViewOfKind: viewInfo.kind.collectionElementKind,
                               withReuseIdentifier: viewInfo.reuseIdentifier)
-            case let .viewClass(viewClass):
+            case let .fromClass(viewClass):
                 self.register(viewClass,
                               forSupplementaryViewOfKind: viewInfo.kind.collectionElementKind,
                               withReuseIdentifier: viewInfo.reuseIdentifier)

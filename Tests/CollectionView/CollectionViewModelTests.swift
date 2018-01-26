@@ -57,7 +57,7 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let viewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationMethod == .viewClass(FooterView.self))
+        XCTAssertTrue(viewInfo?.registrationMethod == .fromClass(FooterView.self))
         XCTAssertEqual(viewInfo?.reuseIdentifier, "reuse_footer+A")
         XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
     }
@@ -83,7 +83,7 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let viewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationMethod == .viewClass(HeaderView.self))
+        XCTAssertTrue(viewInfo?.registrationMethod == .fromClass(HeaderView.self))
         XCTAssertEqual(viewInfo?.reuseIdentifier, "reuse_header+A")
         XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
     }
@@ -110,12 +110,12 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let headerViewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(headerViewInfo?.registrationMethod == .viewClass(HeaderView.self))
+        XCTAssertTrue(headerViewInfo?.registrationMethod == .fromClass(HeaderView.self))
         XCTAssertEqual(headerViewInfo?.reuseIdentifier, "reuse_header+A")
         XCTAssertEqual(headerViewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
 
         let footerViewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(footerViewInfo?.registrationMethod == .viewClass(FooterView.self))
+        XCTAssertTrue(footerViewInfo?.registrationMethod == .fromClass(FooterView.self))
         XCTAssertEqual(footerViewInfo?.reuseIdentifier, "reuse_footer+A")
         XCTAssertEqual(footerViewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
     }

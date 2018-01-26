@@ -97,7 +97,7 @@ final class TableViewDiffingTests: XCTestCase {
 
 struct UserCell: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
-    let cellIdentifier = "UserCell"
+    let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
 
     let user: String
 
