@@ -83,6 +83,7 @@ extension CollectionViewController {
                 viewInfo: SupplementaryViewInfo(
                     registrationMethod: .nib(name: "CollectionViewHeaderView", bundle: nil),
                     reuseIdentifier: "CollectionViewHeaderView",
+                    kind: .header,
                     accessibilityFormat: "CollectionViewHeaderView"
                 )
             )
