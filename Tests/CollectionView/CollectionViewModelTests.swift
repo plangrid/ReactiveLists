@@ -23,7 +23,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// without specifying a header and footer view, wich results
     /// in a blank default view being used.
     func testViewModelInitalizerWithBlankHeaderAndFooter() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerHeight: 40,
             footerHeight: 50
@@ -40,7 +40,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// without specifying a header view, wich results
     /// in a blank default view being used.
     func testViewModelInitializerWithBlankHeader() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerHeight: 40,
             footerViewModel: TestCollectionViewSupplementaryViewModel(
@@ -66,7 +66,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// without specifying a footer view, wich results
     /// in a blank default view being used.
     func testViewModelInitializerWithBlankFooter() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerViewModel: TestCollectionViewSupplementaryViewModel(
                 height: 40,
@@ -90,7 +90,7 @@ final class CollectionViewModelTests: XCTestCase {
 
     /// Can be initialized with a custom header and footer view.
     func testViewModelInitializerWithCustomHeaderAndFooter() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerViewModel: TestCollectionViewSupplementaryViewModel(
                 height: 40,
@@ -125,11 +125,11 @@ final class CollectionViewModelTests: XCTestCase {
     /// model returns `nil`.
     func testSubscripts() {
         let collectionViewModel = CollectionViewModel(sectionModels: [
-            CollectionViewModel.SectionModel(
+            CollectionViewSectionViewModel(
                 cellViewModels: nil,
                 headerHeight: 42,
                 footerHeight: nil),
-            CollectionViewModel.SectionModel(
+            CollectionViewSectionViewModel(
                 cellViewModels: [
                     generateTestCollectionCellViewModel("A"),
                     generateTestCollectionCellViewModel("B"),

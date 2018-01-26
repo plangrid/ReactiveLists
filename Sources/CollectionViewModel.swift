@@ -54,13 +54,13 @@ public extension CollectionViewSupplementaryViewModel {
 
 public struct CollectionViewModel {
 
-    public let sectionModels: [SectionModel]
+    public let sectionModels: [CollectionViewSectionViewModel]
 
-    public init(sectionModels: [SectionModel]) {
+    public init(sectionModels: [CollectionViewSectionViewModel]) {
         self.sectionModels = sectionModels
     }
 
-    public subscript(section: Int) -> SectionModel? {
+    public subscript(section: Int) -> CollectionViewSectionViewModel? {
         guard self.sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
@@ -95,37 +95,35 @@ public struct CollectionViewModel {
     }
 }
 
-extension CollectionViewModel {
-    public struct SectionModel {
-        private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
-            let height: CGFloat?
-            let viewInfo: SupplementaryViewInfo? = nil
+public struct CollectionViewSectionViewModel {
+    private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
+        let height: CGFloat?
+        let viewInfo: SupplementaryViewInfo? = nil
 
-            func applyViewModelToView(_ view: UICollectionReusableView) { }
-        }
+        func applyViewModelToView(_ view: UICollectionReusableView) { }
+    }
 
-        let cellViewModels: [CollectionViewCellViewModel]?
-        let headerViewModel: CollectionViewSupplementaryViewModel?
-        let footerViewModel: CollectionViewSupplementaryViewModel?
-        public var diffingKey: String?
+    let cellViewModels: [CollectionViewCellViewModel]?
+    let headerViewModel: CollectionViewSupplementaryViewModel?
+    let footerViewModel: CollectionViewSupplementaryViewModel?
+    public var diffingKey: String?
 
-        public init(
-            cellViewModels: [CollectionViewCellViewModel]?,
-            headerViewModel: CollectionViewSupplementaryViewModel? = nil,
-            footerViewModel: CollectionViewSupplementaryViewModel? = nil,
-            diffingKey: String? = nil
-            ) {
-            self.cellViewModels = cellViewModels
-            self.headerViewModel = headerViewModel
-            self.footerViewModel = footerViewModel
-            self.diffingKey = diffingKey
-        }
+    public init(
+        cellViewModels: [CollectionViewCellViewModel]?,
+        headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        diffingKey: String? = nil
+        ) {
+        self.cellViewModels = cellViewModels
+        self.headerViewModel = headerViewModel
+        self.footerViewModel = footerViewModel
+        self.diffingKey = diffingKey
     }
 }
 
 // MARK: Initializers without header/footer view models
 
-extension CollectionViewModel.SectionModel {
+extension CollectionViewSectionViewModel {
 
     public init(
         cellViewModels: [CollectionViewCellViewModel]?,
