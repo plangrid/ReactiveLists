@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CollectionViewDriver Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/CollectionViewDriver" class="dashAnchor"></a>
+    <a title="CollectionViewDriver Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ReactiveLists Docs</a> (44% documented)</p>
+        <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ReactiveLists Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        CollectionViewDriver Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../vision.html">VISION</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CollectionViewDriver.html">CollectionViewDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDriver.html">TableViewDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TableViewDriver/TableRefreshContext.html">– TableRefreshContext</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CellAccessibilityFormat.html">CellAccessibilityFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionViewModel/SectionModel.html">– SectionModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupplementaryAccessibilityFormat.html">SupplementaryAccessibilityFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupplementaryViewInfo/RegistrationMethod.html">– RegistrationMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableViewModel.html">TableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableViewModel/SectionModel.html">– SectionModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:13ReactiveLists10DiffingKeya">DiffingKey</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>CollectionViewDriver</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CollectionViewDriver</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">UICollectionViewDataSource</span><span class="p">,</span> <span class="kt">UICollectionViewDelegateFlowLayout</span></code></pre>
+
+                </div>
+              </div>
+            <p>A data source that drives the collection views appereance and behavior based on an underlying
+<code><a href="../Structs/CollectionViewModel.html">CollectionViewModel</a></code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20CollectionViewDriverC010collectionD0So012UICollectionD0Cv"></a>
+                    <a name="//apple_ref/swift/Property/collectionView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20CollectionViewDriverC010collectionD0So012UICollectionD0Cv">collectionView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The collection view to which the <code><a href="../Structs/CollectionViewModel.html">CollectionViewModel</a></code> is rendered.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgv"></a>
+                    <a name="//apple_ref/swift/Property/collectionViewModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgv">collectionViewModel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Describes the current UI state of the collection view.</p>
+
+<p>When this property is set, the UI of the related <code>UICollectionView</code> will be updated.
+If not only the content of individual cells/sections has changed, but instead
+cells/sections were moved/inserted/deleted, the behavior of this setter depends on the
+value of the <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbv">automaticDiffingEnabled</a></code> property.</p>
+
+<p>If <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbv">automaticDiffingEnabled</a></code> is set to <code>true</code>, and cells/sections have been moved/inserted/deleted,
+updating this property will result in the UI of the collection view being updated automatically.</p>
+
+<p>If <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbv">automaticDiffingEnabled</a></code> is set to <code>false</code>, and cells/sections have been moved/inserted/deleted,
+the caller must update the <code>UICollectionView</code> state manually, to bring it back in sync with
+the new model, e.g. by calling <code>reloadData()</code> on the collection view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">collectionViewModel</span><span class="p">:</span> <span class="kt"><a href="../Structs/CollectionViewModel.html">CollectionViewModel</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbv"></a>
+                    <a name="//apple_ref/swift/Property/automaticDiffingEnabled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbv">automaticDiffingEnabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If this property is set to <code>true</code>, updating the <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgv">collectionViewModel</a></code> will always
+automatically lead to updating the UI state of the <code>UICollectionView</code>, even if cells/sections
+were moved/inserted/deleted.</p>
+
+<p>For details, see the documentation for <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgv">CollectionViewDriver.collectionViewModel</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">automaticDiffingEnabled</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20CollectionViewDriverCACSo012UICollectionD0C010collectionD0_AA0cD5ModelVSg0gdH0Sb27shouldDeselectUponSelectionSb23automaticDiffingEnabledtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(collectionView:collectionViewModel:shouldDeselectUponSelection:automaticDiffingEnabled:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20CollectionViewDriverCACSo012UICollectionD0C010collectionD0_AA0cD5ModelVSg0gdH0Sb27shouldDeselectUponSelectionSb23automaticDiffingEnabledtcfc">init(collectionView:collectionViewModel:shouldDeselectUponSelection:automaticDiffingEnabled:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a data source that drives a <code>UICollectionView</code> based on a <code><a href="../Structs/CollectionViewModel.html">CollectionViewModel</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span>
+    <span class="nv">collectionViewModel</span><span class="p">:</span> <span class="kt"><a href="../Structs/CollectionViewModel.html">CollectionViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">shouldDeselectUponSelection</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nv">automaticDiffingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the collection view to which this data source will render its view models.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionViewModel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the view model that describes the initial state of this collection view.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>shouldDeselectUponSelection</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>indicates if selected cells should immediately be
+                         deselected. Defaults to <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>automaticDiffingEnabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>defines whether or not this data source updates the collection
+                     view automatically when cells/sections are moved/inserted/deleted.
+                     Defaults to <code>false</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Change%20and%20UI%20Update%20Handling"></a>
+                <a name="//apple_ref/swift/Section/Change and UI Update Handling" class="dashAnchor"></a>
+                <a href="#/Change%20and%20UI%20Update%20Handling">
+                  <h3 class="section-name">Change and UI Update Handling</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20CollectionViewDriverC12refreshViewsyyF"></a>
+                    <a name="//apple_ref/swift/Method/refreshViews()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20CollectionViewDriverC12refreshViewsyyF">refreshViews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates all currently visible cells and sections, such that they reflect the latest
+state decribed in their respective view models. Typically this method should not be
+called directly, as it is called automatically whenever the <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgv">collectionViewModel</a></code> property
+is updated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">refreshViews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UICollectionViewDataSource%20/%20UICollectionViewDelegate%20implementation"></a>
+                <a name="//apple_ref/swift/Section/UICollectionViewDataSource / UICollectionViewDelegate implementation" class="dashAnchor"></a>
+                <a href="#/UICollectionViewDataSource%20/%20UICollectionViewDelegate%20implementation">
+                  <h3 class="section-name">UICollectionViewDataSource / UICollectionViewDelegate implementation</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)numberOfSectionsInCollectionView:"></a>
+                    <a name="//apple_ref/swift/Method/numberOfSections(in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)numberOfSectionsInCollectionView:">numberOfSections(in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">numberOfSections</span><span class="p">(</span><span class="k">in</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:numberOfItemsInSection:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:numberOfItemsInSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:numberOfItemsInSection:">collectionView(_:numberOfItemsInSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">numberOfItemsInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:layout:referenceSizeForHeaderInSection:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:layout:referenceSizeForHeaderInSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:layout:referenceSizeForHeaderInSection:">collectionView(_:layout:referenceSizeForHeaderInSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">layout</span> <span class="nv">collectionViewLayout</span><span class="p">:</span> <span class="kt">UICollectionViewLayout</span><span class="p">,</span> <span class="n">referenceSizeForHeaderInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:layout:referenceSizeForFooterInSection:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:layout:referenceSizeForFooterInSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:layout:referenceSizeForFooterInSection:">collectionView(_:layout:referenceSizeForFooterInSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">layout</span> <span class="nv">collectionViewLayout</span><span class="p">:</span> <span class="kt">UICollectionViewLayout</span><span class="p">,</span> <span class="n">referenceSizeForFooterInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:viewForSupplementaryElementOfKind:atIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:viewForSupplementaryElementOfKind:at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:viewForSupplementaryElementOfKind:atIndexPath:">collectionView(_:viewForSupplementaryElementOfKind:at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">viewForSupplementaryElementOfKind</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UICollectionReusableView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:cellForItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:cellForItemAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:cellForItemAtIndexPath:">collectionView(_:cellForItemAt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">cellForItemAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UICollectionViewCell</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:shouldHighlightItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:shouldHighlightItemAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:shouldHighlightItemAtIndexPath:">collectionView(_:shouldHighlightItemAt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">shouldHighlightItemAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:didSelectItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:didSelectItemAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:didSelectItemAtIndexPath:">collectionView(_:didSelectItemAt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">didSelectItemAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:didDeselectItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/collectionView(_:didDeselectItemAt:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ReactiveLists@objc(cs)CollectionViewDriver(im)collectionView:didDeselectItemAtIndexPath:">collectionView(_:didDeselectItemAt:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionView</span><span class="p">(</span><span class="n">_</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="n">didDeselectItemAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
