@@ -36,7 +36,7 @@ final class TableViewDriverTests: XCTestCase {
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
             TableViewSectionViewModel(
-                cellViewModels: nil,
+                cellViewModels: [],
                 headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "A"),
                 footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A"),
                 collapsed: false),

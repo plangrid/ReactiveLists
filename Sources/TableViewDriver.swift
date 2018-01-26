@@ -154,6 +154,8 @@ open class TableViewDriver: NSObject {
         }
     }
 
+    // MARK: Private
+
     private func _tableViewModelDidChange() {
         self._registerHeaderFooterViews()
 
@@ -192,8 +194,6 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    // MARK: Private helper methods
-
     private func _registerHeaderFooterViews() {
         self.tableViewModel?.sectionModels.forEach {
             if let header = $0.headerViewModel?.viewInfo {
@@ -215,7 +215,7 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    open func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
+    private func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
         guard let sectionModel = self.tableViewModel?[section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.reuseIdentifier,
@@ -249,7 +249,7 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionModel = self.tableViewModel?[section], !sectionModel.collapsed else { return 0 }
-        return sectionModel.cellViewModels?.count ?? 0
+        return sectionModel.cellViewModels.count
     }
 
     /// :nodoc:

@@ -27,7 +27,7 @@ final class TableViewModelTests: XCTestCase {
             TableViewSectionViewModel(
                 headerTitle: "section_1",
                 headerHeight: 42,
-                cellViewModels: nil),
+                cellViewModels: []),
             TableViewSectionViewModel(
                 headerTitle: "section_2",
                 headerHeight: 43,
@@ -76,7 +76,7 @@ final class TableViewModelTests: XCTestCase {
             footerHeight: 43
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 43)
         XCTAssertFalse(sectionModel.collapsed)
@@ -96,7 +96,7 @@ final class TableViewModelTests: XCTestCase {
             collapsed: true
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 43)
         XCTAssertEqual(sectionModel.headerViewModel?.title, "title_header+A")
