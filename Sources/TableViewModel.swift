@@ -19,26 +19,37 @@ import UIKit
 
 /// View models for the individual cells of a `TableViewModel`.
 public protocol TableViewCellViewModel {
+
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
+
     /// The reuse identifier for this cell.
     var cellIdentifier: String { get }
+
     /// The height of this cell.
     var rowHeight: CGFloat { get }
+
     /// The editing style for this cell.
     var editingStyle: UITableViewCellEditingStyle { get }
+
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
+
     /// Whether or not this cell should be indented while editing.
     var shouldIndentWhileEditing: Bool { get }
+
     /// Invoked when a cell will begin being edited.
     var willBeginEditing: WillBeginEditingClosure? { get }
+
     /// Invoked when cell editing has ended.
     var didEndEditing: DidEndEditingClosure? { get }
+
     /// Asks the cell to commit the insertion/deletion.
     var commitEditingStyle: CommitEditingStyleClosure? { get }
+
     /// Invoked when a cell has been selected.
     var didSelect: DidSelectClosure? { get }
+
     /// Invoked when an accessory button is tapped.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { get }
 
@@ -77,14 +88,20 @@ public protocol TableViewSectionHeaderFooterViewModel {
 
 /// View model for a table view section.
 public struct TableViewSectionViewModel {
+
     /// Cells to be shown in this section.
-    public let cellViewModels: [TableViewCellViewModel]?
+    public let cellViewModels: [TableViewCellViewModel]
+
     /// View model for the header of this section.
+
     public let headerViewModel: TableViewSectionHeaderFooterViewModel?
+
     /// View model for the footer of this section.
     public let footerViewModel: TableViewSectionHeaderFooterViewModel?
+
     /// Indicates whether or not this section is collapsed.
     public var collapsed: Bool = false
+
     /// The key used by the diffing algorithm to uniquely identify this section.
     /// If you are using automatic diffing on the `TableViewDriver` (which is enabled by default)
     /// you are required to provide a key that uniquely identifies this section.
@@ -95,8 +112,13 @@ public struct TableViewSectionViewModel {
     ///      public var diffingKey = { group.identifier }
     public var diffingKey: String?
 
+    /// Returns `true` is the section is empty, `false` otherwise.
+    public var isEmpty: Bool {
+        return self.cellViewModels.isEmpty
+    }
+
     public init(
-        cellViewModels: [TableViewCellViewModel]?,
+        cellViewModels: [TableViewCellViewModel],
         headerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
         footerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
         collapsed: Bool = false,
@@ -112,7 +134,7 @@ public struct TableViewSectionViewModel {
     public init(
         headerTitle: String?,
         headerHeight: CGFloat?,
-        cellViewModels: [TableViewCellViewModel]?,
+        cellViewModels: [TableViewCellViewModel],
         footerTitle: String? = nil,
         footerHeight: CGFloat? = 0,
         diffingKey: String? = nil
@@ -135,25 +157,26 @@ private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel
 }
 
 public struct TableViewModel {
+
     /// The secion index titles for this table view.
     public let sectionIndexTitles: [String]?
+
     /// The section view models for this table view.
     public let sectionModels: [TableViewSectionViewModel]
-    /// Helper function that returns `true` if this table has no sections or has
-    /// a single section with no cells.
-    public var isEmpty: Bool {
-        guard let cellViewModels = self.sectionModels.first?.cellViewModels else {
-            return self.sectionModels.isEmpty
-        }
 
-        return self.sectionModels.count == 1 && cellViewModels.isEmpty
+    /// Returns `true` if this table has no sections or has a single empty section.
+    public var isEmpty: Bool {
+        if self.sectionModels.count == 1 {
+            return self.sectionModels.first!.isEmpty
+        }
+        return self.sectionModels.isEmpty
     }
 
     /// Initializes a table view model with one section and the cell models provided
     /// via the initializer.
     ///
     /// - Parameter cellViewModels: the cell models for the only section in this table.
-    public init(cellViewModels: [TableViewCellViewModel]?) {
+    public init(cellViewModels: [TableViewCellViewModel]) {
         let section = TableViewSectionViewModel(cellViewModels: cellViewModels, diffingKey: "default_section")
         self.init(sectionModels: [section])
     }
@@ -188,11 +211,10 @@ public struct TableViewModel {
     /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
         guard let section = self[indexPath.section],
-            let cellViewModels = section.cellViewModels,
-            cellViewModels.count > indexPath.row else {
+            section.cellViewModels.count > indexPath.row else {
                 return nil
         }
-        return cellViewModels[indexPath.row]
+        return section.cellViewModels[indexPath.row]
     }
 
     /// Provides a description of the table view content in terms of diffing keys. These diffing keys
@@ -206,12 +228,12 @@ public struct TableViewModel {
                 }
 
                 // Ensure we have a diffing key for each cell in this section
-                let cellDiffingKeys: [DiffingKey] = section.cellViewModels?.map { cell in
+                let cellDiffingKeys: [DiffingKey] = section.cellViewModels.map { cell in
                     guard let cell = cell as? DiffableViewModel else {
                         fatalError("When diffing is enabled you need to provide cells which are DiffableViews.")
                     }
                     return "\(type(of: cell))_\(cell.diffingKey)"
-                } ?? []
+                }
 
                 return (sectionDiffingKey, cellDiffingKeys)
             }

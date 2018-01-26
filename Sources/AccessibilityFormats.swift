@@ -63,7 +63,7 @@ public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral {
         self._format = value
     }
 
-    public func accessibilityIdentifierForSection(_ section: Section) -> String {
+    public func accessibilityIdentifierForSection(_ section: Int) -> String {
         return self._format.replacingOccurrences(of: "%{section}", with: String(section))
     }
 }
