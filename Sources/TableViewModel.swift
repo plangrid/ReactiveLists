@@ -48,7 +48,7 @@ public protocol TableViewCellViewModel {
     func applyViewModelToCell(_ cell: UITableViewCell)
 }
 
-/// Default implementations for the protocol
+/// Default implementations for the protocol.
 public extension TableViewCellViewModel {
     var rowHeight: CGFloat {
         return 44.0
@@ -76,9 +76,12 @@ public protocol TableViewSectionHeaderFooterViewModel {
 }
 
 public struct TableViewModel {
+    /// The secion index titles for this table view.
     public let sectionIndexTitles: [String]?
+    /// The section view models for this table view.
     public let sectionModels: [SectionModel]
-
+    /// Helper function that returns `true` if this table has no sections or has
+    /// a single section with no cells.
     public var isEmpty: Bool {
         guard let cellViewModels = self.sectionModels.first?.cellViewModels else {
             return self.sectionModels.isEmpty
@@ -87,21 +90,43 @@ public struct TableViewModel {
         return self.sectionModels.count == 1 && cellViewModels.isEmpty
     }
 
-    public init(sectionModels: [SectionModel], sectionIndexTitles: [String]? = nil) {
-        self.sectionModels = sectionModels
-        self.sectionIndexTitles = sectionIndexTitles
-    }
-
+    /// Initializes a table view model with one section and the cell models provided
+    /// via the initializer.
+    ///
+    /// - Parameter cellViewModels: the cell models for the only section in this table.
     public init(cellViewModels: [TableViewCellViewModel]?) {
         let section = SectionModel(cellViewModels: cellViewModels, diffingKey: "default_section")
         self.init(sectionModels: [section])
     }
 
+    /// Initializes a table view model with the sections provided.
+    /// Optionally accepts the `sectionIndexTitles` for this table view.
+    ///
+    /// - Parameters:
+    ///   - sectionModels: the sections that need to be shown in this table.
+    ///   - sectionIndexTitles: the section index titles for this table.
+    public init(sectionModels: [SectionModel], sectionIndexTitles: [String]? = nil) {
+        if let sectionIndexTitles = sectionIndexTitles {
+            assert(
+                sectionModels.count == sectionIndexTitles.count,
+                "The table view model requires an index title per section."
+            )
+        }
+        self.sectionModels = sectionModels
+        self.sectionIndexTitles = sectionIndexTitles
+    }
+
+    /// Returns the section model at the specified index or `nil` if no such section exists.
+    ///
+    /// - Parameter section: the index for the section that is being retrieved
     public subscript(section: Int) -> SectionModel? {
         guard sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
 
+    /// Returns the cell view model at the specified index path or `nil` if no such section exists.
+    ///
+    /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
         guard let section = self[indexPath.section],
             let cellViewModels = section.cellViewModels,
@@ -137,19 +162,24 @@ public struct TableViewModel {
 
 extension TableViewModel {
 
+    /// View model for a table view section.
     public struct SectionModel {
-        private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
-            let title: String?
-            let height: CGFloat?
-            let viewInfo: SupplementaryViewInfo? = nil
-
-            func applyViewModelToView(_ view: UIView) {}
-        }
-
+        /// Cells to be shown in this section.
         public let cellViewModels: [TableViewCellViewModel]?
+        /// View model for the header of this section.
         public let headerViewModel: TableViewSectionHeaderFooterViewModel?
+        /// View model for the footer of this section.
         public let footerViewModel: TableViewSectionHeaderFooterViewModel?
+        /// Indicates whether or not this section is collapsed.
         public var collapsed: Bool = false
+        /// The key used by the diffing algorithm to uniquely identify this section.
+        /// If you are using automatic diffing on the `TableViewDriver` (which is enabled by default)
+        /// you are required to provide a key that uniquely identifies this section.
+        ///
+        /// Typically you want to base this diffing key on data that is stored in the model.
+        /// For example:
+        ///
+        ///      public var diffingKey = { group.identifier }
         public var diffingKey: String?
 
         public init(
@@ -179,5 +209,15 @@ extension TableViewModel {
             self.footerViewModel = PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
             self.diffingKey = diffingKey
         }
+    }
+
+    // MARK: Private
+
+    private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
+        let title: String?
+        let height: CGFloat?
+        let viewInfo: SupplementaryViewInfo? = nil
+
+        func applyViewModelToView(_ view: UIView) {}
     }
 }

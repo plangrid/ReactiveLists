@@ -224,11 +224,11 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         if self._shouldDeselectUponSelection {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
-        self.collectionViewModel?[indexPath]?.didSelectClosure?()
+        self.collectionViewModel?[indexPath]?.didSelect?()
     }
 
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        self.collectionViewModel?[indexPath]?.didDeselectClosure?()
+        self.collectionViewModel?[indexPath]?.didDeselect?()
     }
 
     // MARK: Private helper methods

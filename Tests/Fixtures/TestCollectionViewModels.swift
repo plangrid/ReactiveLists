@@ -19,8 +19,8 @@ import Foundation
 
 struct TestCollectionCellViewModel: CollectionViewCellViewModel {
     let label: String
-    let didSelectClosure: DidSelectClosure?
-    let didDeselectClosure: DidDeselectClosure?
+    let didSelect: DidSelectClosure?
+    let didDeselect: DidDeselectClosure?
 
     let cellIdentifier = "foo_identifier"
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
@@ -53,10 +53,9 @@ struct TestCollectionViewSupplementaryViewModel: CollectionViewSupplementaryView
             accessibilityFormat: SupplementaryAccessibilityFormat("access_\(kindString)+%{section}")) // e.g. access_header+%{section}
     }
 
-    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
-        guard let testView = view as? TestCollectionReusableView else { return view }
+    func applyViewModelToView(_ view: UICollectionReusableView) {
+        guard let testView = view as? TestCollectionReusableView else { return }
         testView.label = self.label
-        return testView
     }
 }
 
@@ -91,6 +90,7 @@ class TestCollectionReusableView: UICollectionReusableView {
 func generateTestCollectionCellViewModel(_ label: String? = nil) -> TestCollectionCellViewModel {
     return TestCollectionCellViewModel(
         label: label ?? UUID().uuidString,
-        didSelectClosure: nil,
-        didDeselectClosure: nil)
+        didSelect: nil,
+        didDeselect: nil
+    )
 }
