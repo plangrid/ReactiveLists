@@ -14,6 +14,10 @@ For long-term goals and direction, please see [`VISION.md`](https://github.com/p
 * Swift 4.0+
 * iOS 9+
 
+## Getting Started Guide
+
+Please see our [Getting Started](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md) guide to learn how to use ReactiveLists
+
 ## Installation
 
 ### [Cocoapods](https://cocoapods.org/) (recommended)
