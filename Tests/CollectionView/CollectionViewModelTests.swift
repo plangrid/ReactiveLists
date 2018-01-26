@@ -29,7 +29,7 @@ final class CollectionViewModelTests: XCTestCase {
             footerHeight: 50
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
         XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
@@ -50,7 +50,7 @@ final class CollectionViewModelTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
 
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
@@ -76,7 +76,7 @@ final class CollectionViewModelTests: XCTestCase {
             footerHeight: 50
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertNil(sectionModel.footerViewModel?.viewInfo)
 
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
@@ -104,7 +104,7 @@ final class CollectionViewModelTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
 
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
@@ -126,7 +126,7 @@ final class CollectionViewModelTests: XCTestCase {
     func testSubscripts() {
         let collectionViewModel = CollectionViewModel(sectionModels: [
             CollectionViewSectionViewModel(
-                cellViewModels: nil,
+                cellViewModels: [],
                 headerHeight: 42,
                 footerHeight: nil),
             CollectionViewSectionViewModel(

@@ -32,7 +32,7 @@ final class CollectionViewDriverTests: XCTestCase {
         self._collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         self._collectionViewModel = CollectionViewModel(sectionModels: [
             CollectionViewSectionViewModel(
-                cellViewModels: nil,
+                cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "A"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "A")),
             CollectionViewSectionViewModel(
@@ -44,7 +44,7 @@ final class CollectionViewDriverTests: XCTestCase {
                 headerViewModel: TestCollectionViewSupplementaryViewModel(label: "header_C", height: 30),
                 footerViewModel: nil),
             CollectionViewSectionViewModel(
-                cellViewModels: nil,
+                cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
         ])
@@ -209,7 +209,7 @@ final class CollectionViewDriverTests: XCTestCase {
 
         self._collectionViewDataSource.collectionViewModel = CollectionViewModel(sectionModels: [
             CollectionViewSectionViewModel(
-                cellViewModels: nil,
+                cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "X"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "X")),
             CollectionViewSectionViewModel(

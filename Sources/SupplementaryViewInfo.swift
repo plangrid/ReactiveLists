@@ -19,21 +19,31 @@ import UIKit
 
 /// Metadata thats required for setting up a supplementary view.
 public struct SupplementaryViewInfo {
-
+    /// Stores how the view was registered (as a class or via a nib file)
     public let registrationMethod: ViewRegistrationMethod
-
+    /// The reuse identifier for this supplementary view
     public let reuseIdentifier: String
-
+    /// The kind of supplementary view (e.g. `header` or `footer`)
     public let kind: SupplementaryViewKind
 
     /// `TableViewDataSource` and `CollectionViewDataSource` will automatically apply
     /// an `accessibilityIdentifier` to the supplementary view based on this format.
     public let accessibilityFormat: SupplementaryAccessibilityFormat
 
-    public init(registrationMethod: ViewRegistrationMethod,
-                reuseIdentifier: String,
-                kind: SupplementaryViewKind,
-                accessibilityFormat: SupplementaryAccessibilityFormat) {
+    /// Initializes the metadata for a supplementary view.
+    ///
+    /// - Parameters:
+    ///   - registrationMethod: describes how the view was registered (as a class or via a nib file)
+    ///   - reuseIdentifier: reuse identifier for this supplementary view
+    ///   - kind: kind of supplementary view (e.g. `header` or `footer`)
+    ///   - accessibilityFormat: a format string that generates an accessibility identifier for
+    ///                          the view that will be mapped to this view model.
+    public init(
+        registrationMethod: ViewRegistrationMethod,
+        reuseIdentifier: String,
+        kind: SupplementaryViewKind,
+        accessibilityFormat: SupplementaryAccessibilityFormat
+    ) {
         self.registrationMethod = registrationMethod
         self.reuseIdentifier = reuseIdentifier
         self.kind = kind
