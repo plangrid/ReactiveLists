@@ -62,16 +62,11 @@ final class CollectionViewDriverTests: XCTestCase {
 
         // Test that header and footer view classes explicitly provided in the view model are registered
         let registerCalls = self._collectionView.callsToRegisterClass
-        XCTAssertEqual(registerCalls.count, 6)
+        XCTAssertEqual(registerCalls.count, 4)
         self._testRegisterClassCallInfo(registerCalls[0], viewClass: HeaderView.self, kind: .header, identifier: "reuse_header+A")
         self._testRegisterClassCallInfo(registerCalls[1], viewClass: FooterView.self, kind: .footer, identifier: "reuse_footer+A")
         self._testRegisterClassCallInfo(registerCalls[2], viewClass: HeaderView.self, kind: .header, identifier: "reuse_header+D")
         self._testRegisterClassCallInfo(registerCalls[3], viewClass: FooterView.self, kind: .footer, identifier: "reuse_footer+D")
-
-        // Test that the a blank header and footer view class is registered for hidden headers and footers
-        // Used for headers and footers that are not explicitly provided in the view model
-        self._testRegisterClassCallInfo(registerCalls[4], viewClass: UICollectionReusableView.self, kind: .header, identifier: "hidden-supplementary-view")
-        self._testRegisterClassCallInfo(registerCalls[5], viewClass: UICollectionReusableView.self, kind: .footer, identifier: "hidden-supplementary-view")
     }
 
     func testCollectionViewSections() {
@@ -109,12 +104,10 @@ final class CollectionViewDriverTests: XCTestCase {
     func testHeaderViews() {
         parameterize(cases:
             (section: 0, expectedAccessibilityIdentifier: "access_header+0", expectedLabel: "label_header+A", expectedIdentifier: "reuse_header+A"),
-            // If header view info is not explicitly provided for a section, a hidden header is generated
-            // The hidden header can have non-zero height if a height is specified in the view model
-            (1, nil as String?, nil as String?, "hidden-supplementary-view"),
-            (2, nil, nil, "hidden-supplementary-view"),
+            (1, nil, nil, nil),
+            (2, nil, nil, nil),
             (3, "access_header+3", "label_header+D", "reuse_header+D"),
-            (9, nil, nil, "hidden-supplementary-view")) {
+            (9, nil, nil, nil)) {
             let indexPath = path($0)
 
             // Test that headers are generated with the correct identifiers and have the correct labels,
@@ -124,27 +117,27 @@ final class CollectionViewDriverTests: XCTestCase {
             XCTAssertEqual(header?.label, $2)
             XCTAssertEqual(header?.identifier, $3)
 
-            // Test that the header is marked as on screen
-            guard let onScreenHeader = self._collectionViewDataSource.collectionView(self._collectionView,
-                                                                                     viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
-                                                                                     at: indexPath) as? TestCollectionReusableView else {
-                XCTFail("Did not find the on screen TestCollectionReusableView header")
-                return
+            if header != nil {
+                // Test that the header is marked as on screen
+                guard let onScreenHeader = self._collectionViewDataSource.collectionView(self._collectionView,
+                                                                                         viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+                                                                                         at: indexPath) as? TestCollectionReusableView else {
+                                                                                            XCTFail("Did not find the on screen TestCollectionReusableView header")
+                                                                                            return
+                }
+                XCTAssertEqual(onScreenHeader.label, $2)
+                XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath))
             }
-            XCTAssertEqual(onScreenHeader.label, $2)
-            XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath))
         }
     }
 
     func testFooterViews() {
         parameterize(cases:
             (section: 0, expectedAccessibilityIdentifier: "access_footer+0", expectedLabel: "label_footer+A", expectedIdentifier: "reuse_footer+A"),
-            // If footer view info is not explicitly provided for a section, a hidden footer is generated
-            // The hidden footer can have non-zero height if a height is specified in the view model
-            (1, nil as String?, nil as String?, "hidden-supplementary-view"),
-            (2, nil, nil, "hidden-supplementary-view"),
+            (1, nil, nil, nil),
+            (2, nil, nil, nil),
             (3, "access_footer+3", "label_footer+D", "reuse_footer+D"),
-            (9, nil, nil, "hidden-supplementary-view")) {
+            (9, nil, nil, nil)) {
             let indexPath = path($0)
 
             // Test that footers are generated with the correct identifiers and have the correct labels and accessibilityIdentifiers,
@@ -154,15 +147,17 @@ final class CollectionViewDriverTests: XCTestCase {
             XCTAssertEqual(footer?.label, $2)
             XCTAssertEqual(footer?.identifier, $3)
 
-            // Test that the footer is marked as on screen
+            if footer != nil {
+                // Test that the footer is marked as on screen
                 guard let onScreenFooter = self._collectionViewDataSource.collectionView(self._collectionView,
                                                                                          viewForSupplementaryElementOfKind: UICollectionElementKindSectionFooter,
                                                                                          at: indexPath) as? TestCollectionReusableView else {
-                XCTFail("Did not find the on screen TestCollectionReusableView header")
-                return
+                                                                                            XCTFail("Did not find the on screen TestCollectionReusableView header")
+                                                                                            return
+                }
+                XCTAssertEqual(onScreenFooter.label, $2)
+                XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath))
             }
-            XCTAssertEqual(onScreenFooter.label, $2)
-            XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath))
         }
     }
 
