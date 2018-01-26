@@ -129,12 +129,11 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     }
 
     private func _collectionViewModelDidChange() {
-        self._registerSupplementaryViews()
-
         guard let newModel = self.collectionViewModel else {
             self.refreshViews()
             return
         }
+        self.collectionView.registerViews(for: newModel)
 
         if self.automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
@@ -235,27 +234,6 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     }
 
     // MARK: Private helper methods
-
-    private func _registerSupplementaryViews() {
-        self.collectionViewModel?.sectionModels.forEach {
-            if let header = $0.headerViewModel?.viewInfo {
-                switch header.registrationMethod {
-                case let .nib(name, bundle):
-                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: header.kind.collectionElementKind, withReuseIdentifier: header.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    collectionView.register(viewClass, forSupplementaryViewOfKind: header.kind.collectionElementKind, withReuseIdentifier: header.reuseIdentifier)
-                }
-            }
-            if let footer = $0.footerViewModel?.viewInfo {
-                switch footer.registrationMethod {
-                case let .nib(name, bundle):
-                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: footer.kind.collectionElementKind, withReuseIdentifier: footer.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    collectionView.register(viewClass, forSupplementaryViewOfKind: footer.kind.collectionElementKind, withReuseIdentifier: footer.reuseIdentifier)
-                }
-            }
-        }
-    }
 
     private func _sizeForSupplementaryViewOfKind(_ elementKind: SupplementaryViewKind, inSection section: Int, collectionViewLayout: UICollectionViewLayout) -> CGSize {
         guard let sectionModel = self.collectionViewModel?[section] else { return CGSize.zero }
