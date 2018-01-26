@@ -124,7 +124,6 @@ public struct CollectionViewSectionViewModel {
 // MARK: Initializers without header/footer view models
 
 extension CollectionViewSectionViewModel {
-
     public init(
         cellViewModels: [CollectionViewCellViewModel]?,
         headerHeight: CGFloat? = nil,

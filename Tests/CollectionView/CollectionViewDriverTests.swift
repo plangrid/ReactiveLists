@@ -166,12 +166,6 @@ final class CollectionViewDriverTests: XCTestCase {
         }
     }
 
-    func testNonExistingCollectionViewItems() {
-        parameterize(cases: path(0, 0), path(1, 9), path(9, 0)) {
-            XCTAssertNil(self._getItem($0))
-        }
-    }
-
     func testExistingCollectionViewItem() {
         let indexPath = path(1, 2)
         let cell = self._getItem(indexPath)
