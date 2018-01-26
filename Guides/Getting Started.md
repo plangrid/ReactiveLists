@@ -30,8 +30,8 @@ To get set up, you first need to add a `Driver` (either a `TableViewDriver` or `
 
 ```swift
 struct Person {
-  name: String
-  uuid = UUID()
+  let name: String
+  let uuid = UUID()
 }
 
 final class PersonViewController: UITableViewController {
@@ -40,6 +40,13 @@ final class PersonViewController: UITableViewController {
                   .
                   .
                   .
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Initialize our `TableViewDriver` with our tableView
+        self.tableViewDriver = TableViewDriver(tableView: self.tableView)
+        // Register any cell types we will use with their reuse identifiers
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PersonUserCell")
+    }
 }
 ```
 
@@ -78,16 +85,19 @@ Okay now lets go back and fill in our `viewModel(forState:)` function:
 
 ```swift
 /// Given a new set of [Person], generates the `TableViewModel` representing that new data
-static func viewModel(forState people: [Person]) -> TableViewModel {
-        let personCellViewModels = people.map { PersonCellModel(person: $0) }
-        let section = return TableViewSectionViewModel(
-          headerTitle: "People",
-          headerHeight: 44,
-          cellViewModels: personCellViewModels,
-          diffingKey: "People" // a unique string for automatically diffing
-        )
-    return TableViewModel(sectionModels: [section])
+extension PersonViewController {
+    static func viewModel(forState people: [Person]) -> TableViewModel {
+            let personCellViewModels = people.map { PersonCellModel(person: $0) }
+            let section = TableViewSectionViewModel(
+              headerTitle: "People",
+              headerHeight: 44,
+              cellViewModels: personCellViewModels,
+              diffingKey: "People" // a unique string for automatically diffing
+            )
+        return TableViewModel(sectionModels: [section])
+    }
 }
+
 ```
 
 This is now called whenever we get an update to our `people` variable.  This function takes the latest
@@ -100,7 +110,6 @@ Now all we have to do is to define `PersonCellModel`:
 struct PersonCellModel: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = "PersonUserCell"
     let cellIdentifier = "PersonUserCell"
-    let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete
     let person: Person
 
@@ -109,7 +118,7 @@ struct PersonCellModel: TableViewCellViewModel, DiffableViewModel {
     }
 
     func applyViewModelToCell(_ cell: UITableViewCell) {
-        cell.textLabel?.text = "\(self.person.name)""
+        cell.textLabel?.text = "\(self.person.name)"
     }
 
     // If we want the library to automatically reload when new data is available
