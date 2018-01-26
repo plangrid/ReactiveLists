@@ -157,12 +157,12 @@ open class TableViewDriver: NSObject {
     // MARK: Private
 
     private func _tableViewModelDidChange() {
-        self._registerHeaderFooterViews()
-
         guard let newModel = self.tableViewModel else {
             self.refreshViews()
             return
         }
+
+        self.tableView.registerViews(for: newModel)
 
         if self.automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
@@ -191,27 +191,6 @@ open class TableViewDriver: NSObject {
             }
         } else {
             self.refreshViews()
-        }
-    }
-
-    private func _registerHeaderFooterViews() {
-        self.tableViewModel?.sectionModels.forEach {
-            if let header = $0.headerViewModel?.viewInfo {
-                switch header.registrationMethod {
-                case let .nib(name, bundle):
-                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
-                }
-            }
-            if let footer = $0.footerViewModel?.viewInfo {
-                switch footer.registrationMethod {
-                case let .nib(name, bundle):
-                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
-                }
-            }
         }
     }
 

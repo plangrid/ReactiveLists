@@ -36,6 +36,8 @@
 		258E31D41F0D8F3100D6F324 /* SupplementaryViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */; };
 		25B1B0B920195F1C0036545F /* CollectionViewDriverDiffingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B1B0B720195F160036545F /* CollectionViewDriverDiffingTests.swift */; };
 		25B1B0BA201A53CF0036545F /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32124A712019312200EE12FC /* Typealiases.swift */; };
+		32753F8D201BB8310084DCB1 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32753F8C201BB8310084DCB1 /* UICollectionView+Extensions.swift */; };
+		32753F8F201BB8470084DCB1 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32753F8E201BB8470084DCB1 /* UITableView+Extensions.swift */; };
 		32E7A1F8201BADE800B90EBC /* ViewRegistrationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7A1F7201BADE800B90EBC /* ViewRegistrationMethod.swift */; };
 		351B0BB920168E2E0034569D /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB420168D2E0034569D /* CollectionViewCells.swift */; };
 		351B0BBA20168E2E0034569D /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B0BB320168D2E0034569D /* CollectionViewController.swift */; };
@@ -115,6 +117,8 @@
 		276442FEC917A7E0F32CE5B4 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig"; sourceTree = "<group>"; };
 		2F35530D29268B112F99A187 /* Pods_ReactiveLists_ReactiveListsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveLists_ReactiveListsExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32124A712019312200EE12FC /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		32753F8C201BB8310084DCB1 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		32753F8E201BB8470084DCB1 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		32E7A1F7201BADE800B90EBC /* ViewRegistrationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRegistrationMethod.swift; sourceTree = "<group>"; };
 		351B0BB320168D2E0034569D /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		351B0BB420168D2E0034569D /* CollectionViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 				258E31AE1F0D8D9C00D6F324 /* TableViewDriver.swift */,
 				258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */,
 				32124A712019312200EE12FC /* Typealiases.swift */,
+				32753F8C201BB8310084DCB1 /* UICollectionView+Extensions.swift */,
+				32753F8E201BB8470084DCB1 /* UITableView+Extensions.swift */,
 				32E7A1F7201BADE800B90EBC /* ViewRegistrationMethod.swift */,
 			);
 			path = Sources;
@@ -619,10 +625,12 @@
 			files = (
 				2541B73D1F29A13B002C3090 /* Diffing.swift in Sources */,
 				258E31B31F0D8D9C00D6F324 /* TableViewDriver.swift in Sources */,
+				32753F8D201BB8310084DCB1 /* UICollectionView+Extensions.swift in Sources */,
 				32E7A1F8201BADE800B90EBC /* ViewRegistrationMethod.swift in Sources */,
 				258E31B11F0D8D9C00D6F324 /* CollectionViewDriver.swift in Sources */,
 				258E31B41F0D8D9C00D6F324 /* TableViewModel.swift in Sources */,
 				258E31D31F0D8F3100D6F324 /* AccessibilityFormats.swift in Sources */,
+				32753F8F201BB8470084DCB1 /* UITableView+Extensions.swift in Sources */,
 				258E31D41F0D8F3100D6F324 /* SupplementaryViewInfo.swift in Sources */,
 				258E31B21F0D8D9C00D6F324 /* CollectionViewModel.swift in Sources */,
 				25B1B0BA201A53CF0036545F /* Typealiases.swift in Sources */,
