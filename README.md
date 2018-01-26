@@ -18,32 +18,6 @@ For long-term goals and direction, please see [`VISION.md`](https://github.com/p
 
 Please see our [Getting Started](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md) guide to learn how to use ReactiveLists
 
-
-#### `SectionModel`
-
-This is the type that describes a given section within your `UITableView` or `UICollectionView`.
-
-#### `CellViewModel`
-
-This is the type that describes the data that to configure a given cell in your `UITableView` or
-`UICollectionView`.
-
-
-#### `ViewModel`
-
-`TableViewModel` and `CollectionViewModel` are types that describe what your `UITableView` or `UICollectionView`
-should look like.  You initialize such a `ViewModel` with a set of `SectionModel`s, which
-in turn are initialized with a set of `CellViewModel`s.  After doing this, your `ViewModel`
-contains all the data required to render your `UITableView` or `UICollectionView`
-
-#### `Driver`
-
-`TableViewDriver` and `CollectionViewDriver` are responsible for calling all the methods to update your view
-when new data is available.  You initialize your `Driver` with a `UITableView` or `UICollectionView` and then
-as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`  From there the `Driver` will figure out the differences in the data and re-render your
-`UITableView` or `UICollectionView` automatically for you.
-
-
 ## Installation
 
 ### [Cocoapods](https://cocoapods.org/) (recommended)

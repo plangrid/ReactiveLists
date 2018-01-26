@@ -1,7 +1,30 @@
 # Getting Started
 
 ReactiveLists provides a React-like API for `UITableView` and `UICollectionView`.  This goal is to provide a more
-declarative interface on top of your normal list and collection code.  To get started with ReactiveLists, we encourage you to play around with the examples included in the repository, but here we will also discuss the main components of the library.
+declarative interface on top of your normal table and collection code.  To get started with ReactiveLists, we encourage you to play around with the examples included in the repository.
+
+### Primary Components
+
+#### `*SectionViewModel`
+
+This is either a `CollectionViewSectionViewModel` or a `TableViewSectionViewModel`.  This type describes
+the title and contents of a given section within your `UICollectionView` or `UITableView`
+
+#### `*CellViewModel`
+
+This is type you make that conforms to either `CollectionViewCellViewModel` or `TableViewCellViewModel`.  This is the type that describes the data that is used to configure a given cell in your `UITableView` or `UICollectionView`.
+
+
+#### `*ViewModel`
+
+This is either a `TableViewModel` or a `CollectionViewModel`. These are types that describe what your `UITableView` or `UICollectionView` should look like.  You initialize such a `ViewModel` with a set of `SectionModel`s, which
+in turn are initialized with a set of `CellViewModel`s.  After doing this, your `ViewModel`
+contains all the data required to render your `UITableView` or `UICollectionView`
+
+#### `*ViewDriver`
+
+This is either a `TableViewDriver` or a `CollectionViewDriver`.  These types are responsible for calling all the methods to update your view when new data is available.  You initialize your `Driver` with a `UITableView` or `UICollectionView` and then
+as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`  From there the `Driver` will figure out the differences in the data and re-render your `UITableView` or `UICollectionView` automatically for you.
 
 To get set up, you first need to add a `Driver` (either a `TableViewDriver` or `CollectionViewDriver`) to your view controller.
 
@@ -100,29 +123,3 @@ mapped onto a `UITableViewCell` or `UICollectionViewCell`.  In this case we are 
 
 And there you have it!  You now have an automatically refreshing table view which you defined in a clear
 declarative manner.
-
-
-### Glossary of types
-
-
-
-#### `*SectionViewModel`
-
-This is either a `CollectionViewSectionViewModel` or a `TableViewSectionViewModel`.  This type describes
-the title and contents of a given section within your `UICollectionView` or `UITableView`
-
-#### `*CellViewModel`
-
-This is type you make that conforms to either `CollectionViewCellViewModel` or `TableViewCellViewModel`.  This is the type that describes the data that is used to configure a given cell in your `UITableView` or `UICollectionView`.
-
-
-#### `*ViewModel`
-
-This is either a `TableViewModel` or a `CollectionViewModel`. These are types that describe what your `UITableView` or `UICollectionView` should look like.  You initialize such a `ViewModel` with a set of `SectionModel`s, which
-in turn are initialized with a set of `CellViewModel`s.  After doing this, your `ViewModel`
-contains all the data required to render your `UITableView` or `UICollectionView`
-
-#### `*ViewDriver`
-
-This is either a `TableViewDriver` or a `CollectionViewDriver`.  These types are responsible for calling all the methods to update your view when new data is available.  You initialize your `Driver` with a `UITableView` or `UICollectionView` and then
-as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`  From there the `Driver` will figure out the differences in the data and re-render your `UITableView` or `UICollectionView` automatically for you.
