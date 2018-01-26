@@ -149,11 +149,9 @@ final class TableViewDriverTests: XCTestCase {
 
         var header0 = dataSource?._getHeader(0)
         var footer0 = dataSource?._getFooter(0)
-        var cell00 = dataSource?._getCell(path(0, 0))
 
         XCTAssertEqual(header0?.label, "title_header+A")
         XCTAssertEqual(footer0?.label, "title_footer+A")
-        XCTAssertNil(cell00?.label)
 
         var header1 = dataSource?._getHeader(1)
         var footer1 = dataSource?._getFooter(1)
@@ -168,7 +166,7 @@ final class TableViewDriverTests: XCTestCase {
 
         header0 = dataSource?._getHeader(0)
         footer0 = dataSource?._getFooter(0)
-        cell00 = dataSource?._getCell(path(0, 0))
+        let cell00 = dataSource?._getCell(path(0, 0))
 
         XCTAssertEqual(header0?.label, "title_header+X")
         XCTAssertEqual(footer0?.label, "title_footer+X")

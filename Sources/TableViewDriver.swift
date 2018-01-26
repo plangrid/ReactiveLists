@@ -232,8 +232,8 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellViewModel = self.tableViewModel?[indexPath] else { return UITableViewCell() }
-
+        assert(self.tableViewModel != nil, "Table View Model has an invalid configuration")
+        let cellViewModel = self.tableViewModel![indexPath]!
         let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
         cellViewModel.applyViewModelToCell(cell)
         cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
