@@ -57,7 +57,6 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     private var _shouldDeselectUponSelection: Bool
     private var _collectionViewDiffer: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
     private var _didReceiveFirstNonNilValue = false
-    private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
 
     /// Initializes a data source that drives a `UICollectionView` based on a `CollectionViewModel`.
     ///
@@ -131,7 +130,6 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
 
     private func _collectionViewModelDidChange() {
         self._registerSupplementaryViews()
-        self._registerHiddenSupplementaryViews()
 
         guard let newModel = self.collectionViewModel else {
             self.refreshViews()
@@ -197,7 +195,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
             viewModel.applyViewModelToView(view)
             view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
         } else {
-            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewDriver._hiddenSupplementaryViewIdentifier, for: indexPath)
+            view = UICollectionReusableView()
         }
         return view
     }
@@ -247,16 +245,6 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
                     collectionView.register(viewClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footer.reuseIdentifier)
                 }
             }
-        }
-    }
-
-    private func _registerHiddenSupplementaryViews() {
-        // A blank header/footer view class must be registered because `viewForSupplementaryElementOfKind` returns
-        // a non-optional view and yet the `collectionViewModel` may not specify some headers and footers
-        [UICollectionElementKindSectionHeader, UICollectionElementKindSectionFooter].forEach {
-            collectionView.register(UICollectionReusableView.self,
-                                     forSupplementaryViewOfKind: $0,
-                                     withReuseIdentifier: CollectionViewDriver._hiddenSupplementaryViewIdentifier)
         }
     }
 
