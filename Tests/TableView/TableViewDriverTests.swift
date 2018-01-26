@@ -35,17 +35,17 @@ final class TableViewDriverTests: XCTestCase {
     /// the content described in the `TableViewModel`.
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: nil,
                 headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "A"),
                 footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A"),
                 collapsed: false),
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: ["A", "B", "C"].map { _generateTestCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21),
                 collapsed: false),
-            TableViewModel.SectionModel(
+             TableViewSectionViewModel(
                 cellViewModels: ["D", "E", "F"].map { _generateTestCellViewModel($0) },
                 headerViewModel: TestHeaderFooterViewModel(title: "header_3", height: 30),
                 footerViewModel: nil,
@@ -289,11 +289,11 @@ private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
 
 private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
     return TableViewModel(sectionModels: [
-        TableViewModel.SectionModel(
+        TableViewSectionViewModel(
             cellViewModels: [_generateTestCellViewModel("X")],
             headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "X"),
             footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "X")),
-        TableViewModel.SectionModel(
+        TableViewSectionViewModel(
             cellViewModels: ["Y", "Z"].map { _generateTestCellViewModel($0) },
             headerViewModel: TestHeaderFooterViewModel(height: 20, viewKind: .header, label: "Y"),
             footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),

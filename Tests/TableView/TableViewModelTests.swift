@@ -24,11 +24,11 @@ final class TableViewModelTests: XCTestCase {
     /// model returns `nil`.
     func testSubscripts() {
         let tableViewModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 headerTitle: "section_1",
                 headerHeight: 42,
                 cellViewModels: nil),
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 headerTitle: "section_2",
                 headerHeight: 43,
                 cellViewModels: [
@@ -56,7 +56,7 @@ final class TableViewModelTests: XCTestCase {
         XCTAssertTrue(tableViewModel1.isEmpty)
 
         let tableViewModel2 = TableViewModel(
-            sectionModels: [TableViewModel.SectionModel(
+            sectionModels: [TableViewSectionViewModel(
                 cellViewModels: []
             )]
         )
@@ -68,7 +68,7 @@ final class TableViewModelTests: XCTestCase {
     /// Table view sections can be successfully initialized
     /// using a plain section header.
     func testPlainHeaderFooterSectionModelInitalizer() {
-        let sectionModel = TableViewModel.SectionModel(
+        let sectionModel = TableViewSectionViewModel(
             headerTitle: "foo",
             headerHeight: 42,
             cellViewModels: [generateTestCellViewModel()],
@@ -89,7 +89,7 @@ final class TableViewModelTests: XCTestCase {
     /// Table view sections can be successfully initialized
     /// using a custom section header type.
     func testCustomHeaderFooterSectionModelInitalizer() {
-        let sectionModel = TableViewModel.SectionModel(
+        let sectionModel = TableViewSectionViewModel(
             cellViewModels: [generateTestCellViewModel()],
             headerViewModel: TestHeaderFooterViewModel(height: 42, viewKind: .header, label: "A"),
             footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"),

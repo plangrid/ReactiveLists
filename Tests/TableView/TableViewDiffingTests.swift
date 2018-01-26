@@ -66,11 +66,11 @@ final class TableViewDiffingTests: XCTestCase {
     ///   extensive tests for the various diffing scenarios.
     func testChangingSections() {
         let initialModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [],
                 diffingKey: "1"
             ),
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [],
                 diffingKey: "2"
             ),
@@ -79,7 +79,7 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = initialModel
 
         let updatedModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [],
                 diffingKey: "2"
             ),
