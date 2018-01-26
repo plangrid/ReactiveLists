@@ -33,17 +33,11 @@ struct TestCollectionCellViewModel: CollectionViewCellViewModel {
 }
 
 struct TestCollectionViewSupplementaryViewModel: CollectionViewSupplementaryViewModel {
-    let label: String?
-    let height: CGFloat?
-    let viewInfo: SupplementaryViewInfo?
+    let label: String
+    let height: CGFloat
+    let viewInfo: SupplementaryViewInfo
 
-    init(label: String?, height: CGFloat?, viewInfo: SupplementaryViewInfo? = nil) {
-        self.label = label
-        self.height = height
-        self.viewInfo = viewInfo
-    }
-
-    init(height: CGFloat?, viewKind: SupplementaryViewKind = .header, sectionLabel: String) {
+    init(height: CGFloat, viewKind: SupplementaryViewKind = .header, sectionLabel: String) {
         let kindString = viewKind == .header ? "header" : "footer"
         self.label = "label_\(kindString)+\(sectionLabel)" // e.g. title_header+A
         self.height = height

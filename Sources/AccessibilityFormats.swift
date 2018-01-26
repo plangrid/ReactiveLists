@@ -44,7 +44,7 @@ public struct CellAccessibilityFormat: ExpressibleByStringLiteral {
 }
 
 /// Wrapper `struct` for the `accessibilityIdentifier` format that should be applied to the headers and footers of a `UITableView` or a `UICollectionView`
-public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral {
+public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral, CustomStringConvertible {
     private let _format: String
 
     public init(_ format: String) {
@@ -65,5 +65,9 @@ public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral {
 
     public func accessibilityIdentifierForSection(_ section: Int) -> String {
         return self._format.replacingOccurrences(of: "%{section}", with: String(section))
+    }
+
+    public var description: String {
+        return self._format
     }
 }

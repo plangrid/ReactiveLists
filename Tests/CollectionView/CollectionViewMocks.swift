@@ -29,16 +29,8 @@ class TestCollectionView: UICollectionView {
         return TestCollectionViewCell(identifier: identifier)
     }
 
-    override func dequeueReusableSupplementaryView(ofKind elementKind: String, withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionReusableView {
-        return TestCollectionReusableView(identifier: identifier)
-    }
-
     override func register(_ viewClass: AnyClass?, forSupplementaryViewOfKind elementKind: String, withReuseIdentifier identifier: String) {
-        if let viewClass = viewClass {
-            self.callsToRegisterClass.append((viewClass, SupplementaryViewKind(collectionElementKindString: elementKind), identifier))
-        } else {
-            self.callsToRegisterClass.append(nil)
-        }
+        self.callsToRegisterClass.append((viewClass!, SupplementaryViewKind(collectionElementKindString: elementKind), identifier))
     }
 
     override func deselectItem(at indexPath: IndexPath, animated: Bool) {

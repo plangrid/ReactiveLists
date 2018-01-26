@@ -55,4 +55,11 @@ public enum SupplementaryViewKind {
             return nil
         }
     }
+
+    var collectionViewKind: String {
+        switch self {
+        case .header: return UICollectionElementKindSectionHeader
+        case .footer: return UICollectionElementKindSectionFooter
+        }
+    }
 }

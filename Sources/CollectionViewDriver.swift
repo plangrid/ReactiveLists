@@ -185,13 +185,12 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let section = indexPath.section
         let elementKind = SupplementaryViewKind(collectionElementKindString: kind)
-        let view: UICollectionReusableView
 
         if let elementKind = elementKind,
             let sectionModel = self.collectionViewModel?[section],
             let viewModel = elementKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.reuseIdentifier {
-            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
             viewModel.applyViewModelToView(view)
             view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
             return view
@@ -236,17 +235,17 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
             if let header = $0.headerViewModel?.viewInfo {
                 switch header.registrationMethod {
                 case let .nib(name, bundle):
-                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: header.reuseIdentifier)
+                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: header.kind.collectionViewKind, withReuseIdentifier: header.reuseIdentifier)
                 case let .viewClass(viewClass):
-                    collectionView.register(viewClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: header.reuseIdentifier)
+                    collectionView.register(viewClass, forSupplementaryViewOfKind: header.kind.collectionViewKind, withReuseIdentifier: header.reuseIdentifier)
                 }
             }
             if let footer = $0.footerViewModel?.viewInfo {
                 switch footer.registrationMethod {
                 case let .nib(name, bundle):
-                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footer.reuseIdentifier)
+                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: footer.kind.collectionViewKind, withReuseIdentifier: footer.reuseIdentifier)
                 case let .viewClass(viewClass):
-                    collectionView.register(viewClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footer.reuseIdentifier)
+                    collectionView.register(viewClass, forSupplementaryViewOfKind: footer.kind.collectionViewKind, withReuseIdentifier: footer.reuseIdentifier)
                 }
             }
         }
