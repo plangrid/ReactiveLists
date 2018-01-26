@@ -48,7 +48,7 @@ struct TestCollectionViewSupplementaryViewModel: CollectionViewSupplementaryView
         self.label = "label_\(kindString)+\(sectionLabel)" // e.g. title_header+A
         self.height = height
         self.viewInfo = SupplementaryViewInfo(
-            registrationMethod: .viewClass(viewKind == .header ? HeaderView.self : FooterView.self),
+            registrationMethod: .fromClass(viewKind == .header ? HeaderView.self : FooterView.self),
             reuseIdentifier: "reuse_\(kindString)+\(sectionLabel)", // e.g. reuse_header+A
             kind: viewKind,
             accessibilityFormat: SupplementaryAccessibilityFormat("access_\(kindString)+%{section}")) // e.g. access_header+%{section}

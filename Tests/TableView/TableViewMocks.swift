@@ -81,7 +81,7 @@ extension TableViewDriver {
 
 class MockCellViewModel: TableViewCellViewModel {
     var accessibilityFormat: CellAccessibilityFormat = "_"
-    var cellIdentifier = "_"
+    let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
     func applyViewModelToCell(_ cell: UITableViewCell) { }
 
     var didSelect: DidSelectClosure?

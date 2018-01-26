@@ -261,7 +261,7 @@ final class TableViewDriverTests: XCTestCase {
     func testTableViewCellViewModelDefaults() {
         struct DefaultCellViewModel: TableViewCellViewModel {
             var accessibilityFormat: CellAccessibilityFormat = "_"
-            var cellIdentifier: String = "_"
+            let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
             func applyViewModelToCell(_ cell: UITableViewCell) { }
         }
 
@@ -282,7 +282,7 @@ final class TableViewDriverTests: XCTestCase {
 // MARK: Test data generation
 
 private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
-    return TestCellViewModel(label: label)
+    return TestCellViewModel(label: label, registrationInfo: ViewRegistrationInfo(classType: UITableViewCell.self))
 }
 
 private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {

@@ -36,9 +36,7 @@ final class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.tableViewDriver = TableViewDriver(tableView: self.tableView)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableUserCell")
 
         self.groups = [
             ToolGroup(
