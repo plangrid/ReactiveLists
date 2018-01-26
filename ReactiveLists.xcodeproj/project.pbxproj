@@ -173,17 +173,17 @@
 			isa = PBXGroup;
 			children = (
 				2576640D1F29075C00C037E3 /* AppDelegate.swift */,
-				257664161F29075C00C037E3 /* LaunchScreen.storyboard */,
-				257664111F29075C00C037E3 /* Main.storyboard */,
 				257664141F29075C00C037E3 /* Assets.xcassets */,
-				2541B7311F298A69002C3090 /* Models.swift */,
+				357B96D9201934C50000443F /* CollectionToolCell.xib */,
 				351B0BB420168D2E0034569D /* CollectionViewCells.swift */,
 				351B0BB320168D2E0034569D /* CollectionViewController.swift */,
-				357B96D9201934C50000443F /* CollectionToolCell.xib */,
 				357B96E8201956760000443F /* CollectionViewHeaderView.xib */,
+				257664191F29075C00C037E3 /* Info.plist */,
+				257664161F29075C00C037E3 /* LaunchScreen.storyboard */,
+				257664111F29075C00C037E3 /* Main.storyboard */,
+				2541B7311F298A69002C3090 /* Models.swift */,
 				257664221F2907FE00C037E3 /* TableViewCells.swift */,
 				2576641E1F2907DB00C037E3 /* TableViewController.swift */,
-				257664191F29075C00C037E3 /* Info.plist */,
 			);
 			path = Example;
 			sourceTree = "<group>";
