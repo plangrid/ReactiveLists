@@ -233,7 +233,7 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[indexPath] else {
-            fatalError("Table View Model has an invalid configuration")
+            fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
         cellViewModel.applyViewModelToCell(cell)
