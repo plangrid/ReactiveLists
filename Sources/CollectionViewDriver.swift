@@ -166,22 +166,27 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
 
     // MARK: UICollectionViewDataSource / UICollectionViewDelegate implementation
 
+    /// :nodoc:
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.collectionViewModel?.sectionModels.count ?? 0
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.collectionViewModel?[section]?.cellViewModels?.count ?? 0
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return self._sizeForSupplementaryViewOfKind(.header, inSection: section, collectionViewLayout: collectionViewLayout)
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return self._sizeForSupplementaryViewOfKind(.footer, inSection: section, collectionViewLayout: collectionViewLayout)
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let section = indexPath.section
         let elementKind = SupplementaryViewKind(collectionElementKindString: kind)
@@ -200,6 +205,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         return view
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let collectionViewModel = self.collectionViewModel, let cellViewModel = collectionViewModel[indexPath] else {
             fatalError("Collection View Model has an invalid configuration: \(String(describing: self.collectionViewModel))")
@@ -210,10 +216,12 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         return cell
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return self.collectionViewModel?[indexPath]?.shouldHighlight ?? true
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self._shouldDeselectUponSelection {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -221,6 +229,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         self.collectionViewModel?[indexPath]?.didSelect?()
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         self.collectionViewModel?[indexPath]?.didDeselect?()
     }

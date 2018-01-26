@@ -17,7 +17,7 @@
 import Dwifft
 import UIKit
 
-/// View models for the individual cells of a `TableViewModel`.
+/// View model for the individual cells of a `TableViewModel`.
 public protocol TableViewCellViewModel {
 
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
@@ -75,14 +75,24 @@ public extension TableViewCellViewModel {
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
 }
 
+/// Protocol that needs to be implemented by table view cell view models
+/// that want to provide edit actions.
 public protocol TableViewCellModelEditActions {
-    func editActions(_ indexPath: IndexPath) -> [UITableViewRowAction]
+    var editActions: [UITableViewRowAction] { get }
 }
 
+/// Protocol that needs to be implemented by custom header
+/// footer view models.
 public protocol TableViewSectionHeaderFooterViewModel {
+    /// The title of the header
     var title: String? { get }
+    /// The height of the header
     var height: CGFloat? { get }
+    /// Metadata about the custom view type
     var viewInfo: SupplementaryViewInfo? { get }
+    /// Asks the view model to update the header/footer
+    /// view with the content in the model.
+    /// - Parameter view: the header/footer view
     func applyViewModelToView(_ view: UIView)
 }
 
@@ -123,7 +133,7 @@ public struct TableViewSectionViewModel {
         footerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
         collapsed: Bool = false,
         diffingKey: String? = nil
-        ) {
+    ) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
@@ -146,19 +156,9 @@ public struct TableViewSectionViewModel {
     }
 }
 
-// MARK: Private
-
-private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
-    let title: String?
-    let height: CGFloat?
-    let viewInfo: SupplementaryViewInfo? = nil
-
-    func applyViewModelToView(_ view: UIView) {}
-}
-
+/// The view model that describes a `UITableView`.
 public struct TableViewModel {
-
-    /// The secion index titles for this table view.
+    /// The section index titles for this table view.
     public let sectionIndexTitles: [String]?
 
     /// The section view models for this table view.
@@ -185,8 +185,8 @@ public struct TableViewModel {
     /// Optionally accepts the `sectionIndexTitles` for this table view.
     ///
     /// - Parameters:
-    ///   - sectionModels: the sections that need to be shown in this table.
-    ///   - sectionIndexTitles: the section index titles for this table.
+    ///   - sectionModels: the sections that need to be shown in this table view.
+    ///   - sectionIndexTitles: the section index titles for this table view.
     public init(sectionModels: [TableViewSectionViewModel], sectionIndexTitles: [String]? = nil) {
         if let sectionIndexTitles = sectionIndexTitles {
             assert(
@@ -206,7 +206,7 @@ public struct TableViewModel {
         return sectionModels[section]
     }
 
-    /// Returns the cell view model at the specified index path or `nil` if no such section exists.
+    /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
@@ -239,4 +239,15 @@ public struct TableViewModel {
             }
         )
     }
+}
+
+// MARK: Private
+
+/// View model for a default header or footer view in a table view.
+private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
+    let title: String?
+    let height: CGFloat?
+    let viewInfo: SupplementaryViewInfo? = nil
+
+    func applyViewModelToView(_ view: UIView) {}
 }
