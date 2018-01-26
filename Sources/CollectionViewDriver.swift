@@ -203,8 +203,9 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        assert(self.collectionViewModel != nil, "Collection View Model has an invalid configuration")
-        let cellViewModel = self.collectionViewModel![indexPath]!
+        guard let collectionViewModel = self.collectionViewModel, let cellViewModel = collectionViewModel[indexPath] else {
+            fatalError("Collection View Model has an invalid configuration")
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellViewModel.cellIdentifier, for: indexPath)
         cellViewModel.applyViewModelToCell(cell)
         cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
