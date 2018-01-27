@@ -123,7 +123,7 @@
         <section>
           <section class="section">
             
-            <p><img src="Resources/logo.png" alt=""></p>
+            <p><img src="https://raw.githubusercontent.com/plangrid/ReactiveLists/master/Resources/logo.png"/></p>
 
 <p><em>React-like API for <code>UITableView</code> &amp; <code>UICollectionView</code></em></p>
 
@@ -140,20 +140,20 @@
 </ul>
 <h2 id='real-world-example' class='heading'>Real-world example</h2>
 <pre class="highlight swift"><code><span class="c1">// Describes how model data maps to a `TableViewModel`</span>
-<span class="kd">func</span> <span class="nf">tableViewModelForState</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">AnnotationFilterState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nf">TableViewModel</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">shareStatusSection</span> <span class="o">=</span> <span class="nf">TableViewSectionViewModel</span><span class="p">(</span>
+<span class="kd">func</span> <span class="nf">tableViewModelForState</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">AnnotationFilterState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">TableViewModel</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">shareStatusSection</span> <span class="o">=</span> <span class="kt">TableViewSectionViewModel</span><span class="p">(</span>
         <span class="nv">headerTitle</span><span class="p">:</span> <span class="s">"Share Status"</span><span class="p">,</span>
         <span class="nv">headerHeight</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
         <span class="nv">cellViewModels</span><span class="p">:</span> <span class="nf">cellViewModelsForGroup</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">shareStatusFilters</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">let</span> <span class="nv">issueFilterSection</span> <span class="o">=</span> <span class="nf">TableViewSectionViewModel</span><span class="p">(</span>
+    <span class="k">let</span> <span class="nv">issueFilterSection</span> <span class="o">=</span> <span class="kt">TableViewSectionViewModel</span><span class="p">(</span>
         <span class="nv">headerTitle</span><span class="p">:</span> <span class="s">"Issue Filters"</span><span class="p">,</span>
         <span class="nv">headerHeight</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
         <span class="nv">cellViewModels</span><span class="p">:</span> <span class="nf">cellViewModelsForGroup</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">issueFilters</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">return</span> <span class="nf">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span>
+    <span class="k">return</span> <span class="kt">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span>
         <span class="n">shareStatusSection</span><span class="p">,</span>
         <span class="n">issueFilterSection</span>
     <span class="p">])</span>
@@ -163,13 +163,13 @@
 <span class="kd">static</span> <span class="kd">func</span> <span class="nf">cellViewModelsForGroup</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">group</span><span class="p">:</span> <span class="p">[</span><span class="kt">RepresentableAnnotationFilter</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">TableViewCellViewModel</span><span class="p">]</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">-&gt;</span> <span class="kt">TableViewCellViewModel</span><span class="p">?</span> <span class="k">in</span>
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">filter</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="nf">AnnotationTypeFilter</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nf">AnnotationTypeFilterCellViewModel</span><span class="p">(</span><span class="nv">filter</span><span class="p">:</span> <span class="n">filter</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">filter</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="nf">AnnotationFilterType</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nf">AnnotationFilterCellViewModel</span><span class="p">(</span><span class="nv">filter</span><span class="p">:</span> <span class="n">filter</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">filterGroup</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="nf">AnnotationFilterGroupType</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nf">AnnotationFilterGroupCellViewModel</span><span class="p">(</span><span class="nv">filterGroup</span><span class="p">:</span><span class="n">filterGroup</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">filter</span> <span class="k">in</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">filter</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="kt">AnnotationTypeFilter</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">AnnotationTypeFilterCellViewModel</span><span class="p">(</span><span class="nv">filter</span><span class="p">:</span> <span class="n">filter</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">filter</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="kt">AnnotationFilterType</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">AnnotationFilterCellViewModel</span><span class="p">(</span><span class="nv">filter</span><span class="p">:</span> <span class="n">filter</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">filterGroup</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="kt">AnnotationFilterGroupType</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">AnnotationFilterGroupCellViewModel</span><span class="p">(</span><span class="nv">filterGroup</span><span class="p">:</span><span class="n">filterGroup</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="kc">nil</span>
     <span class="p">}</span>
@@ -199,17 +199,13 @@
 </tr>
 </tbody></table>
 <h2 id='getting-started' class='heading'>Getting Started</h2>
-<pre class="highlight plaintext"><code>git clone https://github.com/plangrid/ReactiveLists/
-</code></pre>
 
-<ul>
-<li>Our <a href="https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md">Getting Started Guide</a></li>
-</ul>
+<p>Read our <a href="https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md">Getting Started Guide</a> to learn how to use <code>ReactiveLists</code>.</p>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
 <p>Read our <a href="https://plangrid.github.io/ReactiveLists">documentation here</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
 <h4 id='generating-docs' class='heading'>Generating docs</h4>
-<pre class="highlight shell"><code><span class="nv">$ </span>./scripts/gen_docs.sh
+<pre class="highlight shell"><code><span class="gp">$ </span>./scripts/gen_docs.sh
 </code></pre>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
@@ -218,9 +214,6 @@
 <li>Swift 4.0+</li>
 <li>iOS 9+</li>
 </ul>
-<h2 id='getting-started-guide' class='heading'>Getting Started Guide</h2>
-
-<p>Please see our <a href="https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md">Getting Started</a> guide to learn how to use ReactiveLists</p>
 <h2 id='installation' class='heading'>Installation</h2>
 <h3 id='a-href-https-cocoapods-org-cocoapods-a-recommended' class='heading'><a href="https://cocoapods.org/">Cocoapods</a> (recommended)</h3>
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
@@ -245,8 +238,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
