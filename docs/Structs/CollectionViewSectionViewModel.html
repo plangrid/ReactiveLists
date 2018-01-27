@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SupplementaryViewInfo Structure Reference</title>
+    <title>CollectionViewSectionViewModel Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/SupplementaryViewInfo" class="dashAnchor"></a>
-    <a title="SupplementaryViewInfo Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/CollectionViewSectionViewModel" class="dashAnchor"></a>
+    <a title="CollectionViewSectionViewModel Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">ReactiveLists Docs</a> (78% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ReactiveLists Reference</a>
         <img id="carat" src="../img/carat.png" />
-        SupplementaryViewInfo Structure Reference
+        CollectionViewSectionViewModel Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -123,14 +123,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>SupplementaryViewInfo</h1>
+            <h1>CollectionViewSectionViewModel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SupplementaryViewInfo</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionViewSectionViewModel</span></code></pre>
 
                 </div>
               </div>
-            <p>Metadata thats required for setting up a supplementary view.</p>
+            <p>View model for a collection view section.</p>
 
           </section>
           <section class="section task-group-section">
@@ -139,9 +139,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV18registrationMethodAA0d12RegistrationG0Ov"></a>
-                    <a name="//apple_ref/swift/Property/registrationMethod" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV18registrationMethodAA0d12RegistrationG0Ov">registrationMethod</a>
+                    <a name="/s:13ReactiveLists021CollectionViewSectionD5ModelV10diffingKeySSSgv"></a>
+                    <a name="//apple_ref/swift/Property/diffingKey" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists021CollectionViewSectionD5ModelV10diffingKeySSSgv">diffingKey</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -149,14 +149,21 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Stores how the view was registered (as a class or via a nib file)</p>
+                        <p>The key used by the diffing algorithm to uniquely identify this section.
+If you are using automatic diffing on the <code><a href="../Classes/CollectionViewDriver.html">CollectionViewDriver</a></code> (which is enabled by default)
+you are required to provide a key that uniquely identifies this section.</p>
+
+<p>Typically you want to base this diffing key on data that is stored in the model.
+For example:</p>
+<pre class="highlight swift"><code> <span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span><span class="o">.</span><span class="n">identifier</span> <span class="p">}</span>
+</code></pre>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">registrationMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -166,9 +173,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV15reuseIdentifierSSv"></a>
-                    <a name="//apple_ref/swift/Property/reuseIdentifier" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV15reuseIdentifierSSv">reuseIdentifier</a>
+                    <a name="/s:13ReactiveLists021CollectionViewSectionD5ModelVACSayAA0cd4CelldF0_pG04cellD6Models_AA0cd13SupplementarydF0_pSg06headerdF0AH06footerdF0SSSg10diffingKeytcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists021CollectionViewSectionD5ModelVACSayAA0cd4CelldF0_pG04cellD6Models_AA0cd13SupplementarydF0_pSg06headerdF0AH06footerdF0SSSg10diffingKeytcfc">init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,89 +183,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The reuse identifier for this supplementary view</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV4kindAA0cD4KindOv"></a>
-                    <a name="//apple_ref/swift/Property/kind" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV4kindAA0cD4KindOv">kind</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The kind of supplementary view (e.g. <code>header</code> or <code>footer</code>)</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV19accessibilityFormatAA0c13AccessibilityG0Vv"></a>
-                    <a name="//apple_ref/swift/Property/accessibilityFormat" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV19accessibilityFormatAA0c13AccessibilityG0Vv">accessibilityFormat</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p><code>TableViewDataSource</code> and <code>CollectionViewDataSource</code> will automatically apply
-an <code>accessibilityIdentifier</code> to the supplementary view based on this format.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">SupplementaryAccessibilityFormat</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoVAcA0D18RegistrationMethodO012registrationG0_SS15reuseIdentifierAA0cD4KindO4kindAA0C19AccessibilityFormatV013accessibilityN0tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(registrationMethod:reuseIdentifier:kind:accessibilityFormat:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoVAcA0D18RegistrationMethodO012registrationG0_SS15reuseIdentifierAA0cD4KindO4kindAA0C19AccessibilityFormatV013accessibilityN0tcfc">init(registrationMethod:reuseIdentifier:kind:accessibilityFormat:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Initializes the metadata for a supplementary view.</p>
+                        <p>Initializes a collection view section view model.</p>
 
                       </div>
                       <div class="declaration">
@@ -266,10 +191,10 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="nv">registrationMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a></span><span class="p">,</span>
-    <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a></span><span class="p">,</span>
-    <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">SupplementaryAccessibilityFormat</span>
+    <span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a></span><span class="p">],</span>
+    <span class="nv">headerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">footerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -281,49 +206,48 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                             <tr>
                               <td>
                                 <code>
-                                <em>registrationMethod</em>
+                                <em>cellViewModels</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>describes how the view was registered (as a class or via a nib file)</p>
+                                  <p>the cells in this section.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>reuseIdentifier</em>
+                                <em>headerViewModel</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>reuse identifier for this supplementary view</p>
+                                  <p>the header view model (defaults to <code>nil</code>).</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>kind</em>
+                                <em>footerViewModel</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>kind of supplementary view (e.g. <code>header</code> or <code>footer</code>)</p>
+                                  <p>the footer view model (defaults to <code>nil</code>).</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>accessibilityFormat</em>
+                                <em>diffingKey</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>a format string that generates an accessibility identifier for
-                 the view that will be mapped to this view model.</p>
+                                  <p>the diffing key, required for automated diffing.</p>
                                 </div>
                               </td>
                             </tr>

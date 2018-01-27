@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Getting Started  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">ReactiveLists Docs</a> (78% documented)</p>
+        <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">ReactiveLists Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Getting Started  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="getting-started.html">Getting Started</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="vision.html">VISION</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/CollectionViewDriver.html">CollectionViewDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/TableViewDriver.html">TableViewDriver</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/TableViewDriver/TableRefreshContext.html">– TableRefreshContext</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/SupplementaryViewKind.html">SupplementaryViewKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/DiffableViewModel.html">DiffableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/CollectionViewModel.html">CollectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TableViewModel.html">TableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:13ReactiveLists10DiffingKeya">DiffingKey</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='getting-started' class='heading'>Getting Started</h1>
+
+<p>ReactiveLists provides a React-like API for <code>UITableView</code> and <code>UICollectionView</code>.  The goal is to provide a more
+declarative interface on top of your normal table and collection code.  To get started with ReactiveLists, in addition to reading this document, we encourage you to play around with the examples included in the repository.</p>
+<h3 id='primary-components' class='heading'>Primary Components</h3>
+<h4 id='code-sectionviewmodel-code' class='heading'><code>*SectionViewModel</code></h4>
+
+<p>This is either a <code><a href="Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a></code> or a <code><a href="Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a></code>.  This type describes
+the title and contents of a given section within your <code>UICollectionView</code> or <code>UITableView</code></p>
+<h4 id='code-cellviewmodel-code' class='heading'><code>*CellViewModel</code></h4>
+
+<p>This either <code><a href="Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a></code> protocol or <code><a href="Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a></code> protocol.  You create types that conform to these protocols, which are used to configure a given cell in your <code>UITableView</code> or <code>UICollectionView</code>.</p>
+<h4 id='code-viewmodel-code' class='heading'><code>*ViewModel</code></h4>
+
+<p>This is either a <code><a href="Structs/TableViewModel.html">TableViewModel</a></code> or a <code><a href="Structs/CollectionViewModel.html">CollectionViewModel</a></code>. These are types that describe what your <code>UITableView</code> or <code>UICollectionView</code> should look like.  You initialize such a <code>ViewModel</code> with a set of <code>SectionModel</code>s, which
+in turn are initialized with a set of <code>CellViewModel</code>s.  After doing this, your <code>ViewModel</code>
+contains all the data required to render your <code>UITableView</code> or <code>UICollectionView</code></p>
+<h4 id='code-viewdriver-code' class='heading'><code>*ViewDriver</code></h4>
+
+<p>This is either a <code><a href="Classes/TableViewDriver.html">TableViewDriver</a></code> or a <code><a href="Classes/CollectionViewDriver.html">CollectionViewDriver</a></code>.  These types are responsible for calling all the methods to update your view when new data is available.  You initialize your <code>Driver</code> with a <code>UITableView</code> or <code>UICollectionView</code> and then
+as new data becomes available, you construct a new <code>ViewModel</code> and set the <code>Driver</code>&lsquo;s <code>tableViewModel</code> or <code>collectionViewModel</code> property to the new <code>ViewModel</code>.  From there the <code>Driver</code> will figure out the differences in the data and re-render your <code>UITableView</code> or <code>UICollectionView</code> automatically for you.</p>
+
+<p>To get set up, you first need to add a <code>Driver</code> (either a <code><a href="Classes/TableViewDriver.html">TableViewDriver</a></code> or <code><a href="Classes/CollectionViewDriver.html">CollectionViewDriver</a></code>) to your view controller:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="nf">Person</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+  <span class="k">let</span> <span class="nv">uuid</span> <span class="o">=</span> <span class="nf">UUID</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">final</span> <span class="kd">class</span> <span class="kt">PersonViewController</span><span class="p">:</span> <span class="nf">UITableViewController</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">]</span>
+    <span class="k">var</span> <span class="nv">tableViewDriver</span><span class="p">:</span> <span class="kt">TableViewDriver</span><span class="p">?</span>
+                  <span class="o">.</span>
+                  <span class="o">.</span>
+                  <span class="o">.</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+        <span class="c1">// Initialize our `TableViewDriver` with our tableView</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">tableViewDriver</span> <span class="o">=</span> <span class="nf">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">)</span>
+        <span class="c1">// Register any cell types we will use with their reuse identifiers</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">UITableViewCell</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">forCellReuseIdentifier</span><span class="p">:</span> <span class="s">"PersonUserCell"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p><code>tableViewDriver</code> will be responsible for updating your view when new data is available.</p>
+
+<p>Next, you&rsquo;ll need to bind your new data to the <code>Driver</code> as it comes in.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">newTableViewModel</span><span class="p">:</span> <span class="kt">TableViewModel</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">self</span><span class="o">.</span><span class="n">tableViewDriver</span><span class="p">?</span><span class="o">.</span><span class="n">tableViewModel</span> <span class="o">=</span> <span class="n">newTableViewModel</span>
+</code></pre>
+
+<p>Great!  But how do you make that <code><a href="Structs/TableViewModel.html">TableViewModel</a></code>?  We recommend having a static function that
+takes in new data and generates the <code><a href="Structs/TableViewModel.html">TableViewModel</a></code>.  It might look something like this:</p>
+<pre class="highlight swift"><code><span class="c1">/// Given a new set of [Person], generates the `TableViewModel` representing that new data</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">viewModel</span><span class="p">(</span><span class="n">forState</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nf">TableViewModel</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+
+</code></pre>
+
+<p>Then any time your data (in this case the <code>people</code> property) changes, you can generate your new <code><a href="Structs/TableViewModel.html">TableViewModel</a></code></p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span>
+    <span class="nf">didSet</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">tableViewDriver</span><span class="p">?</span><span class="o">.</span><span class="n">tableViewModel</span> <span class="o">=</span> <span class="kt">PersonViewController</span><span class="o">.</span><span class="nf">viewModel</span><span class="p">(</span>
+            <span class="nv">forState</span><span class="p">:</span> <span class="n">people</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<p>Okay now lets go back and fill in our <code>viewModel(forState:)</code> function:</p>
+<pre class="highlight swift"><code><span class="c1">/// Given a new set of [Person], generates the `TableViewModel` representing that new data</span>
+<span class="kd">extension</span> <span class="nf">PersonViewController</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">viewModel</span><span class="p">(</span><span class="n">forState</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nf">TableViewModel</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="nv">personCellViewModels</span> <span class="o">=</span> <span class="n">people</span><span class="o">.</span><span class="nf">map</span> <span class="p">{</span> <span class="nf">PersonCellModel</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+            <span class="k">let</span> <span class="nv">section</span> <span class="o">=</span> <span class="nf">TableViewSectionViewModel</span><span class="p">(</span>
+              <span class="nv">headerTitle</span><span class="p">:</span> <span class="s">"People"</span><span class="p">,</span>
+              <span class="nv">headerHeight</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span>
+              <span class="nv">cellViewModels</span><span class="p">:</span> <span class="n">personCellViewModels</span><span class="p">,</span>
+              <span class="nv">diffingKey</span><span class="p">:</span> <span class="s">"People"</span> <span class="c1">// a unique string for automatically diffing</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="nf">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section</span><span class="p">])</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<p>This is now called whenever we get an update to our <code>people</code> variable.  This function takes the latest
+<code>people</code> data and for each person generates a <code>PersonCellModel</code> to display in our table view.  It wraps
+all those models into a single section and then creates a <code><a href="Structs/TableViewModel.html">TableViewModel</a></code> from that section.</p>
+
+<p>Now all we have to do is to define <code>PersonCellModel</code>:</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">PersonCellModel</span><span class="p">:</span> <span class="kt">TableViewCellViewModel</span><span class="p">,</span> <span class="nf">DiffableViewModel</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">CellAccessibilityFormat</span> <span class="o">=</span> <span class="s">"PersonUserCell"</span>
+    <span class="k">let</span> <span class="nv">cellIdentifier</span> <span class="o">=</span> <span class="s">"PersonUserCell"</span>
+    <span class="k">let</span> <span class="nv">editingStyle</span><span class="p">:</span> <span class="kt">UITableViewCellEditingStyle</span> <span class="o">=</span> <span class="o">.</span><span class="n">delete</span>
+    <span class="k">let</span> <span class="nv">person</span><span class="p">:</span> <span class="kt">Person</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="kt">Person</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">person</span> <span class="o">=</span> <span class="n">person</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">applyViewModelToCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">cell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">textLabel</span><span class="p">?</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">"</span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">}</span>
+
+    <span class="c1">// If we want the library to automatically reload when new data is available</span>
+    <span class="c1">// each cell model needs to have a unique key for the diffing algorithm to work.</span>
+    <span class="c1">// In this case we just use the person's uuid</span>
+    <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="nf">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuidString</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>A <code>CellViewModel</code> just needs to conform to <code><a href="Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a></code> or <code><a href="Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a></code>.  The
+most important function is <code>applyViewModelToCell</code>.  This is where you define how your view model will get
+mapped onto a <code>UITableViewCell</code> or <code>UICollectionViewCell</code>.  In this case we are just setting the <code>textLabel</code>&rsquo;s
+<code>text</code> property to the person&rsquo;s <code>name</code>.</p>
+
+<p>And there you have it!  You now have an automatically refreshing table view which you have defined in a clear,
+declarative manner.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
