@@ -193,7 +193,7 @@ extension CollectionViewDriver: UICollectionViewDataSource {
 
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.collectionViewModel?[section]?.cellViewModels?.count ?? 0
+        return self.collectionViewModel?[section]?.cellViewModels.count ?? 0
     }
 
     /// :nodoc:

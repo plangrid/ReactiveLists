@@ -107,7 +107,6 @@ public struct TableViewSectionViewModel {
     public let cellViewModels: [TableViewCellViewModel]
 
     /// View model for the header of this section.
-
     public let headerViewModel: TableViewSectionHeaderFooterViewModel?
 
     /// View model for the footer of this section.
@@ -131,6 +130,14 @@ public struct TableViewSectionViewModel {
         return self.cellViewModels.isEmpty
     }
 
+    /// Initializes a `TableViewSectionViewModel`.
+    ///
+    /// - Parameters:
+    ///   - cellViewModels: the cell view models contained in this section.
+    ///   - headerViewModel: a header view model for this section (defaults to `nil`).
+    ///   - footerViewModel: a footer view model for this section (defaults to `nil`).
+    ///   - collapsed: whether or not this section is collapsed (defaults to `false`).
+    ///   - diffingKey: the diffing key, or `nil`. Required for automated diffing.
     public init(
         cellViewModels: [TableViewCellViewModel],
         headerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
@@ -145,6 +152,17 @@ public struct TableViewSectionViewModel {
         self.diffingKey = diffingKey
     }
 
+    /// Initializes a `TableViewSectionViewModel`.
+    ///
+    /// - Parameters:
+    ///   - headerTitle: title for the header, or `nil`. Setting a title will cause a default header
+    ///                  to be added to this section.
+    ///   - headerHeight: the height of the default header, if one exists.
+    ///   - cellViewModels: the cell view models contained in this section.
+    ///   - footerTitle: title for the footer, or `nil`. Setting a title will cause a default footer
+    ///                  to be added to this section.
+    ///   - footerHeight: the height of the default footer, if one exists.
+    ///   - diffingKey: the diffing key, or `nil`. Required for automated diffing.
     public init(
         headerTitle: String?,
         headerHeight: CGFloat?,
@@ -152,7 +170,7 @@ public struct TableViewSectionViewModel {
         footerTitle: String? = nil,
         footerHeight: CGFloat? = 0,
         diffingKey: String? = nil
-        ) {
+    ) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight)
         self.footerViewModel = PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)

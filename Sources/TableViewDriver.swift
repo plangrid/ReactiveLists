@@ -64,7 +64,7 @@ open class TableViewDriver: NSObject {
     /// were moved/inserted/deleted.
     ///
     /// For details, see the documentation for `TableViewDriver.tableViewModel`.
-    private let automaticDiffingEnabled: Bool
+    private let _automaticDiffingEnabled: Bool
 
     private let _shouldDeselectUponSelection: Bool
     private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
@@ -88,7 +88,7 @@ open class TableViewDriver: NSObject {
     ) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
-        self.automaticDiffingEnabled = automaticDiffingEnabled
+        self._automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         tableView.dataSource = self
@@ -164,7 +164,7 @@ open class TableViewDriver: NSObject {
 
         self.tableView.registerViews(for: newModel)
 
-        if self.automaticDiffingEnabled {
+        if self._automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
                 // For the first non-nil value, we want to reload data, to avoid a weird
                 // animation where we animate in the initial state

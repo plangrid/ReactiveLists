@@ -16,26 +16,34 @@
 
 import Foundation
 
-/// Wrapper `struct` for the `accessibilityIdentifier` format that should be applied to the cells of a `UITableView` or a `UICollectionView`
+// Note: The accessibility types below are not documented as they are not intended to be part
+// of the `ReactiveLists` project in the long term. See https://github.com/plangrid/ReactiveLists/issues/77
+
+/// :nodoc:
 public struct CellAccessibilityFormat: ExpressibleByStringLiteral {
     private let _format: String
 
+    /// :nodoc:
     public init(_ format: String) {
         self._format = format
     }
 
+    /// :nodoc:
     public init(stringLiteral value: StringLiteralType) {
         self._format = value
     }
 
+    /// :nodoc:
     public init(extendedGraphemeClusterLiteral value: String) {
         self._format = value
     }
 
+    /// :nodoc:
     public init(unicodeScalarLiteral value: String) {
         self._format = value
     }
 
+    /// :nodoc:
     public func accessibilityIdentifierForIndexPath(_ indexPath: IndexPath) -> String {
         return self._format.replacingOccurrences(of: "%{section}", with: String(indexPath.section))
             .replacingOccurrences(of: "%{item}", with: String(indexPath.item))
@@ -43,26 +51,31 @@ public struct CellAccessibilityFormat: ExpressibleByStringLiteral {
     }
 }
 
-/// Wrapper `struct` for the `accessibilityIdentifier` format that should be applied to the headers and footers of a `UITableView` or a `UICollectionView`
+/// :nodoc:
 public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral {
     private let _format: String
 
+    /// :nodoc:
     public init(_ format: String) {
         self._format = format
     }
 
+    /// :nodoc:
     public init(stringLiteral value: StringLiteralType) {
         self._format = value
     }
 
+    /// :nodoc:
     public init(extendedGraphemeClusterLiteral value: String) {
         self._format = value
     }
 
+    /// :nodoc:
     public init(unicodeScalarLiteral value: String) {
         self._format = value
     }
 
+    /// :nodoc:
     public func accessibilityIdentifierForSection(_ section: Int) -> String {
         return self._format.replacingOccurrences(of: "%{section}", with: String(section))
     }

@@ -37,7 +37,7 @@ public protocol CollectionViewCellViewModel {
 
     /// Asks the cell model to update the `UICollectionViewCell` with the content
     /// in the cell model and return the updated cell.
-    /// - Parameter cell: the cell which contents need to be updated.
+    /// - Parameter cell: the cell which's content need to be updated.
     func applyViewModelToCell(_ cell: UICollectionViewCell)
 }
 
@@ -50,9 +50,14 @@ public extension CollectionViewCellViewModel {
 
 /// View model for supplementary views in collection views.
 public protocol CollectionViewSupplementaryViewModel {
+    /// Metadata for this supplementary view.
     var viewInfo: SupplementaryViewInfo? { get }
+    /// Height of this supplementary view.
     var height: CGFloat? { get }
 
+    /// Asks the supplementary view model to update the `UICollectionReusableView` with the content
+    /// in the model and return the updated view.
+    /// - Parameter view: the view which's content need to be update.
     func applyViewModelToView(_ view: UICollectionReusableView)
 }
 
@@ -89,9 +94,8 @@ public struct CollectionViewModel {
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> CollectionViewCellViewModel? {
-        guard let section = self[indexPath.section],
-            let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.item else { return nil }
-        return cellViewModels[indexPath.item]
+        guard let section = self[indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
+        return section.cellViewModels[indexPath.item]
     }
 
     /// Provides a description of the collection view content in terms of diffing keys. These diffing keys
@@ -105,12 +109,12 @@ public struct CollectionViewModel {
                 }
 
                 // Ensure we have a diffing key for each cell in this section
-                let cellDiffingKeys: [DiffingKey] = section.cellViewModels?.map { cell in
+                let cellDiffingKeys: [DiffingKey] = section.cellViewModels.map { cell in
                     guard let cell = cell as? DiffableViewModel else {
                         fatalError("When diffing is enabled you need to provide cells which are DiffableViews.")
                     }
                     return "\(type(of: cell))_\(cell.diffingKey)"
-                    } ?? []
+                }
 
                 return (sectionDiffingKey, cellDiffingKeys)
             }
@@ -122,8 +126,7 @@ public struct CollectionViewModel {
 public struct CollectionViewSectionViewModel {
 
     /// Cells to be shown in this section.
-    let cellViewModels: [CollectionViewCellViewModel]?
-
+    let cellViewModels: [CollectionViewCellViewModel]
     /// View model for the header of this section.
     let headerViewModel: CollectionViewSupplementaryViewModel?
 
@@ -143,12 +146,12 @@ public struct CollectionViewSectionViewModel {
     /// Initializes a collection view section view model.
     ///
     /// - Parameters:
-    ///   - cellViewModels: the cells in this section, or `nil`.
-    ///   - headerViewModel: the header view model, or `nil`.
-    ///   - footerViewModel: the footer view model, or `nil`.
+    ///   - cellViewModels: the cells in this section.
+    ///   - headerViewModel: the header view model (defaults to `nil`).
+    ///   - footerViewModel: the footer view model (defaults to `nil`).
     ///   - diffingKey: the diffing key, required for automated diffing.
     public init(
-        cellViewModels: [CollectionViewCellViewModel]?,
+        cellViewModels: [CollectionViewCellViewModel],
         headerViewModel: CollectionViewSupplementaryViewModel? = nil,
         footerViewModel: CollectionViewSupplementaryViewModel? = nil,
         diffingKey: String? = nil
@@ -177,7 +180,7 @@ extension CollectionViewSectionViewModel {
 
     /// :nodoc:
     public init(
-        cellViewModels: [CollectionViewCellViewModel]?,
+        cellViewModels: [CollectionViewCellViewModel],
         headerHeight: CGFloat? = nil,
         footerViewModel: CollectionViewSupplementaryViewModel? = nil,
         diffingKey: String? = nil
@@ -192,7 +195,7 @@ extension CollectionViewSectionViewModel {
 
     /// :nodoc:
     public init(
-        cellViewModels: [CollectionViewCellViewModel]?,
+        cellViewModels: [CollectionViewCellViewModel],
         headerViewModel: CollectionViewSupplementaryViewModel? = nil,
         footerHeight: CGFloat? = nil,
         diffingKey: String? = nil
@@ -207,7 +210,7 @@ extension CollectionViewSectionViewModel {
 
     /// :nodoc:
     public init(
-        cellViewModels: [CollectionViewCellViewModel]?,
+        cellViewModels: [CollectionViewCellViewModel],
         headerHeight: CGFloat? = nil,
         footerHeight: CGFloat? = nil,
         diffingKey: String? = nil
