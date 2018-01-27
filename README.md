@@ -68,7 +68,8 @@ An early version of  the `UITableView` support has been shipping in the [PlanGri
 | `UICollectionView` support | ⚠️ Experimental |
 
 ## Getting Started
-Read our [Getting Started Guide](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md)
+
+Read our [Getting Started Guide](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md) to learn how to use `ReactiveLists`.
 
 ## Documentation
 
@@ -85,10 +86,6 @@ $ ./scripts/gen_docs.sh
 * Xcode 9+
 * Swift 4.0+
 * iOS 9+
-
-## Getting Started Guide
-
-Please see our [Getting Started](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md) guide to learn how to use ReactiveLists
 
 ## Installation
 
