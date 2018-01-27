@@ -49,9 +49,11 @@ public extension CollectionViewCellViewModel {
 }
 
 /// View model for supplementary views in collection views.
-public protocol CollectionViewSupplementaryViewModel {
+public protocol CollectionViewSupplementaryViewModel: ReusableSupplementaryViewProtocol {
+
     /// Metadata for this supplementary view.
     var viewInfo: SupplementaryViewInfo? { get }
+    
     /// Height of this supplementary view.
     var height: CGFloat? { get }
 

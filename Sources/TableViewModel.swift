@@ -18,13 +18,10 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `TableViewModel`.
-public protocol TableViewCellViewModel {
+public protocol TableViewCellViewModel: ReusableCellProtocol {
 
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
-
-    /// The registration info for the cell.
-    var registrationInfo: ViewRegistrationInfo { get }
 
     /// The height of this cell.
     var rowHeight: CGFloat { get }
@@ -83,16 +80,13 @@ public protocol TableViewCellModelEditActions {
 
 /// Protocol that needs to be implemented by custom header
 /// footer view models.
-public protocol TableViewSectionHeaderFooterViewModel {
+public protocol TableViewSectionHeaderFooterViewModel: ReusableSupplementaryViewProtocol {
 
     /// The title of the header
     var title: String? { get }
 
     /// The height of the header
     var height: CGFloat? { get }
-
-    /// Metadata about the custom view type
-    var viewInfo: SupplementaryViewInfo? { get }
 
     /// Asks the view model to update the header/footer
     /// view with the content in the model.

@@ -20,27 +20,14 @@ extension UICollectionView {
 
     func registerViews(for model: CollectionViewModel) {
         model.sectionModels.forEach {
+            // TODO: collection cells
+
             if let header = $0.headerViewModel {
-                self._registerSupplementaryViewModel(header)
+                self.registerSupplementaryViewModel(header)
             }
 
             if let footer = $0.footerViewModel {
-                self._registerSupplementaryViewModel(footer)
-            }
-        }
-    }
-
-    private func _registerSupplementaryViewModel(_ viewModel: CollectionViewSupplementaryViewModel) {
-        if let viewInfo = viewModel.viewInfo {
-            switch viewInfo.registrationMethod {
-            case let .fromNib(name, bundle):
-                self.register(UINib(nibName: name, bundle: bundle),
-                              forSupplementaryViewOfKind: viewInfo.kind.collectionElementKind,
-                              withReuseIdentifier: viewInfo.reuseIdentifier)
-            case let .fromClass(viewClass):
-                self.register(viewClass,
-                              forSupplementaryViewOfKind: viewInfo.kind.collectionElementKind,
-                              withReuseIdentifier: viewInfo.reuseIdentifier)
+                self.registerSupplementaryViewModel(footer)
             }
         }
     }

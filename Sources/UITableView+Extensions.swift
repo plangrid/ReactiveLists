@@ -28,42 +28,15 @@ extension UITableView {
 
     func registerViews(for model: TableViewModel) {
         model.sectionModels.forEach {
-            self._registerCells($0.cellViewModels)
-            self._registerHeaderFooterViewModel($0.headerViewModel)
-            self._registerHeaderFooterViewModel($0.footerViewModel)
-        }
-    }
+            self.registerCellViewModels($0.cellViewModels)
 
-    private func _registerCells(_ cellViewModels: [TableViewCellViewModel]) {
-        cellViewModels.forEach {
-            self._registerCellViewModel($0)
-        }
-    }
+            if let header = $0.headerViewModel {
+                self.registerSupplementaryViewModel(header)
+            }
 
-    private func _registerCellViewModel(_ viewModel: TableViewCellViewModel) {
-        let registrationInfo = viewModel.registrationInfo
-        let identifier = registrationInfo.reuseIdentifier
-        let method = registrationInfo.registrationMethod
-
-        switch method {
-        case let .fromClass(classType):
-            self.register(classType, forCellReuseIdentifier: identifier)
-        case .fromNib:
-            self.register(method.nib, forCellReuseIdentifier: identifier)
-        }
-    }
-
-    private func _registerHeaderFooterViewModel(_ viewModel: TableViewSectionHeaderFooterViewModel?) {
-        guard let viewInfo = viewModel?.viewInfo else { return }
-
-        let identifier = viewInfo.reuseIdentifier
-        let method = viewInfo.registrationMethod
-
-        switch method {
-        case .fromNib:
-            self.register(method.nib, forHeaderFooterViewReuseIdentifier: identifier)
-        case let .fromClass(classType):
-            self.register(classType, forHeaderFooterViewReuseIdentifier: identifier)
+            if let footer = $0.footerViewModel {
+                self.registerSupplementaryViewModel(footer)
+            }
         }
     }
 }
