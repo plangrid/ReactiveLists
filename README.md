@@ -41,7 +41,7 @@ func tableViewModelForState(_ state: AnnotationFilterState) -> TableViewModel {
 static func cellViewModelsForGroup(
 	_ group: [RepresentableAnnotationFilter]
 ) -> [TableViewCellViewModel] {
-    return group.flatMap { filter -> TableViewCellViewModel? in
+    return group.flatMap { filter in
         if let filter = filter as? AnnotationTypeFilter {
             return AnnotationTypeFilterCellViewModel(filter: filter)
         } else if let filter = filter as? AnnotationFilterType {
@@ -68,10 +68,7 @@ An early version of  the `UITableView` support has been shipping in the [PlanGri
 | `UICollectionView` support | ⚠️ Experimental |
 
 ## Getting Started
-```
-git clone https://github.com/plangrid/ReactiveLists/
-```
-- Our [Getting Started Guide](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md)
+Read our [Getting Started Guide](https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md)
 
 ## Documentation
 
