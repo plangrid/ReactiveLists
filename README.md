@@ -1,5 +1,4 @@
-![](Resources/logo.png)
-
+<img src="https://raw.githubusercontent.com/plangrid/ReactiveLists/master/Resources/logo.png"/>
 
 *React-like API for `UITableView` & `UICollectionView`*
 
