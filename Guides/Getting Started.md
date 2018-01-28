@@ -1,9 +1,17 @@
 # Getting Started
 
-ReactiveLists provides a React-like API for `UITableView` and `UICollectionView`.  The goal is to provide a more
-declarative interface on top of your normal table and collection code.  To get started with ReactiveLists, in addition to reading this document, we encourage you to play around with the examples included in the repository.
+`ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView`.  The goal is to provide a more
+declarative interface on top of your normal table and collection code.  To get started with `ReactiveLists`, in addition to reading this document, we encourage you to play around with the [example app included](https://github.com/plangrid/ReactiveLists/tree/master/Example) in the repository.
 
-### Primary Components
+#### Checkout
+
+```bash
+$ git clone https://github.com/plangrid/ReactiveLists.git
+$ cd ReactiveLists/
+$ open ReactiveLists.xcworkspace
+```
+
+## Primary Components
 
 #### `*SectionViewModel`
 
