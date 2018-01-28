@@ -37,14 +37,7 @@ final class CollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let collectionView = self.collectionView else { return }
-        collectionView.register(
-            UINib(nibName: "CollectionToolCell", bundle: nil),
-            forCellWithReuseIdentifier: "CollectionToolCell"
-        )
-
-        self.collectionViewDriver = CollectionViewDriver(collectionView: collectionView)
+        self.collectionViewDriver = CollectionViewDriver(collectionView: collectionView!)
 
         self.groups = [
             ToolGroup(

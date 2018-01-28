@@ -18,13 +18,10 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `UICollectionView`.
-public protocol CollectionViewCellViewModel {
+public protocol CollectionViewCellViewModel: ReusableCellProtocol {
 
     /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
-
-    /// The reuse identifier for this cell.
-    var cellIdentifier: String { get }
 
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
@@ -53,7 +50,7 @@ public protocol CollectionViewSupplementaryViewModel: ReusableSupplementaryViewP
 
     /// Metadata for this supplementary view.
     var viewInfo: SupplementaryViewInfo? { get }
-    
+
     /// Height of this supplementary view.
     var height: CGFloat? { get }
 
