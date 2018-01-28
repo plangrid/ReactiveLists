@@ -197,7 +197,7 @@ open class TableViewDriver: NSObject {
     private func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
         guard let sectionModel = self.tableViewModel?[section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
-            let identifier = viewModel.viewInfo?.reuseIdentifier,
+            let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier,
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
                 return nil
         }

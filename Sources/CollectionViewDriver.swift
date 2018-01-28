@@ -213,7 +213,7 @@ extension CollectionViewDriver: UICollectionViewDataSource {
         if let elementKind = elementKind,
             let sectionModel = self.collectionViewModel?[section],
             let viewModel = elementKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
-            let identifier = viewModel.viewInfo?.reuseIdentifier {
+            let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier {
             view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
             viewModel.applyViewModelToView(view)
             view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)

@@ -74,8 +74,7 @@ extension CollectionViewController {
                 title: group.name,
                 height: 44,
                 viewInfo: SupplementaryViewInfo(
-                    registrationMethod: .fromNib(name: "CollectionViewHeaderView", bundle: nil),
-                    reuseIdentifier: "CollectionViewHeaderView",
+                    registrationInfo: ViewRegistrationInfo(classType: CollectionViewHeaderView.self, nibName: "CollectionViewHeaderView"),
                     kind: .header,
                     accessibilityFormat: "CollectionViewHeaderView"
                 )

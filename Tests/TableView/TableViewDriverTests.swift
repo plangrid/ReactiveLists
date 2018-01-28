@@ -219,8 +219,8 @@ final class TableViewDriverTests: XCTestCase {
         self.setupWithTableView(tableView)
 
         XCTAssertEqual(tableView.callsToRegisterClass.count, 2)
-        XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "reuse_header+A")
-        XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "reuse_footer+A")
+        XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "HeaderView")
+        XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "FooterView")
         XCTAssert(tableView.callsToRegisterClass[0].viewClass === HeaderView.self)
         XCTAssert(tableView.callsToRegisterClass[1].viewClass === FooterView.self)
     }

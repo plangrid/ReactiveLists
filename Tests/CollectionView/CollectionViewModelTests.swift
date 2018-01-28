@@ -57,8 +57,8 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let viewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationMethod == .fromClass(FooterView.self))
-        XCTAssertEqual(viewInfo?.reuseIdentifier, "reuse_footer+A")
+        XCTAssertTrue(viewInfo?.registrationInfo.registrationMethod == .fromClass(FooterView.self))
+        XCTAssertEqual(viewInfo?.registrationInfo.reuseIdentifier, "FooterView")
         XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
     }
 
@@ -83,8 +83,8 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let viewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationMethod == .fromClass(HeaderView.self))
-        XCTAssertEqual(viewInfo?.reuseIdentifier, "reuse_header+A")
+        XCTAssertTrue(viewInfo?.registrationInfo.registrationMethod == .fromClass(HeaderView.self))
+        XCTAssertEqual(viewInfo?.registrationInfo.reuseIdentifier, "HeaderView")
         XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
     }
 
@@ -110,13 +110,13 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let headerViewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(headerViewInfo?.registrationMethod == .fromClass(HeaderView.self))
-        XCTAssertEqual(headerViewInfo?.reuseIdentifier, "reuse_header+A")
+        XCTAssertTrue(headerViewInfo?.registrationInfo.registrationMethod == .fromClass(HeaderView.self))
+        XCTAssertEqual(headerViewInfo?.registrationInfo.reuseIdentifier, "HeaderView")
         XCTAssertEqual(headerViewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
 
         let footerViewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(footerViewInfo?.registrationMethod == .fromClass(FooterView.self))
-        XCTAssertEqual(footerViewInfo?.reuseIdentifier, "reuse_footer+A")
+        XCTAssertTrue(footerViewInfo?.registrationInfo.registrationMethod == .fromClass(FooterView.self))
+        XCTAssertEqual(footerViewInfo?.registrationInfo.reuseIdentifier, "FooterView")
         XCTAssertEqual(footerViewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
     }
 

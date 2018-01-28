@@ -63,10 +63,10 @@ final class CollectionViewDriverTests: XCTestCase {
         // Test that header and footer view classes explicitly provided in the view model are registered
         let registerCalls = self._collectionView.callsToRegisterClass
         XCTAssertEqual(registerCalls.count, 4)
-        self._testRegisterClassCallInfo(registerCalls[0], viewClass: HeaderView.self, kind: .header, identifier: "reuse_header+A")
-        self._testRegisterClassCallInfo(registerCalls[1], viewClass: FooterView.self, kind: .footer, identifier: "reuse_footer+A")
-        self._testRegisterClassCallInfo(registerCalls[2], viewClass: HeaderView.self, kind: .header, identifier: "reuse_header+D")
-        self._testRegisterClassCallInfo(registerCalls[3], viewClass: FooterView.self, kind: .footer, identifier: "reuse_footer+D")
+        self._testRegisterClassCallInfo(registerCalls[0], viewClass: HeaderView.self, kind: .header, identifier: "HeaderView")
+        self._testRegisterClassCallInfo(registerCalls[1], viewClass: FooterView.self, kind: .footer, identifier: "FooterView")
+        self._testRegisterClassCallInfo(registerCalls[2], viewClass: HeaderView.self, kind: .header, identifier: "HeaderView")
+        self._testRegisterClassCallInfo(registerCalls[3], viewClass: FooterView.self, kind: .footer, identifier: "FooterView")
     }
 
     func testCollectionViewSections() {
@@ -103,10 +103,10 @@ final class CollectionViewDriverTests: XCTestCase {
 
     func testHeaderViews() {
         parameterize(cases:
-            (section: 0, expectedAccessibilityIdentifier: "access_header+0", expectedLabel: "label_header+A", expectedIdentifier: "reuse_header+A"),
+            (section: 0, expectedAccessibilityIdentifier: "access_header+0", expectedLabel: "label_header+A", expectedIdentifier: "HeaderView"),
             (1, nil, nil, nil),
             (2, nil, nil, nil),
-            (3, "access_header+3", "label_header+D", "reuse_header+D"),
+            (3, "access_header+3", "label_header+D", "HeaderView"),
             (9, nil, nil, nil)) {
             let indexPath = path($0)
 
@@ -133,10 +133,10 @@ final class CollectionViewDriverTests: XCTestCase {
 
     func testFooterViews() {
         parameterize(cases:
-            (section: 0, expectedAccessibilityIdentifier: "access_footer+0", expectedLabel: "label_footer+A", expectedIdentifier: "reuse_footer+A"),
+            (section: 0, expectedAccessibilityIdentifier: "access_footer+0", expectedLabel: "label_footer+A", expectedIdentifier: "FooterView"),
             (1, nil, nil, nil),
             (2, nil, nil, nil),
-            (3, "access_footer+3", "label_footer+D", "reuse_footer+D"),
+            (3, "access_footer+3", "label_footer+D", "FooterView"),
             (9, nil, nil, nil)) {
             let indexPath = path($0)
 
