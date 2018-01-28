@@ -17,6 +17,12 @@
 import Foundation
 import UIKit
 
+public protocol ReusableCellProtocol {
+
+    /// The registration info for the cell.
+    var registrationInfo: ViewRegistrationInfo { get }
+}
+
 public struct ViewRegistrationInfo {
     let reuseIdentifier: String
     let registrationMethod: ViewRegistrationMethod
