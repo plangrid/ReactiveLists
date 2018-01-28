@@ -22,7 +22,7 @@ struct TestCollectionCellViewModel: CollectionViewCellViewModel {
     let didSelect: DidSelectClosure?
     let didDeselect: DidDeselectClosure?
 
-    let cellIdentifier = "foo_identifier"
+    let registrationInfo = ViewRegistrationInfo(classType: TestCollectionViewCell.self)
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
     let shouldHighlight = false
 

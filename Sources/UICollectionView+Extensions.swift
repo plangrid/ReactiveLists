@@ -20,7 +20,7 @@ extension UICollectionView {
 
     func registerViews(for model: CollectionViewModel) {
         model.sectionModels.forEach {
-            // TODO: collection cells
+            self.registerCellViewModels($0.cellViewModels)
 
             if let header = $0.headerViewModel {
                 self.registerSupplementaryViewModel(header)
@@ -30,5 +30,12 @@ extension UICollectionView {
                 self.registerSupplementaryViewModel(footer)
             }
         }
+    }
+
+    func configuredCell(for model: CollectionViewCellViewModel, at indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.dequeueReusableCellFor(identifier: model.registrationInfo.reuseIdentifier, indexPath: indexPath)
+        model.applyViewModelToCell(cell)
+        cell.accessibilityIdentifier = model.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
+        return cell
     }
 }

@@ -201,10 +201,7 @@ extension CollectionViewDriver: UICollectionViewDataSource {
         guard let collectionViewModel = self.collectionViewModel, let cellViewModel = collectionViewModel[indexPath] else {
             fatalError("Collection View Model has an invalid configuration: \(String(describing: self.collectionViewModel))")
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellViewModel.cellIdentifier, for: indexPath)
-        cellViewModel.applyViewModelToCell(cell)
-        cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-        return cell
+        return collectionView.configuredCell(for: cellViewModel, at: indexPath)
     }
 
     /// :nodoc:

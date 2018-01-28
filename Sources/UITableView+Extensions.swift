@@ -19,8 +19,7 @@ import UIKit
 extension UITableView {
 
     func configuredCell(for model: TableViewCellViewModel, at indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.dequeueReusableCell(withIdentifier: model.registrationInfo.reuseIdentifier,
-                                            for: indexPath)
+        let cell = self.dequeueReusableCellFor(identifier: model.registrationInfo.reuseIdentifier, indexPath: indexPath)
         model.applyViewModelToCell(cell)
         cell.accessibilityIdentifier = model.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
         return cell

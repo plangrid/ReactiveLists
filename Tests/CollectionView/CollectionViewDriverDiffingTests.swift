@@ -124,7 +124,7 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
 struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
 
     var accessibilityFormat: CellAccessibilityFormat = "CollectionUserCell"
-    let cellIdentifier = "CollectionUserCell"
+    var registrationInfo = ViewRegistrationInfo(classType: TestCollectionViewCell.self)
     let editingStyle: UITableViewCellEditingStyle = .delete
 
     let user: User
