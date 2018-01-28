@@ -23,7 +23,7 @@ import UIKit
  For `UICollectionViewCell`, this would be `UICollectionView`.
  For `UITableViewCell`, this would be `UITableView`.
  */
-protocol CellParentViewProtocol {
+protocol CellContainerViewProtocol {
 
     /// The type of cell for this parent view.
     associatedtype CellType: UIView
@@ -42,7 +42,7 @@ protocol CellParentViewProtocol {
     func registerSupplementaryNib(_ supplementaryNib: UINib?, kind: SupplementaryViewKind, identifier: String)
 }
 
-extension CellParentViewProtocol {
+extension CellContainerViewProtocol {
     func registerCellViewModels(_ cellViewModels: [ReusableCellProtocol]) {
         cellViewModels.forEach {
             self.registerCellViewModel($0)
@@ -77,7 +77,7 @@ extension CellParentViewProtocol {
     }
 }
 
-extension UICollectionView: CellParentViewProtocol {
+extension UICollectionView: CellContainerViewProtocol {
     typealias CellType = UICollectionViewCell
     typealias SupplementaryType = UICollectionReusableView
 
@@ -106,7 +106,7 @@ extension UICollectionView: CellParentViewProtocol {
     }
 }
 
-extension UITableView: CellParentViewProtocol {
+extension UITableView: CellContainerViewProtocol {
     typealias CellType = UITableViewCell
     typealias SupplementaryType = UITableViewHeaderFooterView
 
