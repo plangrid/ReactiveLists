@@ -98,8 +98,7 @@ struct TestHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
         self.height = height
 
         self.viewInfo = SupplementaryViewInfo(
-            registrationMethod: .fromClass(viewKind == .header ? HeaderView.self : FooterView.self),
-            reuseIdentifier: "reuse_\(kindString)+\(label)", // e.g. reuse_header_3
+            registrationInfo: ViewRegistrationInfo(classType: viewKind == .header ? HeaderView.self : FooterView.self),
             kind: viewKind,
             accessibilityFormat: SupplementaryAccessibilityFormat("access_\(kindString)+%{section}")) // e.g. access_header+%{section}
     }

@@ -64,8 +64,8 @@ extension CellContainerViewProtocol {
 
     func registerSupplementaryViewModel(_ model: ReusableSupplementaryViewProtocol) {
         guard let info = model.viewInfo else { return }
-        let identifier = info.reuseIdentifier
-        let method = info.registrationMethod
+        let identifier = info.registrationInfo.reuseIdentifier
+        let method = info.registrationInfo.registrationMethod
         let kind = info.kind
 
         switch method {

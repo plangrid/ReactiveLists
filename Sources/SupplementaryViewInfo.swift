@@ -20,15 +20,15 @@ import UIKit
 public protocol ReusableSupplementaryViewProtocol {
 
     /// The registration info for the supplementary view.
-    var viewInfo: SupplementaryViewInfo? { get } // TODO: make this not optional
+    var viewInfo: SupplementaryViewInfo? { get }
 }
 
 /// Metadata thats required for setting up a supplementary view.
 public struct SupplementaryViewInfo {
-    /// Stores how the view was registered (as a class or via a nib file)
-    public let registrationMethod: ViewRegistrationMethod
-    /// The reuse identifier for this supplementary view
-    public let reuseIdentifier: String
+
+    /// The registration info for the supplementary view.
+    public let registrationInfo: ViewRegistrationInfo
+
     /// The kind of supplementary view (e.g. `header` or `footer`)
     public let kind: SupplementaryViewKind
 
@@ -39,19 +39,16 @@ public struct SupplementaryViewInfo {
     /// Initializes the metadata for a supplementary view.
     ///
     /// - Parameters:
-    ///   - registrationMethod: describes how the view was registered (as a class or via a nib file)
-    ///   - reuseIdentifier: reuse identifier for this supplementary view
-    ///   - kind: kind of supplementary view (e.g. `header` or `footer`)
-    ///   - accessibilityFormat: a format string that generates an accessibility identifier for
+    ///   - registrationInfo: The registration info for the view.
+    ///   - kind: The kind of supplementary view (e.g. `header` or `footer`)
+    ///   - accessibilityFormat: A format string that generates an accessibility identifier for
     ///                          the view that will be mapped to this view model.
     public init(
-        registrationMethod: ViewRegistrationMethod,
-        reuseIdentifier: String,
+        registrationInfo: ViewRegistrationInfo,
         kind: SupplementaryViewKind,
         accessibilityFormat: SupplementaryAccessibilityFormat
     ) {
-        self.registrationMethod = registrationMethod
-        self.reuseIdentifier = reuseIdentifier
+        self.registrationInfo = registrationInfo
         self.kind = kind
         self.accessibilityFormat = accessibilityFormat
     }
