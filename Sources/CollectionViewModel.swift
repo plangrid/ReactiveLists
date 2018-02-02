@@ -46,7 +46,7 @@ public extension CollectionCellViewModel {
 }
 
 /// View model for supplementary views in collection views.
-public protocol CollectionSupplementaryViewModel: ReusableSupplementaryViewProtocol {
+public protocol CollectionSupplementaryViewModel: ReusableSupplementaryViewModelProtocol {
 
     /// Metadata for this supplementary view.
     var viewInfo: SupplementaryViewInfo? { get }

@@ -17,12 +17,6 @@
 import Foundation
 import UIKit
 
-public protocol ReusableSupplementaryViewProtocol {
-
-    /// The registration info for the supplementary view.
-    var viewInfo: SupplementaryViewInfo? { get }
-}
-
 /// Metadata thats required for setting up a supplementary view.
 public struct SupplementaryViewInfo {
 

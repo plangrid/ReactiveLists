@@ -56,19 +56,36 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol {
     func applyViewModelToCell(_ cell: UITableViewCell)
 }
 
-/// Default implementations for the protocol.
+/// Default implementations for `TableCellViewModel`.
 public extension TableCellViewModel {
+
+    /// Default implementation, returns `44.0`.
     var rowHeight: CGFloat {
         return 44.0
     }
 
+    /// Default implementation, returns `.none`.
     var editingStyle: UITableViewCellEditingStyle { return .none }
+
+    /// Default implementation, returns `true`.
     var shouldHighlight: Bool { return true }
+
+    /// Default implementation, returns `false`.
     var shouldIndentWhileEditing: Bool { return false }
+
+    /// Default implementation, returns `nil`.
     var willBeginEditing: WillBeginEditingClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var didEndEditing: DidEndEditingClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var commitEditingStyle: CommitEditingStyleClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var didSelect: DidSelectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
 }
 
@@ -80,7 +97,7 @@ public protocol TableViewCellModelEditActions {
 
 /// Protocol that needs to be implemented by custom header
 /// footer view models.
-public protocol TableSectionHeaderFooterViewModel: ReusableSupplementaryViewProtocol {
+public protocol TableSectionHeaderFooterViewModel: ReusableSupplementaryViewModelProtocol {
 
     /// The title of the header
     var title: String? { get }
