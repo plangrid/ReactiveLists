@@ -40,8 +40,14 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol {
 
 /// Default implementations for `CollectionViewCellViewModel`.
 public extension CollectionCellViewModel {
+
+    /// Default implementation, returns `true`.
     var shouldHighlight: Bool { return true }
+
+    /// Default implementation, returns `nil`.
     var didSelect: DidSelectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var didDeselect: DidDeselectClosure? { return nil }
 }
 

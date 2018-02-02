@@ -92,6 +92,8 @@ public extension TableCellViewModel {
 /// Protocol that needs to be implemented by table view cell view models
 /// that want to provide edit actions.
 public protocol TableViewCellModelEditActions {
+
+    /// The row edit actions for the cell.
     var editActions: [UITableViewRowAction] { get }
 }
 
