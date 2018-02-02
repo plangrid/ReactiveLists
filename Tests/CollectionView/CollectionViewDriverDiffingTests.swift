@@ -43,7 +43,7 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
     func testChangingRows() {
         let initialModel = CollectionViewModel(
             sectionModels: [
-                CollectionViewSectionViewModel(
+                CollectionSectionViewModel(
                     cellViewModels: [],
                     headerHeight: 44,
                     footerHeight: 44,
@@ -56,7 +56,7 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
 
         let updatedModel = CollectionViewModel(
             sectionModels: [
-                CollectionViewSectionViewModel(
+                CollectionSectionViewModel(
                     cellViewModels: [CollectionUserCellModel(user: User(name: "Mona"))],
                     headerHeight: 44,
                     footerHeight: 44,
@@ -83,13 +83,13 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
     func testChangingSections() {
         let initialModel = CollectionViewModel(
             sectionModels: [
-                CollectionViewSectionViewModel(
+                CollectionSectionViewModel(
                     cellViewModels: [],
                     headerHeight: 44,
                     footerHeight: 44,
                     diffingKey: "1"
                 ),
-                CollectionViewSectionViewModel(
+                CollectionSectionViewModel(
                     cellViewModels: [],
                     headerHeight: 44,
                     footerHeight: 44,
@@ -102,7 +102,7 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
 
         let updatedModel = CollectionViewModel(
             sectionModels: [
-                CollectionViewSectionViewModel(
+                CollectionSectionViewModel(
                     cellViewModels: [],
                     headerHeight: 44,
                     footerHeight: 44,
@@ -121,7 +121,7 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
     }
 }
 
-struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
+struct CollectionUserCellModel: CollectionCellViewModel, DiffableViewModel {
 
     var accessibilityFormat: CellAccessibilityFormat = "CollectionUserCell"
     var registrationInfo = ViewRegistrationInfo(classType: TestCollectionViewCell.self)

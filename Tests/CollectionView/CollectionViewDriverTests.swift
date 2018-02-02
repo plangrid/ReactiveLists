@@ -31,19 +31,19 @@ final class CollectionViewDriverTests: XCTestCase {
         super.setUp()
         self._collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         self._collectionViewModel = CollectionViewModel(sectionModels: [
-            CollectionViewSectionViewModel(
+            CollectionSectionViewModel(
                 cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "A"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "A")),
-            CollectionViewSectionViewModel(
+            CollectionSectionViewModel(
                 cellViewModels: ["A", "B", "C"].map { self._generateTestCollectionCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestCollectionViewSupplementaryViewModel(label: "footer_B", height: 21)),
-            CollectionViewSectionViewModel(
+            CollectionSectionViewModel(
                 cellViewModels: ["D", "E", "F"].map { self._generateTestCollectionCellViewModel($0) },
                 headerViewModel: TestCollectionViewSupplementaryViewModel(label: "header_C", height: 30),
                 footerViewModel: nil),
-            CollectionViewSectionViewModel(
+            CollectionSectionViewModel(
                 cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
@@ -208,11 +208,11 @@ final class CollectionViewDriverTests: XCTestCase {
         XCTAssertEqual(footer?.label, "label_footer+A")
 
         self._collectionViewDataSource.collectionViewModel = CollectionViewModel(sectionModels: [
-            CollectionViewSectionViewModel(
+            CollectionSectionViewModel(
                 cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "X"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "X")),
-            CollectionViewSectionViewModel(
+            CollectionSectionViewModel(
                 cellViewModels: [self._generateTestCollectionCellViewModel("X")],
                 headerViewModel: nil,
                 footerViewModel: nil),
