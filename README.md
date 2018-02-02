@@ -4,58 +4,14 @@
 
 [![Build Status](https://travis-ci.org/plangrid/ReactiveLists.svg?branch=master)](https://travis-ci.org/plangrid/ReactiveLists) [![Version Status](https://img.shields.io/cocoapods/v/ReactiveLists.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/ReactiveLists.svg)][mitLink] [![codecov](https://codecov.io/gh/plangrid/ReactiveLists/branch/master/graph/badge.svg)](https://codecov.io/gh/plangrid/ReactiveLists) [![Platform](https://img.shields.io/cocoapods/p/ReactiveLists.svg)][docsLink]
 
-`ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView` that makes it easy to write stateless code that generates user interfaces.
+`ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView` that makes it easy to write stateless code that generates user interfaces. 
 
-Instead of spreading the definition of your content over various data source methods, you can define the content as concisely as in the real-world example below.
+In our experience this can make UI code significantly easier to read and maintain. Instead of spreading the definition of your content over various data source methods, you can define the content concisely. The table or collection content and layout are immediately obvious by scanning over the source code.
 
 ## Features
 
 - React-like declarative API for `UITableView` and `UICollectionView`
 - Automatic UI updates, whenever your models change
-
-## Real-world example
-
-```swift
-// Describes how model data maps to a `TableViewModel`
-func tableViewModelForState(_ state: AnnotationFilterState) -> TableViewModel {
-    let shareStatusSection = TableViewSectionViewModel(
-        headerTitle: "Share Status",
-        headerHeight: 28,
-        cellViewModels: cellViewModelsForGroup(state.shareStatusFilters)
-    )
-
-    let issueFilterSection = TableViewSectionViewModel(
-        headerTitle: "Issue Filters",
-        headerHeight: 28,
-        cellViewModels: cellViewModelsForGroup(state.issueFilters)
-    )
-
-    return TableViewModel(sectionModels: [
-        shareStatusSection,
-        issueFilterSection
-    ])
-}
-
-/// Describes how individual models map to cells
-static func cellViewModelsForGroup(
-	_ group: [RepresentableAnnotationFilter]
-) -> [TableViewCellViewModel] {
-    return group.flatMap { filter in
-        if let filter = filter as? AnnotationTypeFilter {
-            return AnnotationTypeFilterCellViewModel(filter: filter)
-        } else if let filter = filter as? AnnotationFilterType {
-            return AnnotationFilterCellViewModel(filter: filter)
-        } else if let filterGroup = filter as? AnnotationFilterGroupType {
-            return AnnotationFilterGroupCellViewModel(filterGroup:filterGroup)
-        }
-        return nil
-    }
-}
-```
-
-In our experience this can make UI code significantly easier to read and maintain. The table content & layout becomes obvious just by scanning over the source code.
-
-For long-term goals and direction, please see [`VISION.md`](https://github.com/plangrid/ReactiveLists/blob/master/Guides/VISION.md).
 
 ## Project Status
 
@@ -65,6 +21,10 @@ An early version of  the `UITableView` support has been shipping in the [PlanGri
 | -------------------------- | :-------------: |
 | `UITableView` support      |        ✅        |
 | `UICollectionView` support | ⚠️ Experimental |
+
+## Vision
+
+For long-term goals and direction, please see [`VISION.md`](https://github.com/plangrid/ReactiveLists/blob/master/Guides/VISION.md).
 
 ## Getting Started
 
