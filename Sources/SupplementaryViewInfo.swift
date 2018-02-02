@@ -53,7 +53,11 @@ public struct SupplementaryViewInfo {
 /// - header: indicates that the view is a header
 /// - footer: indicates that the view is a footer
 public enum SupplementaryViewKind {
+
+    /// A header view.
     case header
+
+    /// A footer view.
     case footer
 
     init?(collectionElementKindString: String) {

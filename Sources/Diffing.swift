@@ -34,6 +34,8 @@ public typealias DiffingKey = String
 
 /// Default value for diffingKey
 public extension DiffableViewModel {
+
+    /// Default implementation. Uses class name.
     var diffingKey: DiffingKey {
         return String(describing: Self.self)
     }

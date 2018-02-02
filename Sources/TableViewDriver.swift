@@ -22,15 +22,15 @@ import UIKit
 @objc
 open class TableViewDriver: NSObject {
 
-    /// Communicates information useful for refreshing the table view
-    ///
-    /// - unknown: A refresh was requested, but we don't know if rows/sections are being added/removed
-    /// - contentOnly: Only the content of cells is being refreshed. No rows/sections will be
-    ///                added/deleted
-    /// - rowsModified: Rows/sections are being added/deleted
+    /// Communicates information for refreshing the table view.
     public enum TableRefreshContext {
+        /// A refresh was requested, but we don't know if rows/sections are being added/removed
         case unknown
+
+        /// Only the content of cells is being refreshed. No rows/sections will be added/deleted.
         case contentOnly
+
+        /// Rows/sections are being added/deleted
         case rowsModified
     }
 
