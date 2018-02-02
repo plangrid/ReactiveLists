@@ -14,7 +14,7 @@ end
 # Changelog entries are required for changes to library files
 no_changelog_entry = !git.modified_files.include?("CHANGELOG.md")
 if has_source_changes && no_changelog_entry && git.lines_of_code > 10
-  fail("Source code changes (in APIs or behaviors) should have an entry in CHANGELOG.md.")
+  warn("Source code changes (in APIs or behaviors) should have an entry in CHANGELOG.md.")
 end
 
 # Docs are regenerated when releasing
