@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XYl-Bn-6Dj">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,7 +13,7 @@
         <scene sceneID="fzw-qP-Rxh">
             <objects>
                 <navigationController id="CE7-Nk-uAw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="CollectionView" id="Sif-WW-6mp"/>
+                    <tabBarItem key="tabBarItem" title="CollectionView" image="grid" selectedImage="grid-selected" id="Sif-WW-6mp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oeC-fW-cRf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -27,7 +31,7 @@
             <objects>
                 <collectionViewController id="zbt-zE-Q53" customClass="CollectionViewController" customModule="ReactiveListsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Cjc-qk-6SH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eXg-Gc-uKe">
@@ -81,7 +85,7 @@
         <scene sceneID="L05-pa-kbB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ucc-sl-ZPg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="TableView" id="C42-SC-CZi"/>
+                    <tabBarItem key="tabBarItem" title="TableView" image="list" selectedImage="list-selected" id="C42-SC-CZi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lW0-rJ-hzf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -101,7 +105,7 @@
             <objects>
                 <tableViewController id="vc5-We-rR1" customClass="TableViewController" customModule="ReactiveListsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="7X7-yl-mOd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <connections>
@@ -127,4 +131,10 @@
             <point key="canvasLocation" x="1108" y="-1022"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="grid" width="28" height="24"/>
+        <image name="grid-selected" width="28" height="24"/>
+        <image name="list" width="28" height="22"/>
+        <image name="list-selected" width="28" height="22"/>
+    </resources>
 </document>
