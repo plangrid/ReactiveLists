@@ -79,7 +79,7 @@ extension TableViewDriver {
     }
 }
 
-class MockCellViewModel: TableViewCellViewModel {
+class MockCellViewModel: TableCellViewModel {
     var accessibilityFormat: CellAccessibilityFormat = "_"
     let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
     func applyViewModelToCell(_ cell: UITableViewCell) { }
