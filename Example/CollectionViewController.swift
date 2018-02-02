@@ -68,7 +68,7 @@ extension CollectionViewController {
     /// Pure function mapping new state to a new `CollectionViewModel`.  This is invoked each time the state updates
     /// in order for ReactiveLists to update the UI.
     static func viewModel(forState groups: [ToolGroup], onDeleteClosure: @escaping (Tool) -> Void) -> CollectionViewModel {
-        let sections: [CollectionViewSectionViewModel] = groups.map { group in
+        let sections: [CollectionSectionViewModel] = groups.map { group in
             let cellViewModels = group.tools.map { CollectionToolCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
             let headerViewModel = CollectionViewHeaderModel(
                 title: group.name,
@@ -79,7 +79,7 @@ extension CollectionViewController {
                     accessibilityFormat: "CollectionViewHeaderView"
                 )
             )
-            return CollectionViewSectionViewModel(cellViewModels: cellViewModels, headerViewModel: headerViewModel, footerHeight: nil, diffingKey: group.name)
+            return CollectionSectionViewModel(cellViewModels: cellViewModels, headerViewModel: headerViewModel, footerHeight: nil, diffingKey: group.name)
         }
         return CollectionViewModel(sectionModels: sections)
     }

@@ -18,7 +18,7 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `TableViewModel`.
-public protocol TableViewCellViewModel: ReusableCellProtocol {
+public protocol TableViewCellViewModel: ReusableCellViewModelProtocol {
 
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
