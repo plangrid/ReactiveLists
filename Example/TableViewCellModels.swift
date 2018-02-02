@@ -17,7 +17,7 @@
 import Foundation
 import ReactiveLists
 
-struct ToolTableCellModel: TableViewCellViewModel, DiffableViewModel {
+struct ToolTableCellModel: TableCellViewModel, DiffableViewModel {
     let registrationInfo = ViewRegistrationInfo(classType: ToolTableViewCell.self)
 
     let commitEditingStyle: CommitEditingStyleClosure?

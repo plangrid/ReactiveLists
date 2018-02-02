@@ -35,17 +35,17 @@ final class TableViewDriverTests: XCTestCase {
     /// the content described in the `TableViewModel`.
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
-            TableViewSectionViewModel(
+            TableSectionViewModel(
                 cellViewModels: [],
                 headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "A"),
                 footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A"),
                 collapsed: false),
-            TableViewSectionViewModel(
+            TableSectionViewModel(
                 cellViewModels: ["A", "B", "C"].map { _generateTestCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21),
                 collapsed: false),
-             TableViewSectionViewModel(
+             TableSectionViewModel(
                 cellViewModels: ["D", "E", "F"].map { _generateTestCellViewModel($0) },
                 headerViewModel: TestHeaderFooterViewModel(title: "header_3", height: 30),
                 footerViewModel: nil,
@@ -259,7 +259,7 @@ final class TableViewDriverTests: XCTestCase {
     /// When providing a cell that implements the minimum protocol requirements,
     /// default values for certain properties are provided.
     func testTableViewCellViewModelDefaults() {
-        struct DefaultCellViewModel: TableViewCellViewModel {
+        struct DefaultCellViewModel: TableCellViewModel {
             var accessibilityFormat: CellAccessibilityFormat = "_"
             let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
             func applyViewModelToCell(_ cell: UITableViewCell) { }
@@ -287,11 +287,11 @@ private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
 
 private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
     return TableViewModel(sectionModels: [
-        TableViewSectionViewModel(
+        TableSectionViewModel(
             cellViewModels: [_generateTestCellViewModel("X")],
             headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "X"),
             footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "X")),
-        TableViewSectionViewModel(
+        TableSectionViewModel(
             cellViewModels: ["Y", "Z"].map { _generateTestCellViewModel($0) },
             headerViewModel: TestHeaderFooterViewModel(height: 20, viewKind: .header, label: "Y"),
             footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),

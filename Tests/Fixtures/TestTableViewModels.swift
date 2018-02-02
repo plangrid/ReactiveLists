@@ -17,7 +17,7 @@
 import Foundation
 @testable import ReactiveLists
 
-struct TestCellViewModel: TableViewCellViewModel {
+struct TestCellViewModel: TableCellViewModel {
     let rowHeight: CGFloat = 42
     let editingStyle = UITableViewCellEditingStyle.delete
     let shouldHighlight = false
@@ -80,7 +80,7 @@ func generateTestCellViewModel(_ label: String? = nil) -> TestCellViewModel {
     )
 }
 
-struct TestHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
+struct TestHeaderFooterViewModel: TableSectionHeaderFooterViewModel {
     let title: String?
     let height: CGFloat?
     let viewInfo: SupplementaryViewInfo?
