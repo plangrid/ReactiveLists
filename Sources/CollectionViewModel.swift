@@ -68,10 +68,12 @@ public protocol CollectionSupplementaryViewModel: ReusableSupplementaryViewModel
 
 /// Default implementations for `CollectionViewSupplementaryViewModel`.
 public extension CollectionSupplementaryViewModel {
-    var viewInfo: SupplementaryViewInfo? { return nil }
-    var height: CGFloat? { return nil }
 
-    func applyViewModelToView(_ view: UICollectionReusableView) {}
+    /// Default implementation, returns `nil`.
+    var viewInfo: SupplementaryViewInfo? { return nil }
+
+    /// Default implementation, returns `nil`.
+    var height: CGFloat? { return nil }
 }
 
 /// The view model that describes a `UICollectionView`.
