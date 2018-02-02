@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CollectionViewSectionViewModel Structure Reference</title>
+    <title>CollectionSectionViewModel Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,11 +10,11 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/CollectionViewSectionViewModel" class="dashAnchor"></a>
-    <a title="CollectionViewSectionViewModel Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/CollectionSectionViewModel" class="dashAnchor"></a>
+    <a title="CollectionSectionViewModel Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ReactiveLists Docs</a> (78% documented)</p>
+        <p><a href="../index.html">ReactiveLists Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ReactiveLists Reference</a>
         <img id="carat" src="../img/carat.png" />
-        CollectionViewSectionViewModel Structure Reference
+        CollectionSectionViewModel Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -68,22 +68,28 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+                <a href="../Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+                <a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableSupplementaryViewModelProtocol.html">ReusableSupplementaryViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableCellViewModel.html">TableCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableSectionHeaderFooterViewModel.html">TableSectionHeaderFooterViewModel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
               </li>
             </ul>
           </li>
@@ -91,19 +97,19 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
+                <a href="../Structs/CollectionSectionViewModel.html">CollectionSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
+                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewModel.html">TableViewModel</a>
+                <a href="../Structs/TableSectionViewModel.html">TableSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+                <a href="../Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
@@ -123,10 +129,10 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CollectionViewSectionViewModel</h1>
+            <h1>CollectionSectionViewModel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionViewSectionViewModel</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionSectionViewModel</span></code></pre>
 
                 </div>
               </div>
@@ -139,9 +145,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists021CollectionViewSectionD5ModelV10diffingKeySSSgv"></a>
+                    <a name="/s:13ReactiveLists26CollectionSectionViewModelV10diffingKeySSSgv"></a>
                     <a name="//apple_ref/swift/Property/diffingKey" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists021CollectionViewSectionD5ModelV10diffingKeySSSgv">diffingKey</a>
+                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelV10diffingKeySSSgv">diffingKey</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -155,7 +161,7 @@ you are required to provide a key that uniquely identifies this section.</p>
 
 <p>Typically you want to base this diffing key on data that is stored in the model.
 For example:</p>
-<pre class="highlight plaintext"><code> public var diffingKey = { group.identifier }
+<pre class="highlight swift"><code> <span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span><span class="o">.</span><span class="n">identifier</span> <span class="p">}</span>
 </code></pre>
 
                       </div>
@@ -163,7 +169,7 @@ For example:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -173,9 +179,9 @@ For example:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists021CollectionViewSectionD5ModelVACSayAA0cd4CelldF0_pG04cellD6Models_AA0cd13SupplementarydF0_pSg06headerdF0AH06footerdF0SSSg10diffingKeytcfc"></a>
+                    <a name="/s:13ReactiveLists26CollectionSectionViewModelVACSayAA0c4CelleF0_pG04cellE6Models_AA0c13SupplementaryeF0_pSg06headereF0AH06footereF0SSSg10diffingKeytcfc"></a>
                     <a name="//apple_ref/swift/Method/init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists021CollectionViewSectionD5ModelVACSayAA0cd4CelldF0_pG04cellD6Models_AA0cd13SupplementarydF0_pSg06headerdF0AH06footerdF0SSSg10diffingKeytcfc">init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)</a>
+                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelVACSayAA0c4CelleF0_pG04cellE6Models_AA0c13SupplementaryeF0_pSg06headereF0AH06footereF0SSSg10diffingKeytcfc">init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -190,12 +196,12 @@ For example:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a></span><span class="p">],</span>
-    <span class="nv">headerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">footerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a></span><span class="p">],</span>
+    <span class="nv">headerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">footerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-<span class="p">)</span></code></pre>
+    <span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -262,8 +268,8 @@ For example:</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

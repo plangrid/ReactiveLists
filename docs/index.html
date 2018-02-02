@@ -13,7 +13,7 @@
     <a title="ReactiveLists  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">ReactiveLists Docs</a> (78% documented)</p>
+        <p><a href="index.html">ReactiveLists Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -67,22 +67,28 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+                <a href="Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+                <a href="Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ReusableSupplementaryViewModelProtocol.html">ReusableSupplementaryViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableCellViewModel.html">TableCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableSectionHeaderFooterViewModel.html">TableSectionHeaderFooterViewModel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
               </li>
             </ul>
           </li>
@@ -90,19 +96,19 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/CollectionViewModel.html">CollectionViewModel</a>
+                <a href="Structs/CollectionSectionViewModel.html">CollectionSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
+                <a href="Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TableViewModel.html">TableViewModel</a>
+                <a href="Structs/TableSectionViewModel.html">TableSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+                <a href="Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
@@ -129,56 +135,15 @@
 
 <p><a href="https://travis-ci.org/plangrid/ReactiveLists"><img src="https://travis-ci.org/plangrid/ReactiveLists.svg?branch=master" alt="Build Status"></a> <a href="https://cocoapods.org/pods/ReactiveLists"><img src="https://img.shields.io/cocoapods/v/ReactiveLists.svg" alt="Version Status"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/ReactiveLists.svg" alt="license MIT"></a> <a href="https://codecov.io/gh/plangrid/ReactiveLists"><img src="https://codecov.io/gh/plangrid/ReactiveLists/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://plangrid.github.io/ReactiveLists"><img src="https://img.shields.io/cocoapods/p/ReactiveLists.svg" alt="Platform"></a></p>
 
-<p><code>ReactiveLists</code> provides a React-like API for <code>UITableView</code> and <code>UICollectionView</code> that makes it easy to write stateless code that generates user interfaces.</p>
+<p><code>ReactiveLists</code> provides a React-like API for <code>UITableView</code> and <code>UICollectionView</code> that makes it easy to write stateless code that generates user interfaces. </p>
 
-<p>Instead of spreading the definition of your content over various data source methods, you can define the content as concisely as in the real-world example below.</p>
+<p>In our experience this can make UI code significantly easier to read and maintain. Instead of spreading the definition of your content over various data source methods, you can define the content concisely. The table or collection content and layout are immediately obvious by scanning over the source code.</p>
 <h2 id='features' class='heading'>Features</h2>
 
 <ul>
 <li>React-like declarative API for <code>UITableView</code> and <code>UICollectionView</code></li>
 <li>Automatic UI updates, whenever your models change</li>
 </ul>
-<h2 id='real-world-example' class='heading'>Real-world example</h2>
-<pre class="highlight swift"><code><span class="c1">// Describes how model data maps to a `TableViewModel`</span>
-<span class="kd">func</span> <span class="nf">tableViewModelForState</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">AnnotationFilterState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">TableViewModel</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">shareStatusSection</span> <span class="o">=</span> <span class="kt">TableViewSectionViewModel</span><span class="p">(</span>
-        <span class="nv">headerTitle</span><span class="p">:</span> <span class="s">"Share Status"</span><span class="p">,</span>
-        <span class="nv">headerHeight</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-        <span class="nv">cellViewModels</span><span class="p">:</span> <span class="nf">cellViewModelsForGroup</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">shareStatusFilters</span><span class="p">)</span>
-    <span class="p">)</span>
-
-    <span class="k">let</span> <span class="nv">issueFilterSection</span> <span class="o">=</span> <span class="kt">TableViewSectionViewModel</span><span class="p">(</span>
-        <span class="nv">headerTitle</span><span class="p">:</span> <span class="s">"Issue Filters"</span><span class="p">,</span>
-        <span class="nv">headerHeight</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-        <span class="nv">cellViewModels</span><span class="p">:</span> <span class="nf">cellViewModelsForGroup</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">issueFilters</span><span class="p">)</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="kt">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span>
-        <span class="n">shareStatusSection</span><span class="p">,</span>
-        <span class="n">issueFilterSection</span>
-    <span class="p">])</span>
-<span class="p">}</span>
-
-<span class="c1">/// Describes how individual models map to cells</span>
-<span class="kd">static</span> <span class="kd">func</span> <span class="nf">cellViewModelsForGroup</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">group</span><span class="p">:</span> <span class="p">[</span><span class="kt">RepresentableAnnotationFilter</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">TableViewCellViewModel</span><span class="p">]</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">filter</span> <span class="k">in</span>
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">filter</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="kt">AnnotationTypeFilter</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">AnnotationTypeFilterCellViewModel</span><span class="p">(</span><span class="nv">filter</span><span class="p">:</span> <span class="n">filter</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">filter</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="kt">AnnotationFilterType</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">AnnotationFilterCellViewModel</span><span class="p">(</span><span class="nv">filter</span><span class="p">:</span> <span class="n">filter</span><span class="p">)</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">filterGroup</span> <span class="o">=</span> <span class="n">filter</span> <span class="k">as?</span> <span class="kt">AnnotationFilterGroupType</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">AnnotationFilterGroupCellViewModel</span><span class="p">(</span><span class="nv">filterGroup</span><span class="p">:</span><span class="n">filterGroup</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kc">nil</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>In our experience this can make UI code significantly easier to read and maintain. The table content &amp; layout becomes obvious just by scanning over the source code.</p>
-
-<p>For long-term goals and direction, please see <a href="https://github.com/plangrid/ReactiveLists/blob/master/Guides/VISION.md"><code>VISION.md</code></a>.</p>
 <h2 id='project-status' class='heading'>Project Status</h2>
 
 <p>An early version of  the <code>UITableView</code> support has been shipping in the <a href="https://itunes.apple.com/us/app/plangrid-construction-software/id498795789?mt=8">PlanGrid app</a> since late 2015 and is now used accross wide parts of the app. The support for <code>UICollectionView</code> is less mature as we only use <code>UICollectionView</code> in very few places.</p>
@@ -198,6 +163,9 @@
 <td style="text-align: center">⚠️ Experimental</td>
 </tr>
 </tbody></table>
+<h2 id='vision' class='heading'>Vision</h2>
+
+<p>For long-term goals and direction, please see <a href="https://github.com/plangrid/ReactiveLists/blob/master/Guides/VISION.md"><code>VISION.md</code></a>.</p>
 <h2 id='getting-started' class='heading'>Getting Started</h2>
 
 <p>Read our <a href="https://github.com/plangrid/ReactiveLists/blob/master/Guides/Getting%20Started.md">Getting Started Guide</a> to learn how to use <code>ReactiveLists</code>.</p>
@@ -205,7 +173,7 @@
 
 <p>Read our <a href="https://plangrid.github.io/ReactiveLists">documentation here</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
 <h4 id='generating-docs' class='heading'>Generating docs</h4>
-<pre class="highlight shell"><code><span class="gp">$ </span>./scripts/gen_docs.sh
+<pre class="highlight shell"><code><span class="nv">$ </span>./scripts/gen_docs.sh
 </code></pre>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
@@ -238,8 +206,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

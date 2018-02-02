@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TableViewCellViewModel Protocol Reference</title>
+    <title>TableCellViewModel Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,11 +10,11 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/TableViewCellViewModel" class="dashAnchor"></a>
-    <a title="TableViewCellViewModel Protocol Reference"></a>
+    <a name="//apple_ref/swift/Protocol/TableCellViewModel" class="dashAnchor"></a>
+    <a title="TableCellViewModel Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ReactiveLists Docs</a> (78% documented)</p>
+        <p><a href="../index.html">ReactiveLists Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ReactiveLists Reference</a>
         <img id="carat" src="../img/carat.png" />
-        TableViewCellViewModel Protocol Reference
+        TableCellViewModel Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -68,22 +68,28 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+                <a href="../Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+                <a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableSupplementaryViewModelProtocol.html">ReusableSupplementaryViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableCellViewModel.html">TableCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableSectionHeaderFooterViewModel.html">TableSectionHeaderFooterViewModel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
               </li>
             </ul>
           </li>
@@ -91,19 +97,19 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
+                <a href="../Structs/CollectionSectionViewModel.html">CollectionSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
+                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewModel.html">TableViewModel</a>
+                <a href="../Structs/TableSectionViewModel.html">TableSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+                <a href="../Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
@@ -123,10 +129,10 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>TableViewCellViewModel</h1>
+            <h1>TableCellViewModel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TableViewCellViewModel</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TableCellViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a></span></code></pre>
 
                 </div>
               </div>
@@ -139,9 +145,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP19accessibilityFormatAA0e13AccessibilityH0Vv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP19accessibilityFormatAA0d13AccessibilityH0Vv"></a>
                     <a name="//apple_ref/swift/Property/accessibilityFormat" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP19accessibilityFormatAA0e13AccessibilityH0Vv">accessibilityFormat</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP19accessibilityFormatAA0d13AccessibilityH0Vv">accessibilityFormat</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -156,7 +162,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">CellAccessibilityFormat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">CellAccessibilityFormat</span></code></pre>
 
                         </div>
                       </div>
@@ -166,36 +172,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP16registrationInfoAA0d12RegistrationH0Vv"></a>
-                    <a name="//apple_ref/swift/Property/registrationInfo" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP16registrationInfoAA0d12RegistrationH0Vv">registrationInfo</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The registration info for the cell.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">registrationInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP9rowHeight12CoreGraphics7CGFloatVv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP9rowHeight12CoreGraphics7CGFloatVv"></a>
                     <a name="//apple_ref/swift/Property/rowHeight" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP9rowHeight12CoreGraphics7CGFloatVv">rowHeight</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP9rowHeight12CoreGraphics7CGFloatVv">rowHeight</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -211,14 +190,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>44.0</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">rowHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">rowHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -228,9 +207,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP12editingStyleSC07UITablede7EditingH0Ov"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP12editingStyleSC07UITableed7EditingH0Ov"></a>
                     <a name="//apple_ref/swift/Property/editingStyle" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP12editingStyleSC07UITablede7EditingH0Ov">editingStyle</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP12editingStyleSC07UITableed7EditingH0Ov">editingStyle</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -246,14 +225,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>.none</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">editingStyle</span><span class="p">:</span> <span class="kt">UITableViewCellEditingStyle</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">editingStyle</span><span class="p">:</span> <span class="kt">UITableViewCellEditingStyle</span></code></pre>
 
                         </div>
                       </div>
@@ -263,9 +242,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP15shouldHighlightSbv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP15shouldHighlightSbv"></a>
                     <a name="//apple_ref/swift/Property/shouldHighlight" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP15shouldHighlightSbv">shouldHighlight</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP15shouldHighlightSbv">shouldHighlight</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -281,14 +260,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>true</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">shouldHighlight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">shouldHighlight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -298,9 +277,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP24shouldIndentWhileEditingSbv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP24shouldIndentWhileEditingSbv"></a>
                     <a name="//apple_ref/swift/Property/shouldIndentWhileEditing" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP24shouldIndentWhileEditingSbv">shouldIndentWhileEditing</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP24shouldIndentWhileEditingSbv">shouldIndentWhileEditing</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -316,14 +295,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>false</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">shouldIndentWhileEditing</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">shouldIndentWhileEditing</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -333,9 +312,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP16willBeginEditingyycSgv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP16willBeginEditingyycSgv"></a>
                     <a name="//apple_ref/swift/Property/willBeginEditing" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP16willBeginEditingyycSgv">willBeginEditing</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP16willBeginEditingyycSgv">willBeginEditing</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -351,14 +330,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">willBeginEditing</span><span class="p">:</span> <span class="kt">WillBeginEditingClosure</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">willBeginEditing</span><span class="p">:</span> <span class="kt">WillBeginEditingClosure</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -368,9 +347,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP13didEndEditingyycSgv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP13didEndEditingyycSgv"></a>
                     <a name="//apple_ref/swift/Property/didEndEditing" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP13didEndEditingyycSgv">didEndEditing</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP13didEndEditingyycSgv">didEndEditing</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -386,14 +365,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">didEndEditing</span><span class="p">:</span> <span class="kt">DidEndEditingClosure</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">didEndEditing</span><span class="p">:</span> <span class="kt">DidEndEditingClosure</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -403,9 +382,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP18commitEditingStyleySC07UITabledehI0OcSgv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP18commitEditingStyleySC07UITableedhI0OcSgv"></a>
                     <a name="//apple_ref/swift/Property/commitEditingStyle" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP18commitEditingStyleySC07UITabledehI0OcSgv">commitEditingStyle</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP18commitEditingStyleySC07UITableedhI0OcSgv">commitEditingStyle</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -421,14 +400,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">commitEditingStyle</span><span class="p">:</span> <span class="kt">CommitEditingStyleClosure</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">commitEditingStyle</span><span class="p">:</span> <span class="kt">CommitEditingStyleClosure</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -438,9 +417,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP9didSelectyycSgv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP9didSelectyycSgv"></a>
                     <a name="//apple_ref/swift/Property/didSelect" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP9didSelectyycSgv">didSelect</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP9didSelectyycSgv">didSelect</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -456,14 +435,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">didSelect</span><span class="p">:</span> <span class="kt">DidSelectClosure</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">didSelect</span><span class="p">:</span> <span class="kt">DidSelectClosure</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -473,9 +452,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP21accessoryButtonTappedyycSgv"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP21accessoryButtonTappedyycSgv"></a>
                     <a name="//apple_ref/swift/Property/accessoryButtonTapped" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP21accessoryButtonTappedyycSgv">accessoryButtonTapped</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP21accessoryButtonTappedyycSgv">accessoryButtonTapped</a>
                     </code>
                       <span class="declaration-note">
                         Default implementation
@@ -491,14 +470,14 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Default implementation, returns <code>nil</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">accessoryButtonTapped</span><span class="p">:</span> <span class="kt">AccessoryButtonTappedClosure</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">accessoryButtonTapped</span><span class="p">:</span> <span class="kt">AccessoryButtonTappedClosure</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -508,9 +487,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists013TableViewCellD5ModelP05applydf2ToE0ySo07UITabledE0CF"></a>
+                    <a name="/s:13ReactiveLists18TableCellViewModelP05applyef2ToD0ySo07UITableeD0CF"></a>
                     <a name="//apple_ref/swift/Method/applyViewModelToCell(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists013TableViewCellD5ModelP05applydf2ToE0ySo07UITabledE0CF">applyViewModelToCell(_:)</a>
+                    <a class="token" href="#/s:13ReactiveLists18TableCellViewModelP05applyef2ToD0ySo07UITableeD0CF">applyViewModelToCell(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -526,7 +505,7 @@ in the cell model and return the updated cell.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">applyViewModelToCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">cell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applyViewModelToCell</span><span class="p">(</span><span class="n">_</span> <span class="nv">cell</span><span class="p">:</span> <span class="kt">UITableViewCell</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -557,8 +536,8 @@ in the cell model and return the updated cell.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
