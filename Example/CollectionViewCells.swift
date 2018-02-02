@@ -24,7 +24,7 @@ final class CollectionToolCell: UICollectionViewCell {
     @IBOutlet weak var closeButton: UIButton!
 }
 
-final class CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
+final class CollectionToolCellModel: CollectionCellViewModel, DiffableViewModel {
 
     let accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
     let registrationInfo = ViewRegistrationInfo(classType: CollectionToolCell.self, nibName: "CollectionToolCell")
@@ -65,7 +65,7 @@ final class CollectionViewHeaderView: UICollectionReusableView {
     @IBOutlet weak var headerLabel: UILabel!
 }
 
-struct CollectionViewHeaderModel: CollectionViewSupplementaryViewModel {
+struct CollectionViewHeaderModel: CollectionSupplementaryViewModel {
     var title: String?
     var height: CGFloat?
     var viewInfo: SupplementaryViewInfo?

@@ -17,7 +17,7 @@
 import Foundation
 @testable import ReactiveLists
 
-struct TestCollectionCellViewModel: CollectionViewCellViewModel {
+struct TestCollectionCellViewModel: CollectionCellViewModel {
     let label: String
     let didSelect: DidSelectClosure?
     let didDeselect: DidDeselectClosure?
@@ -32,7 +32,7 @@ struct TestCollectionCellViewModel: CollectionViewCellViewModel {
     }
 }
 
-struct TestCollectionViewSupplementaryViewModel: CollectionViewSupplementaryViewModel {
+struct TestCollectionViewSupplementaryViewModel: CollectionSupplementaryViewModel {
     let label: String?
     let height: CGFloat?
     let viewInfo: SupplementaryViewInfo?
