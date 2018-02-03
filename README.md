@@ -13,6 +13,32 @@ In our experience this can make UI code significantly easier to read and maintai
 - React-like declarative API for `UITableView` and `UICollectionView`
 - Automatic UI updates, whenever your models change
 
+## Example
+
+```swift
+// Given a view controller with a table view
+
+// 1. create cell models
+let cell0 = ExampleTableCellModel(...)
+let cell1 = ExampleTableCellModel(...)
+let cell2 = ExampleTableCellModel(...)
+
+// 2. create section models
+let section0 = ExampleTableSectionViewModel(cellViewModels: [cell0, cell1, cell2])
+
+// 3. create table model
+let tableModel = TableViewModel(sectionModels: [section0])
+
+// 4. create driver
+self.driver = TableViewDriver(tableView: self.tableView, tableViewModel: tableModel)
+
+// 5. update driver with new table model as it changes
+let updatedTableModel = self.doSomethingToChangeModels()
+self.driver.tableViewModel = updatedTableModel
+
+// self.tableView will update automatically
+```
+
 ## Project Status
 
 An early version of  the `UITableView` support has been shipping in the [PlanGrid app](https://itunes.apple.com/us/app/plangrid-construction-software/id498795789?mt=8) since late 2015 and is now used accross wide parts of the app. The support for `UICollectionView` is less mature as we only use `UICollectionView` in very few places.
