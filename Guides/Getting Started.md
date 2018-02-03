@@ -13,28 +13,58 @@ $ open ReactiveLists.xcworkspace
 
 ## Primary Components
 
-#### `*SectionViewModel`
+#### `SectionViewModel`
 
 This is either a `CollectionViewSectionViewModel` or a `TableViewSectionViewModel`.  This type describes
 the title and contents of a given section within your `UICollectionView` or `UITableView`
 
-#### `*CellViewModel`
+#### `CellViewModel`
 
 This either `CollectionViewCellViewModel` protocol or `TableViewCellViewModel` protocol.  You create types that conform to these protocols, which are used to configure a given cell in your `UITableView` or `UICollectionView`.
 
 
-#### `*ViewModel`
+#### `ViewModel`
 
 This is either a `TableViewModel` or a `CollectionViewModel`. These are types that describe what your `UITableView` or `UICollectionView` should look like.  You initialize such a `ViewModel` with a set of `SectionModel`s, which
 in turn are initialized with a set of `CellViewModel`s.  After doing this, your `ViewModel`
 contains all the data required to render your `UITableView` or `UICollectionView`
 
-#### `*ViewDriver`
+#### `ViewDriver`
 
 This is either a `TableViewDriver` or a `CollectionViewDriver`.  These types are responsible for calling all the methods to update your view when new data is available.  You initialize your `Driver` with a `UITableView` or `UICollectionView` and then
 as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`.  From there the `Driver` will figure out the differences in the data and re-render your `UITableView` or `UICollectionView` automatically for you.
 
-To get set up, you first need to add a `Driver` (either a `TableViewDriver` or `CollectionViewDriver`) to your view controller:
+## Example
+
+The following illustrates a simple example of how use the components together
+
+````swift
+// Given a view controller with a collection view
+
+// 1. create you cell models
+let cell0 = ExampleTableCellModel(...)
+let cell1 = ExampleTableCellModel(...)
+let cell2 = ExampleTableCellModel(...)
+
+// 2. create you section model
+let section0 = ExampleTableSectionViewModel(cellViewModels: [cell0, cell1, cell2])
+
+// 3. create your table model
+let tableModel = TableViewModel(sectionModels: [section0])
+
+// 3. create your driver
+let driver = TableViewDriver(tableView: ...)
+
+// 4. update your driver with new table model data
+driver.tableViewModel = tableModel
+````
+
+
+## Detailed Example
+
+The following is a more detailed example, to see how this is all integrated into your
+code.  To get set up, you first need to add a `Driver` (either a `TableViewDriver`
+or `CollectionViewDriver`) to your view controller:
 
 ```swift
 struct Person {
