@@ -3,7 +3,7 @@
 `ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView`.  The goal is to provide a more
 declarative interface on top of your normal table and collection code.  To get started with `ReactiveLists`, in addition to reading this document, we encourage you to play around with the [example app included](https://github.com/plangrid/ReactiveLists/tree/master/Example) in the repository.
 
-#### Checkout
+#### Checking out the code
 
 ```bash
 $ git clone https://github.com/plangrid/ReactiveLists.git
@@ -15,12 +15,12 @@ $ open ReactiveLists.xcworkspace
 
 #### `SectionViewModel`
 
-This is either a `CollectionViewSectionViewModel` or a `TableViewSectionViewModel`.  This type describes
+This is either a `CollectionSectionViewModel` or a `TableSectionViewModel`.  This type describes
 the title and contents of a given section within your `UICollectionView` or `UITableView`
 
 #### `CellViewModel`
 
-This either `CollectionViewCellViewModel` protocol or `TableViewCellViewModel` protocol.  You create types that conform to these protocols, which are used to configure a given cell in your `UITableView` or `UICollectionView`.
+This either `CollectionCellViewModel` protocol or `TableCellViewModel` protocol.  You create types that conform to these protocols, which are used to configure a given cell in your `UITableView` or `UICollectionView`.
 
 
 #### `ViewModel`
@@ -36,28 +36,29 @@ as new data becomes available, you construct a new `ViewModel` and set the `Driv
 
 ## Example
 
-The following illustrates a simple example of how use the components together
+```swift
+// Given a view controller with a table view
 
-````swift
-// Given a view controller with a collection view
-
-// 1. create you cell models
+// 1. create cell models
 let cell0 = ExampleTableCellModel(...)
 let cell1 = ExampleTableCellModel(...)
 let cell2 = ExampleTableCellModel(...)
 
-// 2. create you section model
+// 2. create section models
 let section0 = ExampleTableSectionViewModel(cellViewModels: [cell0, cell1, cell2])
 
-// 3. create your table model
+// 3. create table model
 let tableModel = TableViewModel(sectionModels: [section0])
 
-// 3. create your driver
-let driver = TableViewDriver(tableView: ...)
+// 4. create driver
+self.driver = TableViewDriver(tableView: self.tableView, tableViewModel: tableModel)
 
-// 4. update your driver with new table model data
-driver.tableViewModel = tableModel
-````
+// 5. update driver with new table model as it changes
+let updatedTableModel = self.doSomethingToChangeModels()
+self.driver.tableViewModel = updatedTableModel
+
+// self.tableView will update automatically
+```
 
 
 ## Detailed Example
@@ -82,8 +83,7 @@ final class PersonViewController: UITableViewController {
         super.viewDidLoad()
         // Initialize our `TableViewDriver` with our tableView
         self.tableViewDriver = TableViewDriver(tableView: self.tableView)
-        // Register any cell types we will use with their reuse identifiers
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PersonUserCell")
+        self.people = [Person(name: "Tom")]
     }
 }
 ```
@@ -126,7 +126,7 @@ Okay now lets go back and fill in our `viewModel(forState:)` function:
 extension PersonViewController {
     static func viewModel(forState people: [Person]) -> TableViewModel {
             let personCellViewModels = people.map { PersonCellModel(person: $0) }
-            let section = TableViewSectionViewModel(
+            let section = TableSectionViewModel(
               headerTitle: "People",
               headerHeight: 44,
               cellViewModels: personCellViewModels,
@@ -145,7 +145,11 @@ all those models into a single section and then creates a `TableViewModel` from 
 Now all we have to do is to define `PersonCellModel`:
 
 ```swift
-struct PersonCellModel: TableViewCellViewModel, DiffableViewModel {
+
+final class PersonCell: UITableViewCell { }
+
+struct PersonCellModel: TableCellViewModel, DiffableViewModel {
+    var registrationInfo = ViewRegistrationInfo(classType: PersonCell.self)
     var accessibilityFormat: CellAccessibilityFormat = "PersonUserCell"
     let cellIdentifier = "PersonUserCell"
     let editingStyle: UITableViewCellEditingStyle = .delete
