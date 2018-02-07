@@ -1,24 +1,18 @@
 PODS:
   - Dwifft (0.7)
-  - Nimble (7.0.3)
-  - Quick (1.2.0)
   - ReactiveSwift (3.1.0):
     - Result (~> 3.2)
   - Result (3.2.4)
 
 DEPENDENCIES:
   - Dwifft (= 0.7.0)
-  - Nimble (~> 7.0)
-  - Quick (~> 1.2)
   - ReactiveSwift (~> 3.0)
 
 SPEC CHECKSUMS:
   Dwifft: bb97bff975a5f5e62a7492dc29463e9be47dc121
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
 
-PODFILE CHECKSUM: 1fa05954d92f382e0eee2d82007c13ecc8aebc75
+PODFILE CHECKSUM: 169e04e47e7fab589e25f8f25d2404fcee972a4d
 
 COCOAPODS: 1.4.0
