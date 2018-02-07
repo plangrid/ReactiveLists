@@ -8,6 +8,8 @@
 
 In our experience this can make UI code significantly easier to read and maintain. Instead of spreading the definition of your content over various data source methods, you can define the content concisely. The table or collection content and layout are immediately obvious by scanning over the source code.
 
+You can read more about the origins of this library in our [annoucement blog post](https://medium.com/plangrid-technology/open-sourcing-reactivelists-for-ios-3abdf41b770a).
+
 ## Features
 
 - React-like declarative API for `UITableView` and `UICollectionView`
