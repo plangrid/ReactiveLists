@@ -4,8 +4,7 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-
-1.0.0
+0.1.0
 -----
 
 Initial release 🎉
