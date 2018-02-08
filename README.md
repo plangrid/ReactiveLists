@@ -76,12 +76,12 @@ $ ./scripts/gen_docs.sh
 
 ## Installation
 
-### [Cocoapods](https://cocoapods.org/) (recommended)
+### [CocoaPods](https://cocoapods.org/) (recommended)
 
 ```ruby
 use_frameworks!
 
-# For latest release in cocoapods
+# For latest release in CocoaPods
 pod 'ReactiveLists'
 
 # Latest on master branch
