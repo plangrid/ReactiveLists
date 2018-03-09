@@ -14,6 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+import Dwifft
 import UIKit
 
 public protocol CollectionViewCellViewModel {
@@ -68,26 +69,29 @@ public struct CollectionViewModel {
         let cellViewModels: [CollectionViewCellViewModel]?
         let headerViewModel: CollectionViewSupplementaryViewModel?
         let footerViewModel: CollectionViewSupplementaryViewModel?
+        public var diffingKey: String?
 
         public init(
             cellViewModels: [CollectionViewCellViewModel]?,
             headerViewModel: CollectionViewSupplementaryViewModel? = nil,
-            footerViewModel: CollectionViewSupplementaryViewModel? = nil
+            footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+            diffingKey: String? = nil
         ) {
             self.cellViewModels = cellViewModels
             self.headerViewModel = headerViewModel
             self.footerViewModel = footerViewModel
+            self.diffingKey = diffingKey
         }
     }
 
-    public let sectionModels: [SectionModel]?
+    public let sectionModels: [SectionModel]
 
-    public init(sectionModels: [SectionModel]?) {
+    public init(sectionModels: [SectionModel]) {
         self.sectionModels = sectionModels
     }
 
     public subscript(section: Int) -> SectionModel? {
-        guard let sectionModels = self.sectionModels, sectionModels.count > section else { return nil }
+        guard self.sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
 
@@ -96,27 +100,74 @@ public struct CollectionViewModel {
             let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.item else { return nil }
         return cellViewModels[indexPath.item]
     }
+
+    /// Provides a description of the collection view content in terms of diffing keys. These diffing keys
+    /// are used to calculate changesets in the collection and animate changes automatically.
+    var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
+        return SectionedValues(
+            self.sectionModels.map { section in
+                // Ensure we have a diffing key for the current section
+                guard let sectionDiffingKey = section.diffingKey else {
+                    fatalError("When diffing is enabled you need to provide a non-nil diffingKey for each section.")
+                }
+
+                // Ensure we have a diffing key for each cell in this section
+                let cellDiffingKeys: [DiffingKey] = section.cellViewModels?.map { cell in
+                    guard let cell = cell as? DiffableViewModel else {
+                        fatalError("When diffing is enabled you need to provide cells which are DiffableViews.")
+                    }
+                    return "\(type(of: cell))_\(cell.diffingKey)"
+                    } ?? []
+
+                return (sectionDiffingKey, cellDiffingKeys)
+            }
+        )
+    }
 }
 
 // MARK: Initializers without header/footer view models
 
 extension CollectionViewModel.SectionModel {
 
-    public init(cellViewModels: [CollectionViewCellViewModel]?, headerHeight: CGFloat? = nil, footerViewModel: CollectionViewSupplementaryViewModel? = nil) {
-        self.init(cellViewModels: cellViewModels,
-                  headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
-                  footerViewModel: footerViewModel)
+    public init(
+        cellViewModels: [CollectionViewCellViewModel]?,
+        headerHeight: CGFloat? = nil,
+        footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        diffingKey: String? = nil
+    ) {
+        self.init(
+            cellViewModels: cellViewModels,
+            headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
+            footerViewModel: footerViewModel,
+            diffingKey: diffingKey
+        )
     }
 
-    public init(cellViewModels: [CollectionViewCellViewModel]?, headerViewModel: CollectionViewSupplementaryViewModel? = nil, footerHeight: CGFloat? = nil) {
-        self.init(cellViewModels: cellViewModels,
-                  headerViewModel: headerViewModel,
-                  footerViewModel: BlankSupplementaryViewModel(height: footerHeight))
+    public init(
+        cellViewModels: [CollectionViewCellViewModel]?,
+        headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        footerHeight: CGFloat? = nil,
+        diffingKey: String? = nil
+    ) {
+        self.init(
+            cellViewModels: cellViewModels,
+            headerViewModel: headerViewModel,
+            footerViewModel: BlankSupplementaryViewModel(height: footerHeight),
+            diffingKey: diffingKey
+        )
     }
 
-    public init(cellViewModels: [CollectionViewCellViewModel]?, headerHeight: CGFloat? = nil, footerHeight: CGFloat? = nil) {
-        self.init(cellViewModels: cellViewModels,
-                  headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
-                  footerViewModel: BlankSupplementaryViewModel(height: footerHeight))
+    public init(
+        cellViewModels: [CollectionViewCellViewModel]?,
+        headerHeight: CGFloat? = nil,
+        footerHeight: CGFloat? = nil,
+        diffingKey: String? = nil
+    ) {
+        self.init(
+            cellViewModels: cellViewModels,
+            headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
+            footerViewModel: BlankSupplementaryViewModel(height: footerHeight),
+            diffingKey: diffingKey
+        )
     }
 }

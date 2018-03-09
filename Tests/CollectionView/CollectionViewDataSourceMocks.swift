@@ -14,8 +14,8 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import UIKit
 @testable import ReactiveLists
+import UIKit
 
 typealias _RegisterClassCallInfo = (viewClass: AnyClass?, viewKind: SupplementaryViewKind?, reuseIdentifier: String)
 class TestCollectionView: UICollectionView {

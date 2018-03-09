@@ -15,7 +15,6 @@
 //
 
 @testable import ReactiveLists
-import ReactiveSwift
 import XCTest
 
 final class TableViewDataSourceTests: XCTestCase {
@@ -30,6 +29,10 @@ final class TableViewDataSourceTests: XCTestCase {
         self.setupWithTableView(self._tableView)
     }
 
+    /// Helper method to configure a `TableViewDataSource`
+    /// and a `UITableView`.
+    /// - Parameter tableView: The `UITableView` that is used to present
+    /// the content described in the `TableViewModel`.
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
             TableViewModel.SectionModel(
@@ -49,9 +52,10 @@ final class TableViewDataSourceTests: XCTestCase {
                 collapsed: true),
             ], sectionIndexTitles: ["A", "Z", "Z"])
         self._tableViewDataSource = TableViewDataSource(tableView: tableView)
-        self._tableViewDataSource.tableViewModel.value = self._tableViewModel
+        self._tableViewDataSource.tableViewModel = self._tableViewModel
     }
 
+    /// Table view sections described in the table view model are converted into views correctly.
     func testTableViewSections() {
 
         XCTAssertEqual(self._tableViewDataSource.sectionIndexTitles(for: self._tableView)!, ["A", "Z", "Z"])
@@ -79,6 +83,7 @@ final class TableViewDataSourceTests: XCTestCase {
         }
     }
 
+    /// Table view rows described in the table view model are converted into views correctly.
     func testTableViewRows() {
         parameterize(cases: (0, 44), (1, 42), (2, 42), (9, 44)) {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, heightForRowAt: path($0)), $1)
@@ -94,13 +99,7 @@ final class TableViewDataSourceTests: XCTestCase {
         }
     }
 
-    func testNonExistingSectionHeaderFooters() {
-        parameterize(cases: 1, 2, 9) {
-            XCTAssertNil(self._tableViewDataSource._getHeader($0))
-            XCTAssertNil(self._tableViewDataSource._getFooter($0))
-        }
-    }
-
+    /// Table view section headers described in the table view model are converted into views correctly.
     func testExistingSectionHeaders() {
         let section = 0
         let indexKey = path(section)
@@ -108,16 +107,15 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(header?.label, "title_header+A")
         XCTAssertEqual(header?.accessibilityIdentifier, "access_header+0")
 
-        guard let onScreenHeader = self._tableViewDataSource.headersOnScreen[indexKey] as? TestTableViewSectionHeaderFooter else {
+        guard let onScreenHeader = self._tableViewDataSource.tableView(self._tableView, viewForHeaderInSection: indexKey.section) as? TestTableViewSectionHeaderFooter else {
             XCTFail("Did not find the on screen TestTableViewSectionHeaderFooter header")
             return
         }
         XCTAssertEqual(onScreenHeader.label, "title_header+A")
-
-        self._tableViewDataSource.tableView(self._tableView, didEndDisplayingHeaderView: onScreenHeader, forSection: section)
-        XCTAssertNil(self._tableViewDataSource.headersOnScreen[indexKey])
+        XCTAssertNil(self._tableView.headerView(forSection: indexKey.section))
     }
 
+    /// Table view section footers described in the table view model are converted into views correctly.
     func testExistingSectionFooters() {
         let section = 0
         let indexKey = path(section)
@@ -125,22 +123,15 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(footer?.label, "title_footer+A")
         XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
 
-        guard let onScreenFooter = self._tableViewDataSource.footersOnScreen[indexKey] as? TestTableViewSectionHeaderFooter else {
+        guard let onScreenFooter = self._tableViewDataSource.tableView(self._tableView, viewForFooterInSection: indexKey.section) as? TestTableViewSectionHeaderFooter else {
             XCTFail("Did not find the on screen TestTableViewSectionHeaderFooter footer")
             return
         }
         XCTAssertEqual(onScreenFooter.label, "title_footer+A")
-
-        self._tableViewDataSource.tableView(self._tableView, didEndDisplayingFooterView: onScreenFooter, forSection: section)
-        XCTAssertNil(self._tableViewDataSource.footersOnScreen[indexKey])
+        XCTAssertNil(self._tableView.footerView(forSection: indexKey.section))
     }
 
-    func testNonExistingTableViewCells() {
-        parameterize(cases: path(0, 0), path(1, 9), path(9, 0)) {
-            XCTAssertNil(self._tableViewDataSource._getCell($0))
-        }
-    }
-
+    /// Table view cells described in the table view model are converted into views correctly.
     func testExistingTableViewCell() {
         let indexPath = path(1, 2)
         let cell = self._tableViewDataSource._getCell(indexPath)
@@ -148,56 +139,56 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(cell?.accessibilityIdentifier, "access-1.2")
     }
 
+    /// Views are refreshed upon assigning a new table view model to the
+    /// TableViewDataSource.
     func testRefreshAllViewsOnTableViewModelChange() {
-        let ftvds = self._tableViewDataSource
-        var cell10 = ftvds?._getCell(path(1, 0))
-        let header0 = ftvds?._getHeader(0)
-        let footer0 = ftvds?._getFooter(0)
-        var cell00 = ftvds?._getCell(path(0, 0))
-        var header1 = ftvds?._getHeader(1)
-        var footer1 = ftvds?._getFooter(1)
+        let dataSource = self._tableViewDataSource
 
-        XCTAssertEqual(cell10?.label, "A")
+        var header0 = dataSource?._getHeader(0)
+        var footer0 = dataSource?._getFooter(0)
+        var cell00 = dataSource?._getCell(path(0, 0))
+
         XCTAssertEqual(header0?.label, "title_header+A")
         XCTAssertEqual(footer0?.label, "title_footer+A")
         XCTAssertNil(cell00?.label)
+
+        var header1 = dataSource?._getHeader(1)
+        var footer1 = dataSource?._getFooter(1)
+        var cell10 = dataSource?._getCell(path(1, 0))
+
         XCTAssertNil(header1?.label)
         XCTAssertNil(footer1?.label)
+        XCTAssertEqual(cell10?.label, "A")
 
         // Changing the table view model should refresh all views
-        self._tableViewDataSource.tableViewModel.value = _generateTestTableViewModelForRefreshingViews()
+        self._tableViewDataSource.tableViewModel = _generateTestTableViewModelForRefreshingViews()
 
-        cell10 = ftvds?._getCell(path(1, 0))
-        cell00 = ftvds?._getCell(path(0, 0))
-        header1 = ftvds?._getHeader(1)
-        footer1 = ftvds?._getFooter(1)
+        header0 = dataSource?._getHeader(0)
+        footer0 = dataSource?._getFooter(0)
+        cell00 = dataSource?._getCell(path(0, 0))
 
-        XCTAssertEqual(cell10?.label, "Y")
-
-        let headerPredicate = NSPredicate { (header, _) -> Bool in
-            return (header as! TestTableViewSectionHeaderFooter).label == "title_header+X"
-        }
-        let headerExpectation = XCTNSPredicateExpectation(predicate: headerPredicate, object: header0)
-
-        let footerPredicate = NSPredicate { (footer, _) -> Bool in
-            return (footer as! TestTableViewSectionHeaderFooter).label == "title_footer+X"
-        }
-        let footerExpectation = XCTNSPredicateExpectation(predicate: footerPredicate, object: footer0)
-
-        wait(for: [headerExpectation, footerExpectation], timeout: 5)
-
+        XCTAssertEqual(header0?.label, "title_header+X")
+        XCTAssertEqual(footer0?.label, "title_footer+X")
         XCTAssertEqual(cell00?.label, "X")
-        XCTAssertEqual(header1?.label, "title_header+Y")
-        XCTAssertEqual(footer1?.label, "title_footer+Y")
 
-        XCTAssertEqual(cell00?.accessibilityIdentifier, "access-0.0")
-        XCTAssertEqual(cell10?.accessibilityIdentifier, "access-1.0")
         XCTAssertEqual(header0?.accessibilityIdentifier, "access_header+0")
         XCTAssertEqual(footer0?.accessibilityIdentifier, "access_footer+0")
+        XCTAssertEqual(cell00?.accessibilityIdentifier, "access-0.0")
+
+        header1 = dataSource?._getHeader(1)
+        footer1 = dataSource?._getFooter(1)
+        cell10 = dataSource?._getCell(path(1, 0))
+
+        XCTAssertEqual(header1?.label, "title_header+Y")
+        XCTAssertEqual(footer1?.label, "title_footer+Y")
+        XCTAssertEqual(cell10?.label, "Y")
+
         XCTAssertEqual(header1?.accessibilityIdentifier, "access_header+1")
         XCTAssertEqual(footer1?.accessibilityIdentifier, "access_footer+1")
+        XCTAssertEqual(cell10?.accessibilityIdentifier, "access-1.0")
     }
 
+    /// Selected cells are automatically deselected by default.
     func testShouldDeselectUponSelection() {
         let tableView = TestTableView()
         let dataSource = TableViewDataSource(tableView: tableView)
@@ -206,6 +197,8 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(tableView.callsToDeselect, 1)
     }
 
+    /// When the option is disabled, selected cells are no longer
+    /// immediately deselected.
     func testShouldNotDeselectUponSelection() {
         let tableView = TestTableView()
         let dataSource = TableViewDataSource(
@@ -240,7 +233,7 @@ final class TableViewDataSourceTests: XCTestCase {
         let cell1 = MockCellViewModel()
         let cell2 = MockCellViewModel()
         let tableViewModel = TableViewModel(cellViewModels: [cell1, cell2])
-        dataSource.tableViewModel.value = tableViewModel
+        dataSource.tableViewModel = tableViewModel
 
         // Invoke various callbacks for one of the cells
         let indexPath = IndexPath(row: 0, section: 0)
@@ -260,6 +253,28 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertFalse(cell2.didEndEditingCalled)
         XCTAssertNil(cell2.commitEditingStyleCalled)
         XCTAssertFalse(cell2.didSelectCalled)
+    }
+
+    /// When providing a cell that implements the minimum protocol requirements,
+    /// default values for certain properties are provided.
+    func testTableViewCellViewModelDefaults() {
+        struct DefaultCellViewModel: TableViewCellViewModel {
+            var accessibilityFormat: CellAccessibilityFormat = "_"
+            var cellIdentifier: String = "_"
+            func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell { return cell }
+        }
+
+        let defaultCellViewModel = DefaultCellViewModel()
+
+        XCTAssertNil(defaultCellViewModel.willBeginEditing)
+        XCTAssertNil(defaultCellViewModel.didEndEditing)
+        XCTAssertEqual(defaultCellViewModel.editingStyle, .none)
+        XCTAssertEqual(defaultCellViewModel.rowHeight, 44.0)
+        XCTAssertTrue(defaultCellViewModel.shouldHighlight)
+        XCTAssertNil(defaultCellViewModel.commitEditingStyle)
+        XCTAssertNil(defaultCellViewModel.didSelectClosure)
+        XCTAssertNil(defaultCellViewModel.accessoryButtonTappedClosure)
+        XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
     }
 }
 
@@ -281,4 +296,3 @@ private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
             footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),
         ])
 }
-

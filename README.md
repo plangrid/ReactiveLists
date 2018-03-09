@@ -1,5 +1,7 @@
 # ReactiveLists :warning: under construction :warning:
 
+*React-like API for `UITableView` & `UICollectionView`*
+
 [![Build Status](https://travis-ci.org/plangrid/ReactiveLists.svg?branch=master)](https://travis-ci.org/plangrid/ReactiveLists) [![Version Status](https://img.shields.io/cocoapods/v/ReactiveLists.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/ReactiveLists.svg)][mitLink] [![codecov](https://codecov.io/gh/plangrid/ReactiveLists/branch/master/graph/badge.svg)](https://codecov.io/gh/plangrid/ReactiveLists) [![Platform](https://img.shields.io/cocoapods/p/ReactiveLists.svg)][docsLink]
 
 ## About
@@ -28,7 +30,7 @@ pod 'ReactiveLists', :git => 'https://github.com/plangrid/ReactiveLists.git', :b
 
 ## Documentation
 
-Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
+Read our [documentation here][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
 ## Contribute
 

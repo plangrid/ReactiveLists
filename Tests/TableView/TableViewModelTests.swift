@@ -19,7 +19,6 @@ import XCTest
 
 final class TableViewModelTests: XCTestCase {
 
-
     /// The table view model allows subscripting into sections and cells.
     /// If the section or cell at the index does not exist, the table view
     /// model returns `nil`.
@@ -86,7 +85,6 @@ final class TableViewModelTests: XCTestCase {
         XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
         XCTAssertNil(sectionModel.footerViewModel?.viewInfo)
     }
-
 
     /// Table view sections can be successfully initialized
     /// using a custom section header type.

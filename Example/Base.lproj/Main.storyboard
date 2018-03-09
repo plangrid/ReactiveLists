@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XYl-Bn-6Dj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XYl-Bn-6Dj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,11 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Collection View Example-->
+        <!--CollectionView-->
         <scene sceneID="fzw-qP-Rxh">
             <objects>
                 <navigationController id="CE7-Nk-uAw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection View Example" id="Sif-WW-6mp"/>
+                    <tabBarItem key="tabBarItem" title="CollectionView" id="Sif-WW-6mp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oeC-fW-cRf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -24,12 +24,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lg6-Rq-3jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-94" y="-264"/>
+            <point key="canvasLocation" x="382" y="-295"/>
         </scene>
-        <!--Collection View Example-->
+        <!--ReactiveLists-->
         <scene sceneID="e6s-fB-M4q">
             <objects>
-                <collectionViewController title="Collection View Example" id="zbt-zE-Q53" customClass="CollectionViewController" customModule="ReactiveListsExample" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="zbt-zE-Q53" customClass="CollectionViewController" customModule="ReactiveListsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Cjc-qk-6SH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,29 +40,28 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hoF-3w-NVo">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="zbt-zE-Q53" id="LsZ-qM-HA5"/>
                             <outlet property="delegate" destination="zbt-zE-Q53" id="hSB-8I-jqc"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="e4L-Qs-yBx">
-                        <barButtonItem key="leftBarButtonItem" title="Flip" id="MIQ-18-xZW"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="NNC-E5-DgG"/>
+                    <navigationItem key="navigationItem" title="ReactiveLists" id="e4L-Qs-yBx">
+                        <barButtonItem key="leftBarButtonItem" title="Flip" id="MIQ-18-xZW">
+                            <connections>
+                                <action selector="swapSections:" destination="zbt-zE-Q53" id="kMe-4t-rer"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NNC-E5-DgG">
+                            <connections>
+                                <action selector="addUser:" destination="zbt-zE-Q53" id="t7y-Rg-i17"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Sb-1u-sBK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="863.20000000000005" y="-261.31934032983509"/>
+            <point key="canvasLocation" x="1108" y="-295"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lAK-p4-WZz">
@@ -80,13 +79,13 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8A2-iq-1C7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1800" y="-602"/>
+            <point key="canvasLocation" x="-758" y="-664"/>
         </scene>
-        <!--Table View Example-->
+        <!--TableView-->
         <scene sceneID="L05-pa-kbB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ucc-sl-ZPg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Table View Example" id="C42-SC-CZi"/>
+                    <tabBarItem key="tabBarItem" title="TableView" id="C42-SC-CZi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lW0-rJ-hzf">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -99,32 +98,22 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7i-BQ-wmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-90" y="-931"/>
+            <point key="canvasLocation" x="382" y="-1022"/>
         </scene>
-        <!--Table View Example-->
+        <!--ReactiveLists-->
         <scene sceneID="EVQ-gB-ZAP">
             <objects>
-                <tableViewController title="Table View Example" id="vc5-We-rR1" customClass="TableViewController" customModule="ReactiveListsExample" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7X7-yl-mOd">
+                <tableViewController id="vc5-We-rR1" customClass="TableViewController" customModule="ReactiveListsExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="7X7-yl-mOd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ncb-rL-orf">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ncb-rL-orf" id="blh-Dh-J75">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <connections>
                             <outlet property="dataSource" destination="vc5-We-rR1" id="Il3-e1-20T"/>
                             <outlet property="delegate" destination="vc5-We-rR1" id="45c-Nk-bUl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="lXW-AJ-nNN">
+                    <navigationItem key="navigationItem" title="ReactiveLists" id="lXW-AJ-nNN">
                         <barButtonItem key="leftBarButtonItem" title="Flip" id="nJd-4K-Ay2">
                             <connections>
                                 <action selector="swapSections:" destination="vc5-We-rR1" id="ZEP-Hx-Kge"/>
@@ -139,7 +128,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GRY-Iw-AOD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="-929"/>
+            <point key="canvasLocation" x="1108" y="-1022"/>
         </scene>
     </scenes>
 </document>

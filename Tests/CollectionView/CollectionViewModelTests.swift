@@ -15,7 +15,6 @@
 //
 
 @testable import ReactiveLists
-import ReactiveSwift
 import XCTest
 
 final class CollectionViewModelTests: XCTestCase {
@@ -152,6 +151,4 @@ final class CollectionViewModelTests: XCTestCase {
             as? TestCollectionCellViewModel
         XCTAssertEqual(cell_row_0_section_1?.label, "A")
     }
-
 }
-
