@@ -105,7 +105,8 @@ public struct TableViewModel {
     }
 
     public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
-        guard let section = self[indexPath.section],
+        guard indexPath.count >= 2, // In rare cases, we've seen UIKit give us a bad IndexPath
+            let section = self[indexPath.section],
             let cellViewModels = section.cellViewModels, cellViewModels.count > indexPath.row else { return nil }
         return cellViewModels[ifExists: indexPath.row]
     }

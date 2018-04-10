@@ -48,6 +48,7 @@ final class TableViewModelTests: XCTestCase {
         // Returns the section/cell model, if the index path exists within the table view model.
         XCTAssertEqual(tableViewModel[0]?.headerViewModel?.title, "section_1")
         XCTAssertEqual((tableViewModel[IndexPath(row: 0, section: 1)] as? TestCellViewModel)?.label, "A")
+        XCTAssertNil(tableViewModel[[] as IndexPath])
     }
 
     /// The `.isEmpty` property of the table view returns `true` when the table view
