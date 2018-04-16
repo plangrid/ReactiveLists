@@ -4,6 +4,14 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
+0.1.2
+-----
+
+### New
+- Improve semantics of row height API
+	- Make `TableCellViewModel.rowHeight` optional, defaulting to `nil`
+	- Add `TableViewModel.defaultRowHeight`, defaulting to `44.0`
+
 0.1.1
 -----
 
@@ -29,6 +37,8 @@ This release closes the [0.1.1 milestone](https://github.com/plangrid/ReactiveLi
 - `SupplementaryViewKind` now conforms to `Equatable`
 - `CellAccessibilityFormat` now conforms to `Equatable`
 - `SupplementaryAccessibilityFormat` now conforms to `Equatable`
+
+------
 
 0.1.0
 -----
