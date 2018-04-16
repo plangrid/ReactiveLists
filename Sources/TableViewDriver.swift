@@ -262,7 +262,7 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.tableViewModel?[indexPath]?.rowHeight ?? 44
+        return self.tableViewModel?[indexPath]?.rowHeight ?? self.tableViewModel?.defaultRowHeight ?? 44
     }
 
     /// :nodoc:
