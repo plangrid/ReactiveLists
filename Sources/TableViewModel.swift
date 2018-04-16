@@ -23,7 +23,7 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     var accessibilityFormat: CellAccessibilityFormat { get }
 
     /// The height of this cell.
-    var rowHeight: CGFloat { get }
+    var rowHeight: CGFloat? { get }
 
     /// The editing style for this cell.
     var editingStyle: UITableViewCell.EditingStyle { get }
@@ -58,9 +58,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
 /// Default implementations for `TableCellViewModel`.
 public extension TableCellViewModel {
 
-    /// Default implementation, returns `44.0`.
-    var rowHeight: CGFloat {
-        return 44.0
+    /// Default implementation, returns `nil`.
+    var rowHeight: CGFloat? {
+        return nil
     }
 
     /// Default implementation, returns `.none`.
@@ -210,6 +210,9 @@ extension TableSectionViewModel: Collection {
 /// The view model that describes a `UITableView`.
 public struct TableViewModel {
 
+    /// The default row height for this table view.
+    public let defaultRowHeight: CGFloat
+
     /// The section index titles for this table view.
     public let sectionIndexTitles: [String]?
 
@@ -239,9 +242,10 @@ public struct TableViewModel {
     /// - Parameters:
     ///   - sectionModels: the sections that need to be shown in this table view.
     ///   - sectionIndexTitles: the section index titles for this table view.
-    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil) {
+    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil, defaultRowHeight: CGFloat = 44.0) {
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
+        self.defaultRowHeight = defaultRowHeight
     }
 
     /// Returns the section model at the specified index or `nil` if no such section exists.
