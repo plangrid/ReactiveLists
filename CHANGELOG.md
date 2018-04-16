@@ -17,6 +17,10 @@ This release closes the [0.4.0 milestone](https://github.com/plangrid/ReactiveLi
 
 - Upgrades DifferenceKit to 0.7.2  ([#148](https://github.com/plangrid/ReactiveLists/pull/148), [@benasher44](https://github.com/benasher44)
 
+- Improve semantics of row height API
+        - Make `TableCellViewModel.rowHeight` optional, defaulting to `nil`
+        - Add `TableViewModel.defaultRowHeight`, defaulting to `44.0`
+
 ### Changed
 
 - Use `allSatisfy(_:)` in places where we would use `first(where:)` and a `nil` check
@@ -141,6 +145,8 @@ This release closes the [0.1.1 milestone](https://github.com/plangrid/ReactiveLi
 - `SupplementaryViewKind` now conforms to `Equatable`
 - `CellAccessibilityFormat` now conforms to `Equatable`
 - `SupplementaryAccessibilityFormat` now conforms to `Equatable`
+
+------
 
 0.1.0
 -----
