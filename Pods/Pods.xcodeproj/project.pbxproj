@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		1335F571229B0F9C257021B2C794F4F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		56FF68704986C29FA303D6A5C4A574E2 /* Pods-ReactiveListsTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7736BF83D17ED548FA5069D109840EE9 /* Pods-ReactiveListsTests-dummy.m */; };
-		6A0587FD44998BEE044C76E7C7BD0257 /* Pods-ReactiveListsTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 08FB97B2A45B685DA2CCADBE01D87AFC /* Pods-ReactiveListsTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		56FF68704986C29FA303D6A5C4A574E2 /* Pods-ReactiveListsTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */; };
+		6A0587FD44998BEE044C76E7C7BD0257 /* Pods-ReactiveListsTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		799468D9325D86E04AF0B30960B6D3FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		8B0E8D14249EFA66D65213E74F6DCE44 /* Dwifft-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A68ADB8E1B445799D8C2686316BFA3AC /* Dwifft-dummy.m */; };
+		8B0E8D14249EFA66D65213E74F6DCE44 /* Dwifft-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA65B2D155663AF2B3EBF198CB258FCC /* Dwifft-dummy.m */; };
 		92F8250294AAEA1112766F2A35F104F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		937EAB46091EC9C688A125AF70EF83E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		9C88539038EF674A03A8A990E06F95F0 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1EE8C1262B0821985B75D41B96873D /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */; };
-		B2A61DA262AA75D94B37EB5CA1398254 /* Pods-ReactiveLists-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A036FC77E65E60ABB65EDE0C06211A9 /* Pods-ReactiveLists-dummy.m */; };
+		9C88539038EF674A03A8A990E06F95F0 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */; };
+		B2A61DA262AA75D94B37EB5CA1398254 /* Pods-ReactiveLists-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */; };
 		B2B766109580D83FF7037EBFFBE6B5F6 /* SectionedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2F0B54F48123692F204EA97E1AFED /* SectionedValues.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		C1C288939B16FCBF7F0E898DF93D31AC /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DE5A7BBEFD14F15EF7D8777BED6356 /* Dwifft.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D50ED0E705DEBB84FCA7C863FCC5DEBC /* Pods-ReactiveLists-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 179E4E910A7587954B89E2B87EBB562D /* Pods-ReactiveLists-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE51CD26E1DAFDE060FD29B0462C7D77 /* Dwifft-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BF925F741FDE7C1CC1E5C532CCA75A9 /* Dwifft-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D50ED0E705DEBB84FCA7C863FCC5DEBC /* Pods-ReactiveLists-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE51CD26E1DAFDE060FD29B0462C7D77 /* Dwifft-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C2BA5A50611023A7F51C5A2777C9E8B5 /* Dwifft-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3E655DA0DD4743C089592062A97944 /* Dwifft+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714A0CF3D59E2A5017ED020C3158C06 /* Dwifft+UIKit.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F43BC5F37C8A6374512BC49AE782386E /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F6B64C3020DEC9F7D945DB92DB45B0E /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F43BC5F37C8A6374512BC49AE782386E /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,50 +49,50 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08FB97B2A45B685DA2CCADBE01D87AFC /* Pods-ReactiveListsTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveListsTests-umbrella.h"; sourceTree = "<group>"; };
-		179E4E910A7587954B89E2B87EBB562D /* Pods-ReactiveLists-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-umbrella.h"; sourceTree = "<group>"; };
-		1C51B5FC22BA8353F61F60C08D3589F7 /* Pods-ReactiveLists-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-acknowledgements.plist"; sourceTree = "<group>"; };
-		20FF4749130BCDD44550D43A5F249F41 /* Dwifft.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Dwifft.xcconfig; sourceTree = "<group>"; };
+		077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveListsTests-umbrella.h"; sourceTree = "<group>"; };
+		09C4C1CBBBCDD3D3B746B4C4999941F2 /* Pods-ReactiveListsTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveListsTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		0CCD2504C7F9C9FE3E428F56D0CD04A1 /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
+		0DFDF67C51FF6A636685EE674B35EE25 /* Pods-ReactiveLists-ReactiveListsExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-frameworks.sh"; sourceTree = "<group>"; };
+		116574C9FF8EB5FC53C751AC50912AF8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1419FEB1F3B3831559B8E705F8168DB1 /* Dwifft.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Dwifft.modulemap; sourceTree = "<group>"; };
+		157DE719AE8ACA5E30F2AB3F6FB13B49 /* Pods-ReactiveLists-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-acknowledgements.plist"; sourceTree = "<group>"; };
+		16A36A1E59AB34E2D35DF8EDB28E4E09 /* Pods-ReactiveLists-ReactiveListsExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveLists-ReactiveListsExample.modulemap"; sourceTree = "<group>"; };
+		16DC03E217CC617BD498BE8E5EAA14E9 /* Pods-ReactiveLists.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveLists.modulemap"; sourceTree = "<group>"; };
+		18C6E2B544ED038A3DFBC3098DBCBF05 /* Pods-ReactiveListsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26DE5A7BBEFD14F15EF7D8777BED6356 /* Dwifft.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dwifft.swift; path = Dwifft/Dwifft.swift; sourceTree = "<group>"; };
-		27B1AF8F924E4A50945CC281D140D45D /* Pods-ReactiveListsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		318FFBA14F9E082AA7D2129BF455795F /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
+		27479A7D963BEB91D9C07FD6C3874A6A /* Dwifft-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-prefix.pch"; sourceTree = "<group>"; };
+		2AC90E62B734508A0FCFC653E7A31683 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig"; sourceTree = "<group>"; };
+		2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-ReactiveListsExample-umbrella.h"; sourceTree = "<group>"; };
 		3BB2F0B54F48123692F204EA97E1AFED /* SectionedValues.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionedValues.swift; path = Dwifft/SectionedValues.swift; sourceTree = "<group>"; };
-		3C0CCF3DF02E5C482FCC9F96A56E1C1D /* Pods-ReactiveLists-ReactiveListsExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-frameworks.sh"; sourceTree = "<group>"; };
-		40359D6A1E673C4DE48957B5ABCEF41E /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist"; sourceTree = "<group>"; };
-		46206898A31A2425BC92B90236D02B42 /* Pods-ReactiveLists.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ReactiveLists.modulemap"; sourceTree = "<group>"; };
+		3F77C912163DF5DF098F86DFDACE7D90 /* Pods-ReactiveListsTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveListsTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4714A0CF3D59E2A5017ED020C3158C06 /* Dwifft+UIKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dwifft+UIKit.swift"; path = "Dwifft/Dwifft+UIKit.swift"; sourceTree = "<group>"; };
-		47CB3C070ED9392F483CAA5AF5A06AEF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		488E3D05BAB1E99425F1C03BAE498764 /* Dwifft.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Dwifft.modulemap; sourceTree = "<group>"; };
-		4A036FC77E65E60ABB65EDE0C06211A9 /* Pods-ReactiveLists-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-dummy.m"; sourceTree = "<group>"; };
-		5F6B64C3020DEC9F7D945DB92DB45B0E /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-ReactiveListsExample-umbrella.h"; sourceTree = "<group>"; };
+		531995376063C09D3902C2E4C2EFD97E /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown"; sourceTree = "<group>"; };
+		54D84C3A8195E31D703CF5EA48FF9BFF /* Pods-ReactiveLists-ReactiveListsExample-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-resources.sh"; sourceTree = "<group>"; };
+		5646B58EECDC1B23E9C26FA3D6C1D826 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B4999957B7299E107A21BAC5BF91129 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
+		5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveListsTests-dummy.m"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6650AEB9FBC7B66FC49E7258D9F1418A /* Pods-ReactiveListsTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveListsTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		6DA97DCD10C379E227EFD64429739EE9 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig"; sourceTree = "<group>"; };
-		6DDF95CC10C7A4161D7832749E745B52 /* Pods-ReactiveLists-ReactiveListsExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ReactiveLists-ReactiveListsExample.modulemap"; sourceTree = "<group>"; };
-		7456DE87519896D81CE2DC6E7C5EC821 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
-		757FF445C2341EF3E691C7FC6754EDF7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75F34E49E099BB40A151EF62A6D95944 /* Pods-ReactiveListsTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-resources.sh"; sourceTree = "<group>"; };
-		7736BF83D17ED548FA5069D109840EE9 /* Pods-ReactiveListsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveListsTests-dummy.m"; sourceTree = "<group>"; };
+		67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-umbrella.h"; sourceTree = "<group>"; };
+		760D038C2D89DD28E74C47DD91DAF418 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86570C7F10A6E0FA03885DFDA55E50D3 /* Pods-ReactiveListsTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveListsTests.modulemap"; sourceTree = "<group>"; };
+		8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-ReactiveListsExample-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		99CA91F9B6B822440A6745D057EC4654 /* Pods-ReactiveLists-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-resources.sh"; sourceTree = "<group>"; };
-		9B1EE8C1262B0821985B75D41B96873D /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-ReactiveListsExample-dummy.m"; sourceTree = "<group>"; };
-		9BF925F741FDE7C1CC1E5C532CCA75A9 /* Dwifft-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-umbrella.h"; sourceTree = "<group>"; };
-		A68ADB8E1B445799D8C2686316BFA3AC /* Dwifft-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Dwifft-dummy.m"; sourceTree = "<group>"; };
 		AADC26923EDE46C7BB696B743238F208 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveListsTests.framework; path = "Pods-ReactiveListsTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-dummy.m"; sourceTree = "<group>"; };
+		B954323BFD2178B30660FD15B45035A2 /* Pods-ReactiveLists-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-resources.sh"; sourceTree = "<group>"; };
+		BA65B2D155663AF2B3EBF198CB258FCC /* Dwifft-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Dwifft-dummy.m"; sourceTree = "<group>"; };
 		C0716DE66B91FE9DE84FBD057D8FECA1 /* Pods_ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveLists.framework; path = "Pods-ReactiveLists.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C20D3774CAD7131C443795859EFF461E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3BA1C7C689CA0A575A40C9C1C95881D /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
-		C84AF976D461FFD7305B88A4027EBEDF /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; sourceTree = "<group>"; };
-		CBD183CBF4DD149ADCF134E6CCAB1D57 /* Pods-ReactiveLists-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CE86C953CEE5AEA0812A2A2E698FD17F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7CAFE72FC0FD10A45776952879C0D9E /* Pods-ReactiveLists-ReactiveListsExample-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-resources.sh"; sourceTree = "<group>"; };
-		D8E6E5F71746F1DE817E69EAB35876C1 /* Pods-ReactiveListsTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveListsTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		DA35772C923285E771C574948D382C3B /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C2BA5A50611023A7F51C5A2777C9E8B5 /* Dwifft-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-umbrella.h"; sourceTree = "<group>"; };
+		C51AA72514E0DFA60B554C4A6998B621 /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB4E84CCFDA3F36A827251994A714D84 /* Pods_ReactiveLists_ReactiveListsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveLists_ReactiveListsExample.framework; path = "Pods-ReactiveLists-ReactiveListsExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8C9F1E87043C1B28CD6E28D6CCA4D8C /* Dwifft-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-prefix.pch"; sourceTree = "<group>"; };
+		E306A31585C5CF6D786DB047B9D2E9B7 /* Pods-ReactiveListsTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-frameworks.sh"; sourceTree = "<group>"; };
+		E3C6DD930C99A5D7335B4213B81435E7 /* Pods-ReactiveLists-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Dwifft.xcconfig; sourceTree = "<group>"; };
+		E85B28002AF138D1A4148F60758B33AF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2212AA261D7BC23D65DB471B391225B /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist"; sourceTree = "<group>"; };
+		F65A23E0B8C7657BA9DAE7603D66CD6B /* Pods-ReactiveListsTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-resources.sh"; sourceTree = "<group>"; };
 		F7B7BC2E8943A8CCCDB8A44FBAE25A92 /* Dwifft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Dwifft.framework; path = Dwifft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA5150AAC9D2B2E7B6BB0ABFD3C8B370 /* Pods-ReactiveListsTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ReactiveListsTests.modulemap"; sourceTree = "<group>"; };
-		FE8C2C266837E0A60E89758F788CDDA5 /* Pods-ReactiveListsTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-frameworks.sh"; sourceTree = "<group>"; };
+		FC656316CE90F934E2C128C2DD505710 /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,74 +137,25 @@
 				26DE5A7BBEFD14F15EF7D8777BED6356 /* Dwifft.swift */,
 				4714A0CF3D59E2A5017ED020C3158C06 /* Dwifft+UIKit.swift */,
 				3BB2F0B54F48123692F204EA97E1AFED /* SectionedValues.swift */,
-				15FEBD9B84D4285DD576D0360E766B1F /* Support Files */,
+				F9DB0BDDFFC27435E1560E125000ABAC /* Support Files */,
 			);
 			name = Dwifft;
 			path = Dwifft;
 			sourceTree = "<group>";
 		};
-		15FEBD9B84D4285DD576D0360E766B1F /* Support Files */ = {
+		57E84F625A2F883050D5E97B6B02DC2E /* Pods-ReactiveLists-ReactiveListsExample */ = {
 			isa = PBXGroup;
 			children = (
-				488E3D05BAB1E99425F1C03BAE498764 /* Dwifft.modulemap */,
-				20FF4749130BCDD44550D43A5F249F41 /* Dwifft.xcconfig */,
-				A68ADB8E1B445799D8C2686316BFA3AC /* Dwifft-dummy.m */,
-				E8C9F1E87043C1B28CD6E28D6CCA4D8C /* Dwifft-prefix.pch */,
-				9BF925F741FDE7C1CC1E5C532CCA75A9 /* Dwifft-umbrella.h */,
-				47CB3C070ED9392F483CAA5AF5A06AEF /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Dwifft";
-			sourceTree = "<group>";
-		};
-		248B2B61C1F8EEC4A886004DEDA79AC6 /* Pods-ReactiveLists */ = {
-			isa = PBXGroup;
-			children = (
-				C20D3774CAD7131C443795859EFF461E /* Info.plist */,
-				46206898A31A2425BC92B90236D02B42 /* Pods-ReactiveLists.modulemap */,
-				CBD183CBF4DD149ADCF134E6CCAB1D57 /* Pods-ReactiveLists-acknowledgements.markdown */,
-				1C51B5FC22BA8353F61F60C08D3589F7 /* Pods-ReactiveLists-acknowledgements.plist */,
-				4A036FC77E65E60ABB65EDE0C06211A9 /* Pods-ReactiveLists-dummy.m */,
-				99CA91F9B6B822440A6745D057EC4654 /* Pods-ReactiveLists-resources.sh */,
-				179E4E910A7587954B89E2B87EBB562D /* Pods-ReactiveLists-umbrella.h */,
-				C3BA1C7C689CA0A575A40C9C1C95881D /* Pods-ReactiveLists.debug.xcconfig */,
-				7456DE87519896D81CE2DC6E7C5EC821 /* Pods-ReactiveLists.release.xcconfig */,
-			);
-			name = "Pods-ReactiveLists";
-			path = "Target Support Files/Pods-ReactiveLists";
-			sourceTree = "<group>";
-		};
-		3324B2ADE8DAE22354BEE81EB30C263F /* Pods-ReactiveListsTests */ = {
-			isa = PBXGroup;
-			children = (
-				CE86C953CEE5AEA0812A2A2E698FD17F /* Info.plist */,
-				FA5150AAC9D2B2E7B6BB0ABFD3C8B370 /* Pods-ReactiveListsTests.modulemap */,
-				D8E6E5F71746F1DE817E69EAB35876C1 /* Pods-ReactiveListsTests-acknowledgements.markdown */,
-				6650AEB9FBC7B66FC49E7258D9F1418A /* Pods-ReactiveListsTests-acknowledgements.plist */,
-				7736BF83D17ED548FA5069D109840EE9 /* Pods-ReactiveListsTests-dummy.m */,
-				FE8C2C266837E0A60E89758F788CDDA5 /* Pods-ReactiveListsTests-frameworks.sh */,
-				75F34E49E099BB40A151EF62A6D95944 /* Pods-ReactiveListsTests-resources.sh */,
-				08FB97B2A45B685DA2CCADBE01D87AFC /* Pods-ReactiveListsTests-umbrella.h */,
-				27B1AF8F924E4A50945CC281D140D45D /* Pods-ReactiveListsTests.debug.xcconfig */,
-				318FFBA14F9E082AA7D2129BF455795F /* Pods-ReactiveListsTests.release.xcconfig */,
-			);
-			name = "Pods-ReactiveListsTests";
-			path = "Target Support Files/Pods-ReactiveListsTests";
-			sourceTree = "<group>";
-		};
-		40FF74F773C8259385275E55ACF32600 /* Pods-ReactiveLists-ReactiveListsExample */ = {
-			isa = PBXGroup;
-			children = (
-				757FF445C2341EF3E691C7FC6754EDF7 /* Info.plist */,
-				6DDF95CC10C7A4161D7832749E745B52 /* Pods-ReactiveLists-ReactiveListsExample.modulemap */,
-				DA35772C923285E771C574948D382C3B /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown */,
-				40359D6A1E673C4DE48957B5ABCEF41E /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist */,
-				9B1EE8C1262B0821985B75D41B96873D /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */,
-				3C0CCF3DF02E5C482FCC9F96A56E1C1D /* Pods-ReactiveLists-ReactiveListsExample-frameworks.sh */,
-				D7CAFE72FC0FD10A45776952879C0D9E /* Pods-ReactiveLists-ReactiveListsExample-resources.sh */,
-				5F6B64C3020DEC9F7D945DB92DB45B0E /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */,
-				6DA97DCD10C379E227EFD64429739EE9 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */,
-				C84AF976D461FFD7305B88A4027EBEDF /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */,
+				116574C9FF8EB5FC53C751AC50912AF8 /* Info.plist */,
+				16A36A1E59AB34E2D35DF8EDB28E4E09 /* Pods-ReactiveLists-ReactiveListsExample.modulemap */,
+				531995376063C09D3902C2E4C2EFD97E /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown */,
+				F2212AA261D7BC23D65DB471B391225B /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist */,
+				8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */,
+				0DFDF67C51FF6A636685EE674B35EE25 /* Pods-ReactiveLists-ReactiveListsExample-frameworks.sh */,
+				54D84C3A8195E31D703CF5EA48FF9BFF /* Pods-ReactiveLists-ReactiveListsExample-resources.sh */,
+				2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */,
+				2AC90E62B734508A0FCFC653E7A31683 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */,
+				FC656316CE90F934E2C128C2DD505710 /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */,
 			);
 			name = "Pods-ReactiveLists-ReactiveListsExample";
 			path = "Target Support Files/Pods-ReactiveLists-ReactiveListsExample";
@@ -230,6 +181,41 @@
 				AADC26923EDE46C7BB696B743238F208 /* Pods_ReactiveListsTests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8DE108BB8D0BF433E72B9837DEBF958A /* Pods-ReactiveLists */ = {
+			isa = PBXGroup;
+			children = (
+				E85B28002AF138D1A4148F60758B33AF /* Info.plist */,
+				16DC03E217CC617BD498BE8E5EAA14E9 /* Pods-ReactiveLists.modulemap */,
+				E3C6DD930C99A5D7335B4213B81435E7 /* Pods-ReactiveLists-acknowledgements.markdown */,
+				157DE719AE8ACA5E30F2AB3F6FB13B49 /* Pods-ReactiveLists-acknowledgements.plist */,
+				AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */,
+				B954323BFD2178B30660FD15B45035A2 /* Pods-ReactiveLists-resources.sh */,
+				67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */,
+				0CCD2504C7F9C9FE3E428F56D0CD04A1 /* Pods-ReactiveLists.debug.xcconfig */,
+				5B4999957B7299E107A21BAC5BF91129 /* Pods-ReactiveLists.release.xcconfig */,
+			);
+			name = "Pods-ReactiveLists";
+			path = "Target Support Files/Pods-ReactiveLists";
+			sourceTree = "<group>";
+		};
+		9DD877D5EA602B53838F2B98295322B8 /* Pods-ReactiveListsTests */ = {
+			isa = PBXGroup;
+			children = (
+				760D038C2D89DD28E74C47DD91DAF418 /* Info.plist */,
+				86570C7F10A6E0FA03885DFDA55E50D3 /* Pods-ReactiveListsTests.modulemap */,
+				3F77C912163DF5DF098F86DFDACE7D90 /* Pods-ReactiveListsTests-acknowledgements.markdown */,
+				09C4C1CBBBCDD3D3B746B4C4999941F2 /* Pods-ReactiveListsTests-acknowledgements.plist */,
+				5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */,
+				E306A31585C5CF6D786DB047B9D2E9B7 /* Pods-ReactiveListsTests-frameworks.sh */,
+				F65A23E0B8C7657BA9DAE7603D66CD6B /* Pods-ReactiveListsTests-resources.sh */,
+				077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */,
+				18C6E2B544ED038A3DFBC3098DBCBF05 /* Pods-ReactiveListsTests.debug.xcconfig */,
+				C51AA72514E0DFA60B554C4A6998B621 /* Pods-ReactiveListsTests.release.xcconfig */,
+			);
+			name = "Pods-ReactiveListsTests";
+			path = "Target Support Files/Pods-ReactiveListsTests";
 			sourceTree = "<group>";
 		};
 		A1DB7DB730E0FC7512FBC1E5DD3266F7 /* SwiftLint */ = {
@@ -268,11 +254,25 @@
 		E653DFA019544D2D69A77312BDCAFCCE /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				248B2B61C1F8EEC4A886004DEDA79AC6 /* Pods-ReactiveLists */,
-				40FF74F773C8259385275E55ACF32600 /* Pods-ReactiveLists-ReactiveListsExample */,
-				3324B2ADE8DAE22354BEE81EB30C263F /* Pods-ReactiveListsTests */,
+				8DE108BB8D0BF433E72B9837DEBF958A /* Pods-ReactiveLists */,
+				57E84F625A2F883050D5E97B6B02DC2E /* Pods-ReactiveLists-ReactiveListsExample */,
+				9DD877D5EA602B53838F2B98295322B8 /* Pods-ReactiveListsTests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		F9DB0BDDFFC27435E1560E125000ABAC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1419FEB1F3B3831559B8E705F8168DB1 /* Dwifft.modulemap */,
+				E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */,
+				BA65B2D155663AF2B3EBF198CB258FCC /* Dwifft-dummy.m */,
+				27479A7D963BEB91D9C07FD6C3874A6A /* Dwifft-prefix.pch */,
+				C2BA5A50611023A7F51C5A2777C9E8B5 /* Dwifft-umbrella.h */,
+				5646B58EECDC1B23E9C26FA3D6C1D826 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Dwifft";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,8 +390,8 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -473,76 +473,11 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0B75A3B85697E40B28F682FA99ACF9E1 /* Debug */ = {
+		0005581A4871D117B863381274299A03 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DA97DCD10C379E227EFD64429739EE9 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */;
+			baseConfigurationReference = 18C6E2B544ED038A3DFBC3098DBCBF05 /* Pods-ReactiveListsTests.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_ReactiveLists_ReactiveListsExample;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		18204464E992D1C133C1EA39442CCC07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20FF4749130BCDD44550D43A5F249F41 /* Dwifft.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Dwifft/Dwifft-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Dwifft/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
-				PRODUCT_NAME = Dwifft;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4A670F11E4B730AFB6963BFFB7F9F61E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 318FFBA14F9E082AA7D2129BF455795F /* Pods-ReactiveListsTests.release.xcconfig */;
-			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -562,21 +497,22 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_ReactiveListsTests;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		54792490DEF036361ED1A2E56B1CE46B /* Release */ = {
+		0F070FA57D2A73D97096FEF55A3F4F6D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7456DE87519896D81CE2DC6E7C5EC821 /* Pods-ReactiveLists.release.xcconfig */;
+			baseConfigurationReference = 5B4999957B7299E107A21BAC5BF91129 /* Pods-ReactiveLists.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -596,7 +532,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_ReactiveLists;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -607,65 +543,11 @@
 			};
 			name = Release;
 		};
-		6F9224530522DD3C735EC96CF142642E /* Release */ = {
+		186CE248027E9804EF76DCD54A68C690 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C51AA72514E0DFA60B554C4A6998B621 /* Pods-ReactiveListsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		91BEC72DDDF164C34B1B46B20861B5D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27B1AF8F924E4A50945CC281D140D45D /* Pods-ReactiveListsTests.debug.xcconfig */;
-			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -685,52 +567,18 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_ReactiveListsTests;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		A0F02CBC3D3AB9261A39CD65383F0680 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3BA1C7C689CA0A575A40C9C1C95881D /* Pods-ReactiveLists.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ReactiveLists/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_ReactiveLists;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B57951D085A1B98A97F8A1062A5E5C5B /* Debug */ = {
+		199D972A13F2B4C56847F7A89CCA83BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -740,10 +588,12 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -751,6 +601,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -759,6 +610,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -783,17 +635,52 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		D93B9F6501649B40B51436F4518D1ED8 /* Release */ = {
+		29E6DB2EFA422BC48E3799E50CB209B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C84AF976D461FFD7305B88A4027EBEDF /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */;
+			baseConfigurationReference = 0CCD2504C7F9C9FE3E428F56D0CD04A1 /* Pods-ReactiveLists.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ReactiveLists/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5B07B5636D7113F6B823B6B44F7D980A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2AC90E62B734508A0FCFC653E7A31683 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -813,20 +700,20 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_ReactiveLists_ReactiveListsExample;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		FE3421495192033D50C91AE1011A4AE1 /* Debug */ = {
+		A42CBED13D9CEAC60F4FF092F009B284 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20FF4749130BCDD44550D43A5F249F41 /* Dwifft.xcconfig */;
+			baseConfigurationReference = E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -843,6 +730,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
+				PRODUCT_MODULE_NAME = Dwifft;
 				PRODUCT_NAME = Dwifft;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -855,14 +743,140 @@
 			};
 			name = Debug;
 		};
+		A7E8FD58C1A4C7325359A0017510D8BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Dwifft/Dwifft-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Dwifft/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
+				PRODUCT_MODULE_NAME = Dwifft;
+				PRODUCT_NAME = Dwifft;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A82DCCE90002CA93A350FF96FC075EE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC656316CE90F934E2C128C2DD505710 /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FDB2FC4A1E5891381CD9D922145497F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		076FD9CC0DF93ADD8871D8B90F239645 /* Build configuration list for PBXNativeTarget "Dwifft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FE3421495192033D50C91AE1011A4AE1 /* Debug */,
-				18204464E992D1C133C1EA39442CCC07 /* Release */,
+				A42CBED13D9CEAC60F4FF092F009B284 /* Debug */,
+				A7E8FD58C1A4C7325359A0017510D8BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -870,8 +884,8 @@
 		0D95AA82390FAFD204F44B3C774AAFE5 /* Build configuration list for PBXNativeTarget "Pods-ReactiveLists" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A0F02CBC3D3AB9261A39CD65383F0680 /* Debug */,
-				54792490DEF036361ED1A2E56B1CE46B /* Release */,
+				29E6DB2EFA422BC48E3799E50CB209B5 /* Debug */,
+				0F070FA57D2A73D97096FEF55A3F4F6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -879,8 +893,8 @@
 		0F04487ED3AA543B214A0FB84A5B900D /* Build configuration list for PBXNativeTarget "Pods-ReactiveListsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				91BEC72DDDF164C34B1B46B20861B5D9 /* Debug */,
-				4A670F11E4B730AFB6963BFFB7F9F61E /* Release */,
+				0005581A4871D117B863381274299A03 /* Debug */,
+				186CE248027E9804EF76DCD54A68C690 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -888,8 +902,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B57951D085A1B98A97F8A1062A5E5C5B /* Debug */,
-				6F9224530522DD3C735EC96CF142642E /* Release */,
+				199D972A13F2B4C56847F7A89CCA83BC /* Debug */,
+				FDB2FC4A1E5891381CD9D922145497F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -897,8 +911,8 @@
 		DCE645A841D1C234DDC3E361DDDA3ABC /* Build configuration list for PBXNativeTarget "Pods-ReactiveLists-ReactiveListsExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0B75A3B85697E40B28F682FA99ACF9E1 /* Debug */,
-				D93B9F6501649B40B51436F4518D1ED8 /* Release */,
+				5B07B5636D7113F6B823B6B44F7D980A /* Debug */,
+				A82DCCE90002CA93A350FF96FC075EE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
