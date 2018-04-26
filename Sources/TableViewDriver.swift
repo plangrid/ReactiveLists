@@ -110,8 +110,7 @@ open class TableViewDriver: NSObject {
         let visibleIndexPaths = self.tableView.indexPathsForVisibleRows ?? []
 
         // Collect the index paths and views models to reload
-        let indexPathsAndViewModelsToReload: [(IndexPath, TableCellViewModel)]
-        indexPathsAndViewModelsToReload = visibleIndexPaths.flatMap { indexPath in
+        let indexPathsAndViewModelsToReload = visibleIndexPaths.compactMap { indexPath in
             return self.tableViewModel?[indexPath].map { (indexPath, $0) }
         }
 
