@@ -240,7 +240,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
 
         // Collect the index paths and views models to reload
         let indexPathsAndViewModelsToReload: [(IndexPath, TableViewCellViewModel)]
-        indexPathsAndViewModelsToReload = visibleIndexPaths.flatMap { indexPath in
+        indexPathsAndViewModelsToReload = visibleIndexPaths.compactMap { indexPath in
             if locationFilter?(.cell(indexPath)) ?? true {
                 return self.tableViewModel?[indexPath].map { (indexPath, $0) }
             }
