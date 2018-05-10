@@ -17,30 +17,30 @@
 import Foundation
 import ReactiveLists
 
-struct UserCellModel: TableViewCellViewModel, DiffableViewModel {
+struct ToolTableCellModel: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
     let cellIdentifier = "TableUserCell"
 
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete
 
-    let user: User
+    let tool: Tool
 
-    init(user: User, onDeleteClosure: @escaping (User) -> Void) {
-        self.user = user
+    init(tool: Tool, onDeleteClosure: @escaping (Tool) -> Void) {
+        self.tool = tool
         self.commitEditingStyle = { style in
             if style == .delete {
-                onDeleteClosure(user)
+                onDeleteClosure(tool)
             }
         }
     }
 
     func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
-        cell.textLabel?.text = self.user.name
+        cell.textLabel?.text = "\(self.tool.type.emoji) \(self.tool.type.name)"
         return cell
     }
 
     var diffingKey: String {
-        return self.user.uuid.uuidString
+        return self.tool.uuid.uuidString
     }
 }

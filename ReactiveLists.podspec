@@ -17,5 +17,4 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency 'Dwifft', '~> 0.7.0'
-  s.dependency 'ReactiveSwift', '~> 3.0'
 end

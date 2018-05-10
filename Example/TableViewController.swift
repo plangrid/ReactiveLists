@@ -19,15 +19,15 @@ import UIKit
 
 final class TableViewController: UITableViewController {
 
-    var tableViewDataSource: TableViewDataSource?
-    var groups: [UserGroup] = [] {
+    var tableViewDataSource: TableViewDriver?
+    var groups: [ToolGroup] = [] {
         didSet {
             self.tableViewDataSource?.tableViewModel = TableViewController.viewModel(
                 forState: groups,
-                onDeleteClosure: { deletedUser in
+                onDeleteClosure: { deletedTool in
                     // Iterate through the user groups and find the deleted user.
                     for (index, group) in self.groups.enumerated() {
-                        self.groups[index].users = group.users.filter { $0.uuid != deletedUser.uuid }
+                        self.groups[index].tools = group.tools.filter { $0.uuid != deletedTool.uuid }
                     }
                 }
             )
@@ -37,17 +37,17 @@ final class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableViewDataSource = TableViewDataSource(tableView: self.tableView, automaticDiffEnabled: true)
+        self.tableViewDataSource = TableViewDriver(tableView: self.tableView, automaticDiffEnabled: true)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableUserCell")
 
         self.groups = [
-            UserGroup(
-                name: "Premium",
-                users: [User(name: "Premium1"), User(name: "Premium2")]
+            ToolGroup(
+                name: "OLD TOOLS",
+                tools: [Tool(type: .wrench), Tool(type: .hammer), Tool(type: .clamp), Tool(type: .nutBolt), Tool(type: .crane)]
             ),
-            UserGroup(
-                name: "Regular",
-                users: [User(name: "Regular1"), User(name: "Regular2")]
+            ToolGroup(
+                name: "NEW TOOLS",
+                tools: [Tool(type: .wrench), Tool(type: .hammer), Tool(type: .clamp), Tool(type: .nutBolt), Tool(type: .crane)]
             ),
         ]
     }
@@ -58,8 +58,8 @@ final class TableViewController: UITableViewController {
         self.groups[1] = group0
     }
 
-    @IBAction func addUser(_ sender: Any) {
-        self.groups[0].users.append(User(name: "New User!"))
+    @IBAction func addTool(_ sender: Any) {
+        self.groups[0].tools.append(Tool.randomTool())
     }
 }
 
@@ -69,9 +69,9 @@ extension TableViewController {
 
     /// Pure function mapping new state to a new `TableViewModel`.  This is invoked each time the state updates
     /// in order for ReactiveLists to update the UI.
-    static func viewModel(forState groups: [UserGroup], onDeleteClosure: @escaping (User) -> Void) -> TableViewModel {
+    static func viewModel(forState groups: [ToolGroup], onDeleteClosure: @escaping (Tool) -> Void) -> TableViewModel {
         let sections: [TableViewModel.SectionModel] = groups.map { group in
-            let cellViewModels = group.users.map { UserCellModel(user: $0, onDeleteClosure: onDeleteClosure) }
+            let cellViewModels = group.tools.map { ToolTableCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
             return TableViewModel.SectionModel(
                 headerTitle: group.name,
                 headerHeight: 44,

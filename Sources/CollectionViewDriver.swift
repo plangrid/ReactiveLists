@@ -17,12 +17,27 @@
 import Dwifft
 import UIKit
 
-/// A Data Source that drives the Collection Views appereance and behavior in terms of view models for the individual cells.
+/// A data source that drives the collection views appereance and behavior based on an underlying
+/// `CollectionViewModel`.
 @objc
-public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    /// The collection view to which the `CollectionViewModel` is rendered.
     public let collectionView: UICollectionView
 
+    /// Describes the current UI state of the collection view.
+    ///
+    /// When this property is set, the UI of the related `UICollectionView` will be updated.
+    /// If not only the content of individual cells/sections has changed, but instead
+    /// cells/sections were moved/inserted/deleted, the behavior of this setter depends on the
+    /// value of the `automaticDiffingEnabled` property.
+    ///
+    /// If `automaticDiffingEnabled` is set to `true`, and cells/sections have been moved/inserted/deleted,
+    /// updating this property will result in the UI of the collection view being updated automatically.
+    ///
+    /// If `automaticDiffingEnabled` is set to `false`, and cells/sections have been moved/inserted/deleted,
+    /// the caller must update the `UICollectionView` state manually, to bring it back in sync with
+    /// the new model, e.g. by calling `reloadData()` on the collection view.
     public var collectionViewModel: CollectionViewModel? {
         willSet {
             assert(Thread.isMainThread, "Must set \(#function) on main thread")
@@ -32,31 +47,86 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
         }
     }
 
-    var _cellsOnScreen: [IndexPath: UICollectionViewCell] = [:]
-    var _headersOnScreen: [IndexPath: UICollectionReusableView] = [:]
-    var _footersOnScreen: [IndexPath: UICollectionReusableView] = [:]
+    /// If this property is set to `true`, updating the `collectionViewModel` will always
+    /// automatically lead to updating the UI state of the `UICollectionView`, even if cells/sections
+    /// were moved/inserted/deleted.
+    ///
+    /// For details, see the documentation for `CollectionViewDataSource.collectionViewModel`.
+    public let automaticDiffingEnabled: Bool
+
     private var _shouldDeselectUponSelection: Bool
-
     private var _collectionViewDiffer: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
-    private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilValue = false
-
     private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
 
+    /// Initializes a data source that drives a `UICollectionView` based on `CollectionViewModel`.
+    ///
+    /// - Parameters:
+    ///   - collectionView: the collection view to which this data source will render its view models.
+    ///   - collectionViewModel: the view model that describes the initial state of this collection view.
+    ///   - shouldDeselectUponSelection: indicates if selected cells should immediately be
+    ///                                  deselected. Defaults to `true`.
+    ///   - automaticDiffingEnabled: defines whether or not this data source updates the collection
+    ///                              view automatically when cells/sections are moved/inserted/deleted.
+    ///                              Defaults to `false`.
     public init(
-        collectionViewModel: CollectionViewModel? = nil,
         collectionView: UICollectionView,
+        collectionViewModel: CollectionViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
         automaticDiffingEnabled: Bool = false
     ) {
         self.collectionViewModel = collectionViewModel
         self.collectionView = collectionView
-        self._automaticDiffingEnabled = automaticDiffingEnabled
+        self.automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         collectionView.dataSource = self
         collectionView.delegate = self
         self._collectionViewModelDidChange()
+    }
+
+    // MARK: Change and UI Update Handling
+
+    /// Updates all currently visible cells and sections, such that they reflect the latest
+    /// state decribed in their respective view models. Typically this method should not be
+    /// called directly, as it is called automatically whenever the `collectionViewModel` property
+    /// is updated.
+    public func refreshViews() {
+        guard let sections = self.collectionViewModel?.sectionModels, !sections.isEmpty else {
+            return
+        }
+
+        let visibleIndexPathsForItems = self.collectionView.indexPathsForVisibleItems
+        for indexPath in visibleIndexPathsForItems {
+            guard let model = self.collectionViewModel?[indexPath] else { continue }
+            guard let cell = self.collectionView.cellForItem(at: indexPath) else { continue }
+            model.applyViewModelToCell(cell)
+            cell.accessibilityIdentifier = model.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
+        }
+
+        let visibleIndexPathsForHeaders = self.collectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionHeader)
+        for indexPath in visibleIndexPathsForHeaders {
+            guard let headerModel = self.collectionViewModel?[indexPath.section]?.headerViewModel else {
+                continue
+            }
+            guard let headerView = self.collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath) else {
+                continue
+            }
+            headerModel.applyViewModelToView(headerView)
+            headerView.accessibilityIdentifier = headerModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(indexPath.section)
+        }
+
+        let visibleIndexPathsForFooters = self.collectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionFooter)
+        for indexPath in visibleIndexPathsForFooters {
+            guard let footerModel = self.collectionViewModel?[indexPath.section]?.footerViewModel else {
+                continue
+            }
+            guard let footerView = self.collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath) else {
+                continue
+            }
+            footerModel.applyViewModelToView(footerView)
+            footerView.accessibilityIdentifier = footerModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(indexPath.section)
+        }
     }
 
     private func _collectionViewModelDidChange() {
@@ -68,7 +138,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
             return
         }
 
-        if self._automaticDiffingEnabled {
+        if self.automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
                 // For the first non-nil value, we want to reload data, to avoid a weird
                 // animation where we animate in the initial state
@@ -95,6 +165,8 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
             self.refreshViews()
         }
     }
+
+    // MARK: UICollectionViewDataSource / UICollectionViewDelegate implementation
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.collectionViewModel?.sectionModels.count ?? 0
@@ -125,19 +197,8 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
             viewModel.applyViewModelToView(view)
             view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
         } else {
-            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewDataSource._hiddenSupplementaryViewIdentifier, for: indexPath)
+            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewDriver._hiddenSupplementaryViewIdentifier, for: indexPath)
         }
-
-        let indexPathKey = self._indexPathForSupplementaryViewInSection(section)
-        if let elementKind = elementKind {
-            switch elementKind {
-            case .header:
-                self._headersOnScreen[indexPathKey] = view
-            case .footer:
-                self._footersOnScreen[indexPathKey] = view
-            }
-        }
-
         return view
     }
 
@@ -152,24 +213,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
             cell = UICollectionViewCell()
         }
 
-        self._cellsOnScreen[indexPath] = cell
         return cell
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self._cellsOnScreen.removeValue(forKey: indexPath)
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        guard let viewKind = SupplementaryViewKind(collectionElementKindString: elementKind) else { return }
-        let indexPathKey = self._indexPathForSupplementaryViewInSection(indexPath.section)
-
-        switch viewKind {
-        case .header:
-            self._headersOnScreen.removeValue(forKey: indexPathKey)
-        case .footer:
-            self._footersOnScreen.removeValue(forKey: indexPathKey)
-        }
     }
 
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
@@ -187,32 +231,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
         self.collectionViewModel?[indexPath]?.didDeselectClosure?()
     }
 
-    public func refreshViews() {
-        guard let sections = self.collectionViewModel?.sectionModels, !sections.isEmpty else {
-            return
-        }
-
-        for (index, cell) in self._cellsOnScreen {
-            if let viewModel = self.collectionViewModel?[index] {
-                viewModel.applyViewModelToCell(cell)
-                cell.accessibilityIdentifier = viewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(index)
-            }
-        }
-
-        for (index, view) in self._headersOnScreen {
-            guard let sectionModel = self.collectionViewModel?[index.section],
-                let viewModel = sectionModel.headerViewModel else { continue }
-            viewModel.applyViewModelToView(view)
-            view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(index.section)
-        }
-
-        for (index, view) in self._footersOnScreen {
-            guard let sectionModel = self.collectionViewModel?[index.section],
-                let viewModel = sectionModel.footerViewModel else { continue }
-            viewModel.applyViewModelToView(view)
-            view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(index.section)
-        }
-    }
+    // MARK: Private helper methods
 
     private func _registerSupplementaryViews() {
         self.collectionViewModel?.sectionModels.forEach {
@@ -241,7 +260,7 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
         [UICollectionElementKindSectionHeader, UICollectionElementKindSectionFooter].forEach {
             collectionView.register(UICollectionReusableView.self,
                                      forSupplementaryViewOfKind: $0,
-                                     withReuseIdentifier: CollectionViewDataSource._hiddenSupplementaryViewIdentifier)
+                                     withReuseIdentifier: CollectionViewDriver._hiddenSupplementaryViewIdentifier)
         }
     }
 
@@ -260,9 +279,5 @@ public class CollectionViewDataSource: NSObject, UICollectionViewDataSource, UIC
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout, supplementaryModel?.viewInfo != nil else { return CGSize.zero }
 
         return isHeader ? flowLayout.headerReferenceSize : flowLayout.footerReferenceSize
-    }
-
-    private func _indexPathForSupplementaryViewInSection(_ section: Int) -> IndexPath {
-        return IndexPath(row: 0, section: section)
     }
 }

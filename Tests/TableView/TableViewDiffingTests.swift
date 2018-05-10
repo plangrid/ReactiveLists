@@ -19,13 +19,13 @@ import XCTest
 
 final class TableViewDiffingTests: XCTestCase {
 
-    var tableViewDataSource: TableViewDataSource!
+    var tableViewDataSource: TableViewDriver!
     var mockTableView: TestTableView!
 
     override func setUp() {
         super.setUp()
         self.mockTableView = TestTableView()
-        self.tableViewDataSource = TableViewDataSource(
+        self.tableViewDataSource = TableViewDriver(
             tableView: self.mockTableView,
             automaticDiffEnabled: true,
             shouldDeselectUponSelection: false

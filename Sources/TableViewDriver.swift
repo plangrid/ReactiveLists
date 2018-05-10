@@ -17,11 +17,9 @@
 import Dwifft
 import UIKit
 
-public typealias ViewLocationFilter = (ViewLocation) -> Bool
-
 /// A Data Source that drives a dynamic table view's appereance and behavior in terms of view models for the individual cells.
 @objc
-open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
+open class TableViewDriver: NSObject, UITableViewDataSource, UITableViewDelegate {
 
     /// Communicates information useful for refreshing the tableview
     ///
@@ -50,19 +48,16 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
 
     private let _shouldDeselectUponSelection: Bool
     private let _automaticDiffingEnabled: Bool
-    private let _fullyReloadCellsEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
     public init(tableViewModel: TableViewModel? = nil,
                 tableView: UITableView,
                 automaticDiffEnabled: Bool = false,
-                shouldDeselectUponSelection: Bool = true,
-                fullyReloadCells: Bool = false) {
+                shouldDeselectUponSelection: Bool = true) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
-        self._fullyReloadCellsEnabled = fullyReloadCells
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -233,7 +228,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         return self.tableViewModel?[indexPath]?.shouldIndentWhileEditing ?? true
     }
 
-    public func refreshViews(_ locationFilter: ViewLocationFilter? = nil, refreshContext: TableRefreshContext = .unknown) {
+    public func refreshViews(refreshContext: TableRefreshContext = .unknown) {
         guard let sections = self.tableViewModel?.sectionModels, !sections.isEmpty else {
             return
         }
@@ -243,10 +238,7 @@ open class TableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
         // Collect the index paths and views models to reload
         let indexPathsAndViewModelsToReload: [(IndexPath, TableViewCellViewModel)]
         indexPathsAndViewModelsToReload = visibleIndexPaths.compactMap { indexPath in
-            if locationFilter?(.cell(indexPath)) ?? true {
-                return self.tableViewModel?[indexPath].map { (indexPath, $0) }
-            }
-            return nil
+            return self.tableViewModel?[indexPath].map { (indexPath, $0) }
         }
 
         if !indexPathsAndViewModelsToReload.isEmpty {

@@ -22,6 +22,8 @@ class TestCollectionView: UICollectionView {
 
     var callsToRegisterClass: [_RegisterClassCallInfo?] = []
     var callsToDeselect: Int = 0
+    var callsToInsertItems: [[IndexPath]] = []
+    var callsToDeleteSections: [IndexSet] = []
 
     override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
         return TestCollectionViewCell(identifier: identifier)
@@ -41,5 +43,13 @@ class TestCollectionView: UICollectionView {
 
     override func deselectItem(at indexPath: IndexPath, animated: Bool) {
         self.callsToDeselect += 1
+    }
+
+    override func insertItems(at indexPaths: [IndexPath]) {
+        self.callsToInsertItems.append(indexPaths)
+    }
+
+    override func deleteSections(_ sections: IndexSet) {
+        self.callsToDeleteSections.append(sections)
     }
 }

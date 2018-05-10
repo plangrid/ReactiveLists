@@ -18,36 +18,60 @@ import Foundation
 import ReactiveLists
 import UIKit
 
-final class CollectionUserCell: UICollectionViewCell {
-    @IBOutlet weak var usernameLabel: UILabel!
+final class CollectionToolCell: UICollectionViewCell {
+    @IBOutlet weak var toolNameLabel: UILabel!
+    @IBOutlet weak var emojiLabel: UILabel!
 }
 
-struct CollectionUserCellModel: CollectionViewCellViewModel, DiffableViewModel {
+struct CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
 
-    var accessibilityFormat: CellAccessibilityFormat = "CollectionUserCell"
-    let cellIdentifier = "CollectionUserCell"
+    var accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
+    let cellIdentifier = "CollectionToolCell"
 
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete
 
-    let user: User
+    let tool: Tool
 
-    init(user: User, onDeleteClosure: @escaping (User) -> Void) {
-        self.user = user
+    init(tool: Tool, onDeleteClosure: @escaping (Tool) -> Void) {
+        self.tool = tool
         self.commitEditingStyle = { style in
             if style == .delete {
-                onDeleteClosure(user)
+                onDeleteClosure(tool)
             }
         }
     }
 
     func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell {
-        guard let collectionUserCell = cell as? CollectionUserCell else { return cell }
-        collectionUserCell.usernameLabel.text = self.user.name
-        return collectionUserCell
+        guard let collectionToolCell = cell as? CollectionToolCell else { return cell }
+        collectionToolCell.toolNameLabel.text = self.tool.type.name
+        collectionToolCell.emojiLabel.text = self.tool.type.emoji
+        return collectionToolCell
     }
 
     var diffingKey: String {
-        return self.user.uuid.uuidString
+        return self.tool.uuid.uuidString
+    }
+}
+
+final class CollectionViewHeaderView: UICollectionReusableView {
+    @IBOutlet weak var headerLabel: UILabel!
+}
+
+struct CollectionViewHeaderModel: CollectionViewSupplementaryViewModel {
+    var title: String?
+    var height: CGFloat?
+    var viewInfo: SupplementaryViewInfo?
+
+    init(title: String?, height: CGFloat?, viewInfo: SupplementaryViewInfo? = nil) {
+        self.title = title
+        self.height = height
+        self.viewInfo = viewInfo
+    }
+
+    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
+        guard let collectionHeaderView = view as? CollectionViewHeaderView else { return view }
+        collectionHeaderView.headerLabel.text = self.title
+        return collectionHeaderView
     }
 }

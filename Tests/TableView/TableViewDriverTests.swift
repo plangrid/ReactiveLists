@@ -17,11 +17,11 @@
 @testable import ReactiveLists
 import XCTest
 
-final class TableViewDataSourceTests: XCTestCase {
+final class TableViewDriverTests: XCTestCase {
 
     private var _tableView: TestTableView!
     private var _tableViewModel: TableViewModel!
-    private var _tableViewDataSource: TableViewDataSource!
+    private var _tableViewDataSource: TableViewDriver!
 
     override func setUp() {
         super.setUp()
@@ -51,7 +51,7 @@ final class TableViewDataSourceTests: XCTestCase {
                 footerViewModel: nil,
                 collapsed: true),
             ], sectionIndexTitles: ["A", "Z", "Z"])
-        self._tableViewDataSource = TableViewDataSource(tableView: tableView)
+        self._tableViewDataSource = TableViewDriver(tableView: tableView)
         self._tableViewDataSource.tableViewModel = self._tableViewModel
     }
 
@@ -191,7 +191,7 @@ final class TableViewDataSourceTests: XCTestCase {
     /// Selected cells are automatically deselected by default.
     func testShouldDeselectUponSelection() {
         let tableView = TestTableView()
-        let dataSource = TableViewDataSource(tableView: tableView)
+        let dataSource = TableViewDriver(tableView: tableView)
         XCTAssertEqual(tableView.callsToDeselect, 0)
         dataSource.tableView(tableView, didSelectRowAt: path(0))
         XCTAssertEqual(tableView.callsToDeselect, 1)
@@ -201,7 +201,7 @@ final class TableViewDataSourceTests: XCTestCase {
     /// immediately deselected.
     func testShouldNotDeselectUponSelection() {
         let tableView = TestTableView()
-        let dataSource = TableViewDataSource(
+        let dataSource = TableViewDriver(
             tableView: tableView,
             shouldDeselectUponSelection: false
         )
@@ -229,7 +229,7 @@ final class TableViewDataSourceTests: XCTestCase {
     func testCellCallbacks() {
         // Set up a new table view that contains two mock cells
         let tableView = UITableView()
-        let dataSource = TableViewDataSource(tableView: tableView)
+        let dataSource = TableViewDriver(tableView: tableView)
         let cell1 = MockCellViewModel()
         let cell2 = MockCellViewModel()
         let tableViewModel = TableViewModel(cellViewModels: [cell1, cell2])
