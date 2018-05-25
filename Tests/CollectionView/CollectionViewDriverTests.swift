@@ -50,7 +50,8 @@ final class CollectionViewDriverTests: XCTestCase {
         ])
         self._collectionViewDataSource = CollectionViewDriver(
             collectionView: self._collectionView,
-            collectionViewModel: self._collectionViewModel
+            collectionViewModel: self._collectionViewModel,
+            automaticDiffingEnabled: false
         )
     }
 
@@ -259,8 +260,8 @@ final class CollectionViewDriverTests: XCTestCase {
 
     private func _generateTestCollectionCellViewModel(_ label: String) -> TestCollectionCellViewModel {
         return TestCollectionCellViewModel(label: label,
-                                           didSelectClosure: { [weak self] in self?._lastSelectClosureCaller = label },
-                                           didDeselectClosure: { [weak self] in self?._lastDeselectClosureCaller = label })
+                                           didSelect: { [weak self] in self?._lastSelectClosureCaller = label },
+                                           didDeselect: { [weak self] in self?._lastDeselectClosureCaller = label })
     }
 
     private func _testRegisterClassCallInfo(_ info: _RegisterClassCallInfo?, viewClass: AnyClass, kind: SupplementaryViewKind, identifier: String) {

@@ -21,9 +21,10 @@ import UIKit
 final class CollectionToolCell: UICollectionViewCell {
     @IBOutlet weak var toolNameLabel: UILabel!
     @IBOutlet weak var emojiLabel: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
 }
 
-struct CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
+final class CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
 
     var accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
     let cellIdentifier = "CollectionToolCell"
@@ -32,9 +33,11 @@ struct CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
     let editingStyle: UITableViewCellEditingStyle = .delete
 
     let tool: Tool
+    let onDeleteClosure: (Tool) -> Void
 
     init(tool: Tool, onDeleteClosure: @escaping (Tool) -> Void) {
         self.tool = tool
+        self.onDeleteClosure = onDeleteClosure
         self.commitEditingStyle = { style in
             if style == .delete {
                 onDeleteClosure(tool)
@@ -42,11 +45,16 @@ struct CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
         }
     }
 
-    func applyViewModelToCell(_ cell: UICollectionViewCell) -> UICollectionViewCell {
-        guard let collectionToolCell = cell as? CollectionToolCell else { return cell }
+    @objc
+    func deleteTapped() {
+        self.onDeleteClosure(self.tool)
+    }
+
+    func applyViewModelToCell(_ cell: UICollectionViewCell) {
+        guard let collectionToolCell = cell as? CollectionToolCell else { return }
         collectionToolCell.toolNameLabel.text = self.tool.type.name
         collectionToolCell.emojiLabel.text = self.tool.type.emoji
-        return collectionToolCell
+        collectionToolCell.closeButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
     }
 
     var diffingKey: String {
@@ -69,9 +77,8 @@ struct CollectionViewHeaderModel: CollectionViewSupplementaryViewModel {
         self.viewInfo = viewInfo
     }
 
-    func applyViewModelToView(_ view: UICollectionReusableView) -> UICollectionReusableView {
-        guard let collectionHeaderView = view as? CollectionViewHeaderView else { return view }
+    func applyViewModelToView(_ view: UICollectionReusableView) {
+        guard let collectionHeaderView = view as? CollectionViewHeaderView else { return }
         collectionHeaderView.headerLabel.text = self.title
-        return collectionHeaderView
     }
 }

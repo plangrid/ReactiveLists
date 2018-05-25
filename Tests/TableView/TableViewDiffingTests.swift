@@ -27,8 +27,8 @@ final class TableViewDiffingTests: XCTestCase {
         self.mockTableView = TestTableView()
         self.tableViewDataSource = TableViewDriver(
             tableView: self.mockTableView,
-            automaticDiffEnabled: true,
-            shouldDeselectUponSelection: false
+            shouldDeselectUponSelection: false,
+            automaticDiffingEnabled: true
         )
     }
 
@@ -143,9 +143,7 @@ struct UserCell: TableViewCellViewModel, DiffableViewModel {
         self.user = user
     }
 
-    func applyViewModelToCell(_ cell: UITableViewCell) -> UITableViewCell {
-        return cell
-    }
+    func applyViewModelToCell(_ cell: UITableViewCell) {}
 
     var diffingKey: String {
         return self.user

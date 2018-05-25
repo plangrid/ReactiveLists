@@ -51,7 +51,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     /// automatically lead to updating the UI state of the `UICollectionView`, even if cells/sections
     /// were moved/inserted/deleted.
     ///
-    /// For details, see the documentation for `CollectionViewDataSource.collectionViewModel`.
+    /// For details, see the documentation for `CollectionViewDriver.collectionViewModel`.
     public let automaticDiffingEnabled: Bool
 
     private var _shouldDeselectUponSelection: Bool
@@ -59,7 +59,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     private var _didReceiveFirstNonNilValue = false
     private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
 
-    /// Initializes a data source that drives a `UICollectionView` based on `CollectionViewModel`.
+    /// Initializes a data source that drives a `UICollectionView` based on a `CollectionViewModel`.
     ///
     /// - Parameters:
     ///   - collectionView: the collection view to which this data source will render its view models.
@@ -73,7 +73,7 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         collectionView: UICollectionView,
         collectionViewModel: CollectionViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
-        automaticDiffingEnabled: Bool = false
+        automaticDiffingEnabled: Bool = true
     ) {
         self.collectionViewModel = collectionViewModel
         self.collectionView = collectionView
@@ -224,11 +224,11 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         if self._shouldDeselectUponSelection {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
-        self.collectionViewModel?[indexPath]?.didSelectClosure?()
+        self.collectionViewModel?[indexPath]?.didSelect?()
     }
 
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        self.collectionViewModel?[indexPath]?.didDeselectClosure?()
+        self.collectionViewModel?[indexPath]?.didDeselect?()
     }
 
     // MARK: Private helper methods

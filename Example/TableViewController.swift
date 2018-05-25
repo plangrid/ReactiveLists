@@ -19,10 +19,10 @@ import UIKit
 
 final class TableViewController: UITableViewController {
 
-    var tableViewDataSource: TableViewDriver?
+    var tableViewDriver: TableViewDriver?
     var groups: [ToolGroup] = [] {
         didSet {
-            self.tableViewDataSource?.tableViewModel = TableViewController.viewModel(
+            self.tableViewDriver?.tableViewModel = TableViewController.viewModel(
                 forState: groups,
                 onDeleteClosure: { deletedTool in
                     // Iterate through the user groups and find the deleted user.
@@ -37,7 +37,7 @@ final class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableViewDataSource = TableViewDriver(tableView: self.tableView, automaticDiffEnabled: true)
+        self.tableViewDriver = TableViewDriver(tableView: self.tableView)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableUserCell")
 
         self.groups = [
