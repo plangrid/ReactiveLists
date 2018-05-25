@@ -106,12 +106,6 @@ public struct TableViewModel {
     ///   - sectionModels: the sections that need to be shown in this table.
     ///   - sectionIndexTitles: the section index titles for this table.
     public init(sectionModels: [SectionModel], sectionIndexTitles: [String]? = nil) {
-        if let sectionIndexTitles = sectionIndexTitles {
-            assert(
-                sectionModels.count == sectionIndexTitles.count,
-                "The table view model requires an index title per section."
-            )
-        }
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
     }
