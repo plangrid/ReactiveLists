@@ -136,9 +136,10 @@ public class CollectionViewDriver: NSObject {
 
     private func _collectionViewModelDidChange() {
         guard let newModel = self.collectionViewModel else {
-            self.refreshViews()
+            self.collectionView.reloadData()
             return
         }
+
         self.collectionView.registerViews(for: newModel)
 
         if self.automaticDiffingEnabled {

@@ -69,7 +69,7 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 0)
-        XCTAssertEqual(self.mockTableView.callsToReloadData, 1)
+        XCTAssertEqual(self.mockTableView.callsToReloadData, 3)
     }
 
     /// Tests that changes to individual sections result in the correct calls to update the
@@ -129,7 +129,7 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 0)
-        XCTAssertEqual(self.mockTableView.callsToReloadData, 1)
+        XCTAssertEqual(self.mockTableView.callsToReloadData, 3)
     }
 }
 

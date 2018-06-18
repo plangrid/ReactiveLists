@@ -158,7 +158,7 @@ open class TableViewDriver: NSObject {
 
     private func _tableViewModelDidChange() {
         guard let newModel = self.tableViewModel, !newModel.isEmpty else {
-            self.refreshViews()
+            self.tableView.reloadData()
             return
         }
 
