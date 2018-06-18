@@ -13,7 +13,7 @@
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">ReactiveLists Docs</a> (44% documented)</p>
+        <p><a href="index.html">ReactiveLists Docs</a> (78% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -30,6 +30,9 @@
           <li class="nav-group-name">
             <a href="Guides.html">Guides</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="getting-started.html">Getting Started</a>
+              </li>
               <li class="nav-group-task">
                 <a href="vision.html">VISION</a>
               </li>
@@ -54,6 +57,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/SupplementaryViewKind.html">SupplementaryViewKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a>
               </li>
             </ul>
           </li>
@@ -84,28 +90,22 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/CellAccessibilityFormat.html">CellAccessibilityFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CollectionViewModel/SectionModel.html">– SectionModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/SupplementaryAccessibilityFormat.html">SupplementaryAccessibilityFormat</a>
+                <a href="Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/SupplementaryViewInfo/RegistrationMethod.html">– RegistrationMethod</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TableViewModel/SectionModel.html">– SectionModel</a>
+                <a href="Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
               </li>
             </ul>
           </li>
@@ -142,7 +142,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A view that can participate in an automatic diffing algorithm.</p>
+                        <p>A view model that can participate in an automatic diffing algorithm.</p>
 
                         <a href="Protocols/DiffableViewModel.html" class="slightly-smaller">See more</a>
                       </div>
@@ -174,7 +174,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>View models for the individual cells of a <code><a href="Structs/TableViewModel.html">TableViewModel</a></code>.</p>
+                        <p>View model for the individual cells of a <code><a href="Structs/TableViewModel.html">TableViewModel</a></code>.</p>
 
                         <a href="Protocols/TableViewCellViewModel.html" class="slightly-smaller">See more</a>
                       </div>
@@ -202,7 +202,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Protocol that needs to be implemented by table view cell view models
+that want to provide edit actions.</p>
 
                         <a href="Protocols/TableViewCellModelEditActions.html" class="slightly-smaller">See more</a>
                       </div>
@@ -230,7 +231,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Protocol that needs to be implemented by custom header
+footer view models.</p>
 
                         <a href="Protocols/TableViewSectionHeaderFooterViewModel.html" class="slightly-smaller">See more</a>
                       </div>
@@ -262,7 +264,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>View model for the individual cells of a <code>UICollectionView</code>.</p>
 
                         <a href="Protocols/CollectionViewCellViewModel.html" class="slightly-smaller">See more</a>
                       </div>
@@ -310,7 +312,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

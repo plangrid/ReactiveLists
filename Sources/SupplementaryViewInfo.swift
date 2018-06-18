@@ -17,47 +17,51 @@
 import Foundation
 import UIKit
 
+public protocol ReusableSupplementaryViewProtocol {
+
+    /// The registration info for the supplementary view.
+    var viewInfo: SupplementaryViewInfo? { get }
+}
+
+/// Metadata thats required for setting up a supplementary view.
 public struct SupplementaryViewInfo {
-    /// The method for registering the supplementary view
-    public enum RegistrationMethod: Equatable {
-        /// Class-based views
-        case viewClass(AnyClass)
-        /// Nib-based views
-        case nib(name: String, bundle: Bundle?)
 
-        public static func == (lhs: RegistrationMethod, rhs: RegistrationMethod) -> Bool {
-            switch (lhs, rhs) {
-            case let (.viewClass(lhsClass), .viewClass(rhsClass)):
-                return lhsClass == rhsClass
-            case let (.nib(lhsName, lhsBundle), .nib(rhsName, rhsBundle)):
-                return lhsName == rhsName && lhsBundle == rhsBundle
-            default:
-                return false
-            }
-        }
-    }
+    /// The registration info for the supplementary view.
+    public let registrationInfo: ViewRegistrationInfo
 
-    let registrationMethod: RegistrationMethod
-    let reuseIdentifier: String
-    /// `TableViewDataSource` and `CollectionViewDataSource` will automatically apply an `accessibilityIdentifier` to the supplementary view based on this format
-    let accessibilityFormat: SupplementaryAccessibilityFormat
+    /// The kind of supplementary view (e.g. `header` or `footer`)
+    public let kind: SupplementaryViewKind
 
+    /// `TableViewDataSource` and `CollectionViewDataSource` will automatically apply
+    /// an `accessibilityIdentifier` to the supplementary view based on this format.
+    public let accessibilityFormat: SupplementaryAccessibilityFormat
+
+    /// Initializes the metadata for a supplementary view.
+    ///
+    /// - Parameters:
+    ///   - registrationInfo: The registration info for the view.
+    ///   - kind: The kind of supplementary view (e.g. `header` or `footer`)
+    ///   - accessibilityFormat: A format string that generates an accessibility identifier for
+    ///                          the view that will be mapped to this view model.
     public init(
-        registrationMethod: RegistrationMethod,
-        reuseIdentifier: String,
+        registrationInfo: ViewRegistrationInfo,
+        kind: SupplementaryViewKind,
         accessibilityFormat: SupplementaryAccessibilityFormat
     ) {
-        self.registrationMethod = registrationMethod
-        self.reuseIdentifier = reuseIdentifier
+        self.registrationInfo = registrationInfo
+        self.kind = kind
         self.accessibilityFormat = accessibilityFormat
     }
 }
 
+/// Defines the kind of a supplementary view.
+///
+/// - header: indicates that the view is a header
+/// - footer: indicates that the view is a footer
 public enum SupplementaryViewKind {
     case header
     case footer
 
-    /// Initialize with `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter`
     init?(collectionElementKindString: String) {
         switch collectionElementKindString {
         case UICollectionElementKindSectionHeader:
@@ -66,6 +70,13 @@ public enum SupplementaryViewKind {
             self = .footer
         default:
             return nil
+        }
+    }
+
+    var collectionElementKind: String {
+        switch self {
+        case .header: return UICollectionElementKindSectionHeader
+        case .footer: return UICollectionElementKindSectionFooter
         }
     }
 }

@@ -154,13 +154,15 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    private func _tableViewModelDidChange() {
-        self._registerHeaderFooterViews()
+    // MARK: Private
 
+    private func _tableViewModelDidChange() {
         guard let newModel = self.tableViewModel, !newModel.isEmpty else {
             self.refreshViews()
             return
         }
+
+        self.tableView.registerViews(for: newModel)
 
         if self._automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilNonEmptyValue {
@@ -194,33 +196,10 @@ open class TableViewDriver: NSObject {
         }
     }
 
-    // MARK: Private helper methods
-
-    private func _registerHeaderFooterViews() {
-        self.tableViewModel?.sectionModels.forEach {
-            if let header = $0.headerViewModel?.viewInfo {
-                switch header.registrationMethod {
-                case let .nib(name, bundle):
-                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: header.reuseIdentifier)
-                }
-            }
-            if let footer = $0.footerViewModel?.viewInfo {
-                switch footer.registrationMethod {
-                case let .nib(name, bundle):
-                    self.tableView.register(UINib(nibName: name, bundle: bundle), forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    self.tableView.register(viewClass, forHeaderFooterViewReuseIdentifier: footer.reuseIdentifier)
-                }
-            }
-        }
-    }
-
-    open func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
+    private func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
         guard let sectionModel = self.tableViewModel?[section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
-            let identifier = viewModel.viewInfo?.reuseIdentifier,
+            let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier,
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
                 return nil
         }
@@ -234,17 +213,10 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
-
-        if let cellViewModel = self.tableViewModel?[indexPath] {
-            cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.cellIdentifier, for: indexPath)
-            cellViewModel.applyViewModelToCell(cell)
-            cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-        } else {
-            cell = UITableViewCell()
+        guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[indexPath] else {
+            fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
         }
-
-        return cell
+        return tableView.configuredCell(for: cellViewModel, at: indexPath)
     }
 
     /// :nodoc:
@@ -255,7 +227,7 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionModel = self.tableViewModel?[section], !sectionModel.collapsed else { return 0 }
-        return sectionModel.cellViewModels?.count ?? 0
+        return sectionModel.cellViewModels.count
     }
 
     /// :nodoc:
@@ -311,7 +283,7 @@ extension TableViewDriver: UITableViewDelegate {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let cellViewModel = self.tableViewModel?[indexPath] as? TableViewCellModelEditActions {
-            return cellViewModel.editActions(indexPath)
+            return cellViewModel.editActions
         }
         return nil
     }

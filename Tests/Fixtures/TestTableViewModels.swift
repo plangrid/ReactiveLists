@@ -24,7 +24,7 @@ struct TestCellViewModel: TableViewCellViewModel {
     let shouldIndentWhileEditing = false
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
 
-    let cellIdentifier: String
+    let registrationInfo: ViewRegistrationInfo
     let label: String
     var willBeginEditing: WillBeginEditingClosure?
     var didEndEditing: DidEndEditingClosure?
@@ -32,13 +32,13 @@ struct TestCellViewModel: TableViewCellViewModel {
     var didSelectClosure: DidSelectClosure?
 
     init(label: String,
-         cellIdentifier: String? = nil,
+         registrationInfo: ViewRegistrationInfo,
          willBeginEditing: WillBeginEditingClosure? = nil,
          didEndEditing: DidEndEditingClosure? = nil,
          commitEditingStyle: CommitEditingStyleClosure? = nil,
          didSelectClosure: DidSelectClosure? = nil
     ) {
-        self.cellIdentifier = cellIdentifier ?? label
+        self.registrationInfo = registrationInfo
         self.label = label
         self.willBeginEditing = willBeginEditing
         self.didEndEditing = didEndEditing
@@ -72,6 +72,7 @@ func path(_ section: Int, _ row: Int = 0) -> IndexPath {
 
 func generateTestCellViewModel(_ label: String? = nil) -> TestCellViewModel {
     return TestCellViewModel(label: label ?? UUID().uuidString,
+                             registrationInfo: ViewRegistrationInfo(classType: TestTableViewCell.self),
                              willBeginEditing: nil,
                              didEndEditing: nil,
                              commitEditingStyle: nil,
@@ -97,8 +98,8 @@ struct TestHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
         self.height = height
 
         self.viewInfo = SupplementaryViewInfo(
-            registrationMethod: .viewClass(viewKind == .header ? HeaderView.self : FooterView.self),
-            reuseIdentifier: "reuse_\(kindString)+\(label)", // e.g. reuse_header_3
+            registrationInfo: ViewRegistrationInfo(classType: viewKind == .header ? HeaderView.self : FooterView.self),
+            kind: viewKind,
             accessibilityFormat: SupplementaryAccessibilityFormat("access_\(kindString)+%{section}")) // e.g. access_header+%{section}
     }
 

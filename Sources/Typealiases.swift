@@ -16,12 +16,17 @@
 
 import Foundation
 
-public typealias Section = Int
-
+/// :nodoc:
 public typealias CommitEditingStyleClosure = (UITableViewCellEditingStyle) -> Void
+/// :nodoc:
 public typealias DidSelectClosure = () -> Void
+/// :nodoc:
 public typealias DidDeleteClosure = () -> Void
+/// :nodoc:
 public typealias DidDeselectClosure = () -> Void
+/// :nodoc:
 public typealias WillBeginEditingClosure = () -> Void
+/// :nodoc:
 public typealias DidEndEditingClosure = () -> Void
+/// :nodoc:
 public typealias AccessoryButtonTappedClosure = () -> Void

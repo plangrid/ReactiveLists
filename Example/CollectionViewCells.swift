@@ -26,9 +26,8 @@ final class CollectionToolCell: UICollectionViewCell {
 
 final class CollectionToolCellModel: CollectionViewCellViewModel, DiffableViewModel {
 
-    var accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
-    let cellIdentifier = "CollectionToolCell"
-
+    let accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
+    let registrationInfo = ViewRegistrationInfo(classType: CollectionToolCell.self, nibName: "CollectionToolCell")
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete
 

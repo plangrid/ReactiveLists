@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CellAccessibilityFormat Structure Reference</title>
+    <title>ViewRegistrationMethod Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,11 +10,11 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/CellAccessibilityFormat" class="dashAnchor"></a>
-    <a title="CellAccessibilityFormat Structure Reference"></a>
+    <a name="//apple_ref/swift/Enum/ViewRegistrationMethod" class="dashAnchor"></a>
+    <a title="ViewRegistrationMethod Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ReactiveLists Docs</a> (44% documented)</p>
+        <p><a href="../index.html">ReactiveLists Docs</a> (78% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ReactiveLists Reference</a>
         <img id="carat" src="../img/carat.png" />
-        CellAccessibilityFormat Structure Reference
+        ViewRegistrationMethod Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -31,6 +31,9 @@
           <li class="nav-group-name">
             <a href="../Guides.html">Guides</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../getting-started.html">Getting Started</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../vision.html">VISION</a>
               </li>
@@ -55,6 +58,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a>
               </li>
             </ul>
           </li>
@@ -85,28 +91,22 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CellAccessibilityFormat.html">CellAccessibilityFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewModel/SectionModel.html">– SectionModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/SupplementaryAccessibilityFormat.html">SupplementaryAccessibilityFormat</a>
+                <a href="../Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SupplementaryViewInfo/RegistrationMethod.html">– RegistrationMethod</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewModel/SectionModel.html">– SectionModel</a>
+                <a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
               </li>
             </ul>
           </li>
@@ -123,14 +123,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CellAccessibilityFormat</h1>
+            <h1>ViewRegistrationMethod</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CellAccessibilityFormat</span><span class="p">:</span> <span class="kt">ExpressibleByStringLiteral</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ViewRegistrationMethod</span></code></pre>
 
                 </div>
               </div>
-            <p>Wrapper <code>struct</code> for the <code>accessibilityIdentifier</code> format that should be applied to the cells of a <code>UITableView</code> or a <code>UICollectionView</code></p>
+            <p>The method for registering cells and supplementary views</p>
 
           </section>
           <section class="section task-group-section">
@@ -139,9 +139,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists23CellAccessibilityFormatVACSScfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists23CellAccessibilityFormatVACSScfc">init(_:)</a>
+                    <a name="/s:13ReactiveLists22ViewRegistrationMethodO9fromClassACyXlXpcACmF"></a>
+                    <a name="//apple_ref/swift/Element/fromClass" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists22ViewRegistrationMethodO9fromClassACyXlXpcACmF">fromClass</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -149,26 +149,61 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Class-based views</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">fromClass</span><span class="p">(</span><span class="kt">AnyClass</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s26ExpressibleByStringLiteralPx0cD4TypeQz06stringD0_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(stringLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s26ExpressibleByStringLiteralPx0cD4TypeQz06stringD0_tcfc">init(stringLiteral:)</a>
+                    <a name="/s:13ReactiveLists22ViewRegistrationMethodO7fromNibACSS4name_So6BundleCSg6bundletcACmF"></a>
+                    <a name="//apple_ref/swift/Element/fromNib" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists22ViewRegistrationMethodO7fromNibACSS4name_So6BundleCSg6bundletcACmF">fromNib</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Nib-based views</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">fromNib</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EquatableP2eeoiSbx_xtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EquatableP2eeoiSbx_xtFZ">==(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -182,86 +217,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">stringLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">StringLiteralType</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s43ExpressibleByExtendedGraphemeClusterLiteralPx0cdeF4TypeQz08extendeddeF0_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(extendedGraphemeClusterLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s43ExpressibleByExtendedGraphemeClusterLiteralPx0cdeF4TypeQz08extendeddeF0_tcfc">init(extendedGraphemeClusterLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">extendedGraphemeClusterLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s33ExpressibleByUnicodeScalarLiteralPx0cdE4TypeQz07unicodedE0_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(unicodeScalarLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s33ExpressibleByUnicodeScalarLiteralPx0cdE4TypeQz07unicodedE0_tcfc">init(unicodeScalarLiteral:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">unicodeScalarLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists23CellAccessibilityFormatV35accessibilityIdentifierForIndexPathSS10Foundation0iJ0VF"></a>
-                    <a name="//apple_ref/swift/Method/accessibilityIdentifierForIndexPath(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists23CellAccessibilityFormatV35accessibilityIdentifierForIndexPathSS10Foundation0iJ0VF">accessibilityIdentifierForIndexPath(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">accessibilityIdentifierForIndexPath</span><span class="p">(</span><span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">ViewRegistrationMethod</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">ViewRegistrationMethod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -273,7 +229,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

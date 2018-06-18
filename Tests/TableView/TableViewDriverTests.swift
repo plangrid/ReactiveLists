@@ -35,17 +35,17 @@ final class TableViewDriverTests: XCTestCase {
     /// the content described in the `TableViewModel`.
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
-                cellViewModels: nil,
+            TableViewSectionViewModel(
+                cellViewModels: [],
                 headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "A"),
                 footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A"),
                 collapsed: false),
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: ["A", "B", "C"].map { _generateTestCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21),
                 collapsed: false),
-            TableViewModel.SectionModel(
+             TableViewSectionViewModel(
                 cellViewModels: ["D", "E", "F"].map { _generateTestCellViewModel($0) },
                 headerViewModel: TestHeaderFooterViewModel(title: "header_3", height: 30),
                 footerViewModel: nil,
@@ -149,11 +149,9 @@ final class TableViewDriverTests: XCTestCase {
 
         var header0 = dataSource?._getHeader(0)
         var footer0 = dataSource?._getFooter(0)
-        var cell00 = dataSource?._getCell(path(0, 0))
 
         XCTAssertEqual(header0?.label, "title_header+A")
         XCTAssertEqual(footer0?.label, "title_footer+A")
-        XCTAssertNil(cell00?.label)
 
         var header1 = dataSource?._getHeader(1)
         var footer1 = dataSource?._getFooter(1)
@@ -168,7 +166,7 @@ final class TableViewDriverTests: XCTestCase {
 
         header0 = dataSource?._getHeader(0)
         footer0 = dataSource?._getFooter(0)
-        cell00 = dataSource?._getCell(path(0, 0))
+        let cell00 = dataSource?._getCell(path(0, 0))
 
         XCTAssertEqual(header0?.label, "title_header+X")
         XCTAssertEqual(footer0?.label, "title_footer+X")
@@ -221,8 +219,8 @@ final class TableViewDriverTests: XCTestCase {
         self.setupWithTableView(tableView)
 
         XCTAssertEqual(tableView.callsToRegisterClass.count, 2)
-        XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "reuse_header+A")
-        XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "reuse_footer+A")
+        XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "HeaderView")
+        XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "FooterView")
         XCTAssert(tableView.callsToRegisterClass[0].viewClass === HeaderView.self)
         XCTAssert(tableView.callsToRegisterClass[1].viewClass === FooterView.self)
     }
@@ -263,7 +261,7 @@ final class TableViewDriverTests: XCTestCase {
     func testTableViewCellViewModelDefaults() {
         struct DefaultCellViewModel: TableViewCellViewModel {
             var accessibilityFormat: CellAccessibilityFormat = "_"
-            var cellIdentifier: String = "_"
+            let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
             func applyViewModelToCell(_ cell: UITableViewCell) { }
         }
 
@@ -284,16 +282,16 @@ final class TableViewDriverTests: XCTestCase {
 // MARK: Test data generation
 
 private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
-    return TestCellViewModel(label: label)
+    return TestCellViewModel(label: label, registrationInfo: ViewRegistrationInfo(classType: UITableViewCell.self))
 }
 
 private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
     return TableViewModel(sectionModels: [
-        TableViewModel.SectionModel(
+        TableViewSectionViewModel(
             cellViewModels: [_generateTestCellViewModel("X")],
             headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "X"),
             footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "X")),
-        TableViewModel.SectionModel(
+        TableViewSectionViewModel(
             cellViewModels: ["Y", "Z"].map { _generateTestCellViewModel($0) },
             headerViewModel: TestHeaderFooterViewModel(height: 20, viewKind: .header, label: "Y"),
             footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),

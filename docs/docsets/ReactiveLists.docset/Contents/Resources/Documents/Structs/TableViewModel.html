@@ -14,7 +14,7 @@
     <a title="TableViewModel Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ReactiveLists Docs</a> (44% documented)</p>
+        <p><a href="../index.html">ReactiveLists Docs</a> (78% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -31,6 +31,9 @@
           <li class="nav-group-name">
             <a href="../Guides.html">Guides</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../getting-started.html">Getting Started</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../vision.html">VISION</a>
               </li>
@@ -55,6 +58,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a>
               </li>
             </ul>
           </li>
@@ -85,28 +91,22 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CellAccessibilityFormat.html">CellAccessibilityFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewModel/SectionModel.html">– SectionModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/SupplementaryAccessibilityFormat.html">SupplementaryAccessibilityFormat</a>
+                <a href="../Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SupplementaryViewInfo/RegistrationMethod.html">– RegistrationMethod</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewModel/SectionModel.html">– SectionModel</a>
+                <a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
               </li>
             </ul>
           </li>
@@ -130,7 +130,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The view model that describes a <code>UITableView</code>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -149,7 +149,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The secion index titles for this table view.</p>
+                        <p>The section index titles for this table view.</p>
 
                       </div>
                       <div class="declaration">
@@ -166,9 +166,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV13sectionModelsSayAC07SectionE0VGv"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelV13sectionModelsSayAA0cd7SectiondE0VGv"></a>
                     <a name="//apple_ref/swift/Property/sectionModels" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV13sectionModelsSayAC07SectionE0VGv">sectionModels</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV13sectionModelsSayAA0cd7SectiondE0VGv">sectionModels</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -183,7 +183,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TableViewModel/SectionModel.html">SectionModel</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -203,8 +203,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Helper function that returns <code>true</code> if this table has no sections or has
-a single section with no cells.</p>
+                        <p>Returns <code>true</code> if this table has no sections or has a single empty section.</p>
 
                       </div>
                       <div class="declaration">
@@ -221,9 +220,9 @@ a single section with no cells.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelVACSayAA0cd4CelldE0_pGSg04cellD6Models_tcfc"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelVACSayAA0cd4CelldE0_pG04cellD6Models_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(cellViewModels:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelVACSayAA0cd4CelldE0_pGSg04cellD6Models_tcfc">init(cellViewModels:)</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelVACSayAA0cd4CelldE0_pG04cellD6Models_tcfc">init(cellViewModels:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -239,7 +238,7 @@ via the initializer.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a></span><span class="p">]?)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a></span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -268,9 +267,9 @@ via the initializer.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelVACSayAC07SectionE0VG13sectionModels_SaySSGSg0G11IndexTitlestcfc"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelVACSayAA0cd7SectiondE0VG13sectionModels_SaySSGSg0G11IndexTitlestcfc"></a>
                     <a name="//apple_ref/swift/Method/init(sectionModels:sectionIndexTitles:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelVACSayAC07SectionE0VG13sectionModels_SaySSGSg0G11IndexTitlestcfc">init(sectionModels:sectionIndexTitles:)</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelVACSayAA0cd7SectiondE0VG13sectionModels_SaySSGSg0G11IndexTitlestcfc">init(sectionModels:sectionIndexTitles:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -286,7 +285,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TableViewModel/SectionModel.html">SectionModel</a></span><span class="p">],</span> <span class="nv">sectionIndexTitles</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a></span><span class="p">],</span> <span class="nv">sectionIndexTitles</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -302,7 +301,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                               </td>
                               <td>
                                 <div>
-                                  <p>the sections that need to be shown in this table.</p>
+                                  <p>the sections that need to be shown in this table view.</p>
                                 </div>
                               </td>
                             </tr>
@@ -314,7 +313,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                               </td>
                               <td>
                                 <div>
-                                  <p>the section index titles for this table.</p>
+                                  <p>the section index titles for this table view.</p>
                                 </div>
                               </td>
                             </tr>
@@ -327,9 +326,9 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV9subscriptAC07SectionE0VSgSici"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelV9subscriptAA0cd7SectiondE0VSgSici"></a>
                     <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV9subscriptAC07SectionE0VSgSici">subscript(_:)</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV9subscriptAA0cd7SectiondE0VSgSici">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -344,7 +343,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/TableViewModel/SectionModel.html">SectionModel</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -383,7 +382,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns the cell view model at the specified index path or <code>nil</code> if no such section exists.</p>
+                        <p>Returns the cell view model at the specified index path or <code>nil</code> if no such cell exists.</p>
 
                       </div>
                       <div class="declaration">
@@ -418,42 +417,10 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV07SectionE0V"></a>
-                    <a name="//apple_ref/swift/Struct/SectionModel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV07SectionE0V">SectionModel</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>View model for a table view section.</p>
-
-                        <a href="../Structs/TableViewModel/SectionModel.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SectionModel</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-26)</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

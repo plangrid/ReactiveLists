@@ -36,9 +36,7 @@ final class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.tableViewDriver = TableViewDriver(tableView: self.tableView)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableUserCell")
 
         self.groups = [
             ToolGroup(
@@ -70,9 +68,9 @@ extension TableViewController {
     /// Pure function mapping new state to a new `TableViewModel`.  This is invoked each time the state updates
     /// in order for ReactiveLists to update the UI.
     static func viewModel(forState groups: [ToolGroup], onDeleteClosure: @escaping (Tool) -> Void) -> TableViewModel {
-        let sections: [TableViewModel.SectionModel] = groups.map { group in
+        let sections: [TableViewSectionViewModel] = groups.map { group in
             let cellViewModels = group.tools.map { ToolTableCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
-            return TableViewModel.SectionModel(
+            return TableViewSectionViewModel(
                 headerTitle: group.name,
                 headerHeight: 44,
                 cellViewModels: cellViewModels,

@@ -18,11 +18,11 @@ import Foundation
 import ReactiveLists
 
 struct ToolTableCellModel: TableViewCellViewModel, DiffableViewModel {
-    var accessibilityFormat: CellAccessibilityFormat = ""
-    let cellIdentifier = "TableUserCell"
+    let registrationInfo = ViewRegistrationInfo(classType: ToolTableViewCell.self)
 
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCellEditingStyle = .delete
+    let accessibilityFormat: CellAccessibilityFormat = ""
 
     let tool: Tool
 

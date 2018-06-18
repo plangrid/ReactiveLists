@@ -20,7 +20,9 @@ import UIKit
 /// A data source that drives the collection views appereance and behavior based on an underlying
 /// `CollectionViewModel`.
 @objc
-public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class CollectionViewDriver: NSObject {
+
+    // MARK: Properties
 
     /// The collection view to which the `CollectionViewModel` is rendered.
     public let collectionView: UICollectionView
@@ -57,7 +59,8 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
     private var _shouldDeselectUponSelection: Bool
     private var _collectionViewDiffer: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
     private var _didReceiveFirstNonNilValue = false
-    private static let _hiddenSupplementaryViewIdentifier = "hidden-supplementary-view"
+
+    // MARK: Initialization
 
     /// Initializes a data source that drives a `UICollectionView` based on a `CollectionViewModel`.
     ///
@@ -129,14 +132,14 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         }
     }
 
-    private func _collectionViewModelDidChange() {
-        self._registerSupplementaryViews()
-        self._registerHiddenSupplementaryViews()
+    // MARK: Private
 
+    private func _collectionViewModelDidChange() {
         guard let newModel = self.collectionViewModel else {
             self.refreshViews()
             return
         }
+        self.collectionView.registerViews(for: newModel)
 
         if self.automaticDiffingEnabled {
             if !self._didReceiveFirstNonNilValue {
@@ -166,24 +169,42 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         }
     }
 
-    // MARK: UICollectionViewDataSource / UICollectionViewDelegate implementation
+    private func _sizeForSupplementaryViewOfKind(_ elementKind: SupplementaryViewKind, inSection section: Int, collectionViewLayout: UICollectionViewLayout) -> CGSize {
+        guard let sectionModel = self.collectionViewModel?[section] else { return CGSize.zero }
+        let isHeader = elementKind == .header
+        let supplementaryModel = isHeader ? sectionModel.headerViewModel : sectionModel.footerViewModel
+        if let height = supplementaryModel?.height {
+            return CGSize(width: 0, height: height)
+        }
 
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout, supplementaryModel?.viewInfo != nil else {
+            return CGSize.zero
+        }
+        return isHeader ? flowLayout.headerReferenceSize : flowLayout.footerReferenceSize
+    }
+}
+
+extension CollectionViewDriver: UICollectionViewDataSource {
+
+    /// :nodoc:
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.collectionViewModel?.sectionModels.count ?? 0
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.collectionViewModel?[section]?.cellViewModels?.count ?? 0
+        return self.collectionViewModel?[section]?.cellViewModels.count ?? 0
     }
 
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return self._sizeForSupplementaryViewOfKind(.header, inSection: section, collectionViewLayout: collectionViewLayout)
+    /// :nodoc:
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let collectionViewModel = self.collectionViewModel, let cellViewModel = collectionViewModel[indexPath] else {
+            fatalError("Collection View Model has an invalid configuration: \(String(describing: self.collectionViewModel))")
+        }
+        return collectionView.configuredCell(for: cellViewModel, at: indexPath)
     }
 
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return self._sizeForSupplementaryViewOfKind(.footer, inSection: section, collectionViewLayout: collectionViewLayout)
-    }
-
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let section = indexPath.section
         let elementKind = SupplementaryViewKind(collectionElementKindString: kind)
@@ -192,34 +213,20 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         if let elementKind = elementKind,
             let sectionModel = self.collectionViewModel?[section],
             let viewModel = elementKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
-            let identifier = viewModel.viewInfo?.reuseIdentifier {
+            let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier {
             view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
             viewModel.applyViewModelToView(view)
             view.accessibilityIdentifier = viewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
         } else {
-            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewDriver._hiddenSupplementaryViewIdentifier, for: indexPath)
+            view = UICollectionReusableView()
         }
         return view
     }
+}
 
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell: UICollectionViewCell
+extension CollectionViewDriver: UICollectionViewDelegate {
 
-        if let cellViewModel = self.collectionViewModel?[indexPath] {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellViewModel.cellIdentifier, for: indexPath)
-            cellViewModel.applyViewModelToCell(cell)
-            cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-        } else {
-            cell = UICollectionViewCell()
-        }
-
-        return cell
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return self.collectionViewModel?[indexPath]?.shouldHighlight ?? true
-    }
-
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self._shouldDeselectUponSelection {
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -227,57 +234,25 @@ public class CollectionViewDriver: NSObject, UICollectionViewDataSource, UIColle
         self.collectionViewModel?[indexPath]?.didSelect?()
     }
 
+    /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         self.collectionViewModel?[indexPath]?.didDeselect?()
     }
 
-    // MARK: Private helper methods
+    /// :nodoc:
+    public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return self.collectionViewModel?[indexPath]?.shouldHighlight ?? true
+    }
+}
 
-    private func _registerSupplementaryViews() {
-        self.collectionViewModel?.sectionModels.forEach {
-            if let header = $0.headerViewModel?.viewInfo {
-                switch header.registrationMethod {
-                case let .nib(name, bundle):
-                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: header.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    collectionView.register(viewClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: header.reuseIdentifier)
-                }
-            }
-            if let footer = $0.footerViewModel?.viewInfo {
-                switch footer.registrationMethod {
-                case let .nib(name, bundle):
-                    collectionView.register(UINib(nibName: name, bundle: bundle), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footer.reuseIdentifier)
-                case let .viewClass(viewClass):
-                    collectionView.register(viewClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footer.reuseIdentifier)
-                }
-            }
-        }
+extension CollectionViewDriver: UICollectionViewDelegateFlowLayout {
+    /// :nodoc:
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return self._sizeForSupplementaryViewOfKind(.header, inSection: section, collectionViewLayout: collectionViewLayout)
     }
 
-    private func _registerHiddenSupplementaryViews() {
-        // A blank header/footer view class must be registered because `viewForSupplementaryElementOfKind` returns
-        // a non-optional view and yet the `collectionViewModel` may not specify some headers and footers
-        [UICollectionElementKindSectionHeader, UICollectionElementKindSectionFooter].forEach {
-            collectionView.register(UICollectionReusableView.self,
-                                     forSupplementaryViewOfKind: $0,
-                                     withReuseIdentifier: CollectionViewDriver._hiddenSupplementaryViewIdentifier)
-        }
-    }
-
-    private func _sizeForSupplementaryViewOfKind(_ elementKind: SupplementaryViewKind, inSection section: Int, collectionViewLayout: UICollectionViewLayout) -> CGSize {
-        guard let sectionModel = self.collectionViewModel?[section] else {
-            return CGSize.zero
-        }
-
-        let isHeader = elementKind == .header
-        let supplementaryModel = isHeader ? sectionModel.headerViewModel : sectionModel.footerViewModel
-
-        if let height = supplementaryModel?.height {
-            return CGSize(width: 0, height: height)
-        }
-
-        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout, supplementaryModel?.viewInfo != nil else { return CGSize.zero }
-
-        return isHeader ? flowLayout.headerReferenceSize : flowLayout.footerReferenceSize
+    /// :nodoc:
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return self._sizeForSupplementaryViewOfKind(.footer, inSection: section, collectionViewLayout: collectionViewLayout)
     }
 }

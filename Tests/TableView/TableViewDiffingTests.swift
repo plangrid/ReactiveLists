@@ -80,11 +80,11 @@ final class TableViewDiffingTests: XCTestCase {
     ///   extensive tests for the various diffing scenarios.
     func testChangingSections() {
         let initialModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [UserCell(user: "Name")],
                 diffingKey: "1"
             ),
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [UserCell(user: "user")],
                 diffingKey: "2"
             ),
@@ -93,7 +93,7 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = initialModel
 
         let updatedModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [UserCell(user: "new")],
                 diffingKey: "2"
             ),
@@ -107,11 +107,11 @@ final class TableViewDiffingTests: XCTestCase {
 
     func testChangingSectionsThatAreEmpty() {
         let initialModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [],
                 diffingKey: "1"
             ),
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [],
                 diffingKey: "2"
             ),
@@ -120,7 +120,7 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = initialModel
 
         let updatedModel = TableViewModel(sectionModels: [
-            TableViewModel.SectionModel(
+            TableViewSectionViewModel(
                 cellViewModels: [],
                 diffingKey: "2"
             ),
@@ -135,7 +135,7 @@ final class TableViewDiffingTests: XCTestCase {
 
 struct UserCell: TableViewCellViewModel, DiffableViewModel {
     var accessibilityFormat: CellAccessibilityFormat = ""
-    let cellIdentifier = "UserCell"
+    let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
 
     let user: String
 

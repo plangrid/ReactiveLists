@@ -16,8 +16,16 @@
 
 import Foundation
 
-/// A view that can participate in an automatic diffing algorithm.
+/// A view model that can participate in an automatic diffing algorithm.
 public protocol DiffableViewModel {
+    /// The key used by the diffing algorithm to uniquely identify an element.
+    /// If you are using automatic diffing on a `*Driver` (which is enabled by default)
+    /// you are required to provide a key that uniquely identifies each element.
+    ///
+    /// Typically you want to base this diffing key on data that is stored in the model.
+    /// For example:
+    ///
+    ///      public var diffingKey = { group.identifier }
     var diffingKey: DiffingKey { get }
 }
 

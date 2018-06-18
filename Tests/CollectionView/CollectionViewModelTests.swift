@@ -23,13 +23,13 @@ final class CollectionViewModelTests: XCTestCase {
     /// without specifying a header and footer view, wich results
     /// in a blank default view being used.
     func testViewModelInitalizerWithBlankHeaderAndFooter() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerHeight: 40,
             footerHeight: 50
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
         XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
@@ -40,7 +40,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// without specifying a header view, wich results
     /// in a blank default view being used.
     func testViewModelInitializerWithBlankHeader() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerHeight: 40,
             footerViewModel: TestCollectionViewSupplementaryViewModel(
@@ -50,15 +50,15 @@ final class CollectionViewModelTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
 
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let viewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationMethod == .viewClass(FooterView.self))
-        XCTAssertEqual(viewInfo?.reuseIdentifier, "reuse_footer+A")
+        XCTAssertTrue(viewInfo?.registrationInfo.registrationMethod == .fromClass(FooterView.self))
+        XCTAssertEqual(viewInfo?.registrationInfo.reuseIdentifier, "FooterView")
         XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
     }
 
@@ -66,7 +66,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// without specifying a footer view, wich results
     /// in a blank default view being used.
     func testViewModelInitializerWithBlankFooter() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerViewModel: TestCollectionViewSupplementaryViewModel(
                 height: 40,
@@ -76,21 +76,21 @@ final class CollectionViewModelTests: XCTestCase {
             footerHeight: 50
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertNil(sectionModel.footerViewModel?.viewInfo)
 
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let viewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationMethod == .viewClass(HeaderView.self))
-        XCTAssertEqual(viewInfo?.reuseIdentifier, "reuse_header+A")
+        XCTAssertTrue(viewInfo?.registrationInfo.registrationMethod == .fromClass(HeaderView.self))
+        XCTAssertEqual(viewInfo?.registrationInfo.reuseIdentifier, "HeaderView")
         XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
     }
 
     /// Can be initialized with a custom header and footer view.
     func testViewModelInitializerWithCustomHeaderAndFooter() {
-        let sectionModel = CollectionViewModel.SectionModel(
+        let sectionModel = CollectionViewSectionViewModel(
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerViewModel: TestCollectionViewSupplementaryViewModel(
                 height: 40,
@@ -104,19 +104,19 @@ final class CollectionViewModelTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels?.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
 
         XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
 
         let headerViewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(headerViewInfo?.registrationMethod == .viewClass(HeaderView.self))
-        XCTAssertEqual(headerViewInfo?.reuseIdentifier, "reuse_header+A")
+        XCTAssertTrue(headerViewInfo?.registrationInfo.registrationMethod == .fromClass(HeaderView.self))
+        XCTAssertEqual(headerViewInfo?.registrationInfo.reuseIdentifier, "HeaderView")
         XCTAssertEqual(headerViewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
 
         let footerViewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(footerViewInfo?.registrationMethod == .viewClass(FooterView.self))
-        XCTAssertEqual(footerViewInfo?.reuseIdentifier, "reuse_footer+A")
+        XCTAssertTrue(footerViewInfo?.registrationInfo.registrationMethod == .fromClass(FooterView.self))
+        XCTAssertEqual(footerViewInfo?.registrationInfo.reuseIdentifier, "FooterView")
         XCTAssertEqual(footerViewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
     }
 
@@ -125,11 +125,11 @@ final class CollectionViewModelTests: XCTestCase {
     /// model returns `nil`.
     func testSubscripts() {
         let collectionViewModel = CollectionViewModel(sectionModels: [
-            CollectionViewModel.SectionModel(
-                cellViewModels: nil,
+            CollectionViewSectionViewModel(
+                cellViewModels: [],
                 headerHeight: 42,
                 footerHeight: nil),
-            CollectionViewModel.SectionModel(
+            CollectionViewSectionViewModel(
                 cellViewModels: [
                     generateTestCollectionCellViewModel("A"),
                     generateTestCollectionCellViewModel("B"),

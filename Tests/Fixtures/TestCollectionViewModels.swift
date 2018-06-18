@@ -22,7 +22,7 @@ struct TestCollectionCellViewModel: CollectionViewCellViewModel {
     let didSelect: DidSelectClosure?
     let didDeselect: DidDeselectClosure?
 
-    let cellIdentifier = "foo_identifier"
+    let registrationInfo = ViewRegistrationInfo(classType: TestCollectionViewCell.self)
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
     let shouldHighlight = false
 
@@ -48,8 +48,8 @@ struct TestCollectionViewSupplementaryViewModel: CollectionViewSupplementaryView
         self.label = "label_\(kindString)+\(sectionLabel)" // e.g. title_header+A
         self.height = height
         self.viewInfo = SupplementaryViewInfo(
-            registrationMethod: .viewClass(viewKind == .header ? HeaderView.self : FooterView.self),
-            reuseIdentifier: "reuse_\(kindString)+\(sectionLabel)", // e.g. reuse_header+A
+            registrationInfo: ViewRegistrationInfo(classType: viewKind == .header ? HeaderView.self : FooterView.self),
+            kind: viewKind,
             accessibilityFormat: SupplementaryAccessibilityFormat("access_\(kindString)+%{section}")) // e.g. access_header+%{section}
     }
 
