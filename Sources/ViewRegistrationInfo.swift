@@ -23,9 +23,9 @@ public protocol ReusableCellProtocol {
     var registrationInfo: ViewRegistrationInfo { get }
 }
 
-public struct ViewRegistrationInfo {
-    let reuseIdentifier: String
-    let registrationMethod: ViewRegistrationMethod
+public struct ViewRegistrationInfo: Equatable {
+    public let reuseIdentifier: String
+    public let registrationMethod: ViewRegistrationMethod
 
     public init(classType: AnyClass) {
         self.reuseIdentifier = "\(classType)"
