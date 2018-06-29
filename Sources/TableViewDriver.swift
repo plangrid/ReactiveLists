@@ -59,6 +59,20 @@ open class TableViewDriver: NSObject {
         }
     }
 
+    /// Animation for row insertions
+    public var insertionAnimation: UITableViewRowAnimation = .automatic {
+        didSet {
+            _tableViewDiffer?.insertionAnimation = insertionAnimation
+        }
+    }
+
+    /// Animation for row deletions
+    public var deletionAnimation: UITableViewRowAnimation = .automatic {
+        didSet {
+            _tableViewDiffer?.deletionAnimation = deletionAnimation
+        }
+    }
+
     /// If this property is set to `true`, updating the `tableViewModel` will always
     /// automatically lead to updating the UI state of the `UITableView`, even if cells/sections
     /// were moved/inserted/deleted.
@@ -176,6 +190,9 @@ open class TableViewDriver: NSObject {
                     tableView: self.tableView,
                     initialSectionedValues: newModel.diffingKeys
                 )
+
+                self._tableViewDiffer?.insertionAnimation = insertionAnimation
+                self._tableViewDiffer?.deletionAnimation = deletionAnimation
             } else if self._didReceiveFirstNonNilValue {
                 // If the current table view model is empty, default to an empty set of diffing keys
                 if let differ = self._tableViewDiffer {
