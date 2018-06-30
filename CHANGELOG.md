@@ -4,6 +4,11 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
+0.2.0
+-----
+
+- Allow selection of row animtions.
+
 0.1.0
 -----
 
