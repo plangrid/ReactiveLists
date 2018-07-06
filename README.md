@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/plangrid/ReactiveLists.svg?branch=master)](https://travis-ci.org/plangrid/ReactiveLists) [![Version Status](https://img.shields.io/cocoapods/v/ReactiveLists.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/ReactiveLists.svg)][mitLink] [![codecov](https://codecov.io/gh/plangrid/ReactiveLists/branch/master/graph/badge.svg)](https://codecov.io/gh/plangrid/ReactiveLists) [![Platform](https://img.shields.io/cocoapods/p/ReactiveLists.svg)][docsLink]
 
-`ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView` that makes it easy to write stateless code that generates user interfaces. 
+`ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView` that makes it easy to write stateless code that generates user interfaces.
 
 In our experience this can make UI code significantly easier to read and maintain. Instead of spreading the definition of your content over various data source methods, you can define the content concisely. The table or collection content and layout are immediately obvious by scanning over the source code.
 
@@ -70,8 +70,8 @@ $ ./scripts/gen_docs.sh
 
 ## Requirements
 
-* Xcode 9+
-* Swift 4.0+
+* Xcode 9.4+
+* Swift 4.1+
 * iOS 9+
 
 ## Installation
