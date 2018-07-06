@@ -22,6 +22,7 @@ This release closes the [0.1.1 milestone](https://github.com/plangrid/ReactiveLi
 
 ### New
 
+- You can now customize the cell insertion and deletion animations on `TableViewDriver`. (#115, @wickwirew)
 - `ViewRegistrationInfo` properties `reuseIdentifier` and `registrationMethod` are now public
 - `ViewRegistrationInfo` now conforms to `Equatable`
 - `SupplementaryViewInfo` now conforms to `Equatable`
