@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.swift_version = '4.1'
   s.requires_arc = true
 
-  s.dependency 'Dwifft', '~> 0.7.0'
+  s.dependency 'Dwifft', '~> 0.8.0'
 end
