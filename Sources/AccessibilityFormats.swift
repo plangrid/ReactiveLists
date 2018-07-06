@@ -20,7 +20,7 @@ import Foundation
 // of the `ReactiveLists` project in the long term. See https://github.com/plangrid/ReactiveLists/issues/77
 
 /// :nodoc:
-public struct CellAccessibilityFormat: ExpressibleByStringLiteral {
+public struct CellAccessibilityFormat: ExpressibleByStringLiteral, Equatable {
     private let _format: String
 
     /// :nodoc:
@@ -52,7 +52,7 @@ public struct CellAccessibilityFormat: ExpressibleByStringLiteral {
 }
 
 /// :nodoc:
-public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral {
+public struct SupplementaryAccessibilityFormat: ExpressibleByStringLiteral, Equatable {
     private let _format: String
 
     /// :nodoc:

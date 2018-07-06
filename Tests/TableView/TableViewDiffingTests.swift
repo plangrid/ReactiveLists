@@ -40,7 +40,7 @@ final class TableViewDiffingTests: XCTestCase {
     ///   extensive tests for the various diffing scenarios.
     func testChangingRows() {
         let initialModel = TableViewModel(
-            cellViewModels: []
+            cellViewModels: [UserCell(user: "Name")]
         )
 
         self.tableViewDataSource.tableViewModel = initialModel
@@ -52,10 +52,24 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 1)
-        XCTAssertEqual(
-            self.mockTableView.callsToInsertRowAtIndexPaths[0].indexPaths,
-            [IndexPath(row: 0, section: 0)]
+        XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths[0].indexPaths, [IndexPath(row: 0, section: 0)])
+    }
+
+    func testChangingRowsWithEmptyModles() {
+        let initialModel = TableViewModel(
+            cellViewModels: []
         )
+
+        self.tableViewDataSource.tableViewModel = initialModel
+
+        let updatedModel = TableViewModel(
+            cellViewModels: [UserCell(user: "TestUser")]
+        )
+
+        self.tableViewDataSource.tableViewModel = updatedModel
+
+        XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 0)
+        XCTAssertEqual(self.mockTableView.callsToReloadData, 3)
     }
 
     /// Tests that changes to individual sections result in the correct calls to update the
@@ -67,11 +81,11 @@ final class TableViewDiffingTests: XCTestCase {
     func testChangingSections() {
         let initialModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: [],
+                cellViewModels: [UserCell(user: "Name")],
                 diffingKey: "1"
             ),
             TableSectionViewModel(
-                cellViewModels: [],
+                cellViewModels: [UserCell(user: "user")],
                 diffingKey: "2"
             ),
         ])
@@ -80,7 +94,7 @@ final class TableViewDiffingTests: XCTestCase {
 
         let updatedModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: [],
+                cellViewModels: [UserCell(user: "new")],
                 diffingKey: "2"
             ),
         ])
@@ -88,10 +102,34 @@ final class TableViewDiffingTests: XCTestCase {
         self.tableViewDataSource.tableViewModel = updatedModel
 
         XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 1)
-        XCTAssertEqual(
-            self.mockTableView.callsToDeleteSections[0].sections,
-            IndexSet(integer: 0)
-        )
+        XCTAssertEqual(self.mockTableView.callsToDeleteSections[0].sections, IndexSet(integer: 0))
+    }
+
+    func testChangingSectionsThatAreEmpty() {
+        let initialModel = TableViewModel(sectionModels: [
+            TableSectionViewModel(
+                cellViewModels: [],
+                diffingKey: "1"
+            ),
+            TableSectionViewModel(
+                cellViewModels: [],
+                diffingKey: "2"
+            ),
+            ])
+
+        self.tableViewDataSource.tableViewModel = initialModel
+
+        let updatedModel = TableViewModel(sectionModels: [
+            TableSectionViewModel(
+                cellViewModels: [],
+                diffingKey: "2"
+            ),
+            ])
+
+        self.tableViewDataSource.tableViewModel = updatedModel
+
+        XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 0)
+        XCTAssertEqual(self.mockTableView.callsToReloadData, 3)
     }
 }
 

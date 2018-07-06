@@ -17,14 +17,21 @@
 import Foundation
 import UIKit
 
+/// Describes a reusable cell and specifies how to register it.
+public protocol ReusableCellProtocol {
+
+    /// The registration info for the cell.
+    var registrationInfo: ViewRegistrationInfo { get }
+}
+
 /// Describes the registration information for a cell or supplementary view.
-public struct ViewRegistrationInfo {
+public struct ViewRegistrationInfo: Equatable {
 
     /// The reuse identifier for the view.
-    let reuseIdentifier: String
+    public let reuseIdentifier: String
 
     /// The registration method for the view.
-    let registrationMethod: ViewRegistrationMethod
+    public let registrationMethod: ViewRegistrationMethod
 
     /// Initializes a new `ViewRegistrationInfo` for the provided `classType`.
     ///

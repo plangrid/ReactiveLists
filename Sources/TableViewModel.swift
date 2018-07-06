@@ -224,12 +224,6 @@ public struct TableViewModel {
     ///   - sectionModels: the sections that need to be shown in this table view.
     ///   - sectionIndexTitles: the section index titles for this table view.
     public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil) {
-        if let sectionIndexTitles = sectionIndexTitles {
-            assert(
-                sectionModels.count == sectionIndexTitles.count,
-                "The table view model requires an index title per section."
-            )
-        }
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
     }
@@ -246,10 +240,9 @@ public struct TableViewModel {
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> TableCellViewModel? {
-        guard let section = self[indexPath.section],
-            section.cellViewModels.count > indexPath.row else {
-                return nil
-        }
+        guard indexPath.count >= 2, // In rare cases, we've seen UIKit give us a bad IndexPath
+            let section = self[indexPath.section],
+            section.cellViewModels.count > indexPath.row else { return nil }
         return section.cellViewModels[indexPath.row]
     }
 

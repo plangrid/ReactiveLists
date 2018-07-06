@@ -21,9 +21,10 @@ class FooterView: UITableViewHeaderFooterView {}
 
 class TestTableView: UITableView {
     var callsToRegisterClass: [(viewClass: AnyClass?, identifier: String)] = []
-    var callsToDeselect: Int = 0
+    var callsToDeselect = 0
     var callsToInsertRowAtIndexPaths: [(indexPaths: [IndexPath], animation: UITableViewRowAnimation)] = []
     var callsToDeleteSections: [(sections: IndexSet, animation: UITableViewRowAnimation)] = []
+    var callsToReloadData = 0
 
     override var indexPathsForVisibleRows: [IndexPath]? {
         return (0..<self.numberOfSections).flatMap { (section) -> [IndexPath] in
@@ -59,6 +60,11 @@ class TestTableView: UITableView {
     override func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
         super.deleteSections(sections, with: animation)
         self.callsToDeleteSections.append((sections: sections, animation: animation))
+    }
+
+    override func reloadData() {
+         super.reloadData()
+        self.callsToReloadData += 1
     }
 }
 

@@ -68,7 +68,7 @@ open class TableViewDriver: NSObject {
 
     private let _shouldDeselectUponSelection: Bool
     private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
-    private var _didReceiveFirstNonNilValue = false
+    private var _didReceiveFirstNonNilNonEmptyValue = false
 
     /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
     ///
@@ -156,19 +156,19 @@ open class TableViewDriver: NSObject {
     // MARK: Private
 
     private func _tableViewModelDidChange() {
-        guard let newModel = self.tableViewModel else {
-            self.refreshViews()
+        guard let newModel = self.tableViewModel, !newModel.isEmpty else {
+            self.tableView.reloadData()
             return
         }
 
         self.tableView.registerViews(for: newModel)
 
         if self._automaticDiffingEnabled {
-            if !self._didReceiveFirstNonNilValue {
+            if !self._didReceiveFirstNonNilNonEmptyValue {
                 // For the first non-nil value, we want to reload data, to avoid a weird
                 // animation where we animate in the initial state
                 self.tableView.reloadData()
-                self._didReceiveFirstNonNilValue = true
+                self._didReceiveFirstNonNilNonEmptyValue = true
 
                 // Now that we have this initial state, setup the differ with that initial state,
                 // so that the diffing works properly from here on out
@@ -176,7 +176,9 @@ open class TableViewDriver: NSObject {
                     tableView: self.tableView,
                     initialSectionedValues: newModel.diffingKeys
                 )
-            } else if self._didReceiveFirstNonNilValue {
+                self._tableViewDiffer?.insertionAnimation = .fade
+                self._tableViewDiffer?.deletionAnimation = .fade
+            } else if self._didReceiveFirstNonNilNonEmptyValue {
                 // If the current table view model is empty, default to an empty set of diffing keys
                 if let differ = self._tableViewDiffer {
                     let diffingKeys = newModel.diffingKeys
