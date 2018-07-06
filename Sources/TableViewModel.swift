@@ -143,7 +143,7 @@ public struct TableSectionViewModel {
         return self.cellViewModels.isEmpty
     }
 
-    /// Initializes a `TableViewSectionViewModel`.
+    /// Initializes a `TableSectionViewModel`.
     ///
     /// - Parameters:
     ///   - cellViewModels: the cell view models contained in this section.
@@ -165,7 +165,7 @@ public struct TableSectionViewModel {
         self.diffingKey = diffingKey
     }
 
-    /// Initializes a `TableViewSectionViewModel`.
+    /// Initializes a `TableSectionViewModel`.
     ///
     /// - Parameters:
     ///   - headerTitle: title for the header, or `nil`. Setting a title will cause a default header
