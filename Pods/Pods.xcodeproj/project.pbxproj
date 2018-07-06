@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		1335F571229B0F9C257021B2C794F4F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		1BC5A1322FA8D3CAD10010B9FDB6484D /* Dwifft+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16B8C909C1B3605C70586CE342FD581 /* Dwifft+AppKit.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		529CAB3169FD4B7580C36502697F4BA2 /* Dwifft-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C9D1E90286EAE70DAE96192437D0A3DD /* Dwifft-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52C7B05FD87A524305B52B5C6E0F2D09 /* Dwifft+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E60526A452AF31CFF77082238AB9F6 /* Dwifft+UIKit.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		56FF68704986C29FA303D6A5C4A574E2 /* Pods-ReactiveListsTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */; };
 		6A0587FD44998BEE044C76E7C7BD0257 /* Pods-ReactiveListsTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		799468D9325D86E04AF0B30960B6D3FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		8B0E8D14249EFA66D65213E74F6DCE44 /* Dwifft-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA65B2D155663AF2B3EBF198CB258FCC /* Dwifft-dummy.m */; };
+		84E06244838232319BA2F8E6C51E5077 /* Dwifft-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6065FF27D8E07374701D8FA2F9F326 /* Dwifft-dummy.m */; };
 		92F8250294AAEA1112766F2A35F104F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		937EAB46091EC9C688A125AF70EF83E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		9C88539038EF674A03A8A990E06F95F0 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */; };
+		A0541BEA253112E6FAE5CC7B595FBBC5 /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E1FE9EF6F8C40EC4FBD622FA521A47 /* Dwifft.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A7EA8021FDEAB187C2A9AE67B6675605 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		B2A61DA262AA75D94B37EB5CA1398254 /* Pods-ReactiveLists-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */; };
-		B2B766109580D83FF7037EBFFBE6B5F6 /* SectionedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2F0B54F48123692F204EA97E1AFED /* SectionedValues.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C1C288939B16FCBF7F0E898DF93D31AC /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DE5A7BBEFD14F15EF7D8777BED6356 /* Dwifft.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		D50ED0E705DEBB84FCA7C863FCC5DEBC /* Pods-ReactiveLists-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE51CD26E1DAFDE060FD29B0462C7D77 /* Dwifft-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C2BA5A50611023A7F51C5A2777C9E8B5 /* Dwifft-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC3E655DA0DD4743C089592062A97944 /* Dwifft+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714A0CF3D59E2A5017ED020C3158C06 /* Dwifft+UIKit.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		D61BE82C8FCE2B68399E9EBEF8E2618C /* SectionedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C831FCCE39C995C8FDF2038B67F4251 /* SectionedValues.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F43BC5F37C8A6374512BC49AE782386E /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FFE69A4BC12EAE5C064C715F18E5D67A /* AbstractDiffCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645671BF43FAF8090D411E2FEA9AB382 /* AbstractDiffCalculator.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,66 +31,68 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85823F2AB213BEBBE1A5D186224A1CC7;
+			remoteGlobalIDString = B881263F5FBF1212B32FA2AABEFFB1CD;
 			remoteInfo = Dwifft;
 		};
 		BF2F05188D8DC37A211C3C1A0A39F2D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85823F2AB213BEBBE1A5D186224A1CC7;
+			remoteGlobalIDString = B881263F5FBF1212B32FA2AABEFFB1CD;
 			remoteInfo = Dwifft;
 		};
 		EC18BA694BADFD10B14EE9B0EC48A65D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 85823F2AB213BEBBE1A5D186224A1CC7;
+			remoteGlobalIDString = B881263F5FBF1212B32FA2AABEFFB1CD;
 			remoteInfo = Dwifft;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02E60526A452AF31CFF77082238AB9F6 /* Dwifft+UIKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dwifft+UIKit.swift"; path = "Dwifft/Dwifft+UIKit.swift"; sourceTree = "<group>"; };
+		0756C5BDDAC139F08F74588665428819 /* Dwifft-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-prefix.pch"; sourceTree = "<group>"; };
 		077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveListsTests-umbrella.h"; sourceTree = "<group>"; };
 		09C4C1CBBBCDD3D3B746B4C4999941F2 /* Pods-ReactiveListsTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveListsTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		0CCD2504C7F9C9FE3E428F56D0CD04A1 /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
 		0DFDF67C51FF6A636685EE674B35EE25 /* Pods-ReactiveLists-ReactiveListsExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-frameworks.sh"; sourceTree = "<group>"; };
 		116574C9FF8EB5FC53C751AC50912AF8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1419FEB1F3B3831559B8E705F8168DB1 /* Dwifft.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Dwifft.modulemap; sourceTree = "<group>"; };
 		157DE719AE8ACA5E30F2AB3F6FB13B49 /* Pods-ReactiveLists-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-acknowledgements.plist"; sourceTree = "<group>"; };
 		16A36A1E59AB34E2D35DF8EDB28E4E09 /* Pods-ReactiveLists-ReactiveListsExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveLists-ReactiveListsExample.modulemap"; sourceTree = "<group>"; };
 		16DC03E217CC617BD498BE8E5EAA14E9 /* Pods-ReactiveLists.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveLists.modulemap"; sourceTree = "<group>"; };
 		18C6E2B544ED038A3DFBC3098DBCBF05 /* Pods-ReactiveListsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		26DE5A7BBEFD14F15EF7D8777BED6356 /* Dwifft.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dwifft.swift; path = Dwifft/Dwifft.swift; sourceTree = "<group>"; };
-		27479A7D963BEB91D9C07FD6C3874A6A /* Dwifft-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-prefix.pch"; sourceTree = "<group>"; };
+		1CDD7EFF7F0EBE0C550627F2FBE11E2A /* Dwifft.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Dwifft.xcconfig; sourceTree = "<group>"; };
 		2AC90E62B734508A0FCFC653E7A31683 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig"; sourceTree = "<group>"; };
 		2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-ReactiveListsExample-umbrella.h"; sourceTree = "<group>"; };
-		3BB2F0B54F48123692F204EA97E1AFED /* SectionedValues.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionedValues.swift; path = Dwifft/SectionedValues.swift; sourceTree = "<group>"; };
 		3F77C912163DF5DF098F86DFDACE7D90 /* Pods-ReactiveListsTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveListsTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4714A0CF3D59E2A5017ED020C3158C06 /* Dwifft+UIKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dwifft+UIKit.swift"; path = "Dwifft/Dwifft+UIKit.swift"; sourceTree = "<group>"; };
 		531995376063C09D3902C2E4C2EFD97E /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		54D84C3A8195E31D703CF5EA48FF9BFF /* Pods-ReactiveLists-ReactiveListsExample-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-resources.sh"; sourceTree = "<group>"; };
-		5646B58EECDC1B23E9C26FA3D6C1D826 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B4999957B7299E107A21BAC5BF91129 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
 		5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveListsTests-dummy.m"; sourceTree = "<group>"; };
+		5C831FCCE39C995C8FDF2038B67F4251 /* SectionedValues.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SectionedValues.swift; path = Dwifft/SectionedValues.swift; sourceTree = "<group>"; };
+		645671BF43FAF8090D411E2FEA9AB382 /* AbstractDiffCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AbstractDiffCalculator.swift; path = Dwifft/AbstractDiffCalculator.swift; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-umbrella.h"; sourceTree = "<group>"; };
 		760D038C2D89DD28E74C47DD91DAF418 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86570C7F10A6E0FA03885DFDA55E50D3 /* Pods-ReactiveListsTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveListsTests.modulemap"; sourceTree = "<group>"; };
+		89DEBFF12A2AF546E6273EA3C0968B54 /* Dwifft.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Dwifft.modulemap; sourceTree = "<group>"; };
 		8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-ReactiveListsExample-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AADC26923EDE46C7BB696B743238F208 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveListsTests.framework; path = "Pods-ReactiveListsTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-dummy.m"; sourceTree = "<group>"; };
 		B954323BFD2178B30660FD15B45035A2 /* Pods-ReactiveLists-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-resources.sh"; sourceTree = "<group>"; };
-		BA65B2D155663AF2B3EBF198CB258FCC /* Dwifft-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Dwifft-dummy.m"; sourceTree = "<group>"; };
+		BE6065FF27D8E07374701D8FA2F9F326 /* Dwifft-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Dwifft-dummy.m"; sourceTree = "<group>"; };
 		C0716DE66B91FE9DE84FBD057D8FECA1 /* Pods_ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveLists.framework; path = "Pods-ReactiveLists.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2BA5A50611023A7F51C5A2777C9E8B5 /* Dwifft-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-umbrella.h"; sourceTree = "<group>"; };
 		C51AA72514E0DFA60B554C4A6998B621 /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
+		C9D1E90286EAE70DAE96192437D0A3DD /* Dwifft-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Dwifft-umbrella.h"; sourceTree = "<group>"; };
+		D16B8C909C1B3605C70586CE342FD581 /* Dwifft+AppKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dwifft+AppKit.swift"; path = "Dwifft/Dwifft+AppKit.swift"; sourceTree = "<group>"; };
 		DB4E84CCFDA3F36A827251994A714D84 /* Pods_ReactiveLists_ReactiveListsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveLists_ReactiveListsExample.framework; path = "Pods-ReactiveLists-ReactiveListsExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2B4DE036509B2CF76F8CA910E20AE09 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E306A31585C5CF6D786DB047B9D2E9B7 /* Pods-ReactiveListsTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-frameworks.sh"; sourceTree = "<group>"; };
 		E3C6DD930C99A5D7335B4213B81435E7 /* Pods-ReactiveLists-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Dwifft.xcconfig; sourceTree = "<group>"; };
 		E85B28002AF138D1A4148F60758B33AF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9E1FE9EF6F8C40EC4FBD622FA521A47 /* Dwifft.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dwifft.swift; path = Dwifft/Dwifft.swift; sourceTree = "<group>"; };
 		F2212AA261D7BC23D65DB471B391225B /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist"; sourceTree = "<group>"; };
 		F65A23E0B8C7657BA9DAE7603D66CD6B /* Pods-ReactiveListsTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-resources.sh"; sourceTree = "<group>"; };
 		F7B7BC2E8943A8CCCDB8A44FBAE25A92 /* Dwifft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Dwifft.framework; path = Dwifft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,27 +124,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BEA56EA882960756FC56A42C39CCDD8 /* Frameworks */ = {
+		EA8100DE2067E1B1287C66F1119EE36E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				799468D9325D86E04AF0B30960B6D3FC /* Foundation.framework in Frameworks */,
+				A7EA8021FDEAB187C2A9AE67B6675605 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		12B031C89808A1F969D968171669B902 /* Dwifft */ = {
+		244C6F5AF87DDE0278BFD444F80166DE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				26DE5A7BBEFD14F15EF7D8777BED6356 /* Dwifft.swift */,
-				4714A0CF3D59E2A5017ED020C3158C06 /* Dwifft+UIKit.swift */,
-				3BB2F0B54F48123692F204EA97E1AFED /* SectionedValues.swift */,
-				F9DB0BDDFFC27435E1560E125000ABAC /* Support Files */,
+				89DEBFF12A2AF546E6273EA3C0968B54 /* Dwifft.modulemap */,
+				1CDD7EFF7F0EBE0C550627F2FBE11E2A /* Dwifft.xcconfig */,
+				BE6065FF27D8E07374701D8FA2F9F326 /* Dwifft-dummy.m */,
+				0756C5BDDAC139F08F74588665428819 /* Dwifft-prefix.pch */,
+				C9D1E90286EAE70DAE96192437D0A3DD /* Dwifft-umbrella.h */,
+				E2B4DE036509B2CF76F8CA910E20AE09 /* Info.plist */,
 			);
-			name = Dwifft;
-			path = Dwifft;
+			name = "Support Files";
+			path = "../Target Support Files/Dwifft";
+			sourceTree = "<group>";
+		};
+		3E68AD0D047EB429630D3D0D59C37317 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE11DB38EE95DE0218E1A3F415CF096B /* Dwifft */,
+				AB64E7D2D2BEE592E33184FA7B4D3E87 /* SwiftLint */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		57E84F625A2F883050D5E97B6B02DC2E /* Pods-ReactiveLists-ReactiveListsExample */ = {
@@ -166,7 +181,7 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				D10ACAC86B75CFBDC0CE85A4E621C60D /* Pods */,
+				3E68AD0D047EB429630D3D0D59C37317 /* Pods */,
 				8A9EB8B2D983EDE37509FC40D7DB4450 /* Products */,
 				E653DFA019544D2D69A77312BDCAFCCE /* Targets Support Files */,
 			);
@@ -218,7 +233,7 @@
 			path = "Target Support Files/Pods-ReactiveListsTests";
 			sourceTree = "<group>";
 		};
-		A1DB7DB730E0FC7512FBC1E5DD3266F7 /* SwiftLint */ = {
+		AB64E7D2D2BEE592E33184FA7B4D3E87 /* SwiftLint */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -234,13 +249,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D10ACAC86B75CFBDC0CE85A4E621C60D /* Pods */ = {
+		CE11DB38EE95DE0218E1A3F415CF096B /* Dwifft */ = {
 			isa = PBXGroup;
 			children = (
-				12B031C89808A1F969D968171669B902 /* Dwifft */,
-				A1DB7DB730E0FC7512FBC1E5DD3266F7 /* SwiftLint */,
+				645671BF43FAF8090D411E2FEA9AB382 /* AbstractDiffCalculator.swift */,
+				E9E1FE9EF6F8C40EC4FBD622FA521A47 /* Dwifft.swift */,
+				D16B8C909C1B3605C70586CE342FD581 /* Dwifft+AppKit.swift */,
+				02E60526A452AF31CFF77082238AB9F6 /* Dwifft+UIKit.swift */,
+				5C831FCCE39C995C8FDF2038B67F4251 /* SectionedValues.swift */,
+				244C6F5AF87DDE0278BFD444F80166DE /* Support Files */,
 			);
-			name = Pods;
+			name = Dwifft;
+			path = Dwifft;
 			sourceTree = "<group>";
 		};
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
@@ -261,36 +281,22 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		F9DB0BDDFFC27435E1560E125000ABAC /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				1419FEB1F3B3831559B8E705F8168DB1 /* Dwifft.modulemap */,
-				E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */,
-				BA65B2D155663AF2B3EBF198CB258FCC /* Dwifft-dummy.m */,
-				27479A7D963BEB91D9C07FD6C3874A6A /* Dwifft-prefix.pch */,
-				C2BA5A50611023A7F51C5A2777C9E8B5 /* Dwifft-umbrella.h */,
-				5646B58EECDC1B23E9C26FA3D6C1D826 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Dwifft";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		6BA4697B9E0790E893B4E204069FF773 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529CAB3169FD4B7580C36502697F4BA2 /* Dwifft-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D9F785832F9D01DBC7E5D027CCADB12 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6A0587FD44998BEE044C76E7C7BD0257 /* Pods-ReactiveListsTests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D82E7B293C267EF63B2BF118C1BC5BD1 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DE51CD26E1DAFDE060FD29B0462C7D77 /* Dwifft-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,13 +337,13 @@
 			productReference = DB4E84CCFDA3F36A827251994A714D84 /* Pods_ReactiveLists_ReactiveListsExample.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		85823F2AB213BEBBE1A5D186224A1CC7 /* Dwifft */ = {
+		B881263F5FBF1212B32FA2AABEFFB1CD /* Dwifft */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 076FD9CC0DF93ADD8871D8B90F239645 /* Build configuration list for PBXNativeTarget "Dwifft" */;
+			buildConfigurationList = 04E690776F854B78BAAB4F45DBA72674 /* Build configuration list for PBXNativeTarget "Dwifft" */;
 			buildPhases = (
-				63D6ACA37E8A1F70FCFB2498E24894C3 /* Sources */,
-				7BEA56EA882960756FC56A42C39CCDD8 /* Frameworks */,
-				D82E7B293C267EF63B2BF118C1BC5BD1 /* Headers */,
+				E3B0D20C87BCC0F43152FAC8E54A79B5 /* Sources */,
+				EA8100DE2067E1B1287C66F1119EE36E /* Frameworks */,
+				6BA4697B9E0790E893B4E204069FF773 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -405,7 +411,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				85823F2AB213BEBBE1A5D186224A1CC7 /* Dwifft */,
+				B881263F5FBF1212B32FA2AABEFFB1CD /* Dwifft */,
 				E0446F5C859AB69B4B4420BF139B8D7D /* Pods-ReactiveLists */,
 				458447CA94557C7018BE603466B35854 /* Pods-ReactiveLists-ReactiveListsExample */,
 				F6C7ADBAD2CB32CE3BEC2B51044AD8F4 /* Pods-ReactiveListsTests */,
@@ -430,22 +436,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		63D6ACA37E8A1F70FCFB2498E24894C3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EC3E655DA0DD4743C089592062A97944 /* Dwifft+UIKit.swift in Sources */,
-				8B0E8D14249EFA66D65213E74F6DCE44 /* Dwifft-dummy.m in Sources */,
-				C1C288939B16FCBF7F0E898DF93D31AC /* Dwifft.swift in Sources */,
-				B2B766109580D83FF7037EBFFBE6B5F6 /* SectionedValues.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7CCE7A8284D67961708C11B9E33684D0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9C88539038EF674A03A8A990E06F95F0 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3B0D20C87BCC0F43152FAC8E54A79B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFE69A4BC12EAE5C064C715F18E5D67A /* AbstractDiffCalculator.swift in Sources */,
+				1BC5A1322FA8D3CAD10010B9FDB6484D /* Dwifft+AppKit.swift in Sources */,
+				52C7B05FD87A524305B52B5C6E0F2D09 /* Dwifft+UIKit.swift in Sources */,
+				84E06244838232319BA2F8E6C51E5077 /* Dwifft-dummy.m in Sources */,
+				A0541BEA253112E6FAE5CC7B595FBBC5 /* Dwifft.swift in Sources */,
+				D61BE82C8FCE2B68399E9EBEF8E2618C /* SectionedValues.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,19 +463,19 @@
 		4DC17CA064A6A003F171C4A0D4403248 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Dwifft;
-			target = 85823F2AB213BEBBE1A5D186224A1CC7 /* Dwifft */;
+			target = B881263F5FBF1212B32FA2AABEFFB1CD /* Dwifft */;
 			targetProxy = 22665F48D95F3FA65E4B358C158DAAC6 /* PBXContainerItemProxy */;
 		};
 		55DD6378DC862F2E0F63E1DBE04B90A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Dwifft;
-			target = 85823F2AB213BEBBE1A5D186224A1CC7 /* Dwifft */;
+			target = B881263F5FBF1212B32FA2AABEFFB1CD /* Dwifft */;
 			targetProxy = BF2F05188D8DC37A211C3C1A0A39F2D0 /* PBXContainerItemProxy */;
 		};
 		BE413F97A015584B29A8521D74781878 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Dwifft;
-			target = 85823F2AB213BEBBE1A5D186224A1CC7 /* Dwifft */;
+			target = B881263F5FBF1212B32FA2AABEFFB1CD /* Dwifft */;
 			targetProxy = EC18BA694BADFD10B14EE9B0EC48A65D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -502,6 +510,38 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0875FDDA8E825DA8DE06EF2C7AF94DAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CDD7EFF7F0EBE0C550627F2FBE11E2A /* Dwifft.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Dwifft/Dwifft-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Dwifft/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
+				PRODUCT_MODULE_NAME = Dwifft;
+				PRODUCT_NAME = Dwifft;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -711,41 +751,9 @@
 			};
 			name = Debug;
 		};
-		A42CBED13D9CEAC60F4FF092F009B284 /* Debug */ = {
+		5D7F4B68E579CA3196329A2B3BD68190 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Dwifft/Dwifft-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Dwifft/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Dwifft/Dwifft.modulemap";
-				PRODUCT_MODULE_NAME = Dwifft;
-				PRODUCT_NAME = Dwifft;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		A7E8FD58C1A4C7325359A0017510D8BD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6CB3FCD805C4B3C953E52750C142637 /* Dwifft.xcconfig */;
+			baseConfigurationReference = 1CDD7EFF7F0EBE0C550627F2FBE11E2A /* Dwifft.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -872,11 +880,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		076FD9CC0DF93ADD8871D8B90F239645 /* Build configuration list for PBXNativeTarget "Dwifft" */ = {
+		04E690776F854B78BAAB4F45DBA72674 /* Build configuration list for PBXNativeTarget "Dwifft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A42CBED13D9CEAC60F4FF092F009B284 /* Debug */,
-				A7E8FD58C1A4C7325359A0017510D8BD /* Release */,
+				0875FDDA8E825DA8DE06EF2C7AF94DAC /* Debug */,
+				5D7F4B68E579CA3196329A2B3BD68190 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
