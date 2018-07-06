@@ -77,6 +77,9 @@
                 <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ReusableCellProtocol.html">ReusableCellProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
               </li>
               <li class="nav-group-task">
@@ -145,9 +148,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV18sectionIndexTitlesSaySSGSgv"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelV18sectionIndexTitlesSaySSGSgvp"></a>
                     <a name="//apple_ref/swift/Property/sectionIndexTitles" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV18sectionIndexTitlesSaySSGSgv">sectionIndexTitles</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV18sectionIndexTitlesSaySSGSgvp">sectionIndexTitles</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,9 +175,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV13sectionModelsSayAA0c7SectiondE0VGv"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelV13sectionModelsSayAA0c7SectiondE0VGvp"></a>
                     <a name="//apple_ref/swift/Property/sectionModels" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV13sectionModelsSayAA0c7SectiondE0VGv">sectionModels</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV13sectionModelsSayAA0c7SectiondE0VGvp">sectionModels</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -199,9 +202,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV7isEmptySbv"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelV7isEmptySbvp"></a>
                     <a name="//apple_ref/swift/Property/isEmpty" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV7isEmptySbv">isEmpty</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV7isEmptySbvp">isEmpty</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -216,7 +219,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isEmpty</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isEmpty</span><span class="p">:</span> <span class="nf">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -284,7 +287,7 @@ via the initializer.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initializes a table view model with the sections provided.
-Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13ReactiveLists14TableViewModelV18sectionIndexTitlesSaySSGSgv">sectionIndexTitles</a></code> for this table view.</p>
+Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13ReactiveLists14TableViewModelV18sectionIndexTitlesSaySSGSgvp">sectionIndexTitles</a></code> for this table view.</p>
 
                       </div>
                       <div class="declaration">
@@ -332,9 +335,9 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV9subscriptAA0c7SectiondE0VSgSici"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelVAA0c7SectiondE0VSgSicip"></a>
                     <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV9subscriptAA0c7SectiondE0VSgSici">subscript(_:)</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelVAA0c7SectiondE0VSgSicip">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -349,7 +352,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/TableSectionViewModel.html">TableSectionViewModel</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nf">TableSectionViewModel</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -378,9 +381,9 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists14TableViewModelV9subscriptAA0c4CelldE0_pSg10Foundation9IndexPathVci"></a>
+                    <a name="/s:13ReactiveLists14TableViewModelVAA0c4CelldE0_pSg10Foundation9IndexPathVcip"></a>
                     <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists14TableViewModelV9subscriptAA0c4CelldE0_pSg10Foundation9IndexPathVci">subscript(_:)</a>
+                    <a class="token" href="#/s:13ReactiveLists14TableViewModelVAA0c4CelldE0_pSg10Foundation9IndexPathVcip">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -395,7 +398,7 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/TableCellViewModel.html">TableCellViewModel</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nf">TableCellViewModel</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -426,8 +429,8 @@ Optionally accepts the <code><a href="../Structs/TableViewModel.html#/s:13Reacti
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-07)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-07-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

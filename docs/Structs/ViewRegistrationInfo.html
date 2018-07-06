@@ -77,6 +77,9 @@
                 <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ReusableCellProtocol.html">ReusableCellProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
               </li>
               <li class="nav-group-task">
@@ -132,7 +135,7 @@
             <h1>ViewRegistrationInfo</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ViewRegistrationInfo</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ViewRegistrationInfo</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
               </div>
@@ -142,6 +145,60 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20ViewRegistrationInfoV15reuseIdentifierSSvp"></a>
+                    <a name="//apple_ref/swift/Property/reuseIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20ViewRegistrationInfoV15reuseIdentifierSSvp">reuseIdentifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The reuse identifier for the view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20ViewRegistrationInfoV18registrationMethodAA0cdG0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/registrationMethod" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20ViewRegistrationInfoV18registrationMethodAA0cdG0Ovp">registrationMethod</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The registration method for the view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">registrationMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -158,8 +215,8 @@
                         <p>Initializes a new <code>ViewRegistrationInfo</code> for the provided <code>classType</code>.</p>
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
-    <p>The class name is used for <code>reuseIdentifier</code>.
-The <code>registrationMethod</code> is set to <code>.fromClass</code>.</p>
+    <p>The class name is used for <code><a href="../Structs/ViewRegistrationInfo.html#/s:13ReactiveLists20ViewRegistrationInfoV15reuseIdentifierSSvp">reuseIdentifier</a></code>.
+The <code><a href="../Structs/ViewRegistrationInfo.html#/s:13ReactiveLists20ViewRegistrationInfoV18registrationMethodAA0cdG0Ovp">registrationMethod</a></code> is set to <code>.fromClass</code>.</p>
 
 </div>
 
@@ -210,8 +267,8 @@ The <code>registrationMethod</code> is set to <code>.fromClass</code>.</p>
                         <p>Initializes a new <code>ViewRegistrationInfo</code> for the provided <code>classType</code>, <code>nibName</code>, and <code>bundle</code>.</p>
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
-    <p>The class name is used for <code>reuseIdentifier</code>.
-The <code>registrationMethod</code> is set to <code>.fromNib</code> using the provided <code>nibName</code> and <code>bundle</code>.</p>
+    <p>The class name is used for <code><a href="../Structs/ViewRegistrationInfo.html#/s:13ReactiveLists20ViewRegistrationInfoV15reuseIdentifierSSvp">reuseIdentifier</a></code>.
+The <code><a href="../Structs/ViewRegistrationInfo.html#/s:13ReactiveLists20ViewRegistrationInfoV18registrationMethodAA0cdG0Ovp">registrationMethod</a></code> is set to <code>.fromNib</code> using the provided <code>nibName</code> and <code>bundle</code>.</p>
 
 </div>
 
@@ -275,8 +332,8 @@ The <code>registrationMethod</code> is set to <code>.fromNib</code> using the pr
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-07)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-07-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
