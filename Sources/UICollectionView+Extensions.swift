@@ -32,7 +32,7 @@ extension UICollectionView {
         }
     }
 
-    func configuredCell(for model: CollectionViewCellViewModel, at indexPath: IndexPath) -> UICollectionViewCell {
+    func configuredCell(for model: CollectionCellViewModel, at indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.dequeueReusableCellFor(identifier: model.registrationInfo.reuseIdentifier, indexPath: indexPath)
         model.applyViewModelToCell(cell)
         cell.accessibilityIdentifier = model.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)

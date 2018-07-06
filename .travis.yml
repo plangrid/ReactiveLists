@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode9.2
+osx_image: xcode9.4
 gemfile: Gemfile
 
 branches:
@@ -18,7 +18,7 @@ env:
    - FRAMEWORK_SCHEME="ReactiveLists"
    - EXAMPLE_SCHEME="Example"
 
-   - IOS_SDK=iphonesimulator11.2
+   - IOS_SDK=iphonesimulator11.4
 
    matrix:
    - DESTINATION="OS=9.3,name=iPhone 6s"   SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES"

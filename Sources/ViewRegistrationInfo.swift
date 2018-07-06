@@ -17,21 +17,44 @@
 import Foundation
 import UIKit
 
+/// Describes a reusable cell and specifies how to register it.
 public protocol ReusableCellProtocol {
 
     /// The registration info for the cell.
     var registrationInfo: ViewRegistrationInfo { get }
 }
 
+/// Describes the registration information for a cell or supplementary view.
 public struct ViewRegistrationInfo: Equatable {
+
+    /// The reuse identifier for the view.
     public let reuseIdentifier: String
+
+    /// The registration method for the view.
     public let registrationMethod: ViewRegistrationMethod
 
+    /// Initializes a new `ViewRegistrationInfo` for the provided `classType`.
+    ///
+    /// - Note:
+    /// The class name is used for `reuseIdentifier`.
+    /// The `registrationMethod` is set to `.fromClass`.
+    ///
+    /// - Parameter classType: The cell or supplementary view class.
     public init(classType: AnyClass) {
         self.reuseIdentifier = "\(classType)"
         self.registrationMethod = .fromClass(classType)
     }
 
+    /// Initializes a new `ViewRegistrationInfo` for the provided `classType`, `nibName`, and `bundle`.
+    ///
+    /// - Note:
+    /// The class name is used for `reuseIdentifier`.
+    /// The `registrationMethod` is set to `.fromNib` using the provided `nibName` and `bundle`.
+    ///
+    /// - Parameters:
+    ///   - classType: The cell or supplementary view class.
+    ///   - nibName: The name of the nib for the view.
+    ///   - bundle: The bundle in which the nib is located. Pass `nil` to use the main bundle.
     public init(classType: AnyClass, nibName: String, bundle: Bundle? = nil) {
         self.reuseIdentifier = "\(classType)"
         self.registrationMethod = .fromNib(name: nibName, bundle: bundle)

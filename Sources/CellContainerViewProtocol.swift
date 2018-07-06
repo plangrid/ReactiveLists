@@ -43,13 +43,13 @@ protocol CellContainerViewProtocol {
 }
 
 extension CellContainerViewProtocol {
-    func registerCellViewModels(_ cellViewModels: [ReusableCellProtocol]) {
+    func registerCellViewModels(_ cellViewModels: [ReusableCellViewModelProtocol]) {
         cellViewModels.forEach {
             self.registerCellViewModel($0)
         }
     }
 
-    func registerCellViewModel(_ model: ReusableCellProtocol) {
+    func registerCellViewModel(_ model: ReusableCellViewModelProtocol) {
         let info = model.registrationInfo
         let identifier = info.reuseIdentifier
         let method = info.registrationMethod
@@ -62,7 +62,7 @@ extension CellContainerViewProtocol {
         }
     }
 
-    func registerSupplementaryViewModel(_ model: ReusableSupplementaryViewProtocol) {
+    func registerSupplementaryViewModel(_ model: ReusableSupplementaryViewModelProtocol) {
         guard let info = model.viewInfo else { return }
         let identifier = info.registrationInfo.reuseIdentifier
         let method = info.registrationInfo.registrationMethod

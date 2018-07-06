@@ -14,7 +14,7 @@
     <a title="SupplementaryViewInfo Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ReactiveLists Docs</a> (78% documented)</p>
+        <p><a href="../index.html">ReactiveLists Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -68,22 +68,28 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+                <a href="../Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+                <a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableSupplementaryViewModelProtocol.html">ReusableSupplementaryViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableCellViewModel.html">TableCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TableSectionHeaderFooterViewModel.html">TableSectionHeaderFooterViewModel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
               </li>
             </ul>
           </li>
@@ -91,19 +97,19 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
+                <a href="../Structs/CollectionSectionViewModel.html">CollectionSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
+                <a href="../Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewModel.html">TableViewModel</a>
+                <a href="../Structs/TableSectionViewModel.html">TableSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+                <a href="../Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
@@ -126,7 +132,7 @@
             <h1>SupplementaryViewInfo</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SupplementaryViewInfo</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SupplementaryViewInfo</span></code></pre>
 
                 </div>
               </div>
@@ -139,9 +145,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV18registrationMethodAA0d12RegistrationG0Ov"></a>
-                    <a name="//apple_ref/swift/Property/registrationMethod" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV18registrationMethodAA0d12RegistrationG0Ov">registrationMethod</a>
+                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV012registrationE0AA0d12RegistrationE0Vv"></a>
+                    <a name="//apple_ref/swift/Property/registrationInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV012registrationE0AA0d12RegistrationE0Vv">registrationInfo</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -149,41 +155,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Stores how the view was registered (as a class or via a nib file)</p>
+                        <p>The registration info for the supplementary view.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">registrationMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoV15reuseIdentifierSSv"></a>
-                    <a name="//apple_ref/swift/Property/reuseIdentifier" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoV15reuseIdentifierSSv">reuseIdentifier</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The reuse identifier for this supplementary view</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">registrationInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a></span></code></pre>
 
                         </div>
                       </div>
@@ -210,7 +189,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a></span></code></pre>
 
                         </div>
                       </div>
@@ -238,7 +217,7 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">SupplementaryAccessibilityFormat</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">SupplementaryAccessibilityFormat</span></code></pre>
 
                         </div>
                       </div>
@@ -248,9 +227,9 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists21SupplementaryViewInfoVAcA0D18RegistrationMethodO012registrationG0_SS15reuseIdentifierAA0cD4KindO4kindAA0C19AccessibilityFormatV013accessibilityN0tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(registrationMethod:reuseIdentifier:kind:accessibilityFormat:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoVAcA0D18RegistrationMethodO012registrationG0_SS15reuseIdentifierAA0cD4KindO4kindAA0C19AccessibilityFormatV013accessibilityN0tcfc">init(registrationMethod:reuseIdentifier:kind:accessibilityFormat:)</a>
+                    <a name="/s:13ReactiveLists21SupplementaryViewInfoVAcA0d12RegistrationE0V012registrationE0_AA0cD4KindO4kindAA0C19AccessibilityFormatV013accessibilityK0tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(registrationInfo:kind:accessibilityFormat:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists21SupplementaryViewInfoVAcA0d12RegistrationE0V012registrationE0_AA0cD4KindO4kindAA0C19AccessibilityFormatV013accessibilityK0tcfc">init(registrationInfo:kind:accessibilityFormat:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -265,9 +244,8 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="nv">registrationMethod</span><span class="p">:</span> <span class="kt"><a href="../Enums/ViewRegistrationMethod.html">ViewRegistrationMethod</a></span><span class="p">,</span>
-    <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">registrationInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a></span><span class="p">,</span>
     <span class="nv">kind</span><span class="p">:</span> <span class="kt"><a href="../Enums/SupplementaryViewKind.html">SupplementaryViewKind</a></span><span class="p">,</span>
     <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">SupplementaryAccessibilityFormat</span>
 <span class="p">)</span></code></pre>
@@ -281,24 +259,12 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                             <tr>
                               <td>
                                 <code>
-                                <em>registrationMethod</em>
+                                <em>registrationInfo</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>describes how the view was registered (as a class or via a nib file)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>reuseIdentifier</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>reuse identifier for this supplementary view</p>
+                                  <p>The registration info for the view.</p>
                                 </div>
                               </td>
                             </tr>
@@ -310,7 +276,7 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                               </td>
                               <td>
                                 <div>
-                                  <p>kind of supplementary view (e.g. <code>header</code> or <code>footer</code>)</p>
+                                  <p>The kind of supplementary view (e.g. <code>header</code> or <code>footer</code>)</p>
                                 </div>
                               </td>
                             </tr>
@@ -322,7 +288,7 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
                               </td>
                               <td>
                                 <div>
-                                  <p>a format string that generates an accessibility identifier for
+                                  <p>A format string that generates an accessibility identifier for
                  the view that will be mapped to this view model.</p>
                                 </div>
                               </td>
@@ -338,8 +304,8 @@ an <code>accessibilityIdentifier</code> to the supplementary view based on this 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-07)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

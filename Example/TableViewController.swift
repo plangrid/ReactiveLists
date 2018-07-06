@@ -68,9 +68,9 @@ extension TableViewController {
     /// Pure function mapping new state to a new `TableViewModel`.  This is invoked each time the state updates
     /// in order for ReactiveLists to update the UI.
     static func viewModel(forState groups: [ToolGroup], onDeleteClosure: @escaping (Tool) -> Void) -> TableViewModel {
-        let sections: [TableViewSectionViewModel] = groups.map { group in
+        let sections: [TableSectionViewModel] = groups.map { group in
             let cellViewModels = group.tools.map { ToolTableCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
-            return TableViewSectionViewModel(
+            return TableSectionViewModel(
                 headerTitle: group.name,
                 headerHeight: 44,
                 cellViewModels: cellViewModels,

@@ -18,7 +18,7 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `UICollectionView`.
-public protocol CollectionViewCellViewModel: ReusableCellProtocol {
+public protocol CollectionCellViewModel: ReusableCellViewModelProtocol {
 
     /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
@@ -39,14 +39,20 @@ public protocol CollectionViewCellViewModel: ReusableCellProtocol {
 }
 
 /// Default implementations for `CollectionViewCellViewModel`.
-public extension CollectionViewCellViewModel {
+public extension CollectionCellViewModel {
+
+    /// Default implementation, returns `true`.
     var shouldHighlight: Bool { return true }
+
+    /// Default implementation, returns `nil`.
     var didSelect: DidSelectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var didDeselect: DidDeselectClosure? { return nil }
 }
 
 /// View model for supplementary views in collection views.
-public protocol CollectionViewSupplementaryViewModel: ReusableSupplementaryViewProtocol {
+public protocol CollectionSupplementaryViewModel: ReusableSupplementaryViewModelProtocol {
 
     /// Metadata for this supplementary view.
     var viewInfo: SupplementaryViewInfo? { get }
@@ -61,30 +67,32 @@ public protocol CollectionViewSupplementaryViewModel: ReusableSupplementaryViewP
 }
 
 /// Default implementations for `CollectionViewSupplementaryViewModel`.
-public extension CollectionViewSupplementaryViewModel {
-    var viewInfo: SupplementaryViewInfo? { return nil }
-    var height: CGFloat? { return nil }
+public extension CollectionSupplementaryViewModel {
 
-    func applyViewModelToView(_ view: UICollectionReusableView) {}
+    /// Default implementation, returns `nil`.
+    var viewInfo: SupplementaryViewInfo? { return nil }
+
+    /// Default implementation, returns `nil`.
+    var height: CGFloat? { return nil }
 }
 
 /// The view model that describes a `UICollectionView`.
 public struct CollectionViewModel {
 
     /// The section view models for this collection view.
-    public let sectionModels: [CollectionViewSectionViewModel]
+    public let sectionModels: [CollectionSectionViewModel]
 
     /// Initializes a collection view model with the sections provided.
     ///
     /// - Parameter sectionModels: the sections that need to be shown in this collection view.
-    public init(sectionModels: [CollectionViewSectionViewModel]) {
+    public init(sectionModels: [CollectionSectionViewModel]) {
         self.sectionModels = sectionModels
     }
 
     /// Returns the section model at the specified index or `nil` if no such section exists.
     ///
     /// - Parameter section: the index for the section that is being retrieved
-    public subscript(section: Int) -> CollectionViewSectionViewModel? {
+    public subscript(section: Int) -> CollectionSectionViewModel? {
         guard self.sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
@@ -92,7 +100,7 @@ public struct CollectionViewModel {
     /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
-    public subscript(indexPath: IndexPath) -> CollectionViewCellViewModel? {
+    public subscript(indexPath: IndexPath) -> CollectionCellViewModel? {
         guard let section = self[indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
         return section.cellViewModels[indexPath.item]
     }
@@ -122,15 +130,15 @@ public struct CollectionViewModel {
 }
 
 /// View model for a collection view section.
-public struct CollectionViewSectionViewModel {
+public struct CollectionSectionViewModel {
 
     /// Cells to be shown in this section.
-    let cellViewModels: [CollectionViewCellViewModel]
+    let cellViewModels: [CollectionCellViewModel]
     /// View model for the header of this section.
-    let headerViewModel: CollectionViewSupplementaryViewModel?
+    let headerViewModel: CollectionSupplementaryViewModel?
 
     /// View model for the footer of this section.
-    let footerViewModel: CollectionViewSupplementaryViewModel?
+    let footerViewModel: CollectionSupplementaryViewModel?
 
     /// The key used by the diffing algorithm to uniquely identify this section.
     /// If you are using automatic diffing on the `CollectionViewDriver` (which is enabled by default)
@@ -150,18 +158,18 @@ public struct CollectionViewSectionViewModel {
     ///   - footerViewModel: the footer view model (defaults to `nil`).
     ///   - diffingKey: the diffing key, required for automated diffing.
     public init(
-        cellViewModels: [CollectionViewCellViewModel],
-        headerViewModel: CollectionViewSupplementaryViewModel? = nil,
-        footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        cellViewModels: [CollectionCellViewModel],
+        headerViewModel: CollectionSupplementaryViewModel? = nil,
+        footerViewModel: CollectionSupplementaryViewModel? = nil,
         diffingKey: String? = nil
-    ) {
+        ) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
         self.diffingKey = diffingKey
     }
 
-    private struct BlankSupplementaryViewModel: CollectionViewSupplementaryViewModel {
+    private struct BlankSupplementaryViewModel: CollectionSupplementaryViewModel {
         let height: CGFloat?
         let viewInfo: SupplementaryViewInfo? = nil
 
@@ -175,15 +183,15 @@ public struct CollectionViewSectionViewModel {
 // to remove them. We want to get rid of the legacy functionality that creates
 // blank headers & footers instead of using spacing properties available via
 // `UICollectionViewLayout`s.
-extension CollectionViewSectionViewModel {
+extension CollectionSectionViewModel {
 
     /// :nodoc:
     public init(
-        cellViewModels: [CollectionViewCellViewModel],
+        cellViewModels: [CollectionCellViewModel],
         headerHeight: CGFloat? = nil,
-        footerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        footerViewModel: CollectionSupplementaryViewModel? = nil,
         diffingKey: String? = nil
-    ) {
+        ) {
         self.init(
             cellViewModels: cellViewModels,
             headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
@@ -194,11 +202,11 @@ extension CollectionViewSectionViewModel {
 
     /// :nodoc:
     public init(
-        cellViewModels: [CollectionViewCellViewModel],
-        headerViewModel: CollectionViewSupplementaryViewModel? = nil,
+        cellViewModels: [CollectionCellViewModel],
+        headerViewModel: CollectionSupplementaryViewModel? = nil,
         footerHeight: CGFloat? = nil,
         diffingKey: String? = nil
-    ) {
+        ) {
         self.init(
             cellViewModels: cellViewModels,
             headerViewModel: headerViewModel,
@@ -209,11 +217,11 @@ extension CollectionViewSectionViewModel {
 
     /// :nodoc:
     public init(
-        cellViewModels: [CollectionViewCellViewModel],
+        cellViewModels: [CollectionCellViewModel],
         headerHeight: CGFloat? = nil,
         footerHeight: CGFloat? = nil,
         diffingKey: String? = nil
-    ) {
+        ) {
         self.init(
             cellViewModels: cellViewModels,
             headerViewModel: BlankSupplementaryViewModel(height: headerHeight),

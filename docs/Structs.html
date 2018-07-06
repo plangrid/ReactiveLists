@@ -13,7 +13,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">ReactiveLists Docs</a> (78% documented)</p>
+        <p><a href="index.html">ReactiveLists Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/plangrid/ReactiveLists"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -67,22 +67,28 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/CollectionViewCellViewModel.html">CollectionViewCellViewModel</a>
+                <a href="Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/CollectionViewSupplementaryViewModel.html">CollectionViewSupplementaryViewModel</a>
+                <a href="Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/DiffableViewModel.html">DiffableViewModel</a>
               </li>
               <li class="nav-group-task">
+                <a href="Protocols/ReusableCellViewModelProtocol.html">ReusableCellViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ReusableSupplementaryViewModelProtocol.html">ReusableSupplementaryViewModelProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableCellViewModel.html">TableCellViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/TableSectionHeaderFooterViewModel.html">TableSectionHeaderFooterViewModel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/TableViewCellModelEditActions.html">TableViewCellModelEditActions</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/TableViewCellViewModel.html">TableViewCellViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/TableViewSectionHeaderFooterViewModel.html">TableViewSectionHeaderFooterViewModel</a>
               </li>
             </ul>
           </li>
@@ -90,19 +96,19 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/CollectionViewModel.html">CollectionViewModel</a>
+                <a href="Structs/CollectionSectionViewModel.html">CollectionSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CollectionViewSectionViewModel.html">CollectionViewSectionViewModel</a>
+                <a href="Structs/CollectionViewModel.html">CollectionViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SupplementaryViewInfo.html">SupplementaryViewInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TableViewModel.html">TableViewModel</a>
+                <a href="Structs/TableSectionViewModel.html">TableSectionViewModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TableViewSectionViewModel.html">TableViewSectionViewModel</a>
+                <a href="Structs/TableViewModel.html">TableViewModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ViewRegistrationInfo.html">ViewRegistrationInfo</a>
@@ -142,7 +148,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Describes the registration information for a cell or supplementary view.</p>
 
                         <a href="Structs/ViewRegistrationInfo.html" class="slightly-smaller">See more</a>
                       </div>
@@ -150,7 +156,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ViewRegistrationInfo</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ViewRegistrationInfo</span></code></pre>
 
                         </div>
                       </div>
@@ -164,9 +170,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists016TableViewSectionD5ModelV"></a>
-                    <a name="//apple_ref/swift/Struct/TableViewSectionViewModel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists016TableViewSectionD5ModelV">TableViewSectionViewModel</a>
+                    <a name="/s:13ReactiveLists21TableSectionViewModelV"></a>
+                    <a name="//apple_ref/swift/Struct/TableSectionViewModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists21TableSectionViewModelV">TableSectionViewModel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,13 +182,13 @@
                       <div class="abstract">
                         <p>View model for a table view section.</p>
 
-                        <a href="Structs/TableViewSectionViewModel.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/TableSectionViewModel.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableViewSectionViewModel</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableSectionViewModel</span></code></pre>
 
                         </div>
                       </div>
@@ -210,7 +216,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableViewModel</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableViewModel</span></code></pre>
 
                         </div>
                       </div>
@@ -242,7 +248,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SupplementaryViewInfo</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SupplementaryViewInfo</span></code></pre>
 
                         </div>
                       </div>
@@ -274,7 +280,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionViewModel</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionViewModel</span></code></pre>
 
                         </div>
                       </div>
@@ -284,9 +290,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists021CollectionViewSectionD5ModelV"></a>
-                    <a name="//apple_ref/swift/Struct/CollectionViewSectionViewModel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists021CollectionViewSectionD5ModelV">CollectionViewSectionViewModel</a>
+                    <a name="/s:13ReactiveLists26CollectionSectionViewModelV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionSectionViewModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelV">CollectionSectionViewModel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -296,13 +302,13 @@
                       <div class="abstract">
                         <p>View model for a collection view section.</p>
 
-                        <a href="Structs/CollectionViewSectionViewModel.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/CollectionSectionViewModel.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionViewSectionViewModel</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionSectionViewModel</span></code></pre>
 
                         </div>
                       </div>
@@ -314,8 +320,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-01-27)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-02-07)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

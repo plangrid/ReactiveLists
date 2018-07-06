@@ -3,7 +3,7 @@
 `ReactiveLists` provides a React-like API for `UITableView` and `UICollectionView`.  The goal is to provide a more
 declarative interface on top of your normal table and collection code.  To get started with `ReactiveLists`, in addition to reading this document, we encourage you to play around with the [example app included](https://github.com/plangrid/ReactiveLists/tree/master/Example) in the repository.
 
-#### Checkout
+#### Checking out the code
 
 ```bash
 $ git clone https://github.com/plangrid/ReactiveLists.git
@@ -13,28 +13,59 @@ $ open ReactiveLists.xcworkspace
 
 ## Primary Components
 
-#### `*SectionViewModel`
+#### `SectionViewModel`
 
-This is either a `CollectionViewSectionViewModel` or a `TableViewSectionViewModel`.  This type describes
+This is either a `CollectionSectionViewModel` or a `TableSectionViewModel`.  This type describes
 the title and contents of a given section within your `UICollectionView` or `UITableView`
 
-#### `*CellViewModel`
+#### `CellViewModel`
 
-This either `CollectionViewCellViewModel` protocol or `TableViewCellViewModel` protocol.  You create types that conform to these protocols, which are used to configure a given cell in your `UITableView` or `UICollectionView`.
+This either `CollectionCellViewModel` protocol or `TableCellViewModel` protocol.  You create types that conform to these protocols, which are used to configure a given cell in your `UITableView` or `UICollectionView`.
 
 
-#### `*ViewModel`
+#### `ViewModel`
 
 This is either a `TableViewModel` or a `CollectionViewModel`. These are types that describe what your `UITableView` or `UICollectionView` should look like.  You initialize such a `ViewModel` with a set of `SectionModel`s, which
 in turn are initialized with a set of `CellViewModel`s.  After doing this, your `ViewModel`
 contains all the data required to render your `UITableView` or `UICollectionView`
 
-#### `*ViewDriver`
+#### `ViewDriver`
 
 This is either a `TableViewDriver` or a `CollectionViewDriver`.  These types are responsible for calling all the methods to update your view when new data is available.  You initialize your `Driver` with a `UITableView` or `UICollectionView` and then
 as new data becomes available, you construct a new `ViewModel` and set the `Driver`'s `tableViewModel` or `collectionViewModel` property to the new `ViewModel`.  From there the `Driver` will figure out the differences in the data and re-render your `UITableView` or `UICollectionView` automatically for you.
 
-To get set up, you first need to add a `Driver` (either a `TableViewDriver` or `CollectionViewDriver`) to your view controller:
+## Example
+
+```swift
+// Given a view controller with a table view
+
+// 1. create cell models
+let cell0 = ExampleTableCellModel(...)
+let cell1 = ExampleTableCellModel(...)
+let cell2 = ExampleTableCellModel(...)
+
+// 2. create section models
+let section0 = ExampleTableSectionViewModel(cellViewModels: [cell0, cell1, cell2])
+
+// 3. create table model
+let tableModel = TableViewModel(sectionModels: [section0])
+
+// 4. create driver
+self.driver = TableViewDriver(tableView: self.tableView, tableViewModel: tableModel)
+
+// 5. update driver with new table model as it changes
+let updatedTableModel = self.doSomethingToChangeModels()
+self.driver.tableViewModel = updatedTableModel
+
+// self.tableView will update automatically
+```
+
+
+## Detailed Example
+
+The following is a more detailed example, to see how this is all integrated into your
+code.  To get set up, you first need to add a `Driver` (either a `TableViewDriver`
+or `CollectionViewDriver`) to your view controller:
 
 ```swift
 struct Person {
@@ -52,8 +83,7 @@ final class PersonViewController: UITableViewController {
         super.viewDidLoad()
         // Initialize our `TableViewDriver` with our tableView
         self.tableViewDriver = TableViewDriver(tableView: self.tableView)
-        // Register any cell types we will use with their reuse identifiers
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PersonUserCell")
+        self.people = [Person(name: "Tom")]
     }
 }
 ```
@@ -96,7 +126,7 @@ Okay now lets go back and fill in our `viewModel(forState:)` function:
 extension PersonViewController {
     static func viewModel(forState people: [Person]) -> TableViewModel {
             let personCellViewModels = people.map { PersonCellModel(person: $0) }
-            let section = TableViewSectionViewModel(
+            let section = TableSectionViewModel(
               headerTitle: "People",
               headerHeight: 44,
               cellViewModels: personCellViewModels,
@@ -115,7 +145,11 @@ all those models into a single section and then creates a `TableViewModel` from 
 Now all we have to do is to define `PersonCellModel`:
 
 ```swift
-struct PersonCellModel: TableViewCellViewModel, DiffableViewModel {
+
+final class PersonCell: UITableViewCell { }
+
+struct PersonCellModel: TableCellViewModel, DiffableViewModel {
+    var registrationInfo = ViewRegistrationInfo(classType: PersonCell.self)
     var accessibilityFormat: CellAccessibilityFormat = "PersonUserCell"
     let cellIdentifier = "PersonUserCell"
     let editingStyle: UITableViewCellEditingStyle = .delete

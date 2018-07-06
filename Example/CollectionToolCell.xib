@@ -37,7 +37,7 @@
                             <constraint firstAttribute="height" constant="22" id="IoX-M8-mmz"/>
                             <constraint firstAttribute="width" constant="22" id="hap-8B-64t"/>
                         </constraints>
-                        <state key="normal" image="close-icon"/>
+                        <state key="normal" image="close"/>
                     </button>
                 </subviews>
             </view>
@@ -59,6 +59,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="close-icon" width="14" height="14"/>
+        <image name="close" width="14" height="14"/>
     </resources>
 </document>

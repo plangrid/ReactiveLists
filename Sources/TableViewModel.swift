@@ -18,7 +18,7 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `TableViewModel`.
-public protocol TableViewCellViewModel: ReusableCellProtocol {
+public protocol TableCellViewModel: ReusableCellViewModelProtocol {
 
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
@@ -56,31 +56,50 @@ public protocol TableViewCellViewModel: ReusableCellProtocol {
     func applyViewModelToCell(_ cell: UITableViewCell)
 }
 
-/// Default implementations for the protocol.
-public extension TableViewCellViewModel {
+/// Default implementations for `TableCellViewModel`.
+public extension TableCellViewModel {
+
+    /// Default implementation, returns `44.0`.
     var rowHeight: CGFloat {
         return 44.0
     }
 
+    /// Default implementation, returns `.none`.
     var editingStyle: UITableViewCellEditingStyle { return .none }
+
+    /// Default implementation, returns `true`.
     var shouldHighlight: Bool { return true }
+
+    /// Default implementation, returns `false`.
     var shouldIndentWhileEditing: Bool { return false }
+
+    /// Default implementation, returns `nil`.
     var willBeginEditing: WillBeginEditingClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var didEndEditing: DidEndEditingClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var commitEditingStyle: CommitEditingStyleClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var didSelect: DidSelectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
 }
 
 /// Protocol that needs to be implemented by table view cell view models
 /// that want to provide edit actions.
 public protocol TableViewCellModelEditActions {
+
+    /// The row edit actions for the cell.
     var editActions: [UITableViewRowAction] { get }
 }
 
 /// Protocol that needs to be implemented by custom header
 /// footer view models.
-public protocol TableViewSectionHeaderFooterViewModel: ReusableSupplementaryViewProtocol {
+public protocol TableSectionHeaderFooterViewModel: ReusableSupplementaryViewModelProtocol {
 
     /// The title of the header
     var title: String? { get }
@@ -95,16 +114,16 @@ public protocol TableViewSectionHeaderFooterViewModel: ReusableSupplementaryView
 }
 
 /// View model for a table view section.
-public struct TableViewSectionViewModel {
+public struct TableSectionViewModel {
 
     /// Cells to be shown in this section.
-    public let cellViewModels: [TableViewCellViewModel]
+    public let cellViewModels: [TableCellViewModel]
 
     /// View model for the header of this section.
-    public let headerViewModel: TableViewSectionHeaderFooterViewModel?
+    public let headerViewModel: TableSectionHeaderFooterViewModel?
 
     /// View model for the footer of this section.
-    public let footerViewModel: TableViewSectionHeaderFooterViewModel?
+    public let footerViewModel: TableSectionHeaderFooterViewModel?
 
     /// Indicates whether or not this section is collapsed.
     public var collapsed: Bool = false
@@ -133,9 +152,9 @@ public struct TableViewSectionViewModel {
     ///   - collapsed: whether or not this section is collapsed (defaults to `false`).
     ///   - diffingKey: the diffing key, or `nil`. Required for automated diffing.
     public init(
-        cellViewModels: [TableViewCellViewModel],
-        headerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
-        footerViewModel: TableViewSectionHeaderFooterViewModel? = nil,
+        cellViewModels: [TableCellViewModel],
+        headerViewModel: TableSectionHeaderFooterViewModel? = nil,
+        footerViewModel: TableSectionHeaderFooterViewModel? = nil,
         collapsed: Bool = false,
         diffingKey: String? = nil
     ) {
@@ -160,7 +179,7 @@ public struct TableViewSectionViewModel {
     public init(
         headerTitle: String?,
         headerHeight: CGFloat?,
-        cellViewModels: [TableViewCellViewModel],
+        cellViewModels: [TableCellViewModel],
         footerTitle: String? = nil,
         footerHeight: CGFloat? = 0,
         diffingKey: String? = nil
@@ -179,7 +198,7 @@ public struct TableViewModel {
     public let sectionIndexTitles: [String]?
 
     /// The section view models for this table view.
-    public let sectionModels: [TableViewSectionViewModel]
+    public let sectionModels: [TableSectionViewModel]
 
     /// Returns `true` if this table has no sections or has a single empty section.
     public var isEmpty: Bool {
@@ -193,8 +212,8 @@ public struct TableViewModel {
     /// via the initializer.
     ///
     /// - Parameter cellViewModels: the cell models for the only section in this table.
-    public init(cellViewModels: [TableViewCellViewModel]) {
-        let section = TableViewSectionViewModel(cellViewModels: cellViewModels, diffingKey: "default_section")
+    public init(cellViewModels: [TableCellViewModel]) {
+        let section = TableSectionViewModel(cellViewModels: cellViewModels, diffingKey: "default_section")
         self.init(sectionModels: [section])
     }
 
@@ -202,9 +221,9 @@ public struct TableViewModel {
     /// Optionally accepts the `sectionIndexTitles` for this table view.
     ///
     /// - Parameters:
-    ///   - sectionModels: the sections that need to be shown in this table.
-    ///   - sectionIndexTitles: the section index titles for this table.
-    public init(sectionModels: [TableViewSectionViewModel], sectionIndexTitles: [String]? = nil) {
+    ///   - sectionModels: the sections that need to be shown in this table view.
+    ///   - sectionIndexTitles: the section index titles for this table view.
+    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil) {
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
     }
@@ -212,7 +231,7 @@ public struct TableViewModel {
     /// Returns the section model at the specified index or `nil` if no such section exists.
     ///
     /// - Parameter section: the index for the section that is being retrieved
-    public subscript(section: Int) -> TableViewSectionViewModel? {
+    public subscript(section: Int) -> TableSectionViewModel? {
         guard sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
@@ -220,7 +239,7 @@ public struct TableViewModel {
     /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
-    public subscript(indexPath: IndexPath) -> TableViewCellViewModel? {
+    public subscript(indexPath: IndexPath) -> TableCellViewModel? {
         guard indexPath.count >= 2, // In rare cases, we've seen UIKit give us a bad IndexPath
             let section = self[indexPath.section],
             section.cellViewModels.count > indexPath.row else { return nil }
@@ -254,7 +273,7 @@ public struct TableViewModel {
 // MARK: Private
 
 /// View model for a default header or footer view in a table view.
-private struct PlainHeaderFooterViewModel: TableViewSectionHeaderFooterViewModel {
+private struct PlainHeaderFooterViewModel: TableSectionHeaderFooterViewModel {
     let title: String?
     let height: CGFloat?
     let viewInfo: SupplementaryViewInfo? = nil
