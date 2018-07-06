@@ -38,7 +38,7 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol {
     func applyViewModelToCell(_ cell: UICollectionViewCell)
 }
 
-/// Default implementations for `CollectionViewCellViewModel`.
+/// Default implementations for `CollectionCellViewModel`.
 public extension CollectionCellViewModel {
 
     /// Default implementation, returns `true`.
