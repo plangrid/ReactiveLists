@@ -8,13 +8,13 @@ warn("Big PR") if git.lines_of_code > 500
 
 # Milestones are required to track what's included in each release
 if has_source_changes && !github.pr_json['milestone'].nil?
-  warn('All pull requests should have a milestone attached')
+  warn('All pull requests should have a milestone attached', sticky: false)
 end
 
 # Changelog entries are required for changes to library files
 no_changelog_entry = !git.modified_files.include?("CHANGELOG.md")
 if has_source_changes && no_changelog_entry && git.lines_of_code > 10
-  warn("Source code changes (in APIs or behaviors) should have an entry in CHANGELOG.md.")
+  warn("Source code changes (in APIs or behaviors) should have an entry in CHANGELOG.md.", sticky: false)
 end
 
 # Docs are regenerated when releasing
