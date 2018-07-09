@@ -45,8 +45,6 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
             sectionModels: [
                 CollectionSectionViewModel(
                     cellViewModels: [],
-                    headerHeight: 44,
-                    footerHeight: 44,
                     diffingKey: "1"
                 )
             ]
@@ -58,8 +56,6 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
             sectionModels: [
                 CollectionSectionViewModel(
                     cellViewModels: [CollectionUserCellModel(user: User(name: "Mona"))],
-                    headerHeight: 44,
-                    footerHeight: 44,
                     diffingKey: "1"
                 )
             ]
@@ -85,14 +81,10 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
             sectionModels: [
                 CollectionSectionViewModel(
                     cellViewModels: [],
-                    headerHeight: 44,
-                    footerHeight: 44,
                     diffingKey: "1"
                 ),
                 CollectionSectionViewModel(
                     cellViewModels: [],
-                    headerHeight: 44,
-                    footerHeight: 44,
                     diffingKey: "2"
                 )
             ]
@@ -104,8 +96,6 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
             sectionModels: [
                 CollectionSectionViewModel(
                     cellViewModels: [],
-                    headerHeight: 44,
-                    footerHeight: 44,
                     diffingKey: "2"
                 )
             ]

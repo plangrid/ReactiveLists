@@ -277,7 +277,7 @@ final class TableViewDriverTests: XCTestCase {
 // MARK: Test data generation
 
 private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
-    return TestCellViewModel(label: label, registrationInfo: ViewRegistrationInfo(classType: UITableViewCell.self))
+    return TestCellViewModel(label: label)
 }
 
 private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {

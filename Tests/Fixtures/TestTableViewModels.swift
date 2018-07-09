@@ -23,8 +23,8 @@ struct TestCellViewModel: TableCellViewModel {
     let shouldHighlight = false
     let shouldIndentWhileEditing = false
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
+    let registrationInfo = ViewRegistrationInfo(classType: TestTableViewCell.self)
 
-    let registrationInfo: ViewRegistrationInfo
     let label: String
     var willBeginEditing: WillBeginEditingClosure?
     var didEndEditing: DidEndEditingClosure?
@@ -32,13 +32,11 @@ struct TestCellViewModel: TableCellViewModel {
     var didSelectClosure: DidSelectClosure?
 
     init(label: String,
-         registrationInfo: ViewRegistrationInfo,
          willBeginEditing: WillBeginEditingClosure? = nil,
          didEndEditing: DidEndEditingClosure? = nil,
          commitEditingStyle: CommitEditingStyleClosure? = nil,
          didSelectClosure: DidSelectClosure? = nil
     ) {
-        self.registrationInfo = registrationInfo
         self.label = label
         self.willBeginEditing = willBeginEditing
         self.didEndEditing = didEndEditing
@@ -70,14 +68,16 @@ func path(_ section: Int, _ row: Int = 0) -> IndexPath {
     return IndexPath(row: row, section: section)
 }
 
+func generateTableCellViewModels(count: Int = 4) -> [TableCellViewModel] {
+    var models = [TestCellViewModel]()
+    for _ in 0..<count {
+        models.append(TestCellViewModel(label: UUID().uuidString))
+    }
+    return models
+}
+
 func generateTestCellViewModel(_ label: String? = nil) -> TestCellViewModel {
-    return TestCellViewModel(label: label ?? UUID().uuidString,
-                             registrationInfo: ViewRegistrationInfo(classType: TestTableViewCell.self),
-                             willBeginEditing: nil,
-                             didEndEditing: nil,
-                             commitEditingStyle: nil,
-                             didSelectClosure: nil
-    )
+    return TestCellViewModel(label: label ?? UUID().uuidString)
 }
 
 struct TestHeaderFooterViewModel: TableSectionHeaderFooterViewModel {

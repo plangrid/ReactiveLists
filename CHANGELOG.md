@@ -9,7 +9,19 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ### Breaking
 
-- Removed `TableSectionViewModel.collapsed` ([#120](https://github.com/plangrid/ReactiveLists/pull/120), [@jessesquires](https://github.com/jessesquires))
+- Removed `TableSectionViewModel.collapsed` ([#121](https://github.com/plangrid/ReactiveLists/pull/121), [@jessesquires](https://github.com/jessesquires))
+
+- Removed undocumented initializers for `CollectionSectionViewModel` (the ones that received `headerHeight:` and/or `footerHeight:`) ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
+
+### Fixed
+
+- Fixed incorrect calculation for `TableViewModel.isEmpty`. It now correctly returns true only if all sections return `true` for `isEmpty`. ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
+
+### New
+
+- Added `CollectionSectionViewModel.isEmpty` property ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
+
+- Added `CollectionViewModel.isEmpty` property ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
 
 ### Changed
 
