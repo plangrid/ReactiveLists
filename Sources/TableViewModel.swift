@@ -18,7 +18,7 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `TableViewModel`.
-public protocol TableCellViewModel: ReusableCellViewModelProtocol {
+public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewModel {
 
     /// `TableViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format.
     var accessibilityFormat: CellAccessibilityFormat { get }
@@ -114,7 +114,7 @@ public protocol TableSectionHeaderFooterViewModel: ReusableSupplementaryViewMode
 }
 
 /// View model for a table view section.
-public struct TableSectionViewModel {
+public struct TableSectionViewModel: DiffableViewModel {
 
     /// Cells to be shown in this section.
     public let cellViewModels: [TableCellViewModel]
@@ -136,7 +136,7 @@ public struct TableSectionViewModel {
     /// For example:
     ///
     ///      public var diffingKey = { group.identifier }
-    public var diffingKey: String?
+    public var diffingKey: String
 
     /// Returns `true` is the section is empty, `false` otherwise.
     public var isEmpty: Bool {
@@ -146,18 +146,17 @@ public struct TableSectionViewModel {
     /// Initializes a `TableSectionViewModel`.
     ///
     /// - Parameters:
-    ///   - cellViewModels: the cell view models contained in this section.
-    ///   - headerViewModel: a header view model for this section (defaults to `nil`).
-    ///   - footerViewModel: a footer view model for this section (defaults to `nil`).
-    ///   - collapsed: whether or not this section is collapsed (defaults to `false`).
-    ///   - diffingKey: the diffing key, or `nil`. Required for automated diffing.
+    ///   - cellViewModels: The cell view models contained in this section.
+    ///   - headerViewModel: A header view model for this section (defaults to `nil`).
+    ///   - footerViewModel: A footer view model for this section (defaults to `nil`).
+    ///   - collapsed: Whether or not this section is collapsed (defaults to `false`).
+    ///   - diffingKey: A diffing key.
     public init(
         cellViewModels: [TableCellViewModel],
         headerViewModel: TableSectionHeaderFooterViewModel? = nil,
         footerViewModel: TableSectionHeaderFooterViewModel? = nil,
         collapsed: Bool = false,
-        diffingKey: String? = nil
-    ) {
+        diffingKey: String = UUID().uuidString) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
@@ -168,22 +167,19 @@ public struct TableSectionViewModel {
     /// Initializes a `TableSectionViewModel`.
     ///
     /// - Parameters:
-    ///   - headerTitle: title for the header, or `nil`. Setting a title will cause a default header
-    ///                  to be added to this section.
-    ///   - headerHeight: the height of the default header, if one exists.
-    ///   - cellViewModels: the cell view models contained in this section.
-    ///   - footerTitle: title for the footer, or `nil`. Setting a title will cause a default footer
-    ///                  to be added to this section.
-    ///   - footerHeight: the height of the default footer, if one exists.
-    ///   - diffingKey: the diffing key, or `nil`. Required for automated diffing.
+    ///   - headerTitle: The title for the header, or `nil`. Setting a title will cause a default header to be added to this section.
+    ///   - headerHeight: The height of the default header, if one exists.
+    ///   - cellViewModels: The cell view models contained in this section.
+    ///   - footerTitle: The title for the footer, or `nil`. Setting a title will cause a default footeer to be added to this section.
+    ///   - footerHeight: The height of the default footer, if one exists.
+    ///   - diffingKey: A diffing key.
     public init(
         headerTitle: String?,
         headerHeight: CGFloat?,
         cellViewModels: [TableCellViewModel],
         footerTitle: String? = nil,
         footerHeight: CGFloat? = 0,
-        diffingKey: String? = nil
-    ) {
+        diffingKey: String = UUID().uuidString) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight)
         self.footerViewModel = PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
@@ -251,20 +247,8 @@ public struct TableViewModel {
     var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
         return SectionedValues(
             self.sectionModels.map { section in
-                // Ensure we have a diffing key for the current section
-                guard let sectionDiffingKey = section.diffingKey else {
-                    fatalError("When diffing is enabled you need to provide a non-nil diffingKey for each section.")
-                }
-
-                // Ensure we have a diffing key for each cell in this section
-                let cellDiffingKeys: [DiffingKey] = section.cellViewModels.map { cell in
-                    guard let cell = cell as? DiffableViewModel else {
-                        fatalError("When diffing is enabled you need to provide cells which are DiffableViews.")
-                    }
-                    return "\(type(of: cell))_\(cell.diffingKey)"
-                }
-
-                return (sectionDiffingKey, cellDiffingKeys)
+                let cellDiffingKeys = section.cellViewModels.map { $0.diffingKey }
+                return (section.diffingKey, cellDiffingKeys)
             }
         )
     }

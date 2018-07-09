@@ -18,7 +18,7 @@ import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `UICollectionView`.
-public protocol CollectionCellViewModel: ReusableCellViewModelProtocol {
+public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, DiffableViewModel {
 
     /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
@@ -110,27 +110,15 @@ public struct CollectionViewModel {
     var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
         return SectionedValues(
             self.sectionModels.map { section in
-                // Ensure we have a diffing key for the current section
-                guard let sectionDiffingKey = section.diffingKey else {
-                    fatalError("When diffing is enabled you need to provide a non-nil diffingKey for each section.")
-                }
-
-                // Ensure we have a diffing key for each cell in this section
-                let cellDiffingKeys: [DiffingKey] = section.cellViewModels.map { cell in
-                    guard let cell = cell as? DiffableViewModel else {
-                        fatalError("When diffing is enabled you need to provide cells which are DiffableViews.")
-                    }
-                    return "\(type(of: cell))_\(cell.diffingKey)"
-                }
-
-                return (sectionDiffingKey, cellDiffingKeys)
+                let cellDiffingKeys = section.cellViewModels.map { $0.diffingKey }
+                return (section.diffingKey, cellDiffingKeys)
             }
         )
     }
 }
 
 /// View model for a collection view section.
-public struct CollectionSectionViewModel {
+public struct CollectionSectionViewModel: DiffableViewModel {
 
     /// Cells to be shown in this section.
     let cellViewModels: [CollectionCellViewModel]
@@ -148,7 +136,7 @@ public struct CollectionSectionViewModel {
     /// For example:
     ///
     ///      public var diffingKey = { group.identifier }
-    public var diffingKey: String?
+    public var diffingKey: String
 
     /// Initializes a collection view section view model.
     ///
@@ -161,8 +149,7 @@ public struct CollectionSectionViewModel {
         cellViewModels: [CollectionCellViewModel],
         headerViewModel: CollectionSupplementaryViewModel? = nil,
         footerViewModel: CollectionSupplementaryViewModel? = nil,
-        diffingKey: String? = nil
-        ) {
+        diffingKey: String = UUID().uuidString) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
@@ -190,14 +177,12 @@ extension CollectionSectionViewModel {
         cellViewModels: [CollectionCellViewModel],
         headerHeight: CGFloat? = nil,
         footerViewModel: CollectionSupplementaryViewModel? = nil,
-        diffingKey: String? = nil
-        ) {
+        diffingKey: String = UUID().uuidString) {
         self.init(
             cellViewModels: cellViewModels,
             headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
             footerViewModel: footerViewModel,
-            diffingKey: diffingKey
-        )
+            diffingKey: diffingKey)
     }
 
     /// :nodoc:
@@ -205,14 +190,12 @@ extension CollectionSectionViewModel {
         cellViewModels: [CollectionCellViewModel],
         headerViewModel: CollectionSupplementaryViewModel? = nil,
         footerHeight: CGFloat? = nil,
-        diffingKey: String? = nil
-        ) {
+        diffingKey: String = UUID().uuidString) {
         self.init(
             cellViewModels: cellViewModels,
             headerViewModel: headerViewModel,
             footerViewModel: BlankSupplementaryViewModel(height: footerHeight),
-            diffingKey: diffingKey
-        )
+            diffingKey: diffingKey)
     }
 
     /// :nodoc:
@@ -220,13 +203,11 @@ extension CollectionSectionViewModel {
         cellViewModels: [CollectionCellViewModel],
         headerHeight: CGFloat? = nil,
         footerHeight: CGFloat? = nil,
-        diffingKey: String? = nil
-        ) {
+        diffingKey: String = UUID().uuidString) {
         self.init(
             cellViewModels: cellViewModels,
             headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
             footerViewModel: BlankSupplementaryViewModel(height: footerHeight),
-            diffingKey: diffingKey
-        )
+            diffingKey: diffingKey)
     }
 }
