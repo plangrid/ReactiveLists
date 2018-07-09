@@ -88,9 +88,18 @@ class TestCollectionReusableView: UICollectionReusableView {
 }
 
 func generateTestCollectionCellViewModel(_ label: String? = nil) -> TestCollectionCellViewModel {
-    return TestCollectionCellViewModel(
-        label: label ?? UUID().uuidString,
-        didSelect: nil,
-        didDeselect: nil
+    return TestCollectionCellViewModel(label: label ?? UUID().uuidString,
+                                       didSelect: nil,
+                                       didDeselect: nil
     )
+}
+
+func generateCollectionCellViewModels(count: Int = 4) -> [CollectionCellViewModel] {
+    var models = [TestCollectionCellViewModel]()
+    for _ in 0..<count {
+        models.append(TestCollectionCellViewModel(label: UUID().uuidString,
+                                                  didSelect: nil,
+                                                  didDeselect: nil))
+    }
+    return models
 }

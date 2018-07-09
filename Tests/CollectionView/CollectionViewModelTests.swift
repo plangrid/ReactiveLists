@@ -19,75 +19,6 @@ import XCTest
 
 final class CollectionViewModelTests: XCTestCase {
 
-    /// Can be initialized by specifying a header and footer height,
-    /// without specifying a header and footer view, wich results
-    /// in a blank default view being used.
-    func testViewModelInitalizerWithBlankHeaderAndFooter() {
-        let sectionModel = CollectionSectionViewModel(
-            cellViewModels: [generateTestCollectionCellViewModel()],
-            headerHeight: 40,
-            footerHeight: 50
-        )
-
-        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
-        XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
-        XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
-        XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
-        XCTAssertNil(sectionModel.footerViewModel?.viewInfo)
-    }
-
-    /// Can be initialized by specifying a header height,
-    /// without specifying a header view, wich results
-    /// in a blank default view being used.
-    func testViewModelInitializerWithBlankHeader() {
-        let sectionModel = CollectionSectionViewModel(
-            cellViewModels: [generateTestCollectionCellViewModel()],
-            headerHeight: 40,
-            footerViewModel: TestCollectionViewSupplementaryViewModel(
-                height: 50,
-                viewKind: .footer,
-                sectionLabel: "A"
-            )
-        )
-
-        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
-        XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
-
-        XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
-        XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
-
-        let viewInfo = sectionModel.footerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationInfo.registrationMethod == .fromClass(FooterView.self))
-        XCTAssertEqual(viewInfo?.registrationInfo.reuseIdentifier, "FooterView")
-        XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_footer+84")
-    }
-
-    /// Can be initialized by specifying a footer height,
-    /// without specifying a footer view, wich results
-    /// in a blank default view being used.
-    func testViewModelInitializerWithBlankFooter() {
-        let sectionModel = CollectionSectionViewModel(
-            cellViewModels: [generateTestCollectionCellViewModel()],
-            headerViewModel: TestCollectionViewSupplementaryViewModel(
-                height: 40,
-                viewKind: .header,
-                sectionLabel: "A"
-            ),
-            footerHeight: 50
-        )
-
-        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
-        XCTAssertNil(sectionModel.footerViewModel?.viewInfo)
-
-        XCTAssertEqual(sectionModel.headerViewModel?.height, 40)
-        XCTAssertEqual(sectionModel.footerViewModel?.height, 50)
-
-        let viewInfo = sectionModel.headerViewModel?.viewInfo
-        XCTAssertTrue(viewInfo?.registrationInfo.registrationMethod == .fromClass(HeaderView.self))
-        XCTAssertEqual(viewInfo?.registrationInfo.reuseIdentifier, "HeaderView")
-        XCTAssertEqual(viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(84), "access_header+84")
-    }
-
     /// Can be initialized with a custom header and footer view.
     func testViewModelInitializerWithCustomHeaderAndFooter() {
         let sectionModel = CollectionSectionViewModel(
@@ -125,18 +56,13 @@ final class CollectionViewModelTests: XCTestCase {
     /// model returns `nil`.
     func testSubscripts() {
         let collectionViewModel = CollectionViewModel(sectionModels: [
-            CollectionSectionViewModel(
-                cellViewModels: [],
-                headerHeight: 42,
-                footerHeight: nil),
+            CollectionSectionViewModel(cellViewModels: []),
             CollectionSectionViewModel(
                 cellViewModels: [
                     generateTestCollectionCellViewModel("A"),
                     generateTestCollectionCellViewModel("B"),
                     generateTestCollectionCellViewModel("C"),
-                ],
-                headerHeight: 43,
-                footerHeight: nil),
+                ]),
         ])
 
         // Returns `nil` when there's no cell/section at the provided path.
@@ -146,9 +72,30 @@ final class CollectionViewModelTests: XCTestCase {
         XCTAssertNil(collectionViewModel[IndexPath(row: 9, section: 1)])
 
         // Returns the section/cell model, if the index path exists within the table view model.
-        XCTAssertEqual(collectionViewModel[0]?.headerViewModel?.height, 42)
         let cell_row_0_section_1 = collectionViewModel[IndexPath(row: 0, section: 1)]
             as? TestCollectionCellViewModel
         XCTAssertEqual(cell_row_0_section_1?.label, "A")
+    }
+
+    /// The `.isEmpty` property of the collection view.
+    func testIsEmpty() {
+        let section0 = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels())
+        let sectionEmpty = CollectionSectionViewModel(cellViewModels: [])
+        let section2 = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels(count: 1))
+
+        let viewModel1 = CollectionViewModel(sectionModels: [])
+        XCTAssertTrue(viewModel1.isEmpty)
+
+        let viewModel2 = CollectionViewModel(sectionModels: [sectionEmpty, sectionEmpty, sectionEmpty, sectionEmpty])
+        XCTAssertTrue(viewModel2.isEmpty)
+
+        let viewModel3 = CollectionViewModel(sectionModels: [sectionEmpty, section0, section0, section0])
+        XCTAssertFalse(viewModel3.isEmpty)
+
+        let viewModel4 = CollectionViewModel(sectionModels: [section2, section0, section0, sectionEmpty])
+        XCTAssertFalse(viewModel4.isEmpty)
+
+        let viewModel5 = CollectionViewModel(sectionModels: [section0, sectionEmpty, section2])
+        XCTAssertFalse(viewModel5.isEmpty)
     }
 }

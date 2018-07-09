@@ -82,6 +82,11 @@ public struct CollectionViewModel {
     /// The section view models for this collection view.
     public let sectionModels: [CollectionSectionViewModel]
 
+    /// Returns `true` if this collection has all empty sections.
+    public var isEmpty: Bool {
+        return self.sectionModels.first(where: { !$0.isEmpty }) == nil
+    }
+
     /// Initializes a collection view model with the sections provided.
     ///
     /// - Parameter sectionModels: the sections that need to be shown in this collection view.
@@ -122,6 +127,7 @@ public struct CollectionSectionViewModel: DiffableViewModel {
 
     /// Cells to be shown in this section.
     let cellViewModels: [CollectionCellViewModel]
+
     /// View model for the header of this section.
     let headerViewModel: CollectionSupplementaryViewModel?
 
@@ -137,6 +143,11 @@ public struct CollectionSectionViewModel: DiffableViewModel {
     ///
     ///      public var diffingKey = { group.identifier }
     public var diffingKey: String
+
+    /// Returns `true` if this section has zero cell view models, `false` otherwise.
+    public var isEmpty: Bool {
+        return self.cellViewModels.isEmpty
+    }
 
     /// Initializes a collection view section view model.
     ///
@@ -154,60 +165,5 @@ public struct CollectionSectionViewModel: DiffableViewModel {
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
         self.diffingKey = diffingKey
-    }
-
-    private struct BlankSupplementaryViewModel: CollectionSupplementaryViewModel {
-        let height: CGFloat?
-        let viewInfo: SupplementaryViewInfo? = nil
-
-        func applyViewModelToView(_ view: UICollectionReusableView) { }
-    }
-}
-
-// MARK: Initializers without header/footer view models
-
-// Note: All initializers in this extension are undocumented, because we intend
-// to remove them. We want to get rid of the legacy functionality that creates
-// blank headers & footers instead of using spacing properties available via
-// `UICollectionViewLayout`s.
-extension CollectionSectionViewModel {
-
-    /// :nodoc:
-    public init(
-        cellViewModels: [CollectionCellViewModel],
-        headerHeight: CGFloat? = nil,
-        footerViewModel: CollectionSupplementaryViewModel? = nil,
-        diffingKey: String = UUID().uuidString) {
-        self.init(
-            cellViewModels: cellViewModels,
-            headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
-            footerViewModel: footerViewModel,
-            diffingKey: diffingKey)
-    }
-
-    /// :nodoc:
-    public init(
-        cellViewModels: [CollectionCellViewModel],
-        headerViewModel: CollectionSupplementaryViewModel? = nil,
-        footerHeight: CGFloat? = nil,
-        diffingKey: String = UUID().uuidString) {
-        self.init(
-            cellViewModels: cellViewModels,
-            headerViewModel: headerViewModel,
-            footerViewModel: BlankSupplementaryViewModel(height: footerHeight),
-            diffingKey: diffingKey)
-    }
-
-    /// :nodoc:
-    public init(
-        cellViewModels: [CollectionCellViewModel],
-        headerHeight: CGFloat? = nil,
-        footerHeight: CGFloat? = nil,
-        diffingKey: String = UUID().uuidString) {
-        self.init(
-            cellViewModels: cellViewModels,
-            headerViewModel: BlankSupplementaryViewModel(height: headerHeight),
-            footerViewModel: BlankSupplementaryViewModel(height: footerHeight),
-            diffingKey: diffingKey)
     }
 }

@@ -135,7 +135,7 @@ public struct TableSectionViewModel: DiffableViewModel {
     ///      public var diffingKey = { group.identifier }
     public var diffingKey: String
 
-    /// Returns `true` is the section is empty, `false` otherwise.
+    /// Returns `true` if this section has zero cell view models, `false` otherwise.
     public var isEmpty: Bool {
         return self.cellViewModels.isEmpty
     }
@@ -190,12 +190,9 @@ public struct TableViewModel {
     /// The section view models for this table view.
     public let sectionModels: [TableSectionViewModel]
 
-    /// Returns `true` if this table has no sections or has a single empty section.
+    /// Returns `true` if this table has all empty sections.
     public var isEmpty: Bool {
-        if self.sectionModels.count == 1 {
-            return self.sectionModels.first!.isEmpty
-        }
-        return self.sectionModels.isEmpty
+        return self.sectionModels.first(where: { !$0.isEmpty }) == nil
     }
 
     /// Initializes a table view model with one section and the cell models provided

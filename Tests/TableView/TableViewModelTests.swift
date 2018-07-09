@@ -50,20 +50,29 @@ final class TableViewModelTests: XCTestCase {
         XCTAssertNil(tableViewModel[[] as IndexPath])
     }
 
-    /// The `.isEmpty` property of the table view returns `true` when the table view
-    /// contains no sections or one section with no cells.
+    /// The `.isEmpty` property of the table view.
     func testIsEmpty() {
+        let section0 = TableSectionViewModel(cellViewModels: generateTableCellViewModels())
+        let sectionEmpty = TableSectionViewModel(cellViewModels: [])
+        let section2 = TableSectionViewModel(cellViewModels: generateTableCellViewModels(count: 1))
+
         let tableViewModel1 = TableViewModel(sectionModels: [])
         XCTAssertTrue(tableViewModel1.isEmpty)
 
-        let tableViewModel2 = TableViewModel(
-            sectionModels: [TableSectionViewModel(
-                cellViewModels: []
-            )]
-        )
-
-        XCTAssertTrue(tableViewModel1.isEmpty)
+        let tableViewModel2 = TableViewModel(cellViewModels: [])
         XCTAssertTrue(tableViewModel2.isEmpty)
+
+        let tableViewModel3 = TableViewModel(sectionModels: [sectionEmpty, sectionEmpty, sectionEmpty, sectionEmpty])
+        XCTAssertTrue(tableViewModel3.isEmpty)
+
+        let tableViewModel4 = TableViewModel(sectionModels: [sectionEmpty, section0, section0, section0])
+        XCTAssertFalse(tableViewModel4.isEmpty)
+
+        let tableViewModel5 = TableViewModel(sectionModels: [section2, section0, section0, sectionEmpty])
+        XCTAssertFalse(tableViewModel5.isEmpty)
+
+        let tableViewModel6 = TableViewModel(sectionModels: [section0, sectionEmpty, section2])
+        XCTAssertFalse(tableViewModel6.isEmpty)
     }
 
     /// Table view sections can be successfully initialized
