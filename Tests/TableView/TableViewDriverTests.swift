@@ -38,29 +38,24 @@ final class TableViewDriverTests: XCTestCase {
             TableSectionViewModel(
                 cellViewModels: [],
                 headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "A"),
-                footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A"),
-                collapsed: false),
+                footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A")),
             TableSectionViewModel(
                 cellViewModels: ["A", "B", "C"].map { _generateTestCellViewModel($0) },
                 headerViewModel: nil,
-                footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21),
-                collapsed: false),
+                footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21)),
              TableSectionViewModel(
                 cellViewModels: ["D", "E", "F"].map { _generateTestCellViewModel($0) },
                 headerViewModel: TestHeaderFooterViewModel(title: "header_3", height: 30),
-                footerViewModel: nil,
-                collapsed: true),
+                footerViewModel: nil),
             ], sectionIndexTitles: ["A", "Z", "Z"])
         self._tableViewDataSource = TableViewDriver(
             tableView: tableView,
-            automaticDiffingEnabled: false
-        )
+            automaticDiffingEnabled: false)
         self._tableViewDataSource.tableViewModel = self._tableViewModel
     }
 
     /// Table view sections described in the table view model are converted into views correctly.
     func testTableViewSections() {
-
         XCTAssertEqual(self._tableViewDataSource.sectionIndexTitles(for: self._tableView)!, ["A", "Z", "Z"])
 
         XCTAssertEqual(self._tableViewDataSource.numberOfSections(in: self._tableView), 3)
@@ -81,7 +76,7 @@ final class TableViewDriverTests: XCTestCase {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, titleForFooterInSection: $0), $1)
         }
 
-        parameterize(cases: (0, 0), (1, 3), (2, 0), (9, 0)) {
+        parameterize(cases: (0, 0), (1, 3), (2, 3), (9, 0)) {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, numberOfRowsInSection: $0), $1)
         }
     }
