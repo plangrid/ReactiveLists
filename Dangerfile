@@ -7,8 +7,9 @@ warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
 warn("Big PR") if git.lines_of_code > 500
 
 # Milestones are required to track what's included in each release
-if has_source_changes && !github.pr_json['milestone'].nil?
-  warn('All pull requests should have a milestone attached', sticky: false)
+if has_source_changes
+  has_milestone = !github.pr_json['milestone'].nil?
+  warn('There is no milestone for this PR. Please add one.', sticky: false) unless has_milestone
 end
 
 # Changelog entries are required for changes to library files
