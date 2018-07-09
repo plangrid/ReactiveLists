@@ -13,7 +13,11 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 - Removed undocumented initializers for `CollectionSectionViewModel` (the ones that received `headerHeight:` and/or `footerHeight:`) ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
 
+- `CollectionViewDriver.automaticDiffingEnabled` is no longer public ([#125](https://github.com/plangrid/ReactiveLists/pull/125), [@jessesquires](https://github.com/jessesquires))
+
 ### Fixed
+
+- Fixed a crash in diffing when transitioning to or from empty/nil states ([#125](https://github.com/plangrid/ReactiveLists/pull/125), [@jessesquires](https://github.com/jessesquires))
 
 - Fixed incorrect calculation for `TableViewModel.isEmpty`. It now correctly returns true only if all sections return `true` for `isEmpty`. ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
 

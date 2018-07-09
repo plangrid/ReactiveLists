@@ -26,6 +26,10 @@ struct TestCollectionCellViewModel: CollectionCellViewModel {
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
     let shouldHighlight = false
 
+    var diffingKey: DiffingKey {
+        return self.label
+    }
+
     func applyViewModelToCell(_ cell: UICollectionViewCell) {
         guard let testCell = cell as? TestCollectionViewCell else { return }
         testCell.label = self.label

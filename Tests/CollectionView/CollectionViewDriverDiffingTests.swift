@@ -63,11 +63,8 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
 
         self.collectionViewDataSource.collectionViewModel = updatedModel
 
-        XCTAssertEqual(self.mockCollectionView.callsToInsertItems.count, 1)
-        XCTAssertEqual(
-            self.mockCollectionView.callsToInsertItems[0],
-            [IndexPath(row: 0, section: 0)]
-        )
+        XCTAssertEqual(self.mockCollectionView.callsToInsertItems.count, 0)
+        XCTAssertEqual(self.mockCollectionView.callsToReloadData, 3)
     }
 
     /// Tests that changes to individual sections result in the correct calls to update the
@@ -76,38 +73,26 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
     /// - Note: We're only testing one type of section update since this is sufficient to test the
     ///   communication between the diffing lib and the collection view. The diffing lib itself has
     ///   extensive tests for the various diffing scenarios.
+
+    /// This is broken. Dwifft algo does not work.
     func testChangingSections() {
+        let section = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels(), diffingKey: "2")
+
         let initialModel = CollectionViewModel(
             sectionModels: [
-                CollectionSectionViewModel(
-                    cellViewModels: [],
-                    diffingKey: "1"
-                ),
-                CollectionSectionViewModel(
-                    cellViewModels: [],
-                    diffingKey: "2"
-                )
+                CollectionSectionViewModel( cellViewModels: generateCollectionCellViewModels(), diffingKey: "1"),
+                section,
             ]
         )
 
         self.collectionViewDataSource.collectionViewModel = initialModel
 
-        let updatedModel = CollectionViewModel(
-            sectionModels: [
-                CollectionSectionViewModel(
-                    cellViewModels: [],
-                    diffingKey: "2"
-                )
-            ]
-        )
+        let updatedModel = CollectionViewModel(sectionModels: [section])
 
         self.collectionViewDataSource.collectionViewModel = updatedModel
 
         XCTAssertEqual(self.mockCollectionView.callsToDeleteSections.count, 1)
-        XCTAssertEqual(
-            self.mockCollectionView.callsToDeleteSections[0],
-            IndexSet(integer: 0)
-        )
+        XCTAssertEqual(self.mockCollectionView.callsToDeleteSections[0], IndexSet(integer: 0))
     }
 }
 
