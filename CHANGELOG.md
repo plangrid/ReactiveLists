@@ -4,8 +4,12 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-0.1.2
+0.1.2 (NEXT RELEASE)
 -----
+
+### Breaking
+
+- Removed `TableSectionViewModel.collapsed` ([#120](https://github.com/plangrid/ReactiveLists/pull/120), [@jessesquires](https://github.com/jessesquires))
 
 ### Changed
 

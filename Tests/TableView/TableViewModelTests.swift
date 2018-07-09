@@ -80,7 +80,6 @@ final class TableViewModelTests: XCTestCase {
         XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 43)
-        XCTAssertFalse(sectionModel.collapsed)
         XCTAssertEqual(sectionModel.headerViewModel?.title, "foo")
         XCTAssertEqual(sectionModel.footerViewModel?.title, "bar")
         XCTAssertNil(sectionModel.headerViewModel?.viewInfo)
@@ -93,9 +92,7 @@ final class TableViewModelTests: XCTestCase {
         let sectionModel = TableSectionViewModel(
             cellViewModels: [generateTestCellViewModel()],
             headerViewModel: TestHeaderFooterViewModel(height: 42, viewKind: .header, label: "A"),
-            footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"),
-            collapsed: true
-        )
+            footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"))
 
         XCTAssertEqual(sectionModel.cellViewModels.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
@@ -106,7 +103,6 @@ final class TableViewModelTests: XCTestCase {
         let headerInfo = sectionModel.headerViewModel?.viewInfo
         let footerInfo = sectionModel.footerViewModel?.viewInfo
 
-        XCTAssertTrue(sectionModel.collapsed)
         XCTAssertTrue(headerInfo?.registrationInfo.registrationMethod == .fromClass(HeaderView.self))
         XCTAssertTrue(footerInfo?.registrationInfo.registrationMethod == .fromClass(FooterView.self))
         XCTAssertEqual(headerInfo?.registrationInfo.reuseIdentifier, "HeaderView")
@@ -120,5 +116,4 @@ final class TableViewModelTests: XCTestCase {
             "access_footer+44"
         )
     }
-
 }

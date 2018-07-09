@@ -125,9 +125,6 @@ public struct TableSectionViewModel: DiffableViewModel {
     /// View model for the footer of this section.
     public let footerViewModel: TableSectionHeaderFooterViewModel?
 
-    /// Indicates whether or not this section is collapsed.
-    public var collapsed: Bool = false
-
     /// The key used by the diffing algorithm to uniquely identify this section.
     /// If you are using automatic diffing on the `TableViewDriver` (which is enabled by default)
     /// you are required to provide a key that uniquely identifies this section.
@@ -149,18 +146,15 @@ public struct TableSectionViewModel: DiffableViewModel {
     ///   - cellViewModels: The cell view models contained in this section.
     ///   - headerViewModel: A header view model for this section (defaults to `nil`).
     ///   - footerViewModel: A footer view model for this section (defaults to `nil`).
-    ///   - collapsed: Whether or not this section is collapsed (defaults to `false`).
     ///   - diffingKey: A diffing key.
     public init(
         cellViewModels: [TableCellViewModel],
         headerViewModel: TableSectionHeaderFooterViewModel? = nil,
         footerViewModel: TableSectionHeaderFooterViewModel? = nil,
-        collapsed: Bool = false,
         diffingKey: String = UUID().uuidString) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
-        self.collapsed = collapsed
         self.diffingKey = diffingKey
     }
 

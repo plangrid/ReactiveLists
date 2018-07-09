@@ -231,7 +231,7 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = self.tableViewModel?[section], !sectionModel.collapsed else { return 0 }
+        guard let sectionModel = self.tableViewModel?[section] else { return 0 }
         return sectionModel.cellViewModels.count
     }
 
