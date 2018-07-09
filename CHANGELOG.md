@@ -10,7 +10,7 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 ### Changed
 
 - Section and cell view models are now diffable by default. ([#119](https://github.com/plangrid/ReactiveLists/pull/119), [@jessesquires](https://github.com/jessesquires))
-Each provide default values for `diffingKey`, but you should be customize them for your own needs or opt-out of automatic diffing.
+Each provide default values for `diffingKey`, but you can customize them for your own needs or opt-out of automatic diffing.
     - `CollectionSectionViewModel` protocol now inherits from `DiffableViewModel` protocol
     - `CollectionCellViewModel` protocol now inherits from `DiffableViewModel` protocol
     - ` TableSectionViewModel` protocol now inherits from `DiffableViewModel` protocol
