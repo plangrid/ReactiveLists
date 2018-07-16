@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveLists"
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.summary = "React-like API for UITableView and UICollectionView"
   s.homepage = "https://github.com/plangrid/ReactiveLists"
