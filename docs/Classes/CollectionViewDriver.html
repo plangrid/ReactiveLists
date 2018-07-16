@@ -199,12 +199,12 @@
 <p>When this property is set, the UI of the related <code>UICollectionView</code> will be updated.
 If not only the content of individual cells/sections has changed, but instead
 cells/sections were moved/inserted/deleted, the behavior of this setter depends on the
-value of the <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbvp">automaticDiffingEnabled</a></code> property.</p>
+value of the <code>automaticDiffingEnabled</code> property.</p>
 
-<p>If <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbvp">automaticDiffingEnabled</a></code> is set to <code>true</code>, and cells/sections have been moved/inserted/deleted,
+<p>If <code>automaticDiffingEnabled</code> is set to <code>true</code>, and cells/sections have been moved/inserted/deleted,
 updating this property will result in the UI of the collection view being updated automatically.</p>
 
-<p>If <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbvp">automaticDiffingEnabled</a></code> is set to <code>false</code>, and cells/sections have been moved/inserted/deleted,
+<p>If <code>automaticDiffingEnabled</code> is set to <code>false</code>, and cells/sections have been moved/inserted/deleted,
 the caller must update the <code>UICollectionView</code> state manually, to bring it back in sync with
 the new model, e.g. by calling <code>reloadData()</code> on the collection view.</p>
 
@@ -214,37 +214,6 @@ the new model, e.g. by calling <code>reloadData()</code> on the collection view.
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">collectionViewModel</span><span class="p">:</span> <span class="nf">CollectionViewModel</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbvp"></a>
-                    <a name="//apple_ref/swift/Property/automaticDiffingEnabled" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists20CollectionViewDriverC23automaticDiffingEnabledSbvp">automaticDiffingEnabled</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>If this property is set to <code>true</code>, updating the <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgvp">collectionViewModel</a></code> will always
-automatically lead to updating the UI state of the <code>UICollectionView</code>, even if cells/sections
-were moved/inserted/deleted.</p>
-
-<p>For details, see the documentation for <code><a href="../Classes/CollectionViewDriver.html#/s:13ReactiveLists20CollectionViewDriverC010collectionD5ModelAA0cdG0VSgvp">CollectionViewDriver.collectionViewModel</a></code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">automaticDiffingEnabled</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -286,8 +255,7 @@ were moved/inserted/deleted.</p>
     <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span>
     <span class="nv">collectionViewModel</span><span class="p">:</span> <span class="kt"><a href="../Structs/CollectionViewModel.html">CollectionViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">shouldDeselectUponSelection</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nv">automaticDiffingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="p">)</span></code></pre>
+    <span class="nv">automaticDiffingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -398,7 +366,7 @@ is updated.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-07-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-07-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -135,7 +135,7 @@
             <h1>CollectionSectionViewModel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionSectionViewModel</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionSectionViewModel</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a></span></code></pre>
 
                 </div>
               </div>
@@ -148,9 +148,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists26CollectionSectionViewModelV10diffingKeySSSgvp"></a>
+                    <a name="/s:13ReactiveLists26CollectionSectionViewModelV10diffingKeySSvp"></a>
                     <a name="//apple_ref/swift/Property/diffingKey" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelV10diffingKeySSSgvp">diffingKey</a>
+                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelV10diffingKeySSvp">diffingKey</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -172,7 +172,7 @@ For example:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -182,9 +182,36 @@ For example:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists26CollectionSectionViewModelVACSayAA0c4CelleF0_pG04cellE6Models_AA0c13SupplementaryeF0_pSg06headereF0AH06footereF0SSSg10diffingKeytcfc"></a>
+                    <a name="/s:13ReactiveLists26CollectionSectionViewModelV7isEmptySbvp"></a>
+                    <a name="//apple_ref/swift/Property/isEmpty" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelV7isEmptySbvp">isEmpty</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns <code>true</code> if this section has zero cell view models, <code>false</code> otherwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isEmpty</span><span class="p">:</span> <span class="nf">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists26CollectionSectionViewModelVACSayAA0c4CelleF0_pG04cellE6Models_AA0c13SupplementaryeF0_pSg06headereF0AH06footereF0SS10diffingKeytcfc"></a>
                     <a name="//apple_ref/swift/Method/init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelVACSayAA0c4CelleF0_pG04cellE6Models_AA0c13SupplementaryeF0_pSg06headereF0AH06footereF0SSSg10diffingKeytcfc">init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)</a>
+                    <a class="token" href="#/s:13ReactiveLists26CollectionSectionViewModelVACSayAA0c4CelleF0_pG04cellE6Models_AA0c13SupplementaryeF0_pSg06headereF0AH06footereF0SS10diffingKeytcfc">init(cellViewModels:headerViewModel:footerViewModel:diffingKey:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -203,8 +230,7 @@ For example:</p>
     <span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a></span><span class="p">],</span>
     <span class="nv">headerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">footerViewModel</span><span class="p">:</span> <span class="kt"><a href="../Protocols/CollectionSupplementaryViewModel.html">CollectionSupplementaryViewModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
-    <span class="p">)</span></code></pre>
+    <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">UUID</span><span class="p">()</span><span class="o">.</span><span class="n">uuidString</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -271,7 +297,7 @@ For example:</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-07-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2018-07-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
