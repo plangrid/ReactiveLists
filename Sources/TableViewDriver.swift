@@ -55,7 +55,7 @@ open class TableViewDriver: NSObject {
             assert(Thread.isMainThread, "Must set \(#function) on main thread")
         }
         didSet {
-            self._tableViewModelDidChange()
+            self._tableViewModelDidChange(from: oldValue)
         }
     }
 
@@ -65,15 +65,10 @@ open class TableViewDriver: NSObject {
     /// The animation for row deletions.
     public var deletionAnimation: UITableViewRowAnimation = .fade
 
-    /// If this property is set to `true`, updating the `tableViewModel` will always
-    /// automatically lead to updating the UI state of the `UITableView`, even if cells/sections
-    /// were moved/inserted/deleted.
-    ///
-    /// For details, see the documentation for `TableViewDriver.tableViewModel`.
-    private let _automaticDiffingEnabled: Bool
-
     private let _shouldDeselectUponSelection: Bool
-    private var _tableViewDiffer: TableViewDiffCalculator<DiffingKey, DiffingKey>?
+
+    private var _differ: TableViewDiffCalculator<DiffingKey, DiffingKey>?
+    private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
     /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
@@ -90,8 +85,7 @@ open class TableViewDriver: NSObject {
         tableView: UITableView,
         tableViewModel: TableViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
-        automaticDiffingEnabled: Bool = true
-    ) {
+        automaticDiffingEnabled: Bool = true) {
         self.tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffingEnabled
@@ -99,7 +93,7 @@ open class TableViewDriver: NSObject {
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
-        self._tableViewModelDidChange()
+        self._tableViewModelDidChange(from: nil)
     }
 
     // MARK: Change and UI Update Handling
@@ -161,40 +155,51 @@ open class TableViewDriver: NSObject {
 
     // MARK: Private
 
-    private func _tableViewModelDidChange() {
-        guard let newModel = self.tableViewModel, !newModel.isEmpty else {
+    private func _tableViewModelDidChange(from: TableViewModel?) {
+        if let newModel = self.tableViewModel {
+            self.tableView.registerViews(for: newModel)
+        }
+
+        let previousStateNilOrEmpty = (from == nil || from!.isEmpty)
+        let nextStateNilOrEmpty = (self.tableViewModel == nil || self.tableViewModel!.isEmpty)
+
+        // 1. we're moving *from* a nil/empty state
+        // or
+        // 2. we're moving *to* a nil/empty state
+        // in either case, simply reload and short-circuit, no need to diff
+        if previousStateNilOrEmpty || nextStateNilOrEmpty {
             self.tableView.reloadData()
+
+            if self._automaticDiffingEnabled
+                && self.tableViewModel != nil
+                && !self._didReceiveFirstNonNilNonEmptyValue {
+                // Special case for the first non-nil value
+                // Now that we have this initial state, setup the differ with that initial state,
+                // so that the diffing works properly from here on out
+                self._didReceiveFirstNonNilNonEmptyValue = true
+                self._differ = TableViewDiffCalculator<DiffingKey, DiffingKey>(
+                    tableView: self.tableView,
+                    initialSectionedValues: self.tableViewModel!.diffingKeys)
+            }
             return
         }
 
-        self.tableView.registerViews(for: newModel)
+        guard let newModel = self.tableViewModel else { return }
 
-        if self._automaticDiffingEnabled {
-            if !self._didReceiveFirstNonNilNonEmptyValue {
-                // For the first non-nil value, we want to reload data, to avoid a weird
-                // animation where we animate in the initial state
-                self.tableView.reloadData()
-                self._didReceiveFirstNonNilNonEmptyValue = true
+        if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
 
-                // Now that we have this initial state, setup the differ with that initial state,
-                // so that the diffing works properly from here on out
-                self._tableViewDiffer = TableViewDiffCalculator<DiffingKey, DiffingKey>(
-                    tableView: self.tableView,
-                    initialSectionedValues: newModel.diffingKeys
-                )
-                self._tableViewDiffer?.insertionAnimation = self.insertionAnimation
-                self._tableViewDiffer?.deletionAnimation = self.deletionAnimation
-            } else if self._didReceiveFirstNonNilNonEmptyValue {
-                // If the current table view model is empty, default to an empty set of diffing keys
-                if let differ = self._tableViewDiffer {
-                    let diffingKeys = newModel.diffingKeys
-                    let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
-                    differ.sectionedValues = diffingKeys
-                    let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
-                    self.refreshViews(refreshContext: context)
-                } else {
-                    self.refreshViews()
-                }
+            self._differ?.insertionAnimation = self.insertionAnimation
+            self._differ?.deletionAnimation = self.deletionAnimation
+
+            // If the current table view model is empty, default to an empty set of diffing keys
+            if let differ = self._differ {
+                let diffingKeys = newModel.diffingKeys
+                let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
+                differ.sectionedValues = diffingKeys
+                let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
+                self.refreshViews(refreshContext: context)
+            } else {
+                self.refreshViews()
             }
         } else {
             self.refreshViews()

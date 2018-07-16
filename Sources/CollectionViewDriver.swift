@@ -45,20 +45,15 @@ public class CollectionViewDriver: NSObject {
             assert(Thread.isMainThread, "Must set \(#function) on main thread")
         }
         didSet {
-            self._collectionViewModelDidChange()
+            self._collectionViewModelDidChange(from: oldValue)
         }
     }
 
-    /// If this property is set to `true`, updating the `collectionViewModel` will always
-    /// automatically lead to updating the UI state of the `UICollectionView`, even if cells/sections
-    /// were moved/inserted/deleted.
-    ///
-    /// For details, see the documentation for `CollectionViewDriver.collectionViewModel`.
-    public let automaticDiffingEnabled: Bool
-
     private var _shouldDeselectUponSelection: Bool
-    private var _collectionViewDiffer: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
-    private var _didReceiveFirstNonNilValue = false
+
+    private var _differ: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
+    private let _automaticDiffingEnabled: Bool
+    private var _didReceiveFirstNonNilNonEmptyValue = false
 
     // MARK: Initialization
 
@@ -76,16 +71,15 @@ public class CollectionViewDriver: NSObject {
         collectionView: UICollectionView,
         collectionViewModel: CollectionViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
-        automaticDiffingEnabled: Bool = true
-    ) {
+        automaticDiffingEnabled: Bool = true) {
         self.collectionViewModel = collectionViewModel
         self.collectionView = collectionView
-        self.automaticDiffingEnabled = automaticDiffingEnabled
+        self._automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         collectionView.dataSource = self
         collectionView.delegate = self
-        self._collectionViewModelDidChange()
+        self._collectionViewModelDidChange(from: nil)
     }
 
     // MARK: Change and UI Update Handling
@@ -134,36 +128,45 @@ public class CollectionViewDriver: NSObject {
 
     // MARK: Private
 
-    private func _collectionViewModelDidChange() {
-        guard let newModel = self.collectionViewModel else {
+    private func _collectionViewModelDidChange(from: CollectionViewModel?) {
+        if let newModel = self.collectionViewModel {
+            self.collectionView.registerViews(for: newModel)
+        }
+
+        let previousStateNilOrEmpty = (from == nil || from!.isEmpty)
+        let nextStateNilOrEmpty = (self.collectionViewModel == nil || self.collectionViewModel!.isEmpty)
+
+        // 1. we're moving *from* a nil/empty state
+        // or
+        // 2. we're moving *to* a nil/empty state
+        // in either case, simply reload and short-circuit, no need to diff
+        if previousStateNilOrEmpty || nextStateNilOrEmpty {
             self.collectionView.reloadData()
+
+            if self._automaticDiffingEnabled
+                && self.collectionViewModel != nil
+                && !self._didReceiveFirstNonNilNonEmptyValue {
+                // Special case for the first non-nil value
+                // Now that we have this initial state, setup the differ with that initial state,
+                // so that the diffing works properly from here on out
+                self._didReceiveFirstNonNilNonEmptyValue = true
+                self._differ = CollectionViewDiffCalculator<DiffingKey, DiffingKey>(
+                    collectionView: self.collectionView,
+                    initialSectionedValues: self.collectionViewModel!.diffingKeys)
+            }
             return
         }
 
-        self.collectionView.registerViews(for: newModel)
+        guard let newModel = self.collectionViewModel else { return }
 
-        if self.automaticDiffingEnabled {
-            if !self._didReceiveFirstNonNilValue {
-                // For the first non-nil value, we want to reload data, to avoid a weird
-                // animation where we animate in the initial state
-                self.collectionView.reloadData()
-                self._didReceiveFirstNonNilValue = true
+        if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
 
-                // Now that we have this initial state, setup the differ with that initial state,
-                // so that the diffing works properly from here on out
-                self._collectionViewDiffer = CollectionViewDiffCalculator<DiffingKey, DiffingKey>(
-                    collectionView: self.collectionView,
-                    initialSectionedValues: newModel.diffingKeys
-                )
-            } else if self._didReceiveFirstNonNilValue {
-                // If the current collection view model is empty, default to an empty set of diffing keys
-                if let differ = self._collectionViewDiffer {
-                    let diffingKeys = newModel.diffingKeys
-                    differ.sectionedValues = diffingKeys
-                    self.refreshViews()
-                } else {
-                    self.refreshViews()
-                }
+            // If the current collection view model is empty, default to an empty set of diffing keys
+            if let differ = self._differ {
+                differ.sectionedValues = newModel.diffingKeys
+                self.refreshViews()
+            } else {
+                self.refreshViews()
             }
         } else {
             self.refreshViews()
@@ -194,7 +197,8 @@ extension CollectionViewDriver: UICollectionViewDataSource {
 
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.collectionViewModel?[section]?.cellViewModels.count ?? 0
+        guard let sectionModel = self.collectionViewModel?[section] else { return 0 }
+        return sectionModel.cellViewModels.count
     }
 
     /// :nodoc:

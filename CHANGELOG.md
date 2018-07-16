@@ -13,7 +13,11 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 - Removed undocumented initializers for `CollectionSectionViewModel` (the ones that received `headerHeight:` and/or `footerHeight:`) ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
 
+- `CollectionViewDriver.automaticDiffingEnabled` is no longer public ([#125](https://github.com/plangrid/ReactiveLists/pull/125), [@jessesquires](https://github.com/jessesquires))
+
 ### Fixed
+
+- Fixed a crash in diffing when transitioning to or from empty/nil states ([#125](https://github.com/plangrid/ReactiveLists/pull/125), [@jessesquires](https://github.com/jessesquires))
 
 - Fixed incorrect calculation for `TableViewModel.isEmpty`. It now correctly returns true only if all sections return `true` for `isEmpty`. ([#123](https://github.com/plangrid/ReactiveLists/pull/123), [@jessesquires](https://github.com/jessesquires))
 
@@ -31,6 +35,12 @@ Each provide default values for `diffingKey`, but you can customize them for you
     - `CollectionCellViewModel` protocol now inherits from `DiffableViewModel` protocol
     - ` TableSectionViewModel` protocol now inherits from `DiffableViewModel` protocol
     - `TableCellViewModel` protocol now inherits from `DiffableViewModel` protocol
+
+- `CollectionViewDriver.automaticDiffingEnabled` was reverted to be `false` by default ([#125](https://github.com/plangrid/ReactiveLists/pull/125), [@jessesquires](https://github.com/jessesquires))
+
+### ⚠️ Known issues ⚠️
+
+- Automatic diffing for collection views with multiple sections currently fails (crashes) and possibly won't work in other scenarios. (Thus, the reason why auto-diffing is now `false` for `CollectionViewDriver`.) This will be fixed in the next release. Tracking at [#126](https://github.com/plangrid/ReactiveLists/pull/126).
 
 0.1.1
 -----

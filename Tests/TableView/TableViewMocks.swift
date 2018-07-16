@@ -63,7 +63,7 @@ class TestTableView: UITableView {
     }
 
     override func reloadData() {
-         super.reloadData()
+        super.reloadData()
         self.callsToReloadData += 1
     }
 }

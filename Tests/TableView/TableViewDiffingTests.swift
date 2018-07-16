@@ -81,11 +81,11 @@ final class TableViewDiffingTests: XCTestCase {
     func testChangingSections() {
         let initialModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: [UserCell(user: "Name")],
+                cellViewModels: generateTableCellViewModels(),
                 diffingKey: "1"
             ),
             TableSectionViewModel(
-                cellViewModels: [UserCell(user: "user")],
+                cellViewModels: generateTableCellViewModels(),
                 diffingKey: "2"
             ),
         ])
@@ -94,7 +94,7 @@ final class TableViewDiffingTests: XCTestCase {
 
         let updatedModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: [UserCell(user: "new")],
+                cellViewModels: generateTableCellViewModels(),
                 diffingKey: "2"
             ),
         ])

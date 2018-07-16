@@ -21,9 +21,12 @@ typealias _RegisterClassCallInfo = (viewClass: AnyClass?, viewKind: Supplementar
 class TestCollectionView: UICollectionView {
 
     var callsToRegisterClass: [_RegisterClassCallInfo?] = []
-    var callsToDeselect: Int = 0
-    var callsToInsertItems: [[IndexPath]] = []
-    var callsToDeleteSections: [IndexSet] = []
+    var callsToDeselect = 0
+
+    var callsToReloadData = 0
+
+    var callsToInsertItems = [[IndexPath]]()
+    var callsToDeleteSections = [IndexSet]()
 
     override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
         return TestCollectionViewCell(identifier: identifier)
@@ -39,17 +42,26 @@ class TestCollectionView: UICollectionView {
         } else {
             self.callsToRegisterClass.append(nil)
         }
+        super.register(viewClass, forSupplementaryViewOfKind: elementKind, withReuseIdentifier: identifier)
     }
 
     override func deselectItem(at indexPath: IndexPath, animated: Bool) {
+        super.deselectItem(at: indexPath, animated: animated)
         self.callsToDeselect += 1
     }
 
     override func insertItems(at indexPaths: [IndexPath]) {
+        super.insertItems(at: indexPaths)
         self.callsToInsertItems.append(indexPaths)
     }
 
     override func deleteSections(_ sections: IndexSet) {
+        super.deleteSections(sections)
         self.callsToDeleteSections.append(sections)
+    }
+
+    override func reloadData() {
+        super.reloadData()
+        self.callsToReloadData += 1
     }
 }

@@ -31,6 +31,10 @@ struct TestCellViewModel: TableCellViewModel {
     var commitEditingStyle: CommitEditingStyleClosure?
     var didSelectClosure: DidSelectClosure?
 
+    var diffingKey: DiffingKey {
+        return self.label
+    }
+
     init(label: String,
          willBeginEditing: WillBeginEditingClosure? = nil,
          didEndEditing: DidEndEditingClosure? = nil,
