@@ -197,6 +197,9 @@ open class TableViewDriver: NSObject {
                 }
             }
         } else {
+            // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
+            // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
+            // beginUpdates() endUpdates()
             self.tableView.reloadData()
             self.refreshViews()
         }
