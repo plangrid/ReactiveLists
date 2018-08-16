@@ -50,6 +50,13 @@ Each provide default values for `diffingKey`, but you can customize them for you
 
 - Automatic diffing for collection views with multiple sections currently fails (crashes) and possibly won't work in other scenarios. (Thus, the reason why auto-diffing is now `false` for `CollectionViewDriver`.) This will be fixed in the next release. Tracking at [#126](https://github.com/plangrid/ReactiveLists/pull/126).
 
+0.1.1-patch1
+-----
+
+### Fixed
+
+- Fix edge case reloading bug when reloading a table view with diffing disabled
+
 0.1.1
 -----
 
