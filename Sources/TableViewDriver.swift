@@ -197,6 +197,7 @@ open class TableViewDriver: NSObject {
                 }
             }
         } else {
+            self.tableView.reloadData()
             self.refreshViews()
         }
     }
