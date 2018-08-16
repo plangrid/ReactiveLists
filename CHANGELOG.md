@@ -4,6 +4,13 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
+0.1.1-patch1
+-----
+
+### Fixed
+
+- Fix edge case reloading bug when reloading a table view with diffing disabled
+
 0.1.1
 -----
 
