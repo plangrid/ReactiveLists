@@ -25,6 +25,10 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 
+# Bundler
+.bundle
+vendor
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
