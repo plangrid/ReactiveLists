@@ -14,7 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Dwifft
+import Differ
 import UIKit
 
 /// A data source that drives the collection views appereance and behavior based on an underlying
@@ -51,7 +51,6 @@ public class CollectionViewDriver: NSObject {
 
     private var _shouldDeselectUponSelection: Bool
 
-    private var _differ: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
     private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
@@ -103,7 +102,7 @@ public class CollectionViewDriver: NSObject {
 
         let visibleIndexPathsForHeaders = self.collectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionHeader)
         for indexPath in visibleIndexPathsForHeaders {
-            guard let headerModel = self.collectionViewModel?[indexPath.section]?.headerViewModel else {
+            guard let headerModel = self.collectionViewModel?[ifExists: indexPath.section]?.headerViewModel else {
                 continue
             }
             guard let headerView = self.collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath) else {
@@ -115,7 +114,7 @@ public class CollectionViewDriver: NSObject {
 
         let visibleIndexPathsForFooters = self.collectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionFooter)
         for indexPath in visibleIndexPathsForFooters {
-            guard let footerModel = self.collectionViewModel?[indexPath.section]?.footerViewModel else {
+            guard let footerModel = self.collectionViewModel?[ifExists: indexPath.section]?.footerViewModel else {
                 continue
             }
             guard let footerView = self.collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath) else {
@@ -150,9 +149,6 @@ public class CollectionViewDriver: NSObject {
                 // Now that we have this initial state, setup the differ with that initial state,
                 // so that the diffing works properly from here on out
                 self._didReceiveFirstNonNilNonEmptyValue = true
-                self._differ = CollectionViewDiffCalculator<DiffingKey, DiffingKey>(
-                    collectionView: self.collectionView,
-                    initialSectionedValues: self.collectionViewModel!.diffingKeys)
             }
             return
         }
@@ -161,20 +157,20 @@ public class CollectionViewDriver: NSObject {
 
         if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
 
-            // If the current collection view model is empty, default to an empty set of diffing keys
-            if let differ = self._differ {
-                differ.sectionedValues = newModel.diffingKeys
-                self.refreshViews()
-            } else {
-                self.refreshViews()
-            }
+            let oldModel = from ?? CollectionViewModel(sectionModels: [])
+            let diff = NestedExtendedDiff(oldModel.nestedDiff(
+                to: newModel,
+                isEqualSection: { $0.diffingKey == $1.diffingKey },
+                isEqualElement: { $0.diffingKey == $1.diffingKey }
+            ))
+            self.collectionView.apply(diff)
         } else {
             self.refreshViews()
         }
     }
 
     private func _sizeForSupplementaryViewOfKind(_ elementKind: SupplementaryViewKind, inSection section: Int, collectionViewLayout: UICollectionViewLayout) -> CGSize {
-        guard let sectionModel = self.collectionViewModel?[section] else { return CGSize.zero }
+        guard let sectionModel = self.collectionViewModel?[ifExists: section] else { return CGSize.zero }
         let isHeader = elementKind == .header
         let supplementaryModel = isHeader ? sectionModel.headerViewModel : sectionModel.footerViewModel
         if let height = supplementaryModel?.height {
@@ -197,7 +193,7 @@ extension CollectionViewDriver: UICollectionViewDataSource {
 
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionModel = self.collectionViewModel?[section] else { return 0 }
+        guard let sectionModel = self.collectionViewModel?[ifExists: section] else { return 0 }
         return sectionModel.cellViewModels.count
     }
 
@@ -216,7 +212,7 @@ extension CollectionViewDriver: UICollectionViewDataSource {
         let view: UICollectionReusableView
 
         if let elementKind = elementKind,
-            let sectionModel = self.collectionViewModel?[section],
+            let sectionModel = self.collectionViewModel?[ifExists: section],
             let viewModel = elementKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier {
             view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)

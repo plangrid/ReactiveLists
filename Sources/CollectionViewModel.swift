@@ -14,7 +14,6 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `UICollectionView`.
@@ -97,28 +96,35 @@ public struct CollectionViewModel {
     /// Returns the section model at the specified index or `nil` if no such section exists.
     ///
     /// - Parameter section: the index for the section that is being retrieved
-    public subscript(section: Int) -> CollectionSectionViewModel? {
+    public subscript(ifExists section: Int) -> CollectionSectionViewModel? {
         guard self.sectionModels.count > section else { return nil }
-        return sectionModels[section]
+        return self.sectionModels[section]
     }
 
     /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(indexPath: IndexPath) -> CollectionCellViewModel? {
-        guard let section = self[indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
+        guard let section = self[ifExists: indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
         return section.cellViewModels[indexPath.item]
     }
+}
 
-    /// Provides a description of the collection view content in terms of diffing keys. These diffing keys
-    /// are used to calculate changesets in the collection and animate changes automatically.
-    var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
-        return SectionedValues(
-            self.sectionModels.map { section in
-                let cellDiffingKeys = section.cellViewModels.map { $0.diffingKey }
-                return (section.diffingKey, cellDiffingKeys)
-            }
-        )
+extension CollectionViewModel: Collection {
+    public subscript(_ index: Int) -> CollectionSectionViewModel {
+        return self.sectionModels[index]
+    }
+
+    public func index(after i: Int) -> Int {
+        return self.sectionModels.index(after: i)
+    }
+
+    public var startIndex: Int {
+        return self.sectionModels.startIndex
+    }
+
+    public var endIndex: Int {
+        return self.sectionModels.endIndex
     }
 }
 
@@ -165,5 +171,23 @@ public struct CollectionSectionViewModel: DiffableViewModel {
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
         self.diffingKey = diffingKey
+    }
+}
+
+extension CollectionSectionViewModel: Collection {
+    public subscript(_ index: Int) -> CollectionCellViewModel {
+        return self.cellViewModels[index]
+    }
+
+    public func index(after i: Int) -> Int {
+        return self.cellViewModels.index(after: i)
+    }
+
+    public var startIndex: Int {
+        return self.cellViewModels.startIndex
+    }
+
+    public var endIndex: Int {
+        return self.cellViewModels.endIndex
     }
 }
