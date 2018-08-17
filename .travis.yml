@@ -34,10 +34,10 @@ script:
         bundle exec pod lib lint;
     fi
 
-  - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage "$CODE_COVERAGE" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+  - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage "$CODE_COVERAGE" ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
 
   - if [ $BUILD_EXAMPLE == "YES" ]; then
-        xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
+        xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c;
     fi
 
   - bundle exec danger
