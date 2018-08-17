@@ -22,10 +22,13 @@ import UIKit
 @objc
 open class TableViewDriver: NSObject {
 
-    /// Communicates information for refreshing the table view.
+    /// Communicates information for refreshing the table view, when diffing is not in use, or there
+    /// is no diff that would refresh the table view
     private enum NonDiffTableRefreshType {
 
         /// Only the content of cells is being refreshed. No rows/sections will be added/deleted.
+        /// This is only safe to use, if sections counts and row counts for each section have not
+        /// changed in-between updates
         case contentOnly
 
         /// Rows/sections are being added/deleted
@@ -94,22 +97,6 @@ open class TableViewDriver: NSObject {
         self._tableViewModelDidChange(from: nil)
     }
 
-    // MARK: Change and UI Update Handling
-
-    /// Updates all currently visible cells and sections, such that they reflect the latest
-    /// state decribed in their respective view models.
-    private func _refreshTable(_ type: NonDiffTableRefreshType) {
-        switch type {
-        case .rowsModified:
-            self.tableView.reloadData()
-        case .contentOnly:
-            // We're only updating the content of the cells; we can use `beginUpdates/endUpdates`
-            // to animate any height changes between content
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
-        }
-    }
-
     // MARK: Private
 
     private func _tableViewModelDidChange(from: TableViewModel?) {
@@ -163,6 +150,13 @@ open class TableViewDriver: NSObject {
         }
     }
 
+    /// Determines the `NonDiffTableRefreshType` to use between 2 `TableViewModels` by comparing
+    /// their section counts and row counts for each section
+    ///
+    /// - Parameters:
+    ///   - from: The previous `TableViewModel`
+    ///   - to: The `TableViewModel` that will be displayed
+    /// - Returns: `NonDiffTableRefreshType` to use
     private func _refreshTypeWithoutDiff(from: TableViewModel?, to: TableViewModel) -> NonDiffTableRefreshType {
         switch (from, to) {
         case let (from?, to):
@@ -175,6 +169,20 @@ open class TableViewDriver: NSObject {
             return rowCountsDiffer ? .rowsModified : .contentOnly
         case (nil, _):
             return .rowsModified
+        }
+    }
+
+    /// Updates all currently visible cells and sections, such that they reflect the latest
+    /// state decribed in their respective view models.
+    private func _refreshTable(_ type: NonDiffTableRefreshType) {
+        switch type {
+        case .rowsModified:
+            self.tableView.reloadData()
+        case .contentOnly:
+            // We're only updating the content of the cells; we can use `beginUpdates/endUpdates`
+            // to animate any height changes between content
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
         }
     }
 
