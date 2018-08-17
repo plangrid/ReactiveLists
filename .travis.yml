@@ -33,8 +33,11 @@ script:
   - if [ $POD_LINT == "YES" ]; then
         bundle exec pod lib lint;
     fi
+  - killAll Simulator
 
   - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+  - killAll Simulator
+
 # Build for reporting test coverage
   - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -destination "platform=iOS Simulator,name=iPhone 7" CODE_SIGNING_REQUIRED=NO;
 
