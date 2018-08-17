@@ -10,6 +10,13 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/2).
 
 
+### Breaking
+- `TableViewDriver.refreshViews(refreshContext:)` (and the related enum) is no longer `public`. This is no longer needed, now that setting `tableViewModel` has been improved in the non-diffing case. ([#130](https://github.com/plangrid/ReactiveLists/pull/130), [@benasher44](https://github.com/benasher44))
+
+### Fixed
+
+- Setting `tableViewModel` now always reloads the `UITableView`'s datasource ([#130](https://github.com/plangrid/ReactiveLists/pull/130), [@benasher44](https://github.com/benasher44))
+
 0.1.2
 -----
 
