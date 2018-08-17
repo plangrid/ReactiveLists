@@ -23,9 +23,7 @@ import UIKit
 open class TableViewDriver: NSObject {
 
     /// Communicates information for refreshing the table view.
-    public enum TableRefreshContext {
-        /// A refresh was requested, but we don't know if rows/sections are being added/removed
-        case unknown
+    private enum NonDiffTableRefreshType {
 
         /// Only the content of cells is being refreshed. No rows/sections will be added/deleted.
         case contentOnly
@@ -99,57 +97,16 @@ open class TableViewDriver: NSObject {
     // MARK: Change and UI Update Handling
 
     /// Updates all currently visible cells and sections, such that they reflect the latest
-    /// state decribed in their respective view models. Typically this method should not be
-    /// called directly, as it is called automatically whenever the `tableViewModel` property
-    /// is updated.
-    public func refreshViews(refreshContext: TableRefreshContext = .unknown) {
-        guard let sections = self.tableViewModel?.sectionModels, !sections.isEmpty else {
-            return
-        }
-
-        let visibleIndexPaths = self.tableView.indexPathsForVisibleRows ?? []
-
-        // Collect the index paths and views models to reload
-        let indexPathsAndViewModelsToReload = visibleIndexPaths.compactMap { indexPath in
-            return self.tableViewModel?[indexPath].map { (indexPath, $0) }
-        }
-
-        if !indexPathsAndViewModelsToReload.isEmpty {
-            // If there was a diff (or we don't know if there was one), then we can't do a
-            // beginUpdates/endUpdates-type reload: either one already happened, or we'll
-            // inadvertently cause a crash because we may not know that some rows are being
-            // added/deleted
-            for (indexPath, viewModel) in indexPathsAndViewModelsToReload {
-                guard let cell = self.tableView.cellForRow(at: indexPath) else { continue }
-                viewModel.applyViewModelToCell(cell)
-                cell.accessibilityIdentifier = viewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
-            }
-
-            if refreshContext == .contentOnly {
-                // If we're only updating content (i.e. no diff that would call begin/end updates)
-                // call begin/end updates to ensure that row heights get a chance to update
-                // Note: begin/end updates sometimes re-queries the data source, but not always,
-                //       which is why we have to force refresh cells individually above
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-            }
-        }
-
-        let visibleSections = Set<Int>(visibleIndexPaths.map { $0.section })
-        for section in visibleSections {
-            guard let sectionModel = self.tableViewModel?[section] else { continue }
-
-            if let headerView = self.tableView.headerView(forSection: section),
-                let headerViewModel = sectionModel.headerViewModel {
-                headerViewModel.applyViewModelToView(headerView)
-                headerView.accessibilityIdentifier = headerViewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
-            }
-
-            if let footerView = self.tableView.footerView(forSection: section),
-                let footerViewModel = sectionModel.footerViewModel {
-                footerViewModel.applyViewModelToView(footerView)
-                footerView.accessibilityIdentifier = footerViewModel.viewInfo?.accessibilityFormat.accessibilityIdentifierForSection(section)
-            }
+    /// state decribed in their respective view models.
+    private func _refreshTable(_ type: NonDiffTableRefreshType) {
+        switch type {
+        case .rowsModified:
+            self.tableView.reloadData()
+        case .contentOnly:
+            // We're only updating the content of the cells; we can use `beginUpdates/endUpdates`
+            // to animate any height changes between content
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
         }
     }
 
@@ -186,23 +143,38 @@ open class TableViewDriver: NSObject {
 
         guard let newModel = self.tableViewModel else { return }
 
-        if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
-
-            self._differ?.insertionAnimation = self.insertionAnimation
-            self._differ?.deletionAnimation = self.deletionAnimation
-
-            // If the current table view model is empty, default to an empty set of diffing keys
-            if let differ = self._differ {
-                let diffingKeys = newModel.diffingKeys
-                let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
-                differ.sectionedValues = diffingKeys
-                let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
-                self.refreshViews(refreshContext: context)
-            } else {
-                self.refreshViews()
+        if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue, let differ = self._differ {
+            differ.insertionAnimation = self.insertionAnimation
+            differ.deletionAnimation = self.deletionAnimation
+            let diffingKeys = newModel.diffingKeys
+            let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
+            differ.sectionedValues = diffingKeys
+            if diff.isEmpty {
+                // Dwift skips beginUpdates/endUpdates if there's no diff, so we need to ensure
+                // content is updated
+                self._refreshTable(.contentOnly)
             }
         } else {
-            self.refreshViews()
+            let refreshType = self._refreshTypeWithoutDiff(
+                from: from,
+                to: newModel
+            )
+            self._refreshTable(refreshType)
+        }
+    }
+
+    private func _refreshTypeWithoutDiff(from: TableViewModel?, to: TableViewModel) -> NonDiffTableRefreshType {
+        switch (from, to) {
+        case let (from?, to):
+            let rowCountsDiffer = (
+                from.sectionModels.count != to.sectionModels.count ||
+                    zip(from.sectionModels, to.sectionModels).contains { fromSection, toSection in
+                        fromSection.cellViewModels.count != toSection.cellViewModels.count
+                    }
+            )
+            return rowCountsDiffer ? .rowsModified : .contentOnly
+        case (nil, _):
+            return .rowsModified
         }
     }
 
@@ -226,7 +198,9 @@ extension TableViewDriver: UITableViewDataSource {
         guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[indexPath] else {
             fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
         }
-        return tableView.configuredCell(for: cellViewModel, at: indexPath)
+        let cell = tableView.configuredCell(for: cellViewModel, at: indexPath)
+        cell.accessibilityIdentifier = cellViewModel.accessibilityFormat.accessibilityIdentifierForIndexPath(indexPath)
+        return cell
     }
 
     /// :nodoc:
