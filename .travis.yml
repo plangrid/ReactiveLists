@@ -12,46 +12,37 @@ cache:
 
 env:
    global:
-   - LANG=en_US.UTF-8
+     - LANG=en_US.UTF-8
 
-   - WORKSPACE="ReactiveLists.xcworkspace"
+     - WORKSPACE="ReactiveLists.xcworkspace"
 
-   - FRAMEWORK_SCHEME="ReactiveLists"
-   - EXAMPLE_SCHEME="Example"
-
-   - IOS_SDK=iphonesimulator
+     - FRAMEWORK_SCHEME="ReactiveLists"
+     - EXAMPLE_SCHEME="Example"
 
    matrix:
-   - DESTINATION="OS=9.3,name=iPhone 6s"   SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES"
-   - DESTINATION="OS=10.3.1,name=iPhone 7" SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
-   - DESTINATION="OS=11.4,name=iPhone X"   SDK="$IOS_SDK" SCHEME="$FRAMEWORK_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+     - DESTINATION="OS=9.3,name=iPhone 6s"   SCHEME="$FRAMEWORK_SCHEME" POD_LINT="YES"
+     - DESTINATION="OS=10.3.1,name=iPhone 7" SCHEME="$FRAMEWORK_SCHEME" POD_LINT="NO"
+     - DESTINATION="OS=11.4,name=iPhone X"   SCHEME="$FRAMEWORK_SCHEME" POD_LINT="NO"
 
 # Note: travis installs ruby dependencies using bundler automatically, when there's a Gemfile
 
 script:
-- set -o pipefail
-- xcodebuild -version -sdk
+  - set -o pipefail
+  - xcodebuild -version -sdk
 
-- if [ $POD_LINT == "YES" ]; then
-      bundle exec pod lib lint;
-  fi
+  - if [ $POD_LINT == "YES" ]; then
+        bundle exec pod lib lint;
+    fi
 
-- if [ $BUILD_EXAMPLE == "YES" ]; then
-      xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
-  fi
-
-- if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
-  else
-      xcodebuild build -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
-  fi
-
+  - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 # Build for reporting test coverage
-- if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -destination "platform=iOS Simulator,name=iPhone 7" CODE_SIGNING_REQUIRED=NO;
-  fi
+  - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -destination "platform=iOS Simulator,name=iPhone 7" CODE_SIGNING_REQUIRED=NO;
 
-- bundle exec danger
+  - if [ $BUILD_EXAMPLE == "YES" ]; then
+        xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
+    fi
+
+  - bundle exec danger
 
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
