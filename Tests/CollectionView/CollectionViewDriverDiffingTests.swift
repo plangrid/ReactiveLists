@@ -73,9 +73,7 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
     /// - Note: We're only testing one type of section update since this is sufficient to test the
     ///   communication between the diffing lib and the collection view. The diffing lib itself has
     ///   extensive tests for the various diffing scenarios.
-
-    /// This is broken. Dwifft algo does not work.
-    func BROKEN_testChangingSections() {
+    func testChangingSections() {
         let section = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels(), diffingKey: "2")
 
         let initialModel = CollectionViewModel(
@@ -86,6 +84,11 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
         )
 
         self.collectionViewDataSource.collectionViewModel = initialModel
+
+        // Check the number of sections to get around a testing bug where, despite a correct diff,
+        // the collection view throws an exception claiming that the number of sections before the
+        // update was 1
+        XCTAssertEqual(self.collectionViewDataSource.collectionView.numberOfSections, 2)
 
         let updatedModel = CollectionViewModel(sectionModels: [section])
 
