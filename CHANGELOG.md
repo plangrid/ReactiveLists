@@ -4,13 +4,13 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-0.2.0
------
+0.2.0 (NEXT)
+------------
 
 This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/2).
 
-0.1.3 (NEXT)
-------------
+0.1.3
+-----
 
 This release closes the [0.1.3 milestone](https://github.com/plangrid/ReactiveLists/milestone/6).
 
@@ -18,6 +18,9 @@ This release closes the [0.1.3 milestone](https://github.com/plangrid/ReactiveLi
 
 - Changes `TableViewModel.subscript` and `CollectionViewModel.subscript` methods that return an `Optional` by adding the `ifExists:` parameter name (separating them from future non-`Optional` `Collection` subscripts) ([#131](https://github.com/plangrid/ReactiveLists/pull/131), [@benasher44](https://github.com/benasher44))
 
+### Fixed
+
+- Fix edge case reloading bug when reloading a table view with diffing disabled ([#128](https://github.com/plangrid/ReactiveLists/pull/128), [@benasher44](https://github.com/benasher44))
 
 0.1.2
 -----
