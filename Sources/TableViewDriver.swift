@@ -14,7 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Dwifft
+import Differ
 import UIKit
 
 /// A data source that drives the table views appereance and behavior based on an underlying
@@ -67,7 +67,6 @@ open class TableViewDriver: NSObject {
 
     private let _shouldDeselectUponSelection: Bool
 
-    private var _differ: TableViewDiffCalculator<DiffingKey, DiffingKey>?
     private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
@@ -137,7 +136,7 @@ open class TableViewDriver: NSObject {
 
         let visibleSections = Set<Int>(visibleIndexPaths.map { $0.section })
         for section in visibleSections {
-            guard let sectionModel = self.tableViewModel?[section] else { continue }
+            guard let sectionModel = self.tableViewModel?[ifExists: section] else { continue }
 
             if let headerView = self.tableView.headerView(forSection: section),
                 let headerViewModel = sectionModel.headerViewModel {
@@ -177,9 +176,6 @@ open class TableViewDriver: NSObject {
                 // Now that we have this initial state, setup the differ with that initial state,
                 // so that the diffing works properly from here on out
                 self._didReceiveFirstNonNilNonEmptyValue = true
-                self._differ = TableViewDiffCalculator<DiffingKey, DiffingKey>(
-                    tableView: self.tableView,
-                    initialSectionedValues: self.tableViewModel!.diffingKeys)
             }
             return
         }
@@ -187,27 +183,28 @@ open class TableViewDriver: NSObject {
         guard let newModel = self.tableViewModel else { return }
 
         if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
-
-            self._differ?.insertionAnimation = self.insertionAnimation
-            self._differ?.deletionAnimation = self.deletionAnimation
-
-            // If the current table view model is empty, default to an empty set of diffing keys
-            if let differ = self._differ {
-                let diffingKeys = newModel.diffingKeys
-                let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
-                differ.sectionedValues = diffingKeys
-                let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
-                self.refreshViews(refreshContext: context)
-            } else {
-                self.refreshViews()
-            }
+            let oldModel = from ?? TableViewModel(cellViewModels: [])
+            let diff = NestedExtendedDiff(oldModel.nestedDiff(
+                to: newModel,
+                isEqualSection: { $0.diffingKey == $1.diffingKey },
+                isEqualElement: { $0.diffingKey == $1.diffingKey }
+            ))
+            self.tableView.apply(
+                diff,
+                rowDeletionAnimation: self.deletionAnimation,
+                rowInsertionAnimation: self.insertionAnimation,
+                sectionDeletionAnimation: self.deletionAnimation,
+                sectionInsertionAnimation: self.insertionAnimation,
+                indexPathTransform: { $0 },
+                sectionTransform: { $0 }
+            )
         } else {
             self.refreshViews()
         }
     }
 
     private func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
-        guard let sectionModel = self.tableViewModel?[section],
+        guard let sectionModel = self.tableViewModel?[ifExists: section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier,
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
@@ -236,19 +233,19 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = self.tableViewModel?[section] else { return 0 }
+        guard let sectionModel = self.tableViewModel?[ifExists: section] else { return 0 }
         return sectionModel.cellViewModels.count
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let header = self.tableViewModel?[section]?.headerViewModel, header.viewInfo == nil else { return nil }
+        guard let header = self.tableViewModel?[ifExists: section]?.headerViewModel, header.viewInfo == nil else { return nil }
         return header.title
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        guard let footer = self.tableViewModel?[section]?.footerViewModel, footer.viewInfo == nil else { return nil }
+        guard let footer = self.tableViewModel?[ifExists: section]?.footerViewModel, footer.viewInfo == nil else { return nil }
         return footer.title
     }
 
@@ -282,12 +279,12 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
     }
 
     /// :nodoc:

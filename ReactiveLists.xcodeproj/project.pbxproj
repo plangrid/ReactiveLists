@@ -49,6 +49,7 @@
 		357B96E9201956760000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		357B96EA2019599C0000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
+		A86F615E2127813900FBD869 /* Differ+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86F615D2127813900FBD869 /* Differ+Extensions.swift */; };
 		C11B2E5FBD1253C9FFA431A1 /* Pods_ReactiveListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveListsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		950EFA9B77AA7C8F0696C57B /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
 		978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveLists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A86F615D2127813900FBD869 /* Differ+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Differ+Extensions.swift"; sourceTree = "<group>"; };
 		C984EFFC6B6F170CB9AD8DD3 /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveListsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
 		DFAFA51D8FEF2F413206A2CF /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,6 +264,7 @@
 				3203532C201BF5FB0024D6CC /* CellContainerViewProtocol.swift */,
 				258E31AC1F0D8D9C00D6F324 /* CollectionViewDriver.swift */,
 				258E31AD1F0D8D9C00D6F324 /* CollectionViewModel.swift */,
+				A86F615D2127813900FBD869 /* Differ+Extensions.swift */,
 				2541B73C1F29A13B002C3090 /* Diffing.swift */,
 				258E31931F0D8CBC00D6F324 /* Info.plist */,
 				258E31921F0D8CBC00D6F324 /* ReactiveLists.h */,
@@ -460,11 +463,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Dwifft/Dwifft.framework",
+				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dwifft.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -478,11 +481,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Dwifft/Dwifft.framework",
+				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dwifft.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -578,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3203532D201BF5FB0024D6CC /* CellContainerViewProtocol.swift in Sources */,
+				A86F615E2127813900FBD869 /* Differ+Extensions.swift in Sources */,
 				2541B73D1F29A13B002C3090 /* Diffing.swift in Sources */,
 				258E31B31F0D8D9C00D6F324 /* TableViewDriver.swift in Sources */,
 				32753F8D201BB8310084DCB1 /* UICollectionView+Extensions.swift in Sources */,

@@ -66,7 +66,7 @@ final class CollectionViewModelTests: XCTestCase {
         ])
 
         // Returns `nil` when there's no cell/section at the provided path.
-        XCTAssertNil(collectionViewModel[9]?.headerViewModel?.height)
+        XCTAssertNil(collectionViewModel[ifExists: 9]?.headerViewModel?.height)
         XCTAssertNil(collectionViewModel[IndexPath(row: 0, section: 0)])
         XCTAssertNil(collectionViewModel[IndexPath(row: 0, section: 9)])
         XCTAssertNil(collectionViewModel[IndexPath(row: 9, section: 1)])

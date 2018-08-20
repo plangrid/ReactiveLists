@@ -1,20 +1,20 @@
 PODS:
-  - Dwifft (0.8)
+  - Differ (1.2.3)
   - SwiftLint (0.26.0)
 
 DEPENDENCIES:
-  - Dwifft (= 0.8.0)
+  - Differ (~> 1.2)
   - SwiftLint (= 0.26.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Dwifft
+    - Differ
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Dwifft: 463e61d07322fdf83b32ee6975ca1b20708db746
+  Differ: 061f3298ea9408494c43b530c44583e555884daf
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
 
-PODFILE CHECKSUM: a43a91afd77a3063737440f03c6ccb9032ab397a
+PODFILE CHECKSUM: d3ffc320623f4782a2490bde852e36bcde223fb4
 
 COCOAPODS: 1.5.3
