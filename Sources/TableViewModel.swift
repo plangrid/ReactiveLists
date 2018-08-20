@@ -218,7 +218,7 @@ public struct TableViewModel {
     /// Returns the section model at the specified index or `nil` if no such section exists.
     ///
     /// - Parameter section: the index for the section that is being retrieved
-    public subscript(section: Int) -> TableSectionViewModel? {
+    public subscript(ifExists section: Int) -> TableSectionViewModel? {
         guard sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
@@ -226,9 +226,9 @@ public struct TableViewModel {
     /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
-    public subscript(indexPath: IndexPath) -> TableCellViewModel? {
+    public subscript(ifExists indexPath: IndexPath) -> TableCellViewModel? {
         guard indexPath.count >= 2, // In rare cases, we've seen UIKit give us a bad IndexPath
-            let section = self[indexPath.section],
+            let section = self[ifExists: indexPath.section],
             section.cellViewModels.count > indexPath.row else { return nil }
         return section.cellViewModels[indexPath.row]
     }

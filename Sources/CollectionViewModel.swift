@@ -97,7 +97,7 @@ public struct CollectionViewModel {
     /// Returns the section model at the specified index or `nil` if no such section exists.
     ///
     /// - Parameter section: the index for the section that is being retrieved
-    public subscript(section: Int) -> CollectionSectionViewModel? {
+    public subscript(ifExists section: Int) -> CollectionSectionViewModel? {
         guard self.sectionModels.count > section else { return nil }
         return sectionModels[section]
     }
@@ -105,8 +105,8 @@ public struct CollectionViewModel {
     /// Returns the cell view model at the specified index path or `nil` if no such cell exists.
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
-    public subscript(indexPath: IndexPath) -> CollectionCellViewModel? {
-        guard let section = self[indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
+    public subscript(ifExists indexPath: IndexPath) -> CollectionCellViewModel? {
+        guard let section = self[ifExists: indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
         return section.cellViewModels[indexPath.item]
     }
 
