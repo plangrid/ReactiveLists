@@ -14,7 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Dwifft
+import DifferenceKit
 import UIKit
 
 /// A data source that drives the table views appereance and behavior based on an underlying
@@ -37,6 +37,8 @@ open class TableViewDriver: NSObject {
     /// The table view to which the `TableViewModel` is rendered.
     public let tableView: UITableView
 
+    private var _tableViewModel: TableViewModel?
+
     /// Describes the current UI state of the table view.
     ///
     /// When this property is set, the UI of the related `UITableView` will be updated.
@@ -51,11 +53,12 @@ open class TableViewDriver: NSObject {
     /// the caller must update the `UITableView` state manually, to bring it back in sync with
     /// the new model, e.g. by calling `reloadData()` on the table view.
     public var tableViewModel: TableViewModel? {
-        willSet {
+        set {
             assert(Thread.isMainThread, "Must set \(#function) on main thread")
+            self._updateTableViewModel(from: self._tableViewModel, to: newValue)
         }
-        didSet {
-            self._tableViewModelDidChange(from: oldValue)
+        get {
+            return self._tableViewModel
         }
     }
 
@@ -67,8 +70,6 @@ open class TableViewDriver: NSObject {
 
     private let _shouldDeselectUponSelection: Bool
 
-    // internal for testing
-    var _differ: TableViewDiffCalculator<DiffingKey, DiffingKey>?
     private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
@@ -87,14 +88,14 @@ open class TableViewDriver: NSObject {
         tableViewModel: TableViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
         automaticDiffingEnabled: Bool = true) {
-        self.tableViewModel = tableViewModel
+        self._tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
-        self._tableViewModelDidChange(from: nil)
+        self._updateTableViewModel(from: nil, to: tableViewModel)
     }
 
     // MARK: Change and UI Update Handling
@@ -156,19 +157,25 @@ open class TableViewDriver: NSObject {
 
     // MARK: Private
 
-    private func _tableViewModelDidChange(from: TableViewModel?) {
-        if let newModel = self.tableViewModel {
+    private func _updateTableViewModel(from oldModel: TableViewModel?, to newModel: TableViewModel?) {
+        defer {
+            // Ensure the new model gets updated
+            self._tableViewModel = newModel
+        }
+
+        if let newModel = newModel {
             self.tableView.registerViews(for: newModel)
         }
 
-        let previousStateNilOrEmpty = (from == nil || from!.isEmpty)
-        let nextStateNilOrEmpty = (self.tableViewModel == nil || self.tableViewModel!.isEmpty)
+        let previousStateNilOrEmpty = (oldModel == nil || oldModel!.isEmpty)
+        let nextStateNilOrEmpty = (newModel == nil || newModel!.isEmpty)
 
         // 1. we're moving *from* a nil/empty state
         // or
         // 2. we're moving *to* a nil/empty state
         // in either case, simply reload and short-circuit, no need to diff
         if previousStateNilOrEmpty || nextStateNilOrEmpty {
+            self._tableViewModel = newModel
             self.tableView.reloadData()
 
             if self._automaticDiffingEnabled
@@ -178,31 +185,37 @@ open class TableViewDriver: NSObject {
                 // Now that we have this initial state, setup the differ with that initial state,
                 // so that the diffing works properly from here on out
                 self._didReceiveFirstNonNilNonEmptyValue = true
-                self._differ = TableViewDiffCalculator<DiffingKey, DiffingKey>(
-                    tableView: self.tableView,
-                    initialSectionedValues: self.tableViewModel!.diffingKeys)
             }
             return
         }
 
-        guard let newModel = self.tableViewModel else { return }
+        guard let newModel = newModel else { return }
 
         if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
 
-            self._differ?.insertionAnimation = self.insertionAnimation
-            self._differ?.deletionAnimation = self.deletionAnimation
-
-            // If the current table view model is empty, default to an empty set of diffing keys
-            if let differ = self._differ {
-                let diffingKeys = newModel.diffingKeys
-                let diff = Dwifft.diff(lhs: differ.sectionedValues, rhs: diffingKeys)
-                differ.sectionedValues = diffingKeys
-                let context: TableRefreshContext = !diff.isEmpty ? .rowsModified : .contentOnly
-                self.refreshViews(refreshContext: context)
+            let old: [TableSectionViewModel] = oldModel?.sectionModels ?? []
+            let changeset = StagedChangeset(source: old, target: newModel.sectionModels)
+            if changeset.isEmpty {
+                self._tableViewModel = newModel
+                self.refreshViews(refreshContext: .contentOnly)
             } else {
-                self.refreshViews()
+                self.tableView.reload(
+                    using: changeset,
+                    deleteSectionsAnimation: self.deletionAnimation,
+                    insertSectionsAnimation: self.insertionAnimation,
+                    reloadSectionsAnimation: self.insertionAnimation,
+                    deleteRowsAnimation: self.deletionAnimation,
+                    insertRowsAnimation: self.insertionAnimation,
+                    reloadRowsAnimation: self.insertionAnimation
+                ) {
+                    self._tableViewModel = TableViewModel(
+                        sectionModels: $0,
+                        sectionIndexTitles: oldModel?.sectionIndexTitles
+                    )
+                }
             }
         } else {
+            self._tableViewModel = newModel
             // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
             // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
             // beginUpdates() endUpdates()

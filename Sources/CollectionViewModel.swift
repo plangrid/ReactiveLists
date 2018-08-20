@@ -14,7 +14,6 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `UICollectionView`.
@@ -108,17 +107,6 @@ public struct CollectionViewModel {
     public subscript(ifExists indexPath: IndexPath) -> CollectionCellViewModel? {
         guard let section = self[ifExists: indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
         return section.cellViewModels[indexPath.item]
-    }
-
-    /// Provides a description of the collection view content in terms of diffing keys. These diffing keys
-    /// are used to calculate changesets in the collection and animate changes automatically.
-    var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
-        return SectionedValues(
-            self.sectionModels.map { section in
-                let cellDiffingKeys = section.cellViewModels.map { $0.diffingKey }
-                return (section.diffingKey, cellDiffingKeys)
-            }
-        )
     }
 }
 

@@ -1,20 +1,25 @@
 PODS:
-  - Dwifft (0.8)
+  - DifferenceKit (0.4.1):
+    - DifferenceKit/Core (= 0.4.1)
+    - DifferenceKit/UIExtensions (= 0.4.1)
+  - DifferenceKit/Core (0.4.1)
+  - DifferenceKit/UIExtensions (0.4.1):
+    - DifferenceKit/Core
   - SwiftLint (0.26.0)
 
 DEPENDENCIES:
-  - Dwifft (= 0.8.0)
+  - DifferenceKit (= 0.4.1)
   - SwiftLint (= 0.26.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Dwifft
+    - DifferenceKit
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Dwifft: 463e61d07322fdf83b32ee6975ca1b20708db746
+  DifferenceKit: a99f32418940d2ac3022168e191e1efc145a2e00
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
 
-PODFILE CHECKSUM: a43a91afd77a3063737440f03c6ccb9032ab397a
+PODFILE CHECKSUM: 9cd8b526758abe116112e3db6570cd0f32636d6f
 
 COCOAPODS: 1.5.3

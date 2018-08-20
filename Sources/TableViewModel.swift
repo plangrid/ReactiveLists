@@ -14,7 +14,6 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Dwifft
 import UIKit
 
 /// View model for the individual cells of a `TableViewModel`.
@@ -255,17 +254,6 @@ public struct TableViewModel {
             let section = self[ifExists: indexPath.section],
             section.cellViewModels.count > indexPath.row else { return nil }
         return section.cellViewModels[indexPath.row]
-    }
-
-    /// Provides a description of the table view content in terms of diffing keys. These diffing keys
-    /// are used to calculate changesets in the table and animate changes automatically.
-    var diffingKeys: SectionedValues<DiffingKey, DiffingKey> {
-        return SectionedValues(
-            self.sectionModels.map { section in
-                let cellDiffingKeys = section.cellViewModels.map { $0.diffingKey }
-                return (section.diffingKey, cellDiffingKeys)
-            }
-        )
     }
 }
 
