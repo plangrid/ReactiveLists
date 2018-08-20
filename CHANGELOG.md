@@ -16,7 +16,7 @@ This release closes the [0.1.3 milestone](https://github.com/plangrid/ReactiveLi
 
 ### Breaking
 
-- Changes `TableViewModel.subscript` and `CollectionViewModel.subscript` methods that return an `Optional` by adding the `ifExists:` parameter name (separating them from future non-`Optional` `Collection` subscripts) ([#131](https://github.com/plangrid/ReactiveLists/pull/131), [@jessesquires](https://github.com/benasher44))
+- Changes `TableViewModel.subscript` and `CollectionViewModel.subscript` methods that return an `Optional` by adding the `ifExists:` parameter name (separating them from future non-`Optional` `Collection` subscripts) ([#131](https://github.com/plangrid/ReactiveLists/pull/131), [@benasher44](https://github.com/benasher44))
 
 
 0.1.2
