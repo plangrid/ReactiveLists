@@ -167,3 +167,22 @@ public struct CollectionSectionViewModel: DiffableViewModel {
         self.diffingKey = diffingKey
     }
 }
+
+/// Collection support for diffing
+extension CollectionSectionViewModel: Collection {
+    public subscript(position: Int) -> CollectionCellViewModel {
+        return self.cellViewModels[position]
+    }
+
+    public func index(after i: Int) -> Int {
+        return self.cellViewModels.index(after: i)
+    }
+
+    public var startIndex: Int {
+        return self.cellViewModels.startIndex
+    }
+
+    public var endIndex: Int {
+        return self.cellViewModels.endIndex
+    }
+}

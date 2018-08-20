@@ -181,6 +181,25 @@ public struct TableSectionViewModel: DiffableViewModel {
     }
 }
 
+/// Collection support for diffing
+extension TableSectionViewModel: Collection {
+    public subscript(position: Int) -> TableCellViewModel {
+        return self.cellViewModels[position]
+    }
+
+    public func index(after i: Int) -> Int {
+        return self.cellViewModels.index(after: i)
+    }
+
+    public var startIndex: Int {
+        return self.cellViewModels.startIndex
+    }
+
+    public var endIndex: Int {
+        return self.cellViewModels.endIndex
+    }
+}
+
 /// The view model that describes a `UITableView`.
 public struct TableViewModel {
 
