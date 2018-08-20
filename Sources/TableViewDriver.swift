@@ -111,7 +111,7 @@ open class TableViewDriver: NSObject {
 
         // Collect the index paths and views models to reload
         let indexPathsAndViewModelsToReload = visibleIndexPaths.compactMap { indexPath in
-            return self.tableViewModel?[indexPath].map { (indexPath, $0) }
+            return self.tableViewModel?[ifExists: indexPath].map { (indexPath, $0) }
         }
 
         if !indexPathsAndViewModelsToReload.isEmpty {
@@ -137,7 +137,7 @@ open class TableViewDriver: NSObject {
 
         let visibleSections = Set<Int>(visibleIndexPaths.map { $0.section })
         for section in visibleSections {
-            guard let sectionModel = self.tableViewModel?[section] else { continue }
+            guard let sectionModel = self.tableViewModel?[ifExists: section] else { continue }
 
             if let headerView = self.tableView.headerView(forSection: section),
                 let headerViewModel = sectionModel.headerViewModel {
@@ -211,7 +211,7 @@ open class TableViewDriver: NSObject {
     }
 
     private func _tableView(_ tableView: UITableView, viewForSection section: Int, viewKind: SupplementaryViewKind) -> UIView? {
-        guard let sectionModel = self.tableViewModel?[section],
+        guard let sectionModel = self.tableViewModel?[ifExists: section],
             let viewModel = viewKind == .header ? sectionModel.headerViewModel : sectionModel.footerViewModel,
             let identifier = viewModel.viewInfo?.registrationInfo.reuseIdentifier,
             let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
@@ -227,7 +227,7 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[indexPath] else {
+        guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[ifExists: indexPath] else {
             fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
         }
         return tableView.configuredCell(for: cellViewModel, at: indexPath)
@@ -240,25 +240,25 @@ extension TableViewDriver: UITableViewDataSource {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = self.tableViewModel?[section] else { return 0 }
+        guard let sectionModel = self.tableViewModel?[ifExists: section] else { return 0 }
         return sectionModel.cellViewModels.count
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let header = self.tableViewModel?[section]?.headerViewModel, header.viewInfo == nil else { return nil }
+        guard let header = self.tableViewModel?[ifExists: section]?.headerViewModel, header.viewInfo == nil else { return nil }
         return header.title
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        guard let footer = self.tableViewModel?[section]?.footerViewModel, footer.viewInfo == nil else { return nil }
+        guard let footer = self.tableViewModel?[ifExists: section]?.footerViewModel, footer.viewInfo == nil else { return nil }
         return footer.title
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        self.tableViewModel?[indexPath]?.commitEditingStyle?(editingStyle)
+        self.tableViewModel?[ifExists: indexPath]?.commitEditingStyle?(editingStyle)
     }
 
     /// :nodoc:
@@ -271,7 +271,7 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.tableViewModel?[indexPath]?.rowHeight ?? 44
+        return self.tableViewModel?[ifExists: indexPath]?.rowHeight ?? 44
     }
 
     /// :nodoc:
@@ -286,17 +286,17 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if let cellViewModel = self.tableViewModel?[indexPath] as? TableViewCellModelEditActions {
+        if let cellViewModel = self.tableViewModel?[ifExists: indexPath] as? TableViewCellModelEditActions {
             return cellViewModel.editActions
         }
         return nil
@@ -304,7 +304,7 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        self.tableViewModel?[indexPath]?.accessoryButtonTapped?()
+        self.tableViewModel?[ifExists: indexPath]?.accessoryButtonTapped?()
     }
 
     /// :nodoc:
@@ -312,33 +312,33 @@ extension TableViewDriver: UITableViewDelegate {
         if self._shouldDeselectUponSelection {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        self.tableViewModel?[indexPath]?.didSelect?()
+        self.tableViewModel?[ifExists: indexPath]?.didSelect?()
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-        self.tableViewModel?[indexPath]?.willBeginEditing?()
+        self.tableViewModel?[ifExists: indexPath]?.willBeginEditing?()
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         if let indexPath = indexPath {
-            self.tableViewModel?[indexPath]?.didEndEditing?()
+            self.tableViewModel?[ifExists: indexPath]?.didEndEditing?()
         }
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return self.tableViewModel?[indexPath]?.editingStyle ?? .none
+        return self.tableViewModel?[ifExists: indexPath]?.editingStyle ?? .none
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return self.tableViewModel?[indexPath]?.shouldIndentWhileEditing ?? true
+        return self.tableViewModel?[ifExists: indexPath]?.shouldIndentWhileEditing ?? true
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return self.tableViewModel?[indexPath]?.shouldHighlight ?? true
+        return self.tableViewModel?[ifExists: indexPath]?.shouldHighlight ?? true
     }
 }

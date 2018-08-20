@@ -66,13 +66,13 @@ final class CollectionViewModelTests: XCTestCase {
         ])
 
         // Returns `nil` when there's no cell/section at the provided path.
-        XCTAssertNil(collectionViewModel[9]?.headerViewModel?.height)
-        XCTAssertNil(collectionViewModel[IndexPath(row: 0, section: 0)])
-        XCTAssertNil(collectionViewModel[IndexPath(row: 0, section: 9)])
-        XCTAssertNil(collectionViewModel[IndexPath(row: 9, section: 1)])
+        XCTAssertNil(collectionViewModel[ifExists: 9]?.headerViewModel?.height)
+        XCTAssertNil(collectionViewModel[ifExists: IndexPath(row: 0, section: 0)])
+        XCTAssertNil(collectionViewModel[ifExists: IndexPath(row: 0, section: 9)])
+        XCTAssertNil(collectionViewModel[ifExists: IndexPath(row: 9, section: 1)])
 
         // Returns the section/cell model, if the index path exists within the table view model.
-        let cell_row_0_section_1 = collectionViewModel[IndexPath(row: 0, section: 1)]
+        let cell_row_0_section_1 = collectionViewModel[ifExists: IndexPath(row: 0, section: 1)]
             as? TestCollectionCellViewModel
         XCTAssertEqual(cell_row_0_section_1?.label, "A")
     }
