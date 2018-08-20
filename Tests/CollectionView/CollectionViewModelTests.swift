@@ -98,4 +98,17 @@ final class CollectionViewModelTests: XCTestCase {
         let viewModel5 = CollectionViewModel(sectionModels: [section0, sectionEmpty, section2])
         XCTAssertFalse(viewModel5.isEmpty)
     }
+
+    /// Verify Collection conformace
+    func testSectionCollection() {
+        let section = CollectionSectionViewModel(
+            cellViewModels: generateCollectionCellViewModels()
+        )
+        let sectionLabels = section.cellViewModels.compactMap {
+            ($0 as? TestCollectionCellViewModel)?.label
+        }
+        let sectionLabelsViaCollection = section.compactMap { ($0 as? TestCollectionCellViewModel)?.label }
+        XCTAssertFalse(sectionLabels.isEmpty)
+        XCTAssertEqual(sectionLabels, sectionLabelsViaCollection)
+    }
 }

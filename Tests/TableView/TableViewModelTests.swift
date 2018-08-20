@@ -125,4 +125,17 @@ final class TableViewModelTests: XCTestCase {
             "access_footer+44"
         )
     }
+
+    /// Verify Collection conformace
+    func testSectionCollection() {
+        let section = TableSectionViewModel(
+            cellViewModels: generateTableCellViewModels()
+        )
+        let sectionLabels = section.cellViewModels.compactMap {
+            ($0 as? TestCellViewModel)?.label
+        }
+        let sectionLabelsViaCollection = section.compactMap { ($0 as? TestCellViewModel)?.label }
+        XCTAssertFalse(sectionLabels.isEmpty)
+        XCTAssertEqual(sectionLabels, sectionLabelsViaCollection)
+    }
 }
