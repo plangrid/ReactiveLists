@@ -51,7 +51,8 @@ public class CollectionViewDriver: NSObject {
 
     private var _shouldDeselectUponSelection: Bool
 
-    private var _differ: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
+    // internal for testing
+    var _differ: CollectionViewDiffCalculator<DiffingKey, DiffingKey>?
     private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
@@ -144,7 +145,7 @@ public class CollectionViewDriver: NSObject {
             self.collectionView.reloadData()
 
             if self._automaticDiffingEnabled
-                && self.collectionViewModel != nil
+                && !nextStateNilOrEmpty
                 && !self._didReceiveFirstNonNilNonEmptyValue {
                 // Special case for the first non-nil value
                 // Now that we have this initial state, setup the differ with that initial state,
