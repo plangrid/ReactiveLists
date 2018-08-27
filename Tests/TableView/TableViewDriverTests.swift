@@ -272,6 +272,15 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertNil(defaultCellViewModel.accessoryButtonTapped)
         XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
     }
+
+    /// The setting an empty model shouldn't trigger diffing setup
+    func testDifferNotSetForEmptyModel() {
+        let tableView = TestTableView()
+        let dataSource = TableViewDriver(tableView: tableView)
+        XCTAssertNil(dataSource._differ)
+        dataSource.tableViewModel = TableViewModel(sectionModels: [])
+        XCTAssertNil(dataSource._differ)
+    }
 }
 
 // MARK: Test data generation

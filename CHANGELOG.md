@@ -4,10 +4,19 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-0.2.0 (NEXT)
-------------
+0.2.0
+-----
 
 This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/2).
+
+0.1.4 (NEXT)
+------------
+
+This release closes the [0.1.4 milestone](https://github.com/plangrid/ReactiveLists/milestone/7).
+
+### Fixed
+
+Don't store an empty model for the first non-nil differ. ([#137](https://github.com/plangrid/ReactiveLists/pull/137), [@benasher44](https://github.com/benasher44))
 
 0.1.3
 -----

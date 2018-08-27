@@ -67,7 +67,8 @@ open class TableViewDriver: NSObject {
 
     private let _shouldDeselectUponSelection: Bool
 
-    private var _differ: TableViewDiffCalculator<DiffingKey, DiffingKey>?
+    // internal for testing
+    var _differ: TableViewDiffCalculator<DiffingKey, DiffingKey>?
     private let _automaticDiffingEnabled: Bool
     private var _didReceiveFirstNonNilNonEmptyValue = false
 
@@ -171,7 +172,7 @@ open class TableViewDriver: NSObject {
             self.tableView.reloadData()
 
             if self._automaticDiffingEnabled
-                && self.tableViewModel != nil
+                && !nextStateNilOrEmpty
                 && !self._didReceiveFirstNonNilNonEmptyValue {
                 // Special case for the first non-nil value
                 // Now that we have this initial state, setup the differ with that initial state,
