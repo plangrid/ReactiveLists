@@ -181,20 +181,25 @@ public struct TableSectionViewModel: DiffableViewModel {
     }
 }
 
-/// Collection support for diffing
+/// `Collection` support for diffing
 extension TableSectionViewModel: Collection {
+
+    /// :nodoc:
     public subscript(position: Int) -> TableCellViewModel {
         return self.cellViewModels[position]
     }
 
+    /// :nodoc:
     public func index(after i: Int) -> Int {
         return self.cellViewModels.index(after: i)
     }
 
+    /// :nodoc:
     public var startIndex: Int {
         return self.cellViewModels.startIndex
     }
 
+    /// :nodoc:
     public var endIndex: Int {
         return self.cellViewModels.endIndex
     }

@@ -168,20 +168,24 @@ public struct CollectionSectionViewModel: DiffableViewModel {
     }
 }
 
-/// Collection support for diffing
+/// `Collection` support for diffing
 extension CollectionSectionViewModel: Collection {
+    /// :nodoc:
     public subscript(position: Int) -> CollectionCellViewModel {
         return self.cellViewModels[position]
     }
 
+    /// :nodoc:
     public func index(after i: Int) -> Int {
         return self.cellViewModels.index(after: i)
     }
 
+    /// :nodoc:
     public var startIndex: Int {
         return self.cellViewModels.startIndex
     }
 
+    /// :nodoc:
     public var endIndex: Int {
         return self.cellViewModels.endIndex
     }
