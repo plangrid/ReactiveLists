@@ -9,6 +9,10 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/2).
 
+### New
+
+- `TableSectionViewModel` and `CollectionSectionViewModel` now implement `Collection` ([#135](https://github.com/plangrid/ReactiveLists/pull/135), [@benasher44](https://github.com/benasher44))
+
 0.1.4
 -----
 
