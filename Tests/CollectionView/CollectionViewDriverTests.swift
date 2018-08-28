@@ -231,15 +231,6 @@ final class CollectionViewDriverTests: XCTestCase {
         XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
     }
 
-    /// The setting an empty model shouldn't trigger diffing setup
-    func testDifferNotSetForEmptyModel() {
-        let collectionView = TestCollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        let dataSource = CollectionViewDriver(collectionView: collectionView)
-        XCTAssertNil(dataSource._differ)
-        dataSource.collectionViewModel = CollectionViewModel(sectionModels: [])
-        XCTAssertNil(dataSource._differ)
-    }
-
     private func _getItem(_ path: IndexPath) -> TestCollectionViewCell? {
         guard let cell = self._collectionViewDataSource.collectionView(self._collectionView,
                                                                            cellForItemAt: path) as? TestCollectionViewCell else { return nil }

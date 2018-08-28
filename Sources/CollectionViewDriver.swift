@@ -55,7 +55,6 @@ public class CollectionViewDriver: NSObject {
     private var _shouldDeselectUponSelection: Bool
 
     private let _automaticDiffingEnabled: Bool
-    private var _didReceiveFirstNonNilNonEmptyValue = false
 
     // MARK: Initialization
 
@@ -149,21 +148,12 @@ public class CollectionViewDriver: NSObject {
         if previousStateNilOrEmpty || nextStateNilOrEmpty {
             self._collectionViewModel = newModel
             self.collectionView.reloadData()
-
-            if self._automaticDiffingEnabled
-                && !nextStateNilOrEmpty
-                && !self._didReceiveFirstNonNilNonEmptyValue {
-                // Special case for the first non-nil value
-                // Now that we have this initial state, setup the differ with that initial state,
-                // so that the diffing works properly from here on out
-                self._didReceiveFirstNonNilNonEmptyValue = true
-            }
             return
         }
 
         guard let newModel = newModel else { return }
 
-        if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
+        if self._automaticDiffingEnabled {
 
             let old: [CollectionSectionViewModel] = oldModel?.sectionModels ?? []
             let changeset = StagedChangeset(source: old, target: newModel.sectionModels)

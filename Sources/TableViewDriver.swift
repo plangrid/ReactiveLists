@@ -71,7 +71,6 @@ open class TableViewDriver: NSObject {
     private let _shouldDeselectUponSelection: Bool
 
     private let _automaticDiffingEnabled: Bool
-    private var _didReceiveFirstNonNilNonEmptyValue = false
 
     /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
     ///
@@ -177,21 +176,12 @@ open class TableViewDriver: NSObject {
         if previousStateNilOrEmpty || nextStateNilOrEmpty {
             self._tableViewModel = newModel
             self.tableView.reloadData()
-
-            if self._automaticDiffingEnabled
-                && !nextStateNilOrEmpty
-                && !self._didReceiveFirstNonNilNonEmptyValue {
-                // Special case for the first non-nil value
-                // Now that we have this initial state, setup the differ with that initial state,
-                // so that the diffing works properly from here on out
-                self._didReceiveFirstNonNilNonEmptyValue = true
-            }
             return
         }
 
         guard let newModel = newModel else { return }
 
-        if self._automaticDiffingEnabled && self._didReceiveFirstNonNilNonEmptyValue {
+        if self._automaticDiffingEnabled {
 
             let old: [TableSectionViewModel] = oldModel?.sectionModels ?? []
             let changeset = StagedChangeset(source: old, target: newModel.sectionModels)
