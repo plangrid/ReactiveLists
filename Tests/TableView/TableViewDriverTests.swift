@@ -33,7 +33,7 @@ final class TableViewDriverTests: XCTestCase {
     /// and a `UITableView`.
     /// - Parameter tableView: The `UITableView` that is used to present
     /// the content described in the `TableViewModel`.
-    private func setupWithTableView(_ tableView: UITableView) {
+    private func setupWithTableView(_ tableView: TestTableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
                 cellViewModels: [],
@@ -56,77 +56,81 @@ final class TableViewDriverTests: XCTestCase {
 
     /// Table view sections described in the table view model are converted into views correctly.
     func testTableViewSections() {
-        XCTAssertEqual(self._tableViewDataSource.sectionIndexTitles(for: self._tableView)!, ["A", "Z", "Z"])
+        let testTableView = self._tableViewDataSource.testTableView
+        XCTAssertEqual(self._tableViewDataSource.sectionIndexTitles(for: testTableView)!, ["A", "Z", "Z"])
 
-        XCTAssertEqual(self._tableViewDataSource.numberOfSections(in: self._tableView), 3)
+        XCTAssertEqual(self._tableViewDataSource.numberOfSections(in: testTableView), 3)
 
         parameterize(cases: (0, 10), (1, CGFloat.leastNormalMagnitude), (2, 30), (9, CGFloat.leastNormalMagnitude)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, heightForHeaderInSection: $0), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, heightForHeaderInSection: $0), $1)
         }
 
         parameterize(cases: (0, 11), (1, 21), (2, CGFloat.leastNormalMagnitude), (9, CGFloat.leastNormalMagnitude)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, heightForFooterInSection: $0), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, heightForFooterInSection: $0), $1)
         }
 
         parameterize(cases: (0, nil), (1, nil), (2, "header_3"), (9, nil)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, titleForHeaderInSection: $0), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, titleForHeaderInSection: $0), $1)
         }
 
         parameterize(cases: (0, nil), (1, "footer_2"), (2, nil), (9, nil)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, titleForFooterInSection: $0), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, titleForFooterInSection: $0), $1)
         }
 
         parameterize(cases: (0, 0), (1, 3), (2, 3), (9, 0)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, numberOfRowsInSection: $0), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, numberOfRowsInSection: $0), $1)
         }
     }
 
     /// Table view rows described in the table view model are converted into views correctly.
     func testTableViewRows() {
+        let testTableView = self._tableViewDataSource.testTableView
         parameterize(cases: (0, 44), (1, 42), (2, 42), (9, 44)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, heightForRowAt: path($0)), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, heightForRowAt: path($0)), $1)
         }
 
         parameterize(cases: (0, UITableViewCellEditingStyle.none), (1, .delete), (2, .delete), (9, .none)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, editingStyleForRowAt: path($0)), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, editingStyleForRowAt: path($0)), $1)
         }
 
         parameterize(cases: (0, true), (1, false), (2, false), (9, true)) {
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, shouldHighlightRowAt: path($0)), $1)
-            XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, shouldIndentWhileEditingRowAt: path($0)), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, shouldHighlightRowAt: path($0)), $1)
+            XCTAssertEqual(self._tableViewDataSource.tableView(testTableView, shouldIndentWhileEditingRowAt: path($0)), $1)
         }
     }
 
     /// Table view section headers described in the table view model are converted into views correctly.
     func testExistingSectionHeaders() {
+        let testTableView = self._tableViewDataSource.testTableView
         let section = 0
         let indexKey = path(section)
-        let header = self._tableViewDataSource._getHeader(section)
+        let header: HeaderView? = self._tableViewDataSource._getHeader(section)
         XCTAssertEqual(header?.label, "title_header+A")
         XCTAssertEqual(header?.accessibilityIdentifier, "access_header+0")
 
-        guard let onScreenHeader = self._tableViewDataSource.tableView(self._tableView, viewForHeaderInSection: indexKey.section) as? TestTableViewSectionHeaderFooter else {
-            XCTFail("Did not find the on screen TestTableViewSectionHeaderFooter header")
+        guard let onScreenHeader = self._tableViewDataSource.tableView(testTableView, viewForHeaderInSection: indexKey.section) as? HeaderView else {
+            XCTFail("Did not find the on screen HeaderView header")
             return
         }
         XCTAssertEqual(onScreenHeader.label, "title_header+A")
-        XCTAssertNil(self._tableView.headerView(forSection: indexKey.section))
+        XCTAssertNotNil(self._tableView.headerView(forSection: indexKey.section))
     }
 
     /// Table view section footers described in the table view model are converted into views correctly.
     func testExistingSectionFooters() {
+        let testTableView = self._tableViewDataSource.testTableView
         let section = 0
         let indexKey = path(section)
-        let footer = self._tableViewDataSource._getFooter(section)
+        let footer: FooterView? = self._tableViewDataSource._getFooter(section)
         XCTAssertEqual(footer?.label, "title_footer+A")
         XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
 
-        guard let onScreenFooter = self._tableViewDataSource.tableView(self._tableView, viewForFooterInSection: indexKey.section) as? TestTableViewSectionHeaderFooter else {
-            XCTFail("Did not find the on screen TestTableViewSectionHeaderFooter footer")
+        guard let onScreenFooter = self._tableViewDataSource.tableView(testTableView, viewForFooterInSection: indexKey.section) as? FooterView else {
+            XCTFail("Did not find the on screen FooterView footer")
             return
         }
         XCTAssertEqual(onScreenFooter.label, "title_footer+A")
-        XCTAssertNil(self._tableView.footerView(forSection: indexKey.section))
+        XCTAssertNotNil(self._tableView.footerView(forSection: indexKey.section))
     }
 
     /// Table view cells described in the table view model are converted into views correctly.
@@ -186,7 +190,7 @@ final class TableViewDriverTests: XCTestCase {
 
     /// Selected cells are automatically deselected by default.
     func testShouldDeselectUponSelection() {
-        let tableView = TestTableView()
+        let tableView = SelectionTestTableView()
         let dataSource = TableViewDriver(tableView: tableView)
         XCTAssertEqual(tableView.callsToDeselect, 0)
         dataSource.tableView(tableView, didSelectRowAt: path(0))
@@ -196,7 +200,7 @@ final class TableViewDriverTests: XCTestCase {
     /// When the option is disabled, selected cells are no longer
     /// immediately deselected.
     func testShouldNotDeselectUponSelection() {
-        let tableView = TestTableView()
+        let tableView = SelectionTestTableView()
         let dataSource = TableViewDriver(
             tableView: tableView,
             shouldDeselectUponSelection: false
@@ -213,7 +217,8 @@ final class TableViewDriverTests: XCTestCase {
         let tableView = TestTableView()
         self.setupWithTableView(tableView)
 
-        XCTAssertEqual(tableView.callsToRegisterClass.count, 2)
+        // 1 header + 1 footer + 6 cells
+        XCTAssertEqual(tableView.callsToRegisterClass.count, 8)
         XCTAssertEqual(tableView.callsToRegisterClass[0].identifier, "HeaderView")
         XCTAssertEqual(tableView.callsToRegisterClass[1].identifier, "FooterView")
         XCTAssert(tableView.callsToRegisterClass[0].viewClass === HeaderView.self)

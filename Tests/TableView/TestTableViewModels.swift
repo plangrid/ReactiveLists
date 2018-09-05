@@ -58,6 +58,10 @@ class TestTableViewCell: UITableViewCell {
     var identifier: String?
     var label: String?
 
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+
     init(identifier: String) {
         self.identifier = identifier
         super.init(style: .default, reuseIdentifier: identifier)
@@ -108,21 +112,15 @@ struct TestHeaderFooterViewModel: TableSectionHeaderFooterViewModel {
     }
 
     func applyViewModelToView(_ view: UIView) {
-        guard let view = view as? TestTableViewSectionHeaderFooter else { return }
-        view.label = self.title
-    }
-}
-
-class TestTableViewSectionHeaderFooter: UITableViewHeaderFooterView {
-    var identifier: String?
-    var label: String?
-
-    init(identifier: String) {
-        self.identifier = identifier
-        super.init(reuseIdentifier: identifier)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        switch self.viewInfo!.kind {
+        case .header:
+            if let view = view as? HeaderView {
+                view.label = self.title
+            }
+        case .footer:
+            if let view = view as? FooterView {
+                view.label = self.title
+            }
+        }
     }
 }

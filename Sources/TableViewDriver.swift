@@ -35,7 +35,7 @@ open class TableViewDriver: NSObject {
     }
 
     /// The table view to which the `TableViewModel` is rendered.
-    public let tableView: UITableView
+    let tableView: TableView
 
     private var _tableViewModel: TableViewModel?
 
@@ -72,6 +72,8 @@ open class TableViewDriver: NSObject {
 
     private let _automaticDiffingEnabled: Bool
 
+    private let _registerViews: (TableViewModel) -> Void
+
     /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
     ///
     /// - Parameters:
@@ -82,15 +84,44 @@ open class TableViewDriver: NSObject {
     ///   - automaticDiffingEnabled: defines whether or not this data source updates the table
     ///                              view automatically when cells/sections are moved/inserted/deleted.
     ///                              Defaults to `true`.
-    public init(
+    public convenience init(
         tableView: UITableView,
         tableViewModel: TableViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
         automaticDiffingEnabled: Bool = true) {
+        self.init(
+            tableView: tableView,
+            registerViews: tableView.registerViews(for:),
+            tableViewModel: tableViewModel,
+            shouldDeselectUponSelection: shouldDeselectUponSelection,
+            automaticDiffingEnabled: automaticDiffingEnabled
+        )
+    }
+
+    /// Initializes a data source that drives a `TableView` based on a `TableViewModel`.
+    /// Externally, this is a `UITableView`. Internally, this can be a mock.
+    ///
+    /// - Parameters:
+    ///   - tableView: the table view to which this data source will render its view models.
+    ///   - registerViews: a closure that registers the views for a given `TableViewModel`
+    ///   - tableViewModel: the view model that describes the initial state of this table view.
+    ///   - shouldDeselectUponSelection: indicates if selected cells should immediately be
+    ///                                  deselected. Defaults to `true`.
+    ///   - automaticDiffingEnabled: defines whether or not this data source updates the table
+    ///                              view automatically when cells/sections are moved/inserted/deleted.
+    ///                              Defaults to `true`.
+    init(
+        tableView: TableView,
+        registerViews: @escaping (TableViewModel) -> Void,
+        tableViewModel: TableViewModel? = nil,
+        shouldDeselectUponSelection: Bool = true,
+        automaticDiffingEnabled: Bool = true
+    ) {
         self._tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffingEnabled
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
+        self._registerViews = registerViews
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -163,7 +194,7 @@ open class TableViewDriver: NSObject {
         }
 
         if let newModel = newModel {
-            self.tableView.registerViews(for: newModel)
+            self._registerViews(newModel)
         }
 
         let previousStateNilOrEmpty = (oldModel == nil || oldModel!.isEmpty)

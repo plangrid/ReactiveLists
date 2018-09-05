@@ -14,74 +14,175 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+import DifferenceKit
 @testable import ReactiveLists
 
-class HeaderView: UITableViewHeaderFooterView {}
-class FooterView: UITableViewHeaderFooterView {}
+final class HeaderView: UITableViewHeaderFooterView {
+    var identifier: String?
+    var label: String?
 
-class TestTableView: UITableView {
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        self.identifier = reuseIdentifier
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+final class FooterView: UITableViewHeaderFooterView {
+    var identifier: String?
+    var label: String?
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        self.identifier = reuseIdentifier
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class TestTableView {
     var callsToRegisterClass: [(viewClass: AnyClass?, identifier: String)] = []
-    var callsToDeselect = 0
-    var callsToInsertRowAtIndexPaths: [(indexPaths: [IndexPath], animation: UITableViewRowAnimation)] = []
-    var callsToDeleteSections: [(sections: IndexSet, animation: UITableViewRowAnimation)] = []
     var callsToReloadData = 0
+    var callsToReloadViaDiff: [Changeset<[TableSectionViewModel]>] = []
 
-    override var indexPathsForVisibleRows: [IndexPath]? {
-        return (0..<self.numberOfSections).flatMap { (section) -> [IndexPath] in
-            (0..<self.numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
+    weak var dataSource: UITableViewDataSource?
+    weak var delegate: UITableViewDelegate?
+}
+
+extension TestTableView: TableView {
+
+    private var testTableView: UITableView {
+        return (self.dataSource as? TableViewDriver)?.testTableView ?? UITableView()
+    }
+
+    func headerView(forSection section: Int) -> UITableViewHeaderFooterView? {
+        return self.delegate?.tableView?(self.testTableView, viewForHeaderInSection: section) as? UITableViewHeaderFooterView
+    }
+
+    func footerView(forSection section: Int) -> UITableViewHeaderFooterView? {
+        return self.delegate?.tableView?(self.testTableView, viewForFooterInSection: section) as? UITableViewHeaderFooterView
+    }
+
+    func beginUpdates() {}
+    func endUpdates() {}
+
+    var indexPathsForVisibleRows: [IndexPath]? {
+        let numberOfSections = self.dataSource?.numberOfSections?(in: self.testTableView) ?? 0
+        return (0..<numberOfSections).flatMap { (section) -> [IndexPath] in
+            let numberOfRows = self.dataSource?.tableView(self.testTableView, numberOfRowsInSection: section) ?? 0
+            return (0..<numberOfRows).map { IndexPath(row: $0, section: section) }
         }
     }
 
-    override func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
-        return self.dataSource?.tableView(self, cellForRowAt: indexPath)
+    func cellForRow(at indexPath: IndexPath) -> UITableViewCell? {
+        return self.dataSource?.tableView(self.testTableView, cellForRowAt: indexPath)
     }
 
-    override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+    func reloadData() {
+        self.callsToReloadData += 1
+    }
+
+    //swiftlint:disable:next function_parameter_count
+    func reload<C>(
+        using stagedChangeset: StagedChangeset<C>,
+        deleteSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        insertSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        reloadSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        deleteRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        insertRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        reloadRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        interrupt: ((Changeset<C>) -> Bool)?,
+        setData: (C) -> Void
+    ) where C: Collection {
+        if let stagedChangeset = stagedChangeset as? StagedChangeset<[TableSectionViewModel]> {
+            var fullChangeset = Changeset<[TableSectionViewModel]>(data: [])
+
+            // combine the staged changesets into one for easy inspection in tests
+            for changeset in stagedChangeset {
+                fullChangeset.data += changeset.data
+                fullChangeset.sectionDeleted += changeset.sectionDeleted
+                fullChangeset.sectionInserted += changeset.sectionInserted
+                fullChangeset.sectionUpdated += changeset.sectionUpdated
+                fullChangeset.sectionMoved += changeset.sectionMoved
+                fullChangeset.elementDeleted += changeset.elementDeleted
+                fullChangeset.elementInserted += changeset.elementInserted
+                fullChangeset.elementUpdated += changeset.elementUpdated
+                fullChangeset.elementMoved += changeset.elementMoved
+            }
+
+            self.callsToReloadViaDiff.append(fullChangeset)
+        }
+    }
+}
+
+extension TestTableView: CellContainerViewProtocol {
+
+    typealias CellType = TestTableViewCell
+    typealias SupplementaryType = UITableViewHeaderFooterView
+
+    func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> TestTableViewCell {
         return TestTableViewCell(identifier: identifier)
     }
 
-    override func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView? {
-        return TestTableViewSectionHeaderFooter(identifier: identifier)
+    func dequeueReusableSupplementaryViewFor(kind: SupplementaryViewKind, identifier: String, indexPath: IndexPath) -> UITableViewHeaderFooterView? {
+        return nil
     }
 
-    override func register(_ aClass: AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String) {
-        self.callsToRegisterClass.append((aClass, identifier))
+    func registerCellClass(_ cellClass: AnyClass?, identifier: String) {
+        self.callsToRegisterClass.append((viewClass: cellClass, identifier: identifier))
     }
 
-    override func deselectRow(at indexPath: IndexPath, animated: Bool) {
-        self.callsToDeselect += 1
+    func registerCellNib(_ cellNib: UINib?, identifier: String) {}
+
+    func registerSupplementaryClass(_ supplementaryClass: AnyClass?, kind: SupplementaryViewKind, identifier: String) {
+        self.callsToRegisterClass.append((viewClass: supplementaryClass, identifier: identifier))
     }
 
-    override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
-        super.insertRows(at: indexPaths, with: animation)
-        self.callsToInsertRowAtIndexPaths.append((indexPaths: indexPaths, animation: animation))
-    }
-
-    override func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
-        super.deleteSections(sections, with: animation)
-        self.callsToDeleteSections.append((sections: sections, animation: animation))
-    }
-
-    override func reloadData() {
-        super.reloadData()
-        self.callsToReloadData += 1
-    }
+    func registerSupplementaryNib(_ supplementaryNib: UINib?, kind: SupplementaryViewKind, identifier: String) {}
 }
 
 extension TableViewDriver {
     func _getCell(_ path: IndexPath) -> TestTableViewCell? {
-        guard let cell = self.tableView(self.tableView, cellForRowAt: path) as? TestTableViewCell else { return nil }
-        return cell
+        return self.tableView.dataSource?.tableView(self.testTableView, cellForRowAt: path) as? TestTableViewCell
     }
 
-    func _getHeader(_ section: Int) -> TestTableViewSectionHeaderFooter? {
-        guard let cell = self.tableView(self.tableView, viewForHeaderInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
-        return cell
+    func _getHeader(_ section: Int) -> HeaderView? {
+        return self.tableView.delegate?.tableView?(self.testTableView, viewForHeaderInSection: section) as?
+            HeaderView
     }
 
-    func _getFooter(_ section: Int) -> TestTableViewSectionHeaderFooter? {
-        guard let cell = self.tableView(self.tableView, viewForFooterInSection: section) as? TestTableViewSectionHeaderFooter else { return nil }
-        return cell
+    func _getFooter(_ section: Int) -> FooterView? {
+        return self.tableView.delegate?.tableView?(self.testTableView, viewForFooterInSection: section) as? FooterView
+    }
+}
+
+extension TableViewDriver {
+    convenience init(
+        tableView: TestTableView,
+        tableViewModel: TableViewModel? = nil,
+        shouldDeselectUponSelection: Bool = true,
+        automaticDiffingEnabled: Bool = true
+    ) {
+        self.init(
+            tableView: tableView,
+            registerViews: tableView.registerViews(for:),
+            tableViewModel: tableViewModel,
+            shouldDeselectUponSelection: shouldDeselectUponSelection,
+            automaticDiffingEnabled: automaticDiffingEnabled
+        )
+    }
+
+    var testTableView: UITableView {
+        let tableView = UITableView()
+        if let tableViewModel = self.tableViewModel {
+            tableView.registerViews(for: tableViewModel)
+        }
+        return tableView
     }
 }
 
@@ -104,5 +205,13 @@ class MockCellViewModel: TableCellViewModel {
         self.willBeginEditing = { [unowned self] in self.willBeginEditingCalled = true }
         self.didEndEditing = { [unowned self] in self.didEndEditingCalled = true }
         self.commitEditingStyle = { [unowned self] in self.commitEditingStyleCalled = $0 }
+    }
+}
+
+final class SelectionTestTableView: UITableView {
+    var callsToDeselect = 0
+
+    public override func deselectRow(at indexPath: IndexPath, animated: Bool) {
+        self.callsToDeselect += 1
     }
 }

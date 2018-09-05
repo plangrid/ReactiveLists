@@ -16,7 +16,7 @@
 
 import UIKit
 
-extension UITableView {
+extension TableView where Self: CellContainerViewProtocol, Self.CellType: UITableViewCell {
 
     func configuredCell(for model: TableCellViewModel, at indexPath: IndexPath) -> UITableViewCell {
         let cell = self.dequeueReusableCellFor(identifier: model.registrationInfo.reuseIdentifier, indexPath: indexPath)

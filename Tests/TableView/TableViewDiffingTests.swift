@@ -14,6 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+import DifferenceKit
 @testable import ReactiveLists
 import XCTest
 
@@ -51,8 +52,9 @@ final class TableViewDiffingTests: XCTestCase {
 
         self.tableViewDataSource.tableViewModel = updatedModel
 
-        XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 1)
-        XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths[0].indexPaths, [IndexPath(row: 0, section: 0)])
+        XCTAssertEqual(self.mockTableView.callsToReloadViaDiff.count, 1)
+        let insertedRows = self.mockTableView.callsToReloadViaDiff[0].elementInserted
+        XCTAssertEqual(insertedRows, [ElementPath(element: 0, section: 0)])
     }
 
     func testChangingRowsWithEmptyModles() {
@@ -68,7 +70,7 @@ final class TableViewDiffingTests: XCTestCase {
 
         self.tableViewDataSource.tableViewModel = updatedModel
 
-        XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 0)
+        XCTAssertEqual(self.mockTableView.callsToReloadViaDiff.count, 0)
         XCTAssertEqual(self.mockTableView.callsToReloadData, 3)
     }
 
@@ -101,8 +103,9 @@ final class TableViewDiffingTests: XCTestCase {
 
         self.tableViewDataSource.tableViewModel = updatedModel
 
-        XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 1)
-        XCTAssertEqual(self.mockTableView.callsToDeleteSections[0].sections, IndexSet(integer: 0))
+        let deletedSections = self.mockTableView.callsToReloadViaDiff[0].sectionDeleted
+        XCTAssertEqual(deletedSections.count, 1)
+        XCTAssertEqual(deletedSections, [0])
     }
 
     func testChangingSectionsThatAreEmpty() {
@@ -128,7 +131,7 @@ final class TableViewDiffingTests: XCTestCase {
 
         self.tableViewDataSource.tableViewModel = updatedModel
 
-        XCTAssertEqual(self.mockTableView.callsToDeleteSections.count, 0)
+        XCTAssertEqual(self.mockTableView.callsToReloadViaDiff.count, 0)
         XCTAssertEqual(self.mockTableView.callsToReloadData, 3)
     }
 }
