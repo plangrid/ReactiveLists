@@ -49,6 +49,7 @@
 		357B96E9201956760000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		357B96EA2019599C0000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
+		A860FAF3214076B000EFEC1B /* TableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A860FAF2214076B000EFEC1B /* TableViewProtocol.swift */; };
 		C11B2E5FBD1253C9FFA431A1 /* Pods_ReactiveListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveListsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		950EFA9B77AA7C8F0696C57B /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
 		978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveLists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A860FAF2214076B000EFEC1B /* TableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewProtocol.swift; sourceTree = "<group>"; };
 		C984EFFC6B6F170CB9AD8DD3 /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveListsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
 		DFAFA51D8FEF2F413206A2CF /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +271,7 @@
 				258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */,
 				258E31AE1F0D8D9C00D6F324 /* TableViewDriver.swift */,
 				258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */,
+				A860FAF2214076B000EFEC1B /* TableViewProtocol.swift */,
 				32124A712019312200EE12FC /* Typealiases.swift */,
 				32753F8C201BB8310084DCB1 /* UICollectionView+Extensions.swift */,
 				32753F8E201BB8470084DCB1 /* UITableView+Extensions.swift */,
@@ -578,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3203532D201BF5FB0024D6CC /* CellContainerViewProtocol.swift in Sources */,
+				A860FAF3214076B000EFEC1B /* TableViewProtocol.swift in Sources */,
 				2541B73D1F29A13B002C3090 /* Diffing.swift in Sources */,
 				258E31B31F0D8D9C00D6F324 /* TableViewDriver.swift in Sources */,
 				32753F8D201BB8310084DCB1 /* UICollectionView+Extensions.swift in Sources */,
