@@ -8,27 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		07E9719D3A28866116C35CB13C5936DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
-		3315F7EB9A9D87EAAFDE76C7712532D4 /* AnyDifferentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3359927E6301D9CE41C15CBDA547AE4 /* AnyDifferentiable.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1C7696E7B4FC9CEC0A5379831D311AA6 /* AnyDifferentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A36CFB138BD2378ED06DC361A47216 /* AnyDifferentiable.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		2CA12FE6D2B618E9A340FBC65505DD92 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0868C0B2F25707828FE67125A3D14A1 /* UIKitExtension.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		363C09ACB3931A0209B7B533D09DC1CC /* DifferenceKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 432BE36F6B1660EA6F20634192561008 /* DifferenceKit-dummy.m */; };
 		3682251440DB3BE1B190721DF7299FDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
 		3A3459C6635F7E54D17D4C3C7AF98B4D /* Pods-ReactiveListsTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */; };
-		5F74E66726CE826DBB924C9680929DDB /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0868C0B2F25707828FE67125A3D14A1 /* UIKitExtension.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		666B4278E77CEE2EE4DB8392E5E68A99 /* DifferenceKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 432BE36F6B1660EA6F20634192561008 /* DifferenceKit-dummy.m */; };
+		3B896C4C405A1D876BADD43BF4C78A5F /* ElementPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CD1D52FC9B7F5952890617B8ED0B83 /* ElementPath.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		51A4726DD2B7AEE1B4B74A2BDF44EF53 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53EA8A3B76CEB52D046B19AAD2A83A /* Changeset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		684DCEF906E0F2D3AC40BCAB8026163F /* Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358631BF1E441628D8CE35DB52616EF8 /* Differentiable.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		700A5CEDA8C3AB06E7CBCA444C8DB7D5 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */; };
 		717CC8057FAF08B521EBBB0C90CA1957 /* Pods-ReactiveLists-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */; };
 		769DB306087A753583E4C6DFE73B5591 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
 		76CE05AD22B56EB6DCF6B948C96C3E2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
-		8D6CFAC538132D66EEFA2A9EE050C0FF /* Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F7EFC4CF691C57D6620C64E2B0F2D8 /* Differentiable.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		A568D8CFEBB5F4CE6C06E3480E85D5D8 /* StagedChangeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB27FA4F46996BFFF3A73FB7EBCBC8 /* StagedChangeset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		B334F9AA93E7C88DF7B034C6CE7F96B8 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78440F7265FEF71575324EEAAB5F573F /* Changeset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		77AA995CCD44ADD5F7EF095562BFADE6 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEFCB20A5F74EF195D26E7B4305577B /* Algorithm.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		789B467A96CA8C7712A06D7D90D4F561 /* StagedChangeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B2A54A11F051CE6FCD21C0D9D34043 /* StagedChangeset.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		98E10E2C0F33734F19351BFD31A14A8B /* DifferentiableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED8C4F5FC60CCD27D0ECAC51568B19C /* DifferentiableSection.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A836B6697AC48FEBFC2E534A2B9C6EED /* ArraySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A22199A97AA17DE00D691AE8BC52A37 /* ArraySection.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B5F1A3B1B2403153EBAD618ECFE5F15B /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3C949A94E83090D952CE21B521CFF86 /* DifferenceKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6468539425CF8322872B3FEA35F68B /* DifferenceKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C565B5513DB0063BA51AE1B7CCB966AB /* Pods-ReactiveListsTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D4442FD4B9947128BA6C40F9337C166E /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5CFEFABF3B5163E30AE612A162474 /* Section.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		D84612AD34C440B4456ABFB09ACF46AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
-		DA5ACD25C66364D6E1E44EF099A67479 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92241F3CF96FCF52D53EABE4417D5484 /* Algorithm.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		DD3841775A0A7566381F6C32D9A72FDD /* Pods-ReactiveLists-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E977879BB77DD9491B395F83E83A73DF /* ElementPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EC9113EFA2EEFB5F6AF1BC74F30F6 /* ElementPath.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F1D42D283057F347B027CC74A257DCB6 /* DifferentiableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AF1DBA9D006BA2DAA93DCFE2198C12 /* DifferentiableSection.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +58,9 @@
 /* Begin PBXFileReference section */
 		077F63C096C41C515DECE309492BABF1 /* Pods-ReactiveListsTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveListsTests-umbrella.h"; sourceTree = "<group>"; };
 		09C4C1CBBBCDD3D3B746B4C4999941F2 /* Pods-ReactiveListsTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveListsTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		0CAB27FA4F46996BFFF3A73FB7EBCBC8 /* StagedChangeset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StagedChangeset.swift; path = Sources/StagedChangeset.swift; sourceTree = "<group>"; };
 		0CCD2504C7F9C9FE3E428F56D0CD04A1 /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
 		0DFDF67C51FF6A636685EE674B35EE25 /* Pods-ReactiveLists-ReactiveListsExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-frameworks.sh"; sourceTree = "<group>"; };
+		0FEFCB20A5F74EF195D26E7B4305577B /* Algorithm.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Algorithm.swift; path = Sources/Algorithm.swift; sourceTree = "<group>"; };
 		116574C9FF8EB5FC53C751AC50912AF8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1270A5FCD5FEA21A6263C5505DC18CA1 /* DifferenceKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DifferenceKit.modulemap; sourceTree = "<group>"; };
 		157DE719AE8ACA5E30F2AB3F6FB13B49 /* Pods-ReactiveLists-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -70,24 +70,23 @@
 		20DD7AA11E46FD03FEDDE2BDCEBD3089 /* DifferenceKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DifferenceKit-prefix.pch"; sourceTree = "<group>"; };
 		2AC90E62B734508A0FCFC653E7A31683 /* Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.debug.xcconfig"; sourceTree = "<group>"; };
 		2DC27AB8BC897B36466A70CCCEFC37D3 /* Pods-ReactiveLists-ReactiveListsExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-ReactiveListsExample-umbrella.h"; sourceTree = "<group>"; };
+		358631BF1E441628D8CE35DB52616EF8 /* Differentiable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Differentiable.swift; path = Sources/Differentiable.swift; sourceTree = "<group>"; };
 		3F77C912163DF5DF098F86DFDACE7D90 /* Pods-ReactiveListsTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveListsTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		432BE36F6B1660EA6F20634192561008 /* DifferenceKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DifferenceKit-dummy.m"; sourceTree = "<group>"; };
 		531995376063C09D3902C2E4C2EFD97E /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		53D7DCE02714FDDB88E29CD726A96D49 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53F7EFC4CF691C57D6620C64E2B0F2D8 /* Differentiable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Differentiable.swift; path = Sources/Differentiable.swift; sourceTree = "<group>"; };
+		54CD1D52FC9B7F5952890617B8ED0B83 /* ElementPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ElementPath.swift; path = Sources/ElementPath.swift; sourceTree = "<group>"; };
 		54D84C3A8195E31D703CF5EA48FF9BFF /* Pods-ReactiveLists-ReactiveListsExample-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-ReactiveListsExample-resources.sh"; sourceTree = "<group>"; };
-		56F5CFEFABF3B5163E30AE612A162474 /* Section.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Sources/Section.swift; sourceTree = "<group>"; };
+		5A22199A97AA17DE00D691AE8BC52A37 /* ArraySection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArraySection.swift; path = Sources/ArraySection.swift; sourceTree = "<group>"; };
 		5B4999957B7299E107A21BAC5BF91129 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
 		5C59CF5C323494B3F1D789F2DBBA8EB7 /* Pods-ReactiveListsTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveListsTests-dummy.m"; sourceTree = "<group>"; };
 		5CA8B89B9510D3B827766966FB2DE870 /* Pods_ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveLists.framework; path = "Pods-ReactiveLists.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67F77AD5BE16ABB539C913D9B97439DA /* Pods-ReactiveLists-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ReactiveLists-umbrella.h"; sourceTree = "<group>"; };
 		760D038C2D89DD28E74C47DD91DAF418 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		78440F7265FEF71575324EEAAB5F573F /* Changeset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Changeset.swift; path = Sources/Changeset.swift; sourceTree = "<group>"; };
 		8162E24BE29B7395EC6615E5229183AF /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ReactiveListsTests.framework; path = "Pods-ReactiveListsTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86570C7F10A6E0FA03885DFDA55E50D3 /* Pods-ReactiveListsTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ReactiveListsTests.modulemap"; sourceTree = "<group>"; };
 		8C5343ECCD027724500DF49E141FC554 /* Pods-ReactiveLists-ReactiveListsExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-ReactiveListsExample-dummy.m"; sourceTree = "<group>"; };
 		908E902E026C5C22904CF9014A5604AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		92241F3CF96FCF52D53EABE4417D5484 /* Algorithm.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Algorithm.swift; path = Sources/Algorithm.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F6468539425CF8322872B3FEA35F68B /* DifferenceKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DifferenceKit-umbrella.h"; sourceTree = "<group>"; };
 		A0868C0B2F25707828FE67125A3D14A1 /* UIKitExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIKitExtension.swift; path = Sources/UIExtensions/UIKitExtension.swift; sourceTree = "<group>"; };
@@ -95,16 +94,17 @@
 		A86CF2EEC11C7E044420AF22516AF526 /* DifferenceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DifferenceKit.framework; path = DifferenceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6C59BD7669713C77BAC3443746B5DE /* Pods-ReactiveLists-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ReactiveLists-dummy.m"; sourceTree = "<group>"; };
 		B954323BFD2178B30660FD15B45035A2 /* Pods-ReactiveLists-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveLists-resources.sh"; sourceTree = "<group>"; };
+		B9B2A54A11F051CE6FCD21C0D9D34043 /* StagedChangeset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StagedChangeset.swift; path = Sources/StagedChangeset.swift; sourceTree = "<group>"; };
 		BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C51AA72514E0DFA60B554C4A6998B621 /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
-		CF8EC9113EFA2EEFB5F6AF1BC74F30F6 /* ElementPath.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ElementPath.swift; path = Sources/ElementPath.swift; sourceTree = "<group>"; };
+		CED8C4F5FC60CCD27D0ECAC51568B19C /* DifferentiableSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DifferentiableSection.swift; path = Sources/DifferentiableSection.swift; sourceTree = "<group>"; };
 		E306A31585C5CF6D786DB047B9D2E9B7 /* Pods-ReactiveListsTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-frameworks.sh"; sourceTree = "<group>"; };
 		E3C6DD930C99A5D7335B4213B81435E7 /* Pods-ReactiveLists-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ReactiveLists-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E8408D003877BF3F19785EB6A7A6B40E /* DifferenceKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DifferenceKit.xcconfig; sourceTree = "<group>"; };
 		E85B28002AF138D1A4148F60758B33AF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1AF1DBA9D006BA2DAA93DCFE2198C12 /* DifferentiableSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DifferentiableSection.swift; path = Sources/DifferentiableSection.swift; sourceTree = "<group>"; };
+		EC53EA8A3B76CEB52D046B19AAD2A83A /* Changeset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Changeset.swift; path = Sources/Changeset.swift; sourceTree = "<group>"; };
 		F2212AA261D7BC23D65DB471B391225B /* Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ReactiveLists-ReactiveListsExample-acknowledgements.plist"; sourceTree = "<group>"; };
-		F3359927E6301D9CE41C15CBDA547AE4 /* AnyDifferentiable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyDifferentiable.swift; path = Sources/AnyDifferentiable.swift; sourceTree = "<group>"; };
+		F2A36CFB138BD2378ED06DC361A47216 /* AnyDifferentiable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyDifferentiable.swift; path = Sources/AnyDifferentiable.swift; sourceTree = "<group>"; };
 		F65A23E0B8C7657BA9DAE7603D66CD6B /* Pods-ReactiveListsTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ReactiveListsTests-resources.sh"; sourceTree = "<group>"; };
 		FC656316CE90F934E2C128C2DD505710 /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +234,21 @@
 			);
 			sourceTree = "<group>";
 		};
+		886F4D9D746E6B4FDF146775E598FD58 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0FEFCB20A5F74EF195D26E7B4305577B /* Algorithm.swift */,
+				F2A36CFB138BD2378ED06DC361A47216 /* AnyDifferentiable.swift */,
+				5A22199A97AA17DE00D691AE8BC52A37 /* ArraySection.swift */,
+				EC53EA8A3B76CEB52D046B19AAD2A83A /* Changeset.swift */,
+				358631BF1E441628D8CE35DB52616EF8 /* Differentiable.swift */,
+				CED8C4F5FC60CCD27D0ECAC51568B19C /* DifferentiableSection.swift */,
+				54CD1D52FC9B7F5952890617B8ED0B83 /* ElementPath.swift */,
+				B9B2A54A11F051CE6FCD21C0D9D34043 /* StagedChangeset.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		8DE108BB8D0BF433E72B9837DEBF958A /* Pods-ReactiveLists */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,25 +266,10 @@
 			path = "Target Support Files/Pods-ReactiveLists";
 			sourceTree = "<group>";
 		};
-		979A13779AE9B1F227F6F5D829F48721 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				92241F3CF96FCF52D53EABE4417D5484 /* Algorithm.swift */,
-				F3359927E6301D9CE41C15CBDA547AE4 /* AnyDifferentiable.swift */,
-				78440F7265FEF71575324EEAAB5F573F /* Changeset.swift */,
-				53F7EFC4CF691C57D6620C64E2B0F2D8 /* Differentiable.swift */,
-				F1AF1DBA9D006BA2DAA93DCFE2198C12 /* DifferentiableSection.swift */,
-				CF8EC9113EFA2EEFB5F6AF1BC74F30F6 /* ElementPath.swift */,
-				56F5CFEFABF3B5163E30AE612A162474 /* Section.swift */,
-				0CAB27FA4F46996BFFF3A73FB7EBCBC8 /* StagedChangeset.swift */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
 		9A0EB221E6A8DBA71150CB44CE680273 /* DifferenceKit */ = {
 			isa = PBXGroup;
 			children = (
-				979A13779AE9B1F227F6F5D829F48721 /* Core */,
+				886F4D9D746E6B4FDF146775E598FD58 /* Core */,
 				270F2BE6ED8FE7C2AE0403B4F1EBE8AF /* Support Files */,
 				F7DA3D5A7B33EB03F88792DBE0C86BC7 /* UIExtensions */,
 			);
@@ -413,7 +413,7 @@
 			buildConfigurationList = 2873D9A2B7A5CAE41DD334E3FDF5A182 /* Build configuration list for PBXNativeTarget "DifferenceKit" */;
 			buildPhases = (
 				358A47FDD1CC708DD112A471E508B025 /* Headers */,
-				82D28A58AF7480E2A68DB59AFD6375D3 /* Sources */,
+				BE8CBBC63967B4E221AC0D561AD57279 /* Sources */,
 				9F6A9F963E1A52349B437EE5F9B6CD3A /* Frameworks */,
 				0A7C98A4A39E46110CCF1D8870D679FF /* Resources */,
 			);
@@ -495,20 +495,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		82D28A58AF7480E2A68DB59AFD6375D3 /* Sources */ = {
+		BE8CBBC63967B4E221AC0D561AD57279 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA5ACD25C66364D6E1E44EF099A67479 /* Algorithm.swift in Sources */,
-				3315F7EB9A9D87EAAFDE76C7712532D4 /* AnyDifferentiable.swift in Sources */,
-				B334F9AA93E7C88DF7B034C6CE7F96B8 /* Changeset.swift in Sources */,
-				666B4278E77CEE2EE4DB8392E5E68A99 /* DifferenceKit-dummy.m in Sources */,
-				8D6CFAC538132D66EEFA2A9EE050C0FF /* Differentiable.swift in Sources */,
-				F1D42D283057F347B027CC74A257DCB6 /* DifferentiableSection.swift in Sources */,
-				E977879BB77DD9491B395F83E83A73DF /* ElementPath.swift in Sources */,
-				D4442FD4B9947128BA6C40F9337C166E /* Section.swift in Sources */,
-				A568D8CFEBB5F4CE6C06E3480E85D5D8 /* StagedChangeset.swift in Sources */,
-				5F74E66726CE826DBB924C9680929DDB /* UIKitExtension.swift in Sources */,
+				77AA995CCD44ADD5F7EF095562BFADE6 /* Algorithm.swift in Sources */,
+				1C7696E7B4FC9CEC0A5379831D311AA6 /* AnyDifferentiable.swift in Sources */,
+				A836B6697AC48FEBFC2E534A2B9C6EED /* ArraySection.swift in Sources */,
+				51A4726DD2B7AEE1B4B74A2BDF44EF53 /* Changeset.swift in Sources */,
+				363C09ACB3931A0209B7B533D09DC1CC /* DifferenceKit-dummy.m in Sources */,
+				684DCEF906E0F2D3AC40BCAB8026163F /* Differentiable.swift in Sources */,
+				98E10E2C0F33734F19351BFD31A14A8B /* DifferentiableSection.swift in Sources */,
+				3B896C4C405A1D876BADD43BF4C78A5F /* ElementPath.swift in Sources */,
+				789B467A96CA8C7712A06D7D90D4F561 /* StagedChangeset.swift in Sources */,
+				2CA12FE6D2B618E9A340FBC65505DD92 /* UIKitExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

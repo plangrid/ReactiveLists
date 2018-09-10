@@ -83,76 +83,62 @@ extension AnyDiffableViewModel: Differentiable {
     }
 }
 
-/// Wraps a `DifferentiableSection` that is a `DiffableViewModel`, so that
-/// `DifferentalSection`-types don't have to implement `Differentiable`, which would lead to an
-/// ambiguous type check for the correct initializer for `StagedChangeset`
-public struct DifferentiableSectionModel<D: DiffableViewModel & DifferentiableSection> {
-    let model: D
-
-    private let isContentEqualTo: (DifferentiableSectionModel) -> Bool
-
-    init(_ model: D) {
-        self.model = model
-        let differenceIdentifier = model.diffingKey
-        self.isContentEqualTo = { source in
-            return differenceIdentifier == source.differenceIdentifier
-        }
-    }
-}
-
-extension DifferentiableSectionModel: Differentiable {
-
-    public var differenceIdentifier: DiffingKey {
-        return self.model.diffingKey
-    }
-
-    public func isContentEqual(to source: DifferentiableSectionModel) -> Bool {
-        return self.isContentEqualTo(source)
-    }
-}
-
 /// MARK: - DifferenceKit Protocol Conformance
 
 extension TableSectionViewModel: DifferentiableSection {
 
-    public var model: DifferentiableSectionModel<TableSectionViewModel> {
-        return DifferentiableSectionModel(self)
+    // MARK: Differentiable Conformance
+
+    public var differenceIdentifier: DiffingKey {
+        return self.diffingKey
     }
+
+    public func isContentEqual(to source: TableSectionViewModel) -> Bool {
+        return self.diffingKey == source.diffingKey
+    }
+
+    // MARK: DifferentiableSection Conformance
 
     public var elements: [AnyDiffableViewModel] {
         return self.map { AnyDiffableViewModel($0) }
     }
 
-    public init<C>(model: DifferentiableSectionModel<TableSectionViewModel>, elements: C) where C: Collection, C.Element == AnyDiffableViewModel {
-        let sectionModel = model.model
+    public init<C: Collection>(source: TableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
             //swiftlint:disable:next force_cast
             cellViewModels: elements.map { $0.model as! TableCellViewModel },
-            headerViewModel: sectionModel.headerViewModel,
-            footerViewModel: sectionModel.footerViewModel,
-            diffingKey: sectionModel.diffingKey
+            headerViewModel: source.headerViewModel,
+            footerViewModel: source.footerViewModel,
+            diffingKey: source.diffingKey
         )
     }
 }
 
 extension CollectionSectionViewModel: DifferentiableSection {
 
-    public var model: DifferentiableSectionModel<CollectionSectionViewModel> {
-        return DifferentiableSectionModel(self)
+    // MARK: Differentiable Conformance
+
+    public var differenceIdentifier: DiffingKey {
+        return self.diffingKey
     }
+
+    public func isContentEqual(to source: CollectionSectionViewModel) -> Bool {
+        return self.diffingKey == source.diffingKey
+    }
+
+    // MARK: DifferentiableSection Conformance
 
     public var elements: [AnyDiffableViewModel] {
         return self.map { AnyDiffableViewModel($0) }
     }
 
-    public init<C>(model: DifferentiableSectionModel<CollectionSectionViewModel>, elements: C) where C: Collection, C.Element == AnyDiffableViewModel {
-        let sectionModel = model.model
+    public init<C: Collection>(source: CollectionSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
             //swiftlint:disable:next force_cast
             cellViewModels: elements.map { $0.model as! CollectionCellViewModel },
-            headerViewModel: sectionModel.headerViewModel,
-            footerViewModel: sectionModel.footerViewModel,
-            diffingKey: sectionModel.diffingKey
+            headerViewModel: source.headerViewModel,
+            footerViewModel: source.footerViewModel,
+            diffingKey: source.diffingKey
         )
     }
 }

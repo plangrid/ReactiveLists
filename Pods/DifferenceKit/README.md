@@ -1,4 +1,6 @@
-<h1 align="center">DifferenceKit</h1>
+<p align="center">
+<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/logo.png" width="500">
+</p>
 <H4 align="center">
 A fast and flexible O(n) difference algorithm framework for Swift collection.</br>
 The algorithm is optimized based on the Paul Heckel's algorithm.
@@ -18,11 +20,15 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 ---
 
 ## Features
-✅ Automate to calculate commands for batch-updates of UITableView and UICollectionView  
+✅ Automate to calculate operations for batch-updates of UITableView and UICollectionView  
+
 ✅ **O(n)** difference algorithm optimized for performance in Swift  
+
 ✅ Supports both linear and sectioned collection  
+
 ✅ Supports calculating differences with best effort even if elements or section contains duplicates  
-✅ Supports **all commands** for animating UI batch-updates including section reloads  
+
+✅ Supports **all operations** for animated UI batch-updates including section reloads  
 
 ---
 
@@ -41,7 +47,7 @@ See also his paper ["A technique for isolating differences between files"](https
 [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) and [IGListKit](https://github.com/Instagram/IGListKit) are also implemented based on his algorithm.  
 This allows all types of differences to be computed in linear time **O(n)**.  
 
-However, in `performBatchUpdates` of UITableView and UICollectionView, there are combinations of commands that cause crash when applied simultaneously.  
+However, in `performBatchUpdates` of UITableView and UICollectionView, there are combinations of operations that cause crash when applied simultaneously.  
 To solve this problem, DifferenceKit takes an approach of split the set of differences at the minimal stages that can be perform batch-updates with no crashes.
 
 Implementation is [here](https://github.com/ra1028/DifferenceKit/blob/master/Sources/Algorithm.swift).
@@ -81,10 +87,24 @@ In the case of definition above, `id` uniquely identifies the element and get to
 
 There are default implementations of `Differentiable` for the types that conformed to `Equatable` or `Hashable`：
 ```swift
+public extension Differentiable where Self: Equatable {
+    func isContentEqual(to source: Self) -> Bool {
+        return self == source
+    }
+}
+
+public extension Differentiable where Self: Hashable {
+    var differenceIdentifier: Self {
+        return self
+    }
+}
+```
+So, you can simply:
+```swift
 extension String: Differentiable {}
 ```
 
-You can calculate the differences by creating `StagedChangeset` from two collections of elements conforming to `Differentiable`:
+Calculates the differences by creating `StagedChangeset` from two collections of elements conforming to `Differentiable`:
 ```swift
 let source = [
     User(id: 0, name: "Vincent"),
@@ -108,28 +128,28 @@ let source = [
 ```
 
 In the case of sectioned collection, the section itself must have a unique identifier and be able to compare whether there is an update.  
-So each section must conform to `DifferentiableSection` protocol, but in most cases you can use `Section` that general type conformed to it.  
-`Section` requires a model conforming to `Differentiable` for differentiate from other sections:
+So each section must conform to `DifferentiableSection` protocol, but in most cases you can use `ArraySection` that general type conformed to it.  
+`ArraySection` requires a model conforming to `Differentiable` for differentiate from other sections:
 ```swift
 enum Model: Differentiable {
     case a, b, c
 }
 
-let source: [Section<Model, String>] = [
-    Section(model: .a, elements: ["A", "B"]),
-    Section(model: .b, elements: ["C"])
+let source: [ArraySection<Model, String>] = [
+    ArraySection(model: .a, elements: ["A", "B"]),
+    ArraySection(model: .b, elements: ["C"])
 ]
-let target: [Section<Model, String>] = [
-    Section(model: .c, elements: ["D", "E"]),
-    Section(model: .a, elements: ["A"]),
-    Section(model: .b, elements: ["B", "C"])
+let target: [ArraySection<Model, String>] = [
+    ArraySection(model: .c, elements: ["D", "E"]),
+    ArraySection(model: .a, elements: ["A"]),
+    ArraySection(model: .b, elements: ["B", "C"])
 ]
 
 let changeset = StagedChangeset(source: source, target: target)
 ```
 
 You can incremental updates UITableView and UICollectionView using the created `StagedChangeset`.  
-**Don't forget** to update the data referenced by the dataSource in `setData` closure, as the differences is applied in stages:
+**Don't forget** to update **synchronously** the data referenced by the data-source in `setData` closure, as the differences is applied in stages:
 ```swift
 tableView.reload(using: changeset, with: .fade) { data in
     dataSource.data = data
@@ -210,31 +230,31 @@ Use `Foundation.UUID` as an element.
 #### - From 5,000 elements to 500 deleted and 500 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.00425     |
-|RxDataSources|0.00784     |
+|DifferenceKit|0.0032      |
+|RxDataSources|0.0078      |
 |FlexibleDiff |0.0168      |
 |IGListKit    |0.0412      |
 |ListDiff     |0.0388      |
-|DeepDiff     |0.015       |
-|Differ       |0.326       |
-|Dwifft       |33.6        |
+|DeepDiff     |0.0150      |
+|Differ       |0.3260      |
+|Dwifft       |33.600      |
 
 #### - From 10,000 elements to 1,000 deleted and 1,000 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.0079      |
+|DifferenceKit|0.0076      |
 |RxDataSources|0.0143      |
 |FlexibleDiff |0.0305      |
 |IGListKit    |0.0891      |
 |ListDiff     |0.0802      |
-|DeepDiff     |0.030       |
-|Differ       |1.345       |
+|DeepDiff     |0.0300      |
+|Differ       |1.3450      |
 |Dwifft       |❌          |
 
 #### - From 100,000 elements to 10,000 deleted and 10,000 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.098       |
+|DifferenceKit|0.087       |
 |RxDataSources|0.179       |
 |FlexibleDiff |0.356       |
 |IGListKit    |1.329       |
