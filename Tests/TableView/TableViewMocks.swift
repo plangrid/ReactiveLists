@@ -26,8 +26,20 @@ class TestTableView: UITableView {
     var callsToDeleteSections: [(sections: IndexSet, animation: UITableViewRowAnimation)] = []
     var callsToReloadData = 0
 
+    /// Setup after init to avoid crashes in iOS 10
+    private var _window: UIWindow?
+
     override var window: UIWindow? {
-        return UIWindow()
+        return self._window
+    }
+
+    override init(frame: CGRect, style: UITableViewStyle) {
+        super.init(frame: frame, style: style)
+        self._window = UIWindow()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override var indexPathsForVisibleRows: [IndexPath]? {
