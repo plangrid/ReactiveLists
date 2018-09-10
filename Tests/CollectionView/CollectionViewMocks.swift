@@ -28,6 +28,10 @@ class TestCollectionView: UICollectionView {
     var callsToInsertItems = [[IndexPath]]()
     var callsToDeleteSections = [IndexSet]()
 
+    override var window: UIWindow? {
+        return UIWindow()
+    }
+
     override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
         return TestCollectionViewCell(identifier: identifier)
     }
@@ -46,22 +50,23 @@ class TestCollectionView: UICollectionView {
     }
 
     override func deselectItem(at indexPath: IndexPath, animated: Bool) {
-        super.deselectItem(at: indexPath, animated: animated)
         self.callsToDeselect += 1
     }
 
     override func insertItems(at indexPaths: [IndexPath]) {
-        super.insertItems(at: indexPaths)
         self.callsToInsertItems.append(indexPaths)
     }
 
     override func deleteSections(_ sections: IndexSet) {
-        super.deleteSections(sections)
         self.callsToDeleteSections.append(sections)
     }
 
     override func reloadData() {
-        super.reloadData()
         self.callsToReloadData += 1
+    }
+
+    override func performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+        updates?()
+        completion?(true)
     }
 }

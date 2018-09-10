@@ -26,6 +26,10 @@ class TestTableView: UITableView {
     var callsToDeleteSections: [(sections: IndexSet, animation: UITableViewRowAnimation)] = []
     var callsToReloadData = 0
 
+    override var window: UIWindow? {
+        return UIWindow()
+    }
+
     override var indexPathsForVisibleRows: [IndexPath]? {
         return (0..<self.numberOfSections).flatMap { (section) -> [IndexPath] in
             (0..<self.numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
@@ -53,18 +57,20 @@ class TestTableView: UITableView {
     }
 
     override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
-        super.insertRows(at: indexPaths, with: animation)
         self.callsToInsertRowAtIndexPaths.append((indexPaths: indexPaths, animation: animation))
     }
 
     override func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
-        super.deleteSections(sections, with: animation)
         self.callsToDeleteSections.append((sections: sections, animation: animation))
     }
 
     override func reloadData() {
-        super.reloadData()
         self.callsToReloadData += 1
+    }
+
+    override func performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+        updates?()
+        completion?(true)
     }
 }
 
