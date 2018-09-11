@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ViewRegistrationMethod Enumeration Reference</title>
+    <title>AnyDiffableViewModel Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/ViewRegistrationMethod" class="dashAnchor"></a>
-    <a title="ViewRegistrationMethod Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Struct/AnyDiffableViewModel" class="dashAnchor"></a>
+    <a title="AnyDiffableViewModel Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">ReactiveLists Docs</a> (91% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">ReactiveLists Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ViewRegistrationMethod Enumeration Reference
+        AnyDiffableViewModel Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -135,14 +135,17 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ViewRegistrationMethod</h1>
+            <h1>AnyDiffableViewModel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ViewRegistrationMethod</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnyDiffableViewModel</span></code></pre>
 
                 </div>
               </div>
-            <p>The method for registering cells and supplementary views</p>
+            <p>MARK: - DifferenceKit Helpers
+Creates a type-erased Differentiable for DiffableViewModel.
+These are only created internally from either <code><a href="../Protocols/TableCellViewModel.html">TableCellViewModel</a></code> or <code><a href="../Protocols/CollectionCellViewModel.html">CollectionCellViewModel</a></code>,
+so that we can safely force cast the models back to those types.</p>
 
           </section>
           <section class="section task-group-section">
@@ -151,9 +154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13ReactiveLists22ViewRegistrationMethodO9fromClassACyXlXpcACmF"></a>
-                    <a name="//apple_ref/swift/Element/fromClass" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists22ViewRegistrationMethodO9fromClassACyXlXpcACmF">fromClass</a>
+                    <a name="/s:13ReactiveLists20AnyDiffableViewModelV5modelAA0deF0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/model" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20AnyDiffableViewModelV5modelAA0deF0_pvp">model</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -161,41 +164,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Class-based views</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">fromClass</span><span class="p">(</span><span class="kt">AnyClass</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13ReactiveLists22ViewRegistrationMethodO7fromNibACSS4name_So6BundleCSg6bundletcACmF"></a>
-                    <a name="//apple_ref/swift/Element/fromNib" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13ReactiveLists22ViewRegistrationMethodO7fromNibACSS4name_So6BundleCSg6bundletcACmF">fromNib</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Nib-based views</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">fromNib</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">model</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DiffableViewModel.html">DiffableViewModel</a></span></code></pre>
 
                         </div>
                       </div>
@@ -209,9 +185,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s9EquatableP2eeoiSbx_xtFZ"></a>
-                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s9EquatableP2eeoiSbx_xtFZ">==(_:_:)</a>
+                    <a name="/s:13ReactiveLists20AnyDiffableViewModelV20differenceIdentifierSSvp"></a>
+                    <a name="//apple_ref/swift/Property/differenceIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20AnyDiffableViewModelV20differenceIdentifierSSvp">differenceIdentifier</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -219,13 +195,41 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Undocumented</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">ViewRegistrationMethod</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">ViewRegistrationMethod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:13ReactiveLists10DiffingKeya">DiffingKey</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13ReactiveLists20AnyDiffableViewModelV14isContentEqualSbAC2to_tF"></a>
+                    <a name="//apple_ref/swift/Method/isContentEqual(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13ReactiveLists20AnyDiffableViewModelV14isContentEqualSbAC2to_tF">isContentEqual(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">AnyDiffableViewModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
