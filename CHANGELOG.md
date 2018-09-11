@@ -4,8 +4,13 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-0.2.0 (NEXT)
+0.2.1 (NEXT)
 ------------
+
+This release closes the [0.2.1 milestone](https://github.com/plangrid/ReactiveLists/milestone/8).
+
+0.2.0
+-----
 
 This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/2).
 
@@ -16,6 +21,7 @@ This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLi
 ### New
 
 - `TableSectionViewModel` and `CollectionSectionViewModel` now implement `Collection` ([#135](https://github.com/plangrid/ReactiveLists/pull/135), [@benasher44](https://github.com/benasher44))
+
 - [DifferenceKit](https://github.com/ra1028/DifferenceKit) is now used instead of Dwifft for faster diffing ([#136](https://github.com/plangrid/ReactiveLists/pull/136), [@benasher44](https://github.com/benasher44))
 
 0.1.4
@@ -25,7 +31,7 @@ This release closes the [0.1.4 milestone](https://github.com/plangrid/ReactiveLi
 
 ### Fixed
 
-Don't store an empty model for the first non-nil differ. ([#137](https://github.com/plangrid/ReactiveLists/pull/137), [@benasher44](https://github.com/benasher44))
+- Don't store an empty model for the first non-nil differ. ([#137](https://github.com/plangrid/ReactiveLists/pull/137), [@benasher44](https://github.com/benasher44))
 
 0.1.3
 -----
