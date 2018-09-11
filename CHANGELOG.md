@@ -4,8 +4,13 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-0.2.0 (NEXT)
+0.2.1 (NEXT)
 ------------
+
+This release closes the [0.2.1 milestone](https://github.com/plangrid/ReactiveLists/milestone/8).
+
+0.2.0
+-----
 
 This release closes the [0.2.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/2).
 
