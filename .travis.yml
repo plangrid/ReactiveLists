@@ -26,6 +26,9 @@ env:
 
 # Note: travis installs ruby dependencies using bundler automatically, when there's a Gemfile
 
+before_install:
+  - pod repo update # don't use 'bundle exec' because bundler deps haven't been installed yet
+
 script:
   - set -o pipefail
   - xcodebuild -version -sdk
