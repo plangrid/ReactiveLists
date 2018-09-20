@@ -4,10 +4,14 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 ------
 
-0.2.1 (NEXT)
+0.3.0 (NEXT)
 ------------
 
-This release closes the [0.2.1 milestone](https://github.com/plangrid/ReactiveLists/milestone/8).
+This release closes the [0.3.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/9).
+
+### New
+
+- Drop iOS 9 and migrate to Swift 4.2 ([#144](https://github.com/plangrid/ReactiveLists/pull/144), [@benasher44](https://github.com/benasher44))
 
 0.2.0
 -----
