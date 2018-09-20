@@ -63,10 +63,10 @@ open class TableViewDriver: NSObject {
     }
 
     /// The animation for row insertions.
-    public var insertionAnimation: UITableViewRowAnimation = .fade
+    public var insertionAnimation: UITableView.RowAnimation = .fade
 
     /// The animation for row deletions.
-    public var deletionAnimation: UITableViewRowAnimation = .fade
+    public var deletionAnimation: UITableView.RowAnimation = .fade
 
     private let _shouldDeselectUponSelection: Bool
 
@@ -261,7 +261,7 @@ extension TableViewDriver: UITableViewDataSource {
     }
 
     /// :nodoc:
-    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         self.tableViewModel?[ifExists: indexPath]?.commitEditingStyle?(editingStyle)
     }
 
@@ -332,7 +332,7 @@ extension TableViewDriver: UITableViewDelegate {
     }
 
     /// :nodoc:
-    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return self.tableViewModel?[ifExists: indexPath]?.editingStyle ?? .none
     }
 

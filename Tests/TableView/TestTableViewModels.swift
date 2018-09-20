@@ -19,7 +19,7 @@ import Foundation
 
 struct TestCellViewModel: TableCellViewModel {
     let rowHeight: CGFloat = 42
-    let editingStyle = UITableViewCellEditingStyle.delete
+    let editingStyle = UITableViewCell.EditingStyle.delete
     let shouldHighlight = false
     let shouldIndentWhileEditing = false
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"

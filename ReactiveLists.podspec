@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
 
   s.source = { :git => "https://github.com/plangrid/ReactiveLists.git", :tag => s.version.to_s }
   s.source_files = 'Sources/**/*.swift'
-  s.ios.deployment_target = '9.0'
-  s.swift_version = '4.1'
+  s.ios.deployment_target = '10.0'
+  s.swift_version = '4.2'
   s.requires_arc = true
 
-  s.dependency 'DifferenceKit', '~> 0.5.3'
+  s.dependency 'DifferenceKit', '~> 0.6.0'
 end

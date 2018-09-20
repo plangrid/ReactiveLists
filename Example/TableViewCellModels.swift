@@ -21,7 +21,7 @@ struct ToolTableCellModel: TableCellViewModel, DiffableViewModel {
     let registrationInfo = ViewRegistrationInfo(classType: ToolTableViewCell.self)
 
     let commitEditingStyle: CommitEditingStyleClosure?
-    let editingStyle: UITableViewCellEditingStyle = .delete
+    let editingStyle: UITableViewCell.EditingStyle = .delete
     let accessibilityFormat: CellAccessibilityFormat = ""
 
     let tool: Tool

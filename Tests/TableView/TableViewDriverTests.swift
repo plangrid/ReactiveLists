@@ -87,7 +87,7 @@ final class TableViewDriverTests: XCTestCase {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, heightForRowAt: path($0)), $1)
         }
 
-        parameterize(cases: (0, UITableViewCellEditingStyle.none), (1, .delete), (2, .delete), (9, .none)) {
+        parameterize(cases: (0, UITableViewCell.EditingStyle.none), (1, .delete), (2, .delete), (9, .none)) {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, editingStyleForRowAt: path($0)), $1)
         }
 

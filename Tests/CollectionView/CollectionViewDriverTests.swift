@@ -120,13 +120,13 @@ final class CollectionViewDriverTests: XCTestCase {
             if header != nil {
                 // Test that the header is marked as on screen
                 guard let onScreenHeader = self._collectionViewDataSource.collectionView(self._collectionView,
-                                                                                         viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader,
+                                                                                         viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader,
                                                                                          at: indexPath) as? TestCollectionReusableView else {
                                                                                             XCTFail("Did not find the on screen TestCollectionReusableView header")
                                                                                             return
                 }
                 XCTAssertEqual(onScreenHeader.label, $2)
-                XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: indexPath))
+                XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: indexPath))
             }
         }
     }
@@ -150,13 +150,13 @@ final class CollectionViewDriverTests: XCTestCase {
             if footer != nil {
                 // Test that the footer is marked as on screen
                 guard let onScreenFooter = self._collectionViewDataSource.collectionView(self._collectionView,
-                                                                                         viewForSupplementaryElementOfKind: UICollectionElementKindSectionFooter,
+                                                                                         viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter,
                                                                                          at: indexPath) as? TestCollectionReusableView else {
                                                                                             XCTFail("Did not find the on screen TestCollectionReusableView header")
                                                                                             return
                 }
                 XCTAssertEqual(onScreenFooter.label, $2)
-                XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: indexPath))
+                XCTAssertNil(self._collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: indexPath))
             }
         }
     }
@@ -240,7 +240,7 @@ final class CollectionViewDriverTests: XCTestCase {
     private func _getSupplementaryView(section: Int, kind: SupplementaryViewKind) -> TestCollectionReusableView? {
         guard let view = self._collectionViewDataSource.collectionView(
             self._collectionView,
-            viewForSupplementaryElementOfKind: kind == .header ? UICollectionElementKindSectionHeader : UICollectionElementKindSectionFooter,
+            viewForSupplementaryElementOfKind: kind == .header ? UICollectionView.elementKindSectionHeader : UICollectionView.elementKindSectionFooter,
             at: path(section)
         ) as? TestCollectionReusableView else { return nil }
 

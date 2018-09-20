@@ -29,7 +29,7 @@ final class CollectionToolCellModel: CollectionCellViewModel, DiffableViewModel 
     let accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
     let registrationInfo = ViewRegistrationInfo(classType: CollectionToolCell.self, nibName: "CollectionToolCell")
     let commitEditingStyle: CommitEditingStyleClosure?
-    let editingStyle: UITableViewCellEditingStyle = .delete
+    let editingStyle: UITableViewCell.EditingStyle = .delete
 
     let tool: Tool
     let onDeleteClosure: (Tool) -> Void
