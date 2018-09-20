@@ -48,6 +48,8 @@ public extension DiffableViewModel {
 /// These are only created internally from either `TableCellViewModel` or `CollectionCellViewModel`,
 /// so that we can safely force cast the models back to those types.
 public struct AnyDiffableViewModel {
+
+    /// The type-erased `DiffableViewModel`
     public let model: DiffableViewModel
 
     /// Holds implementation of `Differentiable.isContentEqual(to:)`, so that the model's concrete
