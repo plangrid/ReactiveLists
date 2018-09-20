@@ -22,8 +22,8 @@ class FooterView: UITableViewHeaderFooterView {}
 class TestTableView: UITableView {
     var callsToRegisterClass: [(viewClass: AnyClass?, identifier: String)] = []
     var callsToDeselect = 0
-    var callsToInsertRowAtIndexPaths: [(indexPaths: [IndexPath], animation: UITableViewRowAnimation)] = []
-    var callsToDeleteSections: [(sections: IndexSet, animation: UITableViewRowAnimation)] = []
+    var callsToInsertRowAtIndexPaths: [(indexPaths: [IndexPath], animation: UITableView.RowAnimation)] = []
+    var callsToDeleteSections: [(sections: IndexSet, animation: UITableView.RowAnimation)] = []
     var callsToReloadData = 0
 
     /// Setup after init to avoid crashes in iOS 10
@@ -33,7 +33,7 @@ class TestTableView: UITableView {
         return self._window
     }
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self._window = UIWindow()
     }
@@ -68,11 +68,11 @@ class TestTableView: UITableView {
         self.callsToDeselect += 1
     }
 
-    override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    override func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.callsToInsertRowAtIndexPaths.append((indexPaths: indexPaths, animation: animation))
     }
 
-    override func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
+    override func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         self.callsToDeleteSections.append((sections: sections, animation: animation))
     }
 
@@ -115,7 +115,7 @@ class MockCellViewModel: TableCellViewModel {
     var didEndEditing: DidEndEditingClosure?
     var didEndEditingCalled = false
     var commitEditingStyle: CommitEditingStyleClosure?
-    var commitEditingStyleCalled: UITableViewCellEditingStyle?
+    var commitEditingStyleCalled: UITableViewCell.EditingStyle?
 
     init() {
         self.didSelect = { [unowned self] in self.didSelectCalled = true }

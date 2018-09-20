@@ -62,9 +62,9 @@ public enum SupplementaryViewKind: Equatable {
 
     init?(collectionElementKindString: String) {
         switch collectionElementKindString {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             self = .header
-        case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
             self = .footer
         default:
             return nil
@@ -73,8 +73,8 @@ public enum SupplementaryViewKind: Equatable {
 
     var collectionElementKind: String {
         switch self {
-        case .header: return UICollectionElementKindSectionHeader
-        case .footer: return UICollectionElementKindSectionFooter
+        case .header: return UICollectionView.elementKindSectionHeader
+        case .footer: return UICollectionView.elementKindSectionFooter
         }
     }
 }

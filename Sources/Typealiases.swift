@@ -17,7 +17,7 @@
 import Foundation
 
 /// :nodoc:
-public typealias CommitEditingStyleClosure = (UITableViewCellEditingStyle) -> Void
+public typealias CommitEditingStyleClosure = (UITableViewCell.EditingStyle) -> Void
 /// :nodoc:
 public typealias DidSelectClosure = () -> Void
 /// :nodoc:

@@ -26,7 +26,7 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     var rowHeight: CGFloat { get }
 
     /// The editing style for this cell.
-    var editingStyle: UITableViewCellEditingStyle { get }
+    var editingStyle: UITableViewCell.EditingStyle { get }
 
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
@@ -64,7 +64,7 @@ public extension TableCellViewModel {
     }
 
     /// Default implementation, returns `.none`.
-    var editingStyle: UITableViewCellEditingStyle { return .none }
+    var editingStyle: UITableViewCell.EditingStyle { return .none }
 
     /// Default implementation, returns `true`.
     var shouldHighlight: Bool { return true }

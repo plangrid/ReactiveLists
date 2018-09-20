@@ -103,7 +103,7 @@ struct CollectionUserCellModel: CollectionCellViewModel, DiffableViewModel {
 
     var accessibilityFormat: CellAccessibilityFormat = "CollectionUserCell"
     var registrationInfo = ViewRegistrationInfo(classType: TestCollectionViewCell.self)
-    let editingStyle: UITableViewCellEditingStyle = .delete
+    let editingStyle: UITableViewCell.EditingStyle = .delete
 
     let user: User
 
