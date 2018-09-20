@@ -50,8 +50,11 @@ public extension DiffableViewModel {
 public struct AnyDiffableViewModel {
     public let model: DiffableViewModel
 
+    /// Holds implementation of `Differentiable.isContentEqual(to:)`, so that the model's concrete
+    /// type can be erased
     private let isContentEqualTo: (AnyDiffableViewModel) -> Bool
 
+    /// Initializes a `AnyDiffableViewModel` that wraps a `TableCellViewModel`
     init(_ model: TableCellViewModel) {
         self.model = model
 
@@ -62,6 +65,7 @@ public struct AnyDiffableViewModel {
         }
     }
 
+    /// Initializes a `AnyDiffableViewModel` that wraps a `TableCellViewModel`
     init(_ model: CollectionCellViewModel) {
         self.model = model
 
@@ -74,10 +78,12 @@ public struct AnyDiffableViewModel {
 
 extension AnyDiffableViewModel: Differentiable {
 
+    /// :nodoc:
     public var differenceIdentifier: DiffingKey {
         return self.model.diffingKey
     }
 
+    /// :nodoc:
     public func isContentEqual(to source: AnyDiffableViewModel) -> Bool {
         return self.isContentEqualTo(source)
     }
@@ -89,20 +95,24 @@ extension TableSectionViewModel: DifferentiableSection {
 
     // MARK: Differentiable Conformance
 
+    /// :nodoc:
     public var differenceIdentifier: DiffingKey {
         return self.diffingKey
     }
 
+    /// :nodoc:
     public func isContentEqual(to source: TableSectionViewModel) -> Bool {
         return self.diffingKey == source.diffingKey
     }
 
     // MARK: DifferentiableSection Conformance
 
+    /// :nodoc:
     public var elements: [AnyDiffableViewModel] {
         return self.map { AnyDiffableViewModel($0) }
     }
 
+    /// :nodoc:
     public init<C: Collection>(source: TableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
             //swiftlint:disable:next force_cast
@@ -118,20 +128,24 @@ extension CollectionSectionViewModel: DifferentiableSection {
 
     // MARK: Differentiable Conformance
 
+    /// :nodoc:
     public var differenceIdentifier: DiffingKey {
         return self.diffingKey
     }
 
+    /// :nodoc:
     public func isContentEqual(to source: CollectionSectionViewModel) -> Bool {
         return self.diffingKey == source.diffingKey
     }
 
     // MARK: DifferentiableSection Conformance
 
+    /// :nodoc:
     public var elements: [AnyDiffableViewModel] {
         return self.map { AnyDiffableViewModel($0) }
     }
 
+    /// :nodoc:
     public init<C: Collection>(source: CollectionSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
             //swiftlint:disable:next force_cast
