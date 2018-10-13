@@ -25,17 +25,21 @@ final class TableViewModelTests: XCTestCase {
     func testSubscripts() {
         let tableViewModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
+                diffingKey: nil,
                 headerTitle: "section_1",
                 headerHeight: 42,
-                cellViewModels: []),
+                cellViewModels: []
+            ),
             TableSectionViewModel(
+                diffingKey: nil,
                 headerTitle: "section_2",
                 headerHeight: 43,
                 cellViewModels: [
                     generateTestCellViewModel("A"),
                     generateTestCellViewModel("B"),
                     generateTestCellViewModel("C"),
-            ]),
+                ]
+            ),
         ])
 
         // Returns `nil` when there's no cell/section at the provided path.
@@ -52,9 +56,15 @@ final class TableViewModelTests: XCTestCase {
 
     /// The `.isEmpty` property of the table view.
     func testIsEmpty() {
-        let section0 = TableSectionViewModel(cellViewModels: generateTableCellViewModels())
-        let sectionEmpty = TableSectionViewModel(cellViewModels: [])
-        let section2 = TableSectionViewModel(cellViewModels: generateTableCellViewModels(count: 1))
+        let section0 = TableSectionViewModel(
+            diffingKey: nil,
+            cellViewModels: generateTableCellViewModels()
+        )
+        let sectionEmpty = TableSectionViewModel(diffingKey: nil, cellViewModels: [])
+        let section2 = TableSectionViewModel(
+            diffingKey: nil,
+            cellViewModels: generateTableCellViewModels(count: 1)
+        )
 
         let tableViewModel1 = TableViewModel(sectionModels: [])
         XCTAssertTrue(tableViewModel1.isEmpty)
@@ -79,6 +89,7 @@ final class TableViewModelTests: XCTestCase {
     /// using a plain section header.
     func testPlainHeaderFooterSectionModelInitalizer() {
         let sectionModel = TableSectionViewModel(
+            diffingKey: nil,
             headerTitle: "foo",
             headerHeight: 42,
             cellViewModels: [generateTestCellViewModel()],
@@ -99,6 +110,7 @@ final class TableViewModelTests: XCTestCase {
     /// using a custom section header type.
     func testCustomHeaderFooterSectionModelInitalizer() {
         let sectionModel = TableSectionViewModel(
+            diffingKey: nil,
             cellViewModels: [generateTestCellViewModel()],
             headerViewModel: TestHeaderFooterViewModel(height: 42, viewKind: .header, label: "A"),
             footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"))
@@ -129,6 +141,7 @@ final class TableViewModelTests: XCTestCase {
     /// Verify Collection conformace
     func testSectionCollection() {
         let section = TableSectionViewModel(
+            diffingKey: nil,
             cellViewModels: generateTableCellViewModels()
         )
         let sectionLabels = section.cellViewModels.compactMap {

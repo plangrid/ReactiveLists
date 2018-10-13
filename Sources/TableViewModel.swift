@@ -142,19 +142,21 @@ public struct TableSectionViewModel: DiffableViewModel {
     /// Initializes a `TableSectionViewModel`.
     ///
     /// - Parameters:
+    ///   - diffingKey: a `String` key unique to this section that is used to diff sections
+    ///     automatically. Pass in `nil` if you are not using automatic diffing on this collection.
     ///   - cellViewModels: The cell view models contained in this section.
     ///   - headerViewModel: A header view model for this section (defaults to `nil`).
     ///   - footerViewModel: A footer view model for this section (defaults to `nil`).
-    ///   - diffingKey: A diffing key.
     public init(
+        diffingKey: String?,
         cellViewModels: [TableCellViewModel],
         headerViewModel: TableSectionHeaderFooterViewModel? = nil,
-        footerViewModel: TableSectionHeaderFooterViewModel? = nil,
-        diffingKey: String = UUID().uuidString) {
+        footerViewModel: TableSectionHeaderFooterViewModel? = nil
+    ) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
-        self.diffingKey = diffingKey
+        self.diffingKey = diffingKey ?? UUID().uuidString
     }
 
     /// Initializes a `TableSectionViewModel`.
@@ -167,16 +169,17 @@ public struct TableSectionViewModel: DiffableViewModel {
     ///   - footerHeight: The height of the default footer, if one exists.
     ///   - diffingKey: A diffing key.
     public init(
+        diffingKey: String?,
         headerTitle: String?,
         headerHeight: CGFloat?,
         cellViewModels: [TableCellViewModel],
         footerTitle: String? = nil,
-        footerHeight: CGFloat? = 0,
-        diffingKey: String = UUID().uuidString) {
+        footerHeight: CGFloat? = 0
+    ) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight)
         self.footerViewModel = PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
-        self.diffingKey = diffingKey
+        self.diffingKey = diffingKey ?? UUID().uuidString
     }
 }
 
@@ -223,7 +226,10 @@ public struct TableViewModel {
     ///
     /// - Parameter cellViewModels: the cell models for the only section in this table.
     public init(cellViewModels: [TableCellViewModel]) {
-        let section = TableSectionViewModel(cellViewModels: cellViewModels, diffingKey: "default_section")
+        let section = TableSectionViewModel(
+            diffingKey: "default_section",
+            cellViewModels: cellViewModels
+        )
         self.init(sectionModels: [section])
     }
 

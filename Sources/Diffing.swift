@@ -117,11 +117,11 @@ extension TableSectionViewModel: DifferentiableSection {
     /// :nodoc:
     public init<C: Collection>(source: TableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
+            diffingKey: source.diffingKey,
             //swiftlint:disable:next force_cast
             cellViewModels: elements.map { $0.model as! TableCellViewModel },
             headerViewModel: source.headerViewModel,
-            footerViewModel: source.footerViewModel,
-            diffingKey: source.diffingKey
+            footerViewModel: source.footerViewModel
         )
     }
 }
