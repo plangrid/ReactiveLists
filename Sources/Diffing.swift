@@ -150,11 +150,11 @@ extension CollectionSectionViewModel: DifferentiableSection {
     /// :nodoc:
     public init<C: Collection>(source: CollectionSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
+            diffingKey: source.diffingKey,
             //swiftlint:disable:next force_cast
             cellViewModels: elements.map { $0.model as! CollectionCellViewModel },
             headerViewModel: source.headerViewModel,
-            footerViewModel: source.footerViewModel,
-            diffingKey: source.diffingKey
+            footerViewModel: source.footerViewModel
         )
     }
 }

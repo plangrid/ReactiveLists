@@ -140,19 +140,21 @@ public struct CollectionSectionViewModel: DiffableViewModel {
     /// Initializes a collection view section view model.
     ///
     /// - Parameters:
+    ///   - diffingKey: a `String` key unique to this section that is used to diff sections
+    ///     automatically. Pass in `nil` if you are not using automatic diffing on this collection.
     ///   - cellViewModels: the cells in this section.
     ///   - headerViewModel: the header view model (defaults to `nil`).
     ///   - footerViewModel: the footer view model (defaults to `nil`).
-    ///   - diffingKey: the diffing key, required for automated diffing.
     public init(
+        diffingKey: String?,
         cellViewModels: [CollectionCellViewModel],
         headerViewModel: CollectionSupplementaryViewModel? = nil,
-        footerViewModel: CollectionSupplementaryViewModel? = nil,
-        diffingKey: String = UUID().uuidString) {
+        footerViewModel: CollectionSupplementaryViewModel? = nil
+    ) {
         self.cellViewModels = cellViewModels
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
-        self.diffingKey = diffingKey
+        self.diffingKey = diffingKey ?? UUID().uuidString
     }
 }
 
