@@ -71,10 +71,10 @@ extension TableViewController {
         let sections: [TableSectionViewModel] = groups.map { group in
             let cellViewModels = group.tools.map { ToolTableCellModel(tool: $0, onDeleteClosure: onDeleteClosure) }
             return TableSectionViewModel(
+                diffingKey: group.name,
                 headerTitle: group.name,
                 headerHeight: 44,
-                cellViewModels: cellViewModels,
-                diffingKey: group.name
+                cellViewModels: cellViewModels
             )
         }
         return TableViewModel(sectionModels: sections)

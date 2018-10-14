@@ -79,7 +79,11 @@ extension CollectionViewController {
                     accessibilityFormat: "CollectionViewHeaderView"
                 )
             )
-            return CollectionSectionViewModel(cellViewModels: cellViewModels, headerViewModel: headerViewModel, diffingKey: group.name)
+            return CollectionSectionViewModel(
+                diffingKey: group.name,
+                cellViewModels: cellViewModels,
+                headerViewModel: headerViewModel
+            )
         }
         return CollectionViewModel(sectionModels: sections)
     }
