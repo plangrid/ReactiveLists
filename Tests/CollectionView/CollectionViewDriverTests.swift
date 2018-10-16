@@ -32,21 +32,43 @@ final class CollectionViewDriverTests: XCTestCase {
         self._collectionView = TestCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
         self._collectionViewModel = CollectionViewModel(sectionModels: [
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: [],
-                headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "A"),
-                footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "A")),
+                headerViewModel: TestCollectionViewSupplementaryViewModel(
+                    height: 10,
+                    viewKind: .header,
+                    sectionLabel: "A"
+                ),
+                footerViewModel: TestCollectionViewSupplementaryViewModel(
+                    height: 11,
+                    viewKind: .footer,
+                    sectionLabel: "A"
+                )
+            ),
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: ["A", "B", "C"].map { self._generateTestCollectionCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestCollectionViewSupplementaryViewModel(label: "footer_B", height: 21)),
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: ["D", "E", "F"].map { self._generateTestCollectionCellViewModel($0) },
                 headerViewModel: TestCollectionViewSupplementaryViewModel(label: "header_C", height: 30),
                 footerViewModel: nil),
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: [],
-                headerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .header, sectionLabel: "D"),
-                footerViewModel: TestCollectionViewSupplementaryViewModel(height: nil, viewKind: .footer, sectionLabel: "D")),
+                headerViewModel: TestCollectionViewSupplementaryViewModel(
+                    height: nil,
+                    viewKind: .header,
+                    sectionLabel: "D"
+                ),
+                footerViewModel: TestCollectionViewSupplementaryViewModel(
+                    height: nil,
+                    viewKind: .footer,
+                    sectionLabel: "D"
+                )
+            ),
         ])
         self._collectionViewDataSource = CollectionViewDriver(
             collectionView: self._collectionView,
@@ -209,10 +231,12 @@ final class CollectionViewDriverTests: XCTestCase {
 
         self._collectionViewDataSource.collectionViewModel = CollectionViewModel(sectionModels: [
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: [],
                 headerViewModel: TestCollectionViewSupplementaryViewModel(height: 10, viewKind: .header, sectionLabel: "X"),
                 footerViewModel: TestCollectionViewSupplementaryViewModel(height: 11, viewKind: .footer, sectionLabel: "X")),
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: [self._generateTestCollectionCellViewModel("X")],
                 headerViewModel: nil,
                 footerViewModel: nil),

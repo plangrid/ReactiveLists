@@ -22,6 +22,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// Can be initialized with a custom header and footer view.
     func testViewModelInitializerWithCustomHeaderAndFooter() {
         let sectionModel = CollectionSectionViewModel(
+            diffingKey: nil,
             cellViewModels: [generateTestCollectionCellViewModel()],
             headerViewModel: TestCollectionViewSupplementaryViewModel(
                 height: 40,
@@ -56,8 +57,9 @@ final class CollectionViewModelTests: XCTestCase {
     /// model returns `nil`.
     func testSubscripts() {
         let collectionViewModel = CollectionViewModel(sectionModels: [
-            CollectionSectionViewModel(cellViewModels: []),
+            CollectionSectionViewModel(diffingKey: nil, cellViewModels: []),
             CollectionSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: [
                     generateTestCollectionCellViewModel("A"),
                     generateTestCollectionCellViewModel("B"),
@@ -79,9 +81,15 @@ final class CollectionViewModelTests: XCTestCase {
 
     /// The `.isEmpty` property of the collection view.
     func testIsEmpty() {
-        let section0 = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels())
-        let sectionEmpty = CollectionSectionViewModel(cellViewModels: [])
-        let section2 = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels(count: 1))
+        let section0 = CollectionSectionViewModel(
+            diffingKey: nil,
+            cellViewModels: generateCollectionCellViewModels()
+        )
+        let sectionEmpty = CollectionSectionViewModel(diffingKey: nil, cellViewModels: [])
+        let section2 = CollectionSectionViewModel(
+            diffingKey: nil,
+            cellViewModels: generateCollectionCellViewModels(count: 1)
+        )
 
         let viewModel1 = CollectionViewModel(sectionModels: [])
         XCTAssertTrue(viewModel1.isEmpty)
@@ -102,6 +110,7 @@ final class CollectionViewModelTests: XCTestCase {
     /// Verify Collection conformace
     func testSectionCollection() {
         let section = CollectionSectionViewModel(
+            diffingKey: nil,
             cellViewModels: generateCollectionCellViewModels()
         )
         let sectionLabels = section.cellViewModels.compactMap {

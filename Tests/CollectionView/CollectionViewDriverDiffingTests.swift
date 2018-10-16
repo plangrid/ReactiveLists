@@ -44,8 +44,8 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
         let initialModel = CollectionViewModel(
             sectionModels: [
                 CollectionSectionViewModel(
-                    cellViewModels: [],
-                    diffingKey: "1"
+                    diffingKey: "1",
+                    cellViewModels: []
                 )
             ]
         )
@@ -55,8 +55,8 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
         let updatedModel = CollectionViewModel(
             sectionModels: [
                 CollectionSectionViewModel(
-                    cellViewModels: [CollectionUserCellModel(user: User(name: "Mona"))],
-                    diffingKey: "1"
+                    diffingKey: "1",
+                    cellViewModels: [CollectionUserCellModel(user: User(name: "Mona"))]
                 )
             ]
         )
@@ -74,11 +74,17 @@ final class CollectionViewDriverDiffingTests: XCTestCase {
     ///   communication between the diffing lib and the collection view. The diffing lib itself has
     ///   extensive tests for the various diffing scenarios.
     func testChangingSections() {
-        let section = CollectionSectionViewModel(cellViewModels: generateCollectionCellViewModels(), diffingKey: "2")
+        let section = CollectionSectionViewModel(
+            diffingKey: "2",
+            cellViewModels: generateCollectionCellViewModels()
+        )
 
         let initialModel = CollectionViewModel(
             sectionModels: [
-                CollectionSectionViewModel( cellViewModels: generateCollectionCellViewModels(), diffingKey: "1"),
+                CollectionSectionViewModel(
+                    diffingKey: "1",
+                    cellViewModels: generateCollectionCellViewModels()
+                ),
                 section,
             ]
         )

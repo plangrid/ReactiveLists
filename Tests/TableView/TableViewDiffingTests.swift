@@ -81,12 +81,12 @@ final class TableViewDiffingTests: XCTestCase {
     func testChangingSections() {
         let initialModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: generateTableCellViewModels(),
-                diffingKey: "1"
+                diffingKey: "1",
+                cellViewModels: generateTableCellViewModels()
             ),
             TableSectionViewModel(
-                cellViewModels: generateTableCellViewModels(),
-                diffingKey: "2"
+                diffingKey: "2",
+                cellViewModels: generateTableCellViewModels()
             ),
         ])
 
@@ -94,8 +94,8 @@ final class TableViewDiffingTests: XCTestCase {
 
         let updatedModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: generateTableCellViewModels(),
-                diffingKey: "2"
+                diffingKey: "2",
+                cellViewModels: generateTableCellViewModels()
             ),
         ])
 
@@ -108,23 +108,23 @@ final class TableViewDiffingTests: XCTestCase {
     func testChangingSectionsThatAreEmpty() {
         let initialModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: [],
-                diffingKey: "1"
+                diffingKey: "1",
+                cellViewModels: []
             ),
             TableSectionViewModel(
-                cellViewModels: [],
-                diffingKey: "2"
+                diffingKey: "2",
+                cellViewModels: []
             ),
-            ])
+        ])
 
         self.tableViewDataSource.tableViewModel = initialModel
 
         let updatedModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
-                cellViewModels: [],
-                diffingKey: "2"
+                diffingKey: "2",
+                cellViewModels: []
             ),
-            ])
+        ])
 
         self.tableViewDataSource.tableViewModel = updatedModel
 

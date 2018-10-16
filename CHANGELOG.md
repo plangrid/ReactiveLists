@@ -9,6 +9,10 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 This release closes the [0.4.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/10).
 
+### Breaking
+
+- Updates the initializers for `TableSectionViewModel` and `CollectionSectionViewModel` so that the `diffingKey` argument is _required_. This prevents accidental misuse of the automatic diffing API, which was possible if you relied on the previous default parameter value. (#147, @ronaldsmartin)
+
 0.3.0
 -----
 

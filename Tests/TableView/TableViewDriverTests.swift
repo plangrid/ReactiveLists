@@ -36,14 +36,17 @@ final class TableViewDriverTests: XCTestCase {
     private func setupWithTableView(_ tableView: UITableView) {
         self._tableViewModel = TableViewModel(sectionModels: [
             TableSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: [],
                 headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "A"),
                 footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "A")),
             TableSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: ["A", "B", "C"].map { _generateTestCellViewModel($0) },
                 headerViewModel: nil,
                 footerViewModel: TestHeaderFooterViewModel(title: "footer_2", height: 21)),
              TableSectionViewModel(
+                diffingKey: nil,
                 cellViewModels: ["D", "E", "F"].map { _generateTestCellViewModel($0) },
                 headerViewModel: TestHeaderFooterViewModel(title: "header_3", height: 30),
                 footerViewModel: nil),
@@ -283,10 +286,12 @@ private func _generateTestCellViewModel(_ label: String) -> TestCellViewModel {
 private func _generateTestTableViewModelForRefreshingViews() -> TableViewModel {
     return TableViewModel(sectionModels: [
         TableSectionViewModel(
+            diffingKey: nil,
             cellViewModels: [_generateTestCellViewModel("X")],
             headerViewModel: TestHeaderFooterViewModel(height: 10, viewKind: .header, label: "X"),
             footerViewModel: TestHeaderFooterViewModel(height: 11, viewKind: .footer, label: "X")),
         TableSectionViewModel(
+            diffingKey: nil,
             cellViewModels: ["Y", "Z"].map { _generateTestCellViewModel($0) },
             headerViewModel: TestHeaderFooterViewModel(height: 20, viewKind: .header, label: "Y"),
             footerViewModel: TestHeaderFooterViewModel(height: 21, viewKind: .footer, label: "Y")),
