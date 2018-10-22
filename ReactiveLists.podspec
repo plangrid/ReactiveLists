@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.requires_arc = true
 
-  s.dependency 'DifferenceKit', '~> 0.6.0'
+  s.dependency 'DifferenceKit', '~> 0.7.2'
 end

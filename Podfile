@@ -7,7 +7,7 @@ inhibit_all_warnings!
 target 'ReactiveLists' do
     project 'ReactiveLists.xcodeproj'
 
-    pod 'DifferenceKit', '0.6.0'
+    pod 'DifferenceKit', '0.7.2'
     pod 'SwiftLint', '0.26.0'
 
     target 'ReactiveListsExample' do
