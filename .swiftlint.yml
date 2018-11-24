@@ -29,6 +29,10 @@ opt_in_rules:
   - number_separator
   - operator_usage_whitespace
   - sorted_imports
+  - redundant_type_annotation
+  - closure_spacing
+  - collection_alignment
+  - toggle_bool
 
   # lint
   - overridden_super_call
