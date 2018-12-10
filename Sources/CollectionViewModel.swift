@@ -83,7 +83,7 @@ public struct CollectionViewModel {
 
     /// Returns `true` if this collection has all empty sections.
     public var isEmpty: Bool {
-        return self.sectionModels.first(where: { !$0.isEmpty }) == nil
+        return self.sectionModels.allSatisfy { $0.isEmpty }
     }
 
     /// Initializes a collection view model with the sections provided.

@@ -218,7 +218,7 @@ public struct TableViewModel {
 
     /// Returns `true` if this table has all empty sections.
     public var isEmpty: Bool {
-        return self.sectionModels.first(where: { !$0.isEmpty }) == nil
+        return self.sectionModels.allSatisfy { $0.isEmpty }
     }
 
     /// Initializes a table view model with one section and the cell models provided
