@@ -15,6 +15,10 @@ This release closes the [0.4.0 milestone](https://github.com/plangrid/ReactiveLi
 
 - Upgrades DifferenceKit to 0.7.2  ([#148](https://github.com/plangrid/ReactiveLists/pull/148), [@benasher44](https://github.com/benasher44)
 
+### Changed
+
+- Use `allSatisfy(_:)` in places where we would use `first(where:)` and a `nil` check
+
 0.3.0
 -----
 
