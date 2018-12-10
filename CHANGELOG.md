@@ -21,6 +21,8 @@ This release closes the [0.4.0 milestone](https://github.com/plangrid/ReactiveLi
 
 - Use `allSatisfy(_:)` in places where we would use `first(where:)` and a `nil` check
 
+- Upgrade to SwiftLint 0.29.1
+
 0.3.0
 -----
 
