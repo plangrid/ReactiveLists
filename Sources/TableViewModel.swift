@@ -59,6 +59,8 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
 public extension TableCellViewModel {
 
     /// Default implementation, returns `nil`.
+    /// - Note: If `nil`, the `TableViewDriver` will fallback to `TableViewModel.defaultRowHeight`.
+    /// - See also: TableViewModel
     var rowHeight: CGFloat? {
         return nil
     }
