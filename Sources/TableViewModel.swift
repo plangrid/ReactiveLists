@@ -210,7 +210,7 @@ extension TableSectionViewModel: Collection {
 /// The view model that describes a `UITableView`.
 public struct TableViewModel {
 
-    /// The default row height for this table view.
+    /// The default row height for this table view.  The default value is 44.
     public let defaultRowHeight: CGFloat
 
     /// The section index titles for this table view.
