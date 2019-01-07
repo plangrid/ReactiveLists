@@ -271,7 +271,7 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertNil(defaultCellViewModel.willBeginEditing)
         XCTAssertNil(defaultCellViewModel.didEndEditing)
         XCTAssertEqual(defaultCellViewModel.editingStyle, .none)
-        XCTAssertEqual(defaultCellViewModel.rowHeight, 44.0)
+        XCTAssertEqual(defaultCellViewModel.rowHeight, nil)
         XCTAssertTrue(defaultCellViewModel.shouldHighlight)
         XCTAssertNil(defaultCellViewModel.commitEditingStyle)
         XCTAssertNil(defaultCellViewModel.didSelect)
