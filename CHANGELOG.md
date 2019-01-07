@@ -11,11 +11,11 @@ This release closes the [0.4.0 milestone](https://github.com/plangrid/ReactiveLi
 
 ### Breaking
 
-- Upgrades SwiftLint to 0.29.1 ([#149](https://github.com/plangrid/ReactiveLists/pull/149), [@anayini](https://github.com/anayini)
+- Upgrades SwiftLint to 0.29.1 ([#149](https://github.com/plangrid/ReactiveLists/pull/149), [@anayini](https://github.com/anayini))
 
 - Updates the initializers for `TableSectionViewModel` and `CollectionSectionViewModel` so that the `diffingKey` argument is _required_. This prevents accidental misuse of the automatic diffing API, which was possible if you relied on the previous default parameter value. ([#147](https://github.com/plangrid/ReactiveLists/pull/147), [@ronaldsmartin](https://github.com/ronaldsmartin))
 
-- Upgrades DifferenceKit to 0.7.2  ([#148](https://github.com/plangrid/ReactiveLists/pull/148), [@benasher44](https://github.com/benasher44)
+- Upgrades DifferenceKit to 0.8.0  ([#153](https://github.com/plangrid/ReactiveLists/pull/153), [@anayini](https://github.com/anayini))
 
 ### Changed
 
