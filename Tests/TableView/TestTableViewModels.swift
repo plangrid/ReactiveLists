@@ -18,7 +18,7 @@ import Foundation
 @testable import ReactiveLists
 
 struct TestCellViewModel: TableCellViewModel {
-    let rowHeight: CGFloat = 42
+    let rowHeight: CGFloat? = 42
     let editingStyle = UITableViewCell.EditingStyle.delete
     let shouldHighlight = false
     let shouldIndentWhileEditing = false

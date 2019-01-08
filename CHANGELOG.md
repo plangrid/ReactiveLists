@@ -11,6 +11,10 @@ This release closes the [0.4.0 milestone](https://github.com/plangrid/ReactiveLi
 
 ### Breaking
 
+- Improve semantics of row height API ([#154](https://github.com/plangrid/ReactiveLists/pull/154), [@asmallteapot](https://github.com/asmallteapot))
+        - Make `TableCellViewModel.rowHeight` optional, defaulting to `nil`
+        - Add `TableViewModel.defaultRowHeight`, defaulting to `44.0`
+
 - Upgrades SwiftLint to 0.29.1 ([#149](https://github.com/plangrid/ReactiveLists/pull/149), [@anayini](https://github.com/anayini))
 
 - Updates the initializers for `TableSectionViewModel` and `CollectionSectionViewModel` so that the `diffingKey` argument is _required_. This prevents accidental misuse of the automatic diffing API, which was possible if you relied on the previous default parameter value. ([#147](https://github.com/plangrid/ReactiveLists/pull/147), [@ronaldsmartin](https://github.com/ronaldsmartin))
@@ -141,6 +145,8 @@ This release closes the [0.1.1 milestone](https://github.com/plangrid/ReactiveLi
 - `SupplementaryViewKind` now conforms to `Equatable`
 - `CellAccessibilityFormat` now conforms to `Equatable`
 - `SupplementaryAccessibilityFormat` now conforms to `Equatable`
+
+------
 
 0.1.0
 -----
