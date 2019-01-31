@@ -5,11 +5,11 @@ PODS:
   - DifferenceKit/Core (0.8.0)
   - DifferenceKit/UIKitExtension (0.8.0):
     - DifferenceKit/Core
-  - SwiftLint (0.29.1)
+  - SwiftLint (0.30.1)
 
 DEPENDENCIES:
   - DifferenceKit (= 0.8.0)
-  - SwiftLint (= 0.29.1)
+  - SwiftLint (= 0.30.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -18,8 +18,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DifferenceKit: edcc9da33f545a49a70eefcf1a5327162cb72eb8
-  SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
+  SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
 
-PODFILE CHECKSUM: 182de778c9cdace633288a9d25dd0412b4f9c713
+PODFILE CHECKSUM: 8c89a720011d2cf121771c39fd8f62abf8fb3585
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2
