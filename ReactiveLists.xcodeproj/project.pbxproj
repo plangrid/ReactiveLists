@@ -461,7 +461,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -470,7 +470,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		214905C3DB97E063F1272320 /* [CP] Embed Pods Frameworks */ = {
@@ -479,7 +479,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -488,7 +488,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		357B96DD20193EB50000443F /* ShellScript */ = {
