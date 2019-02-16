@@ -7,6 +7,9 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+### Changed
+- Upgrades DifferenceKit to 1.0.0 ([#156](https://github.com/plangrid/ReactiveLists/pull/156), [@anayini](https://github.com/anayini))
+
 0.4.0
 -----
 
