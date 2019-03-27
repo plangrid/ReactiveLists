@@ -156,18 +156,18 @@
 <pre class="highlight swift"><code><span class="c1">// Given a view controller with a table view</span>
 
 <span class="c1">// 1. create cell models</span>
-<span class="k">let</span> <span class="nv">cell0</span> <span class="o">=</span> <span class="nf">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">cell1</span> <span class="o">=</span> <span class="nf">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">cell2</span> <span class="o">=</span> <span class="nf">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cell0</span> <span class="o">=</span> <span class="kt">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cell1</span> <span class="o">=</span> <span class="kt">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cell2</span> <span class="o">=</span> <span class="kt">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 
 <span class="c1">// 2. create section models</span>
-<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="nf">ExampleTableSectionViewModel</span><span class="p">(</span><span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="n">cell0</span><span class="p">,</span> <span class="n">cell1</span><span class="p">,</span> <span class="n">cell2</span><span class="p">])</span>
+<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="kt">ExampleTableSectionViewModel</span><span class="p">(</span><span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="n">cell0</span><span class="p">,</span> <span class="n">cell1</span><span class="p">,</span> <span class="n">cell2</span><span class="p">])</span>
 
 <span class="c1">// 3. create table model</span>
-<span class="k">let</span> <span class="nv">tableModel</span> <span class="o">=</span> <span class="nf">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section0</span><span class="p">])</span>
+<span class="k">let</span> <span class="nv">tableModel</span> <span class="o">=</span> <span class="kt">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section0</span><span class="p">])</span>
 
 <span class="c1">// 4. create driver</span>
-<span class="k">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="nf">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">,</span> <span class="nv">tableViewModel</span><span class="p">:</span> <span class="n">tableModel</span><span class="p">)</span>
+<span class="k">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="kt">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">,</span> <span class="nv">tableViewModel</span><span class="p">:</span> <span class="n">tableModel</span><span class="p">)</span>
 
 <span class="c1">// 5. update driver with new table model as it changes</span>
 <span class="k">let</span> <span class="nv">updatedTableModel</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="nf">doSomethingToChangeModels</span><span class="p">()</span>
@@ -177,7 +177,7 @@
 </code></pre>
 <h2 id='project-status' class='heading'>Project Status</h2>
 
-<p>An early version of  the <code>UITableView</code> support has been shipping in the <a href="https://itunes.apple.com/us/app/plangrid-construction-software/id498795789?mt=8">PlanGrid app</a> since late 2015 and is now used accross wide parts of the app. The support for <code>UICollectionView</code> is less mature as we only use <code>UICollectionView</code> in very few places.</p>
+<p>An early version of the <code>UITableView</code> support has been shipping in the <a href="https://itunes.apple.com/us/app/plangrid-construction-software/id498795789?mt=8">PlanGrid app</a> since late 2015 and is now used accross wide parts of the app. The support for <code>UICollectionView</code> is less mature as we only use <code>UICollectionView</code> in very few places.</p>
 
 <table><thead>
 <tr>
@@ -211,7 +211,7 @@
 <ul>
 <li>Xcode 10+</li>
 <li>Swift 4.2+</li>
-<li>iOS 10+</li>
+<li>iOS 11+</li>
 </ul>
 <h2 id='installation' class='heading'>Installation</h2>
 <h3 id='a-href-https-cocoapods-org-cocoapods-a-recommended' class='heading'><a href="https://cocoapods.org/">CocoaPods</a> (recommended)</h3>
@@ -237,7 +237,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2019-01-31)</p>
+          <p>&copy; 2019 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2019-03-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
