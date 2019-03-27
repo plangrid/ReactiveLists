@@ -10,6 +10,8 @@ NEXT
 0.5.0
 -----
 
+This release closes the [0.5.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/12?closed=1).
+
 ### Breaking
 
 - Migrated to Swift 5.0
