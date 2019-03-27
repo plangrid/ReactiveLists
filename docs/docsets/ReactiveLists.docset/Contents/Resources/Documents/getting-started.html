@@ -165,18 +165,18 @@ as new data becomes available, you construct a new <code>ViewModel</code> and se
 <pre class="highlight swift"><code><span class="c1">// Given a view controller with a table view</span>
 
 <span class="c1">// 1. create cell models</span>
-<span class="k">let</span> <span class="nv">cell0</span> <span class="o">=</span> <span class="nf">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">cell1</span> <span class="o">=</span> <span class="nf">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">cell2</span> <span class="o">=</span> <span class="nf">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cell0</span> <span class="o">=</span> <span class="kt">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cell1</span> <span class="o">=</span> <span class="kt">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">cell2</span> <span class="o">=</span> <span class="kt">ExampleTableCellModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 
 <span class="c1">// 2. create section models</span>
-<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="nf">ExampleTableSectionViewModel</span><span class="p">(</span><span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="n">cell0</span><span class="p">,</span> <span class="n">cell1</span><span class="p">,</span> <span class="n">cell2</span><span class="p">])</span>
+<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="kt">ExampleTableSectionViewModel</span><span class="p">(</span><span class="nv">cellViewModels</span><span class="p">:</span> <span class="p">[</span><span class="n">cell0</span><span class="p">,</span> <span class="n">cell1</span><span class="p">,</span> <span class="n">cell2</span><span class="p">])</span>
 
 <span class="c1">// 3. create table model</span>
-<span class="k">let</span> <span class="nv">tableModel</span> <span class="o">=</span> <span class="nf">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section0</span><span class="p">])</span>
+<span class="k">let</span> <span class="nv">tableModel</span> <span class="o">=</span> <span class="kt">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section0</span><span class="p">])</span>
 
 <span class="c1">// 4. create driver</span>
-<span class="k">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="nf">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">,</span> <span class="nv">tableViewModel</span><span class="p">:</span> <span class="n">tableModel</span><span class="p">)</span>
+<span class="k">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="kt">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">,</span> <span class="nv">tableViewModel</span><span class="p">:</span> <span class="n">tableModel</span><span class="p">)</span>
 
 <span class="c1">// 5. update driver with new table model as it changes</span>
 <span class="k">let</span> <span class="nv">updatedTableModel</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="nf">doSomethingToChangeModels</span><span class="p">()</span>
@@ -189,12 +189,12 @@ as new data becomes available, you construct a new <code>ViewModel</code> and se
 <p>The following is a more detailed example, to see how this is all integrated into your
 code.  To get set up, you first need to add a <code>Driver</code> (either a <code><a href="Classes/TableViewDriver.html">TableViewDriver</a></code>
 or <code><a href="Classes/CollectionViewDriver.html">CollectionViewDriver</a></code>) to your view controller:</p>
-<pre class="highlight swift"><code><span class="kd">struct</span> <span class="nf">Person</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Person</span> <span class="p">{</span>
   <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
-  <span class="k">let</span> <span class="nv">uuid</span> <span class="o">=</span> <span class="nf">UUID</span><span class="p">()</span>
+  <span class="k">let</span> <span class="nv">uuid</span> <span class="o">=</span> <span class="kt">UUID</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="kd">final</span> <span class="kd">class</span> <span class="kt">PersonViewController</span><span class="p">:</span> <span class="nf">UITableViewController</span> <span class="p">{</span>
+<span class="kd">final</span> <span class="kd">class</span> <span class="kt">PersonViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">]</span>
     <span class="k">var</span> <span class="nv">tableViewDriver</span><span class="p">:</span> <span class="kt">TableViewDriver</span><span class="p">?</span>
                   <span class="o">.</span>
@@ -203,8 +203,8 @@ or <code><a href="Classes/CollectionViewDriver.html">CollectionViewDriver</a></c
     <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
         <span class="c1">// Initialize our `TableViewDriver` with our tableView</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">tableViewDriver</span> <span class="o">=</span> <span class="nf">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">)</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="nf">Person</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Tom"</span><span class="p">)]</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">tableViewDriver</span> <span class="o">=</span> <span class="kt">TableViewDriver</span><span class="p">(</span><span class="nv">tableView</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">tableView</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Person</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Tom"</span><span class="p">)]</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -219,13 +219,13 @@ or <code><a href="Classes/CollectionViewDriver.html">CollectionViewDriver</a></c
 <p>Great!  But how do you make that <code><a href="Structs/TableViewModel.html">TableViewModel</a></code>?  We recommend having a static function that
 takes in new data and generates the <code><a href="Structs/TableViewModel.html">TableViewModel</a></code>.  It might look something like this:</p>
 <pre class="highlight swift"><code><span class="c1">/// Given a new set of [Person], generates the `TableViewModel` representing that new data</span>
-<span class="kd">static</span> <span class="kd">func</span> <span class="nf">viewModel</span><span class="p">(</span><span class="n">forState</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nf">TableViewModel</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="kd">static</span> <span class="kd">func</span> <span class="nf">viewModel</span><span class="p">(</span><span class="n">forState</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">TableViewModel</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
 
 </code></pre>
 
 <p>Then any time your data (in this case the <code>people</code> property) changes, you can generate your new <code><a href="Structs/TableViewModel.html">TableViewModel</a></code></p>
 <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span>
-    <span class="nf">didSet</span> <span class="p">{</span>
+    <span class="k">didSet</span> <span class="p">{</span>
         <span class="k">self</span><span class="o">.</span><span class="n">tableViewDriver</span><span class="p">?</span><span class="o">.</span><span class="n">tableViewModel</span> <span class="o">=</span> <span class="kt">PersonViewController</span><span class="o">.</span><span class="nf">viewModel</span><span class="p">(</span>
             <span class="nv">forState</span><span class="p">:</span> <span class="n">people</span>
         <span class="p">)</span>
@@ -236,16 +236,16 @@ takes in new data and generates the <code><a href="Structs/TableViewModel.html">
 
 <p>Okay now lets go back and fill in our <code>viewModel(forState:)</code> function:</p>
 <pre class="highlight swift"><code><span class="c1">/// Given a new set of [Person], generates the `TableViewModel` representing that new data</span>
-<span class="kd">extension</span> <span class="nf">PersonViewController</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">viewModel</span><span class="p">(</span><span class="n">forState</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nf">TableViewModel</span> <span class="p">{</span>
-            <span class="k">let</span> <span class="nv">personCellViewModels</span> <span class="o">=</span> <span class="n">people</span><span class="o">.</span><span class="nf">map</span> <span class="p">{</span> <span class="nf">PersonCellModel</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
-            <span class="k">let</span> <span class="nv">section</span> <span class="o">=</span> <span class="nf">TableSectionViewModel</span><span class="p">(</span>
+<span class="kd">extension</span> <span class="kt">PersonViewController</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">viewModel</span><span class="p">(</span><span class="n">forState</span> <span class="nv">people</span><span class="p">:</span> <span class="p">[</span><span class="kt">Person</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">TableViewModel</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="nv">personCellViewModels</span> <span class="o">=</span> <span class="n">people</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="kt">PersonCellModel</span><span class="p">(</span><span class="nv">person</span><span class="p">:</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+            <span class="k">let</span> <span class="nv">section</span> <span class="o">=</span> <span class="kt">TableSectionViewModel</span><span class="p">(</span>
               <span class="nv">headerTitle</span><span class="p">:</span> <span class="s">"People"</span><span class="p">,</span>
               <span class="nv">headerHeight</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span>
               <span class="nv">cellViewModels</span><span class="p">:</span> <span class="n">personCellViewModels</span><span class="p">,</span>
               <span class="nv">diffingKey</span><span class="p">:</span> <span class="s">"People"</span> <span class="c1">// a unique string for automatically diffing</span>
             <span class="p">)</span>
-        <span class="k">return</span> <span class="nf">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section</span><span class="p">])</span>
+        <span class="k">return</span> <span class="kt">TableViewModel</span><span class="p">(</span><span class="nv">sectionModels</span><span class="p">:</span> <span class="p">[</span><span class="n">section</span><span class="p">])</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -257,10 +257,10 @@ all those models into a single section and then creates a <code><a href="Structs
 
 <p>Now all we have to do is to define <code>PersonCellModel</code>:</p>
 <pre class="highlight swift"><code>
-<span class="kd">final</span> <span class="kd">class</span> <span class="kt">PersonCell</span><span class="p">:</span> <span class="nf">UITableViewCell</span> <span class="p">{</span> <span class="p">}</span>
+<span class="kd">final</span> <span class="kd">class</span> <span class="kt">PersonCell</span><span class="p">:</span> <span class="kt">UITableViewCell</span> <span class="p">{</span> <span class="p">}</span>
 
-<span class="kd">struct</span> <span class="kt">PersonCellModel</span><span class="p">:</span> <span class="kt">TableCellViewModel</span><span class="p">,</span> <span class="nf">DiffableViewModel</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">registrationInfo</span> <span class="o">=</span> <span class="nf">ViewRegistrationInfo</span><span class="p">(</span><span class="nv">classType</span><span class="p">:</span> <span class="kt">PersonCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+<span class="kd">struct</span> <span class="kt">PersonCellModel</span><span class="p">:</span> <span class="kt">TableCellViewModel</span><span class="p">,</span> <span class="kt">DiffableViewModel</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">registrationInfo</span> <span class="o">=</span> <span class="kt">ViewRegistrationInfo</span><span class="p">(</span><span class="nv">classType</span><span class="p">:</span> <span class="kt">PersonCell</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
     <span class="k">var</span> <span class="nv">accessibilityFormat</span><span class="p">:</span> <span class="kt">CellAccessibilityFormat</span> <span class="o">=</span> <span class="s">"PersonUserCell"</span>
     <span class="k">let</span> <span class="nv">cellIdentifier</span> <span class="o">=</span> <span class="s">"PersonUserCell"</span>
     <span class="k">let</span> <span class="nv">editingStyle</span><span class="p">:</span> <span class="kt">UITableViewCellEditingStyle</span> <span class="o">=</span> <span class="o">.</span><span class="n">delete</span>
@@ -277,7 +277,7 @@ all those models into a single section and then creates a <code><a href="Structs
     <span class="c1">// If we want the library to automatically reload when new data is available</span>
     <span class="c1">// each cell model needs to have a unique key for the diffing algorithm to work.</span>
     <span class="c1">// In this case we just use the person's uuid</span>
-    <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="nf">String</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">diffingKey</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">person</span><span class="o">.</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuidString</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -294,7 +294,7 @@ declarative manner.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2019-01-31)</p>
+          <p>&copy; 2019 <a class="link" href="https://twitter.com/PlanGrid" target="_blank" rel="external">PlanGrid</a>. All rights reserved. (Last updated: 2019-03-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

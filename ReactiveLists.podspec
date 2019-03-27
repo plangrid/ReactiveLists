@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveLists"
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.summary = "React-like API for UITableView and UICollectionView"
   s.homepage = "https://github.com/plangrid/ReactiveLists"
@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
 
   s.source = { :git => "https://github.com/plangrid/ReactiveLists.git", :tag => s.version.to_s }
   s.source_files = 'Sources/**/*.swift'
-  s.ios.deployment_target = '10.0'
-  s.swift_version = '4.2'
+  s.ios.deployment_target = '11.0'
+  s.swift_version = '5.0'
   s.requires_arc = true
 
-  s.dependency 'DifferenceKit', '~> 1.0.0'
+  s.dependency 'DifferenceKit', '~> 1.1.0'
 end

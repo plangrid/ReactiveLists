@@ -7,8 +7,19 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+0.5.0
+-----
+
+This release closes the [0.5.0 milestone](https://github.com/plangrid/ReactiveLists/milestone/12?closed=1).
+
+### Breaking
+
+- Migrated to Swift 5.0
+- Dropped support for iOS 10. iOS 11 and above now required.
+
 ### Changed
-- Upgrades DifferenceKit to 1.0.0 ([#156](https://github.com/plangrid/ReactiveLists/pull/156), [@anayini](https://github.com/anayini))
+
+- Upgraded to DifferenceKit to 1.1.0
 
 0.4.0
 -----
