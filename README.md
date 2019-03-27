@@ -43,7 +43,7 @@ self.driver.tableViewModel = updatedTableModel
 
 ## Project Status
 
-An early version of  the `UITableView` support has been shipping in the [PlanGrid app](https://itunes.apple.com/us/app/plangrid-construction-software/id498795789?mt=8) since late 2015 and is now used accross wide parts of the app. The support for `UICollectionView` is less mature as we only use `UICollectionView` in very few places.
+An early version of the `UITableView` support has been shipping in the [PlanGrid app](https://itunes.apple.com/us/app/plangrid-construction-software/id498795789?mt=8) since late 2015 and is now used accross wide parts of the app. The support for `UICollectionView` is less mature as we only use `UICollectionView` in very few places.
 
 | Feature                    |     Status      |
 | -------------------------- | :-------------: |
@@ -72,7 +72,7 @@ $ ./scripts/gen_docs.sh
 
 * Xcode 10+
 * Swift 4.2+
-* iOS 10+
+* iOS 11+
 
 ## Installation
 

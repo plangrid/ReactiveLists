@@ -10,9 +10,14 @@ NEXT
 0.5.0
 -----
 
+### Breaking
+
+- Migrated to Swift 5.0
+- Dropped support for iOS 10. iOS 11 and above now required.
+
 ### Changed
 
-- Upgrades DifferenceKit to 1.0.0 ([#156](https://github.com/plangrid/ReactiveLists/pull/156), [@anayini](https://github.com/anayini))
+- Upgraded to DifferenceKit to 1.1.0
 
 0.4.0
 -----
