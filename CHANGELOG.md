@@ -7,6 +7,11 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+0.5.1
+-----
+
+Re-add support for Swift 4.2 to make transitioning easier.
+
 0.5.0
 -----
 

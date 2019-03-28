@@ -1,29 +1,36 @@
-language: objective-c
-osx_image: xcode10
-gemfile: Gemfile
+os: osx
+osx_image: xcode10.1
+rvm: 2.6.0
 
-branches:
-  only:
-    - master
+addons:
+  homebrew:
+    packages:
+    - swiftlint
+    update: true
 
 cache:
   - bundler
   - cocoapods
+
+branches:
+  only:
+    - master
 
 env:
    global:
      - WORKSPACE="ReactiveLists.xcworkspace"
      - FRAMEWORK_SCHEME="ReactiveLists"
      - EXAMPLE_SCHEME="Example"
+     - SDK=iphonesimulator12.1
 
    matrix:
-     - DESTINATION="OS=11.4,name=iPhone X"  SCHEME="$FRAMEWORK_SCHEME" POD_LINT="YES"
-     - DESTINATION="OS=12.0,name=iPhone X" SCHEME="$FRAMEWORK_SCHEME" POD_LINT="NO"
-
-# Note: travis installs ruby dependencies using bundler automatically, when there's a Gemfile
+     - DEST="OS=11.4,name=iPhone X" POD_LINT="YES"
+     - DEST="OS=12.1,name=iPhone X" POD_LINT="NO"
 
 before_install:
-  - pod repo update # don't use 'bundle exec' because bundler deps haven't been installed yet
+  - gem update --system
+  - gem install bundler
+  - gem install cocoapods --pre
 
 script:
   - set -o pipefail
@@ -33,11 +40,9 @@ script:
         bundle exec pod lib lint;
     fi
 
-  - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
+  - xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DEST" ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c;
 
-  - if [ $BUILD_EXAMPLE == "YES" ]; then
-        xcodebuild build -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "iphonesimulator" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c;
-    fi
+  - xcodebuild test -workspace "$WORKSPACE" -scheme "$FRAMEWORK_SCHEME" -sdk "$SDK" -destination "$DEST" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
 
   - bundle exec danger
 

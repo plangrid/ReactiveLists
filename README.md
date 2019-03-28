@@ -70,8 +70,8 @@ $ ./scripts/gen_docs.sh
 
 ## Requirements
 
-* Xcode 10+
-* Swift 4.2+
+* Xcode 10.2+
+* Swift 4.2 or 5.0
 * iOS 11+
 
 ## Installation
