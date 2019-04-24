@@ -1,5 +1,5 @@
 os: osx
-osx_image: xcode10.1
+osx_image: xcode10.2
 rvm: 2.6.0
 
 addons:
@@ -21,11 +21,11 @@ env:
      - WORKSPACE="ReactiveLists.xcworkspace"
      - FRAMEWORK_SCHEME="ReactiveLists"
      - EXAMPLE_SCHEME="Example"
-     - SDK=iphonesimulator12.1
+     - SDK=iphonesimulator12.2
 
    matrix:
      - DEST="OS=11.4,name=iPhone X" POD_LINT="YES"
-     - DEST="OS=12.1,name=iPhone X" POD_LINT="NO"
+     - DEST="OS=12.2,name=iPhone X" POD_LINT="NO"
 
 before_install:
   - gem update --system
