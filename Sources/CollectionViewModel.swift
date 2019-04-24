@@ -38,16 +38,16 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, Diffable
 }
 
 /// Default implementations for `CollectionCellViewModel`.
-public extension CollectionCellViewModel {
+extension CollectionCellViewModel {
 
     /// Default implementation, returns `true`.
-    var shouldHighlight: Bool { return true }
+    public var shouldHighlight: Bool { return true }
 
     /// Default implementation, returns `nil`.
-    var didSelect: DidSelectClosure? { return nil }
+    public var didSelect: DidSelectClosure? { return nil }
 
     /// Default implementation, returns `nil`.
-    var didDeselect: DidDeselectClosure? { return nil }
+    public var didDeselect: DidDeselectClosure? { return nil }
 }
 
 /// View model for supplementary views in collection views.
@@ -66,13 +66,13 @@ public protocol CollectionSupplementaryViewModel: ReusableSupplementaryViewModel
 }
 
 /// Default implementations for `CollectionViewSupplementaryViewModel`.
-public extension CollectionSupplementaryViewModel {
+extension CollectionSupplementaryViewModel {
 
     /// Default implementation, returns `nil`.
-    var viewInfo: SupplementaryViewInfo? { return nil }
+    public var viewInfo: SupplementaryViewInfo? { return nil }
 
     /// Default implementation, returns `nil`.
-    var height: CGFloat? { return nil }
+    public var height: CGFloat? { return nil }
 }
 
 /// The view model that describes a `UICollectionView`.

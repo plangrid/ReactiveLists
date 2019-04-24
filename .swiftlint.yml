@@ -21,21 +21,42 @@ opt_in_rules:
   - first_where
   - sorted_first_last
   - contains_over_first_not_nil
+  - last_where
+
 
   # idiomatic
   - fatal_error_message
+  - xctfail_message
+  - legacy_random
+  - no_extension_access_modifier
+  - redundant_type_annotation
+  - toggle_bool
 
   # style
   - number_separator
   - operator_usage_whitespace
   - sorted_imports
-  - redundant_type_annotation
+  - redundant_objc_attribute
   - closure_spacing
   - collection_alignment
-  - toggle_bool
+  - modifier_order
+  - vertical_whitespace_closing_braces
+  - multiline_arguments
+  - multiline_parameters
+  - unneeded_parentheses_in_closure_argument
+  - explicit_self
 
   # lint
   - overridden_super_call
+  - yoda_condition
+  - weak_computed_property
+  - anyobject_protocol
+  - array_init
+  - empty_xctest_method
+  - identical_operands
+  - prohibited_super_call
+  - unused_import
+  - unused_private_declaration
 
 file_length: 650
 line_length: 200

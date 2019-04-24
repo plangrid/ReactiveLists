@@ -26,7 +26,7 @@ struct Tool {
     let uuid = UUID()
 
     static func randomTool() -> Tool {
-        let randomNumber = arc4random_uniform((UInt32(ToolType.allValues.count)))
+        let randomNumber = UInt32.random(in: 0..<UInt32(ToolType.allValues.count))
         return Tool(type: ToolType(rawValue: randomNumber)!)
     }
 }
@@ -68,6 +68,5 @@ enum ToolType: UInt32 {
         case .crane:
             return "🏗️"
         }
-
     }
 }

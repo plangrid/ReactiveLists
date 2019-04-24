@@ -8,7 +8,7 @@ target 'ReactiveLists' do
     project 'ReactiveLists.xcodeproj'
 
     pod 'DifferenceKit', '1.1.0'
-    pod 'SwiftLint', '0.30.1'
+    pod 'SwiftLint', '0.31.0'
 
     target 'ReactiveListsExample' do
       project 'ReactiveLists.xcodeproj'

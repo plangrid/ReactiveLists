@@ -43,7 +43,7 @@ class TestTableView: UITableView {
     }
 
     override var indexPathsForVisibleRows: [IndexPath]? {
-        return (0..<self.numberOfSections).flatMap { (section) -> [IndexPath] in
+        return (0..<self.numberOfSections).flatMap { section -> [IndexPath] in
             (0..<self.numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
         }
     }
