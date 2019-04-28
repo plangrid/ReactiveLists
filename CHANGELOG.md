@@ -7,6 +7,9 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+### Changed
+- Upgrades SwiftLint to 0.31.0 and add several new rules. ([#164](https://github.com/plangrid/ReactiveLists/pull/164), [@anayini](https://github.com/anayini))
+
 0.5.1
 -----
 
