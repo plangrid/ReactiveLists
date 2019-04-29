@@ -56,38 +56,38 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
 }
 
 /// Default implementations for `TableCellViewModel`.
-public extension TableCellViewModel {
+extension TableCellViewModel {
 
     /// Default implementation, returns `nil`.
     /// - Note: If `nil`, the `TableViewDriver` will fallback to `TableViewModel.defaultRowHeight`.
     /// - See also: TableViewModel
-    var rowHeight: CGFloat? {
+    public var rowHeight: CGFloat? {
         return nil
     }
 
     /// Default implementation, returns `.none`.
-    var editingStyle: UITableViewCell.EditingStyle { return .none }
+    public var editingStyle: UITableViewCell.EditingStyle { return .none }
 
     /// Default implementation, returns `true`.
-    var shouldHighlight: Bool { return true }
+    public var shouldHighlight: Bool { return true }
 
     /// Default implementation, returns `false`.
-    var shouldIndentWhileEditing: Bool { return false }
+    public var shouldIndentWhileEditing: Bool { return false }
 
     /// Default implementation, returns `nil`.
-    var willBeginEditing: WillBeginEditingClosure? { return nil }
+    public var willBeginEditing: WillBeginEditingClosure? { return nil }
 
     /// Default implementation, returns `nil`.
-    var didEndEditing: DidEndEditingClosure? { return nil }
+    public var didEndEditing: DidEndEditingClosure? { return nil }
 
     /// Default implementation, returns `nil`.
-    var commitEditingStyle: CommitEditingStyleClosure? { return nil }
+    public var commitEditingStyle: CommitEditingStyleClosure? { return nil }
 
     /// Default implementation, returns `nil`.
-    var didSelect: DidSelectClosure? { return nil }
+    public var didSelect: DidSelectClosure? { return nil }
 
     /// Default implementation, returns `nil`.
-    var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
+    public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
 }
 
 /// Protocol that needs to be implemented by table view cell view models

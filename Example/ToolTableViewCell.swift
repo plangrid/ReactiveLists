@@ -17,5 +17,4 @@
 import UIKit
 
 final class ToolTableViewCell: UITableViewCell {
-
 }
