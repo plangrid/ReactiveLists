@@ -21,7 +21,7 @@ env:
      - WORKSPACE="ReactiveLists.xcworkspace"
      - FRAMEWORK_SCHEME="ReactiveLists"
      - EXAMPLE_SCHEME="Example"
-     - SDK=iphonesimulator12.2
+     - SDK=iphonesimulator
 
    matrix:
      - DEST="OS=11.4,name=iPhone X" POD_LINT="YES"
