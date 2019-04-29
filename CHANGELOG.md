@@ -7,6 +7,9 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+### Changed
+- Upgrade Travis to Xcode 10.2, SDK 12.2
+
 0.5.1
 -----
 
