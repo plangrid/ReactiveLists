@@ -10,6 +10,7 @@ NEXT
 ### Changed
 - Upgrades SwiftLint to 0.31.0 and add several new rules. ([#164](https://github.com/plangrid/ReactiveLists/pull/164), [@anayini](https://github.com/anayini))
 - Upgrade Travis to Xcode 10.2, SDK 12.2
+- Add support for the `UISwipeActionsConfiguration` API, which replaces the deprecated `UITableViewRowAction` API, [@ronaldsmartin](https://github.com/ronaldsmartin)
 
 0.5.1
 -----

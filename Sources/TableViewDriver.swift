@@ -300,6 +300,20 @@ extension TableViewDriver: UITableViewDelegate {
     }
 
     /// :nodoc:
+    @available(iOS 11.0, *)
+    public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let editActions = self.tableViewModel?[ifExists: indexPath] as? TableViewCellModelEditActions else { return nil }
+        return editActions.leadingSwipeActionConfiguration
+    }
+
+    /// :nodoc:
+    @available(iOS 11.0, *)
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let editActions = self.tableViewModel?[ifExists: indexPath] as? TableViewCellModelEditActions else { return nil }
+        return editActions.trailingSwipeActionConfiguration
+    }
+
+    /// :nodoc:
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if let cellViewModel = self.tableViewModel?[ifExists: indexPath] as? TableViewCellModelEditActions {
             return cellViewModel.editActions
