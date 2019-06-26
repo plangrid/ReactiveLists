@@ -101,10 +101,6 @@ public protocol TableViewCellModelEditActions {
     /// The edit actions for this cell when swiping from the trailing direction.
     @available(iOS 11.0, *)
     var trailingSwipeActionConfiguration: UISwipeActionsConfiguration? { get }
-
-    /// The row edit actions for the cell.
-    /// - Warning: `UITableViewRowAction` is deprecated in iOS 13. Implement `leadingSwipeActionConfiguration` or `trailingSwipeActionConfiguration` instead.
-    var editActions: [UITableViewRowAction] { get }
 }
 
 /// Protocol that needs to be implemented by custom header
