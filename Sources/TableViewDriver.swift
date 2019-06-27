@@ -314,14 +314,6 @@ extension TableViewDriver: UITableViewDelegate {
     }
 
     /// :nodoc:
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if let cellViewModel = self.tableViewModel?[ifExists: indexPath] as? TableViewCellModelEditActions {
-            return cellViewModel.editActions
-        }
-        return nil
-    }
-
-    /// :nodoc:
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         self.tableViewModel?[ifExists: indexPath]?.accessoryButtonTapped?()
     }
