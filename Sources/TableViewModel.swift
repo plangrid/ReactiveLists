@@ -94,8 +94,21 @@ extension TableCellViewModel {
 /// that want to provide edit actions.
 public protocol TableViewCellModelEditActions {
 
-    /// The row edit actions for the cell.
-    var editActions: [UITableViewRowAction] { get }
+    /// The edit actions for this cell when swiping from the leading direction.
+    var leadingSwipeActionConfiguration: UISwipeActionsConfiguration? { get }
+
+    /// The edit actions for this cell when swiping from the trailing direction.
+    var trailingSwipeActionConfiguration: UISwipeActionsConfiguration? { get }
+}
+
+/// Default implementation for `TableViewCellModelEditActions`.
+extension TableViewCellModelEditActions {
+
+    /// Default implementation, returns `nil`.
+    var leadingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
+
+    /// Default implementation, returns `nil`.
+    var trailingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
 }
 
 /// Protocol that needs to be implemented by custom header
