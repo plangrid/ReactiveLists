@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Switch to Xcode 11
+      run: sudo xcode-select --switch /Applications/Xcode_11.1.app
+    - name: Install Pods
+      run: bundle exec pod install
+    - name: Run Tests
+      run: xcodebuild clean test -workspace ReactiveLists.xcworkspace -scheme ReactiveLists -destination "OS=13.0,name=iPhone 11" -configuration Debug
