@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [push]
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_11.2.app/Contents/Developer
@@ -28,7 +28,5 @@ jobs:
           xcodebuild clean
           xcodebuild test -workspace "$WORKSPACE" -scheme "$LIBRARY_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
           xcodebuild test -workspace "$WORKSPACE" -scheme "$EXAMPLE_APP_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
-      - name: Run Danger
-        run: bundle exec danger
       - name: Run Codecov
         run: bash <(curl -s https://codecov.io/bash)
