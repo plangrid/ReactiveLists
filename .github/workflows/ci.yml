@@ -28,5 +28,5 @@ jobs:
           xcodebuild clean
           xcodebuild test -workspace "$WORKSPACE" -scheme "$LIBRARY_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
           xcodebuild test -workspace "$WORKSPACE" -scheme "$EXAMPLE_APP_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
-      - name: Run Codecov
+      - name: Run Code Coverage
         run: bash <(curl -s https://codecov.io/bash)
