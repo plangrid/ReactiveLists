@@ -26,12 +26,6 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-      
-      - uses: actions/cache@v1
-        with:
-          path: ~/.cocoapods
-          key: ${{ runner.os }}-cocoapods
-          restore-keys: |
-            ${{ runner.os }}-cocoapods
       - name: Install Pods
         run: bundle exec pod install
       - name: Run Tests
