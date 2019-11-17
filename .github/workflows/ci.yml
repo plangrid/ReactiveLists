@@ -1,0 +1,32 @@
+name: CI
+
+on: [push]
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_11.2.app/Contents/Developer
+  WORKSPACE: ReactiveLists.xcworkspace
+  LIBRARY_SCHEME: ReactiveLists
+  EXAMPLE_APP_SCHEME: Example
+  IOS_SDK: iphonesimulator13.2
+
+jobs:
+  iOS:
+    name: iOS Test
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        destination: ["OS=13.2,name=iPhone 11"]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Bundle Install
+        run: bundle install
+      - name: Install Pods
+        run: bundle exec pod install
+      - name: Run Tests
+        run: |
+          set -o pipefail
+          xcodebuild clean
+          xcodebuild test -workspace "$WORKSPACE" -scheme "$LIBRARY_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
+          xcodebuild test -workspace "$WORKSPACE" -scheme "$EXAMPLE_APP_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
+      - name: Run Code Coverage
+        run: bash <(curl -s https://codecov.io/bash)
