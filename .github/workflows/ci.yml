@@ -20,6 +20,12 @@ jobs:
       - uses: actions/checkout@v1
       - name: Bundle Install
         run: bundle install
+      - uses: actions/cache@v1
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
       - name: Install Pods
         run: bundle exec pod install
       - name: Run Tests
