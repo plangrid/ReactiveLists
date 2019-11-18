@@ -34,9 +34,6 @@ jobs:
           xcodebuild clean
           xcodebuild test -workspace "$WORKSPACE" -scheme "$LIBRARY_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
           xcodebuild test -workspace "$WORKSPACE" -scheme "$EXAMPLE_APP_SCHEME" -destination "${{ matrix.destination }}" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=NO | bundle exec xcpretty -c
-      - name: Check Danger ENV
-        run: |
-          echo "$GITHUB_EVENT_NAME"
       - uses: MeilCli/danger-action@v2
         with:
           plugins_file: 'Gemfile'
