@@ -105,10 +105,10 @@ public protocol TableViewCellModelEditActions {
 extension TableViewCellModelEditActions {
 
     /// Default implementation, returns `nil`.
-    var leadingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
+    public var leadingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
 
     /// Default implementation, returns `nil`.
-    var trailingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
+    public var trailingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
 }
 
 /// Protocol that needs to be implemented by custom header
