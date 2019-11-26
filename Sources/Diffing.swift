@@ -42,7 +42,7 @@ extension DiffableViewModel {
     }
 }
 
-/// MARK: - DifferenceKit Helpers
+// MARK: - DifferenceKit Helpers
 
 /// Creates a type-erased Differentiable for DiffableViewModel.
 /// These are only created internally from either `TableCellViewModel` or `CollectionCellViewModel`,
@@ -91,7 +91,7 @@ extension AnyDiffableViewModel: Differentiable {
     }
 }
 
-/// MARK: - DifferenceKit Protocol Conformance
+// MARK: - DifferenceKit Protocol Conformance
 
 extension TableSectionViewModel: DifferentiableSection {
 
