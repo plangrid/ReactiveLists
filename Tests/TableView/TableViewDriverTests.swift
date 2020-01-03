@@ -257,6 +257,8 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertFalse(cell2.didSelectCalled)
     }
 
+    // MARK: Default values
+
     /// When providing a cell that implements the minimum protocol requirements,
     /// default values for certain properties are provided.
     func testTableViewCellViewModelDefaults() {
@@ -277,6 +279,25 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertNil(defaultCellViewModel.didSelect)
         XCTAssertNil(defaultCellViewModel.accessoryButtonTapped)
         XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
+    }
+
+    /// Cells without a row height will be given the default row height from the TableViewModel.
+    func testDefaultRowHeight() {
+        // Set up a new table view that contains one mock cell
+        let tableView = UITableView()
+        let dataSource = TableViewDriver(tableView: tableView, automaticDiffingEnabled: false)
+        let cell1 = MockCellViewModel()
+        let tableViewModel = TableViewModel(cellViewModels: [cell1])
+        dataSource.tableViewModel = tableViewModel
+
+        XCTAssertNil(cell1.rowHeight)
+        XCTAssertNotEqual(cell1.rowHeight, tableView.rowHeight)
+
+        let actualRowHeight = tableView.delegate?.tableView?(
+            tableView,
+            heightForRowAt: IndexPath(row: 0, section: 0)
+        )
+        XCTAssertEqual(actualRowHeight, tableViewModel.defaultRowHeight)
     }
 }
 
