@@ -22,6 +22,10 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, Diffable
     /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
 
+    /// When using this cell inside of a `UICollectionViewFlowLayout`, this value will be used to
+    /// size this cell.
+    var itemSize: CGSize? { get }
+
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
 
@@ -39,6 +43,9 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, Diffable
 
 /// Default implementations for `CollectionCellViewModel`.
 extension CollectionCellViewModel {
+
+    /// Default implementation, returns `nil`.
+    public var itemSize: CGSize? { nil }
 
     /// Default implementation, returns `true`.
     public var shouldHighlight: Bool { return true }

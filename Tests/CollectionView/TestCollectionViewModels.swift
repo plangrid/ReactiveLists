@@ -19,6 +19,7 @@ import Foundation
 
 struct TestCollectionCellViewModel: CollectionCellViewModel {
     let label: String
+    let itemSize: CGSize?
     let didSelect: DidSelectClosure?
     let didDeselect: DidDeselectClosure?
 
@@ -93,6 +94,7 @@ class TestCollectionReusableView: UICollectionReusableView {
 
 func generateTestCollectionCellViewModel(_ label: String? = nil) -> TestCollectionCellViewModel {
     return TestCollectionCellViewModel(label: label ?? UUID().uuidString,
+                                       itemSize: nil,
                                        didSelect: nil,
                                        didDeselect: nil
     )
@@ -102,6 +104,7 @@ func generateCollectionCellViewModels(count: Int = 4) -> [CollectionCellViewMode
     var models = [TestCollectionCellViewModel]()
     for _ in 0..<count {
         models.append(TestCollectionCellViewModel(label: UUID().uuidString,
+                                                  itemSize: nil,
                                                   didSelect: nil,
                                                   didDeselect: nil))
     }
