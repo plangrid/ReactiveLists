@@ -248,6 +248,9 @@ extension CollectionViewDriver: UICollectionViewDelegate {
 }
 
 extension CollectionViewDriver: UICollectionViewDelegateFlowLayout {
+
+    // MARK: Supplementary view sizing
+
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return self._sizeForSupplementaryViewOfKind(.header, inSection: section, collectionViewLayout: collectionViewLayout)
@@ -256,5 +259,21 @@ extension CollectionViewDriver: UICollectionViewDelegateFlowLayout {
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return self._sizeForSupplementaryViewOfKind(.footer, inSection: section, collectionViewLayout: collectionViewLayout)
+    }
+
+    // MARK: Cell view sizing
+
+    /// :nodoc:
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let itemSize = self.collectionViewModel?[ifExists: indexPath]?.itemSize {
+            return itemSize
+        }
+
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            assertionFailure("A non-flow layout should not hit this delegate method")
+            return .zero
+        }
+
+        return flowLayout.itemSize
     }
 }

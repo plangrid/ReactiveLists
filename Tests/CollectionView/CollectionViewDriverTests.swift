@@ -47,7 +47,9 @@ final class CollectionViewDriverTests: XCTestCase {
             ),
             CollectionSectionViewModel(
                 diffingKey: nil,
-                cellViewModels: ["A", "B", "C"].map { self._generateTestCollectionCellViewModel($0) },
+                cellViewModels: ["A", "B", "C"].map {
+                    self._generateTestCollectionCellViewModel($0, itemSize: CGSize(width: 44, height: 44))
+                },
                 headerViewModel: nil,
                 footerViewModel: TestCollectionViewSupplementaryViewModel(label: "footer_B", height: 21)),
             CollectionSectionViewModel(
@@ -115,6 +117,38 @@ final class CollectionViewDriverTests: XCTestCase {
                                                                              layout: $0 ?? UICollectionViewLayout(),
                                                                              referenceSizeForFooterInSection: $1).height, $2)
         }
+    }
+
+    func testDefaultItemSize() {
+        let layout = UICollectionViewFlowLayout()
+        let section = 2
+        let firstViewModel = self._collectionViewDataSource
+            .collectionViewModel?
+            .sectionModels[section]
+            .cellViewModels[0]
+        let itemSize = self._collectionViewDataSource.collectionView(
+            self._collectionView,
+            layout: layout,
+            sizeForItemAt: path(section)
+        )
+        XCTAssertNil(firstViewModel?.itemSize)
+        XCTAssertEqual(itemSize, layout.itemSize)
+    }
+
+    func testExplicitItemSize() {
+        let layout = UICollectionViewFlowLayout()
+        let section = 1
+        let firstViewModel = self._collectionViewDataSource
+            .collectionViewModel?
+            .sectionModels[section]
+            .cellViewModels[0]
+        let itemSize = self._collectionViewDataSource.collectionView(
+            self._collectionView,
+            layout: layout,
+            sizeForItemAt: path(section)
+        )
+        XCTAssertEqual(itemSize, firstViewModel?.itemSize)
+        XCTAssertNotEqual(itemSize, layout.itemSize)
     }
 
     func testCollectionViewItems() {
@@ -254,6 +288,11 @@ final class CollectionViewDriverTests: XCTestCase {
         XCTAssertEqual(header?.accessibilityIdentifier, "access_header+0")
         XCTAssertEqual(footer?.accessibilityIdentifier, "access_footer+0")
     }
+}
+
+// MARK: - Test helpers
+
+extension CollectionViewDriverTests {
 
     private func _getItem(_ path: IndexPath) -> TestCollectionViewCell? {
         guard let cell = self._collectionViewDataSource.collectionView(self._collectionView,
@@ -271,8 +310,12 @@ final class CollectionViewDriverTests: XCTestCase {
         return view
     }
 
-    private func _generateTestCollectionCellViewModel(_ label: String) -> TestCollectionCellViewModel {
+    private func _generateTestCollectionCellViewModel(
+        _ label: String,
+        itemSize: CGSize? = nil
+    ) -> TestCollectionCellViewModel {
         return TestCollectionCellViewModel(label: label,
+                                           itemSize: itemSize,
                                            didSelect: { [weak self] in self?._lastSelectClosureCaller = label },
                                            didDeselect: { [weak self] in self?._lastDeselectClosureCaller = label })
     }
