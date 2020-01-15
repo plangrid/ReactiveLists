@@ -28,6 +28,7 @@ final class CollectionToolCellModel: CollectionCellViewModel, DiffableViewModel 
 
     let accessibilityFormat: CellAccessibilityFormat = "CollectionToolCell"
     let registrationInfo = ViewRegistrationInfo(classType: CollectionToolCell.self, nibName: "CollectionToolCell")
+    let itemSize: CGSize? = CGSize(width: 150, height: 100)
     let commitEditingStyle: CommitEditingStyleClosure?
     let editingStyle: UITableViewCell.EditingStyle = .delete
 
