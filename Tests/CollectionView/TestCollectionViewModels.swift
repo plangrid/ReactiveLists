@@ -19,7 +19,6 @@ import Foundation
 
 struct TestCollectionCellViewModel: CollectionCellViewModel {
     let label: String
-    let itemSize: CGSize?
     let didSelect: DidSelectClosure?
     let didDeselect: DidDeselectClosure?
 
@@ -34,6 +33,34 @@ struct TestCollectionCellViewModel: CollectionCellViewModel {
     func applyViewModelToCell(_ cell: UICollectionViewCell) {
         guard let testCell = cell as? TestCollectionViewCell else { return }
         testCell.label = self.label
+    }
+}
+
+struct TestFlowLayoutCollectionCellViewModel: FlowLayoutCollectionCellViewModel {
+    let label: String
+    let itemSize: CGSize
+    let didSelect: DidSelectClosure?
+    let didDeselect: DidDeselectClosure?
+
+    let registrationInfo = ViewRegistrationInfo(classType: TestCollectionViewCell.self)
+    let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
+    let shouldHighlight = false
+
+    var diffingKey: DiffingKey {
+        return self.label
+    }
+
+    func applyViewModelToCell(_ cell: UICollectionViewCell) {
+        guard let testCell = cell as? TestCollectionViewCell else { return }
+        testCell.label = self.label
+    }
+
+    func itemSize(
+        in collectionView: UICollectionView,
+        layout: UICollectionViewFlowLayout,
+        indexPath: IndexPath
+    ) -> CGSize {
+        self.itemSize
     }
 }
 
@@ -94,7 +121,6 @@ class TestCollectionReusableView: UICollectionReusableView {
 
 func generateTestCollectionCellViewModel(_ label: String? = nil) -> TestCollectionCellViewModel {
     return TestCollectionCellViewModel(label: label ?? UUID().uuidString,
-                                       itemSize: nil,
                                        didSelect: nil,
                                        didDeselect: nil
     )
@@ -104,7 +130,6 @@ func generateCollectionCellViewModels(count: Int = 4) -> [CollectionCellViewMode
     var models = [TestCollectionCellViewModel]()
     for _ in 0..<count {
         models.append(TestCollectionCellViewModel(label: UUID().uuidString,
-                                                  itemSize: nil,
                                                   didSelect: nil,
                                                   didDeselect: nil))
     }

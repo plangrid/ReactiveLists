@@ -131,7 +131,7 @@ final class CollectionViewDriverTests: XCTestCase {
             layout: layout,
             sizeForItemAt: path(section)
         )
-        XCTAssertNil(firstViewModel?.itemSize)
+        XCTAssertFalse(firstViewModel is FlowLayoutCollectionCellViewModel)
         XCTAssertEqual(itemSize, layout.itemSize)
     }
 
@@ -141,13 +141,18 @@ final class CollectionViewDriverTests: XCTestCase {
         let firstViewModel = self._collectionViewDataSource
             .collectionViewModel?
             .sectionModels[section]
-            .cellViewModels[0]
+            .cellViewModels[0] as? FlowLayoutCollectionCellViewModel
+        let indexPath = path(section)
         let itemSize = self._collectionViewDataSource.collectionView(
             self._collectionView,
             layout: layout,
-            sizeForItemAt: path(section)
+            sizeForItemAt: indexPath
         )
-        XCTAssertEqual(itemSize, firstViewModel?.itemSize)
+        XCTAssertNotNil(firstViewModel)
+        XCTAssertEqual(
+            itemSize,
+            firstViewModel!.itemSize(in: self._collectionView, layout: layout, indexPath: indexPath)
+        )
         XCTAssertNotEqual(itemSize, layout.itemSize)
     }
 
@@ -313,9 +318,16 @@ extension CollectionViewDriverTests {
     private func _generateTestCollectionCellViewModel(
         _ label: String,
         itemSize: CGSize? = nil
-    ) -> TestCollectionCellViewModel {
+    ) -> CollectionCellViewModel {
+        if let itemSize = itemSize {
+            return TestFlowLayoutCollectionCellViewModel(
+                label: label,
+                itemSize: itemSize,
+                didSelect: { [weak self] in self?._lastSelectClosureCaller = label },
+                didDeselect: { [weak self] in self?._lastDeselectClosureCaller = label }
+            )
+        }
         return TestCollectionCellViewModel(label: label,
-                                           itemSize: itemSize,
                                            didSelect: { [weak self] in self?._lastSelectClosureCaller = label },
                                            didDeselect: { [weak self] in self?._lastDeselectClosureCaller = label })
     }
