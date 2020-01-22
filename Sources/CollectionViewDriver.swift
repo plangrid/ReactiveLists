@@ -265,13 +265,13 @@ extension CollectionViewDriver: UICollectionViewDelegateFlowLayout {
 
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let itemSize = self.collectionViewModel?[ifExists: indexPath]?.itemSize {
-            return itemSize
-        }
-
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
             assertionFailure("A non-flow layout should not hit this delegate method")
             return .zero
+        }
+
+        if let item = self.collectionViewModel?[ifExists: indexPath] as? FlowLayoutCollectionCellViewModel {
+            return item.itemSize(in: collectionView, layout: flowLayout, indexPath: indexPath)
         }
 
         return flowLayout.itemSize

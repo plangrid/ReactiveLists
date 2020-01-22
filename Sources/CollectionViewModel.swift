@@ -16,15 +16,13 @@
 
 import UIKit
 
+// MARK: - CollectionCellViewModel
+
 /// View model for the individual cells of a `UICollectionView`.
 public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, DiffableViewModel {
 
     /// `CollectionViewDriver` will automatically apply an `accessibilityIdentifier` to the cell based on this format
     var accessibilityFormat: CellAccessibilityFormat { get }
-
-    /// When using this cell inside of a `UICollectionViewFlowLayout`, this value will be used to
-    /// size this cell.
-    var itemSize: CGSize? { get }
 
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
@@ -44,9 +42,6 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, Diffable
 /// Default implementations for `CollectionCellViewModel`.
 extension CollectionCellViewModel {
 
-    /// Default implementation, returns `nil`.
-    public var itemSize: CGSize? { nil }
-
     /// Default implementation, returns `true`.
     public var shouldHighlight: Bool { return true }
 
@@ -56,6 +51,29 @@ extension CollectionCellViewModel {
     /// Default implementation, returns `nil`.
     public var didDeselect: DidDeselectClosure? { return nil }
 }
+
+/// A `FlowLayoutCollectionCellViewModel` is a `CollectionCellViewModel` that will be placed in its
+/// collection view using a `UICollectionViewFlowLayout`. This allows it to provide a dynamic item
+/// size that can take into account its container size and other layout information.
+public protocol FlowLayoutCollectionCellViewModel: CollectionCellViewModel {
+
+    /// When using this cell inside of a `UICollectionViewFlowLayout`, this hook can be used to
+    /// size this cell.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The parent `UICollectionView` of this cell.
+    ///   - layout: The `UICollectionViewFlowLayout` that will layout this cell.
+    ///   - indexPath: The path at which this item is positioned in `collectionView`.
+    /// - Returns:
+    ///   The width and height of the specified item. Both values should be greater than 0.
+    func itemSize(
+        in collectionView: UICollectionView,
+        layout: UICollectionViewFlowLayout,
+        indexPath: IndexPath
+    ) -> CGSize
+}
+
+// MARK: - CollectionSupplementaryViewModel
 
 /// View model for supplementary views in collection views.
 public protocol CollectionSupplementaryViewModel: ReusableSupplementaryViewModelProtocol {
@@ -81,6 +99,8 @@ extension CollectionSupplementaryViewModel {
     /// Default implementation, returns `nil`.
     public var height: CGFloat? { return nil }
 }
+
+// MARK: - CollectionViewModel
 
 /// The view model that describes a `UICollectionView`.
 public struct CollectionViewModel {
@@ -116,6 +136,8 @@ public struct CollectionViewModel {
         return section.cellViewModels[indexPath.item]
     }
 }
+
+// MARK: - CollectionSectionViewModel
 
 /// View model for a collection view section.
 public struct CollectionSectionViewModel: DiffableViewModel {
