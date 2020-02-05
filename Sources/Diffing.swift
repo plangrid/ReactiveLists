@@ -115,7 +115,7 @@ extension TableSectionViewModel: DifferentiableSection {
     }
 
     /// :nodoc:
-    public init<C: Collection>(source: TableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
+    public init<C: Swift.Collection>(source: TableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
             diffingKey: source.diffingKey,
             //swiftlint:disable:next force_cast
@@ -148,7 +148,7 @@ extension CollectionSectionViewModel: DifferentiableSection {
     }
 
     /// :nodoc:
-    public init<C: Collection>(source: CollectionSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
+    public init<C: Swift.Collection>(source: CollectionSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
         self.init(
             diffingKey: source.diffingKey,
             //swiftlint:disable:next force_cast
