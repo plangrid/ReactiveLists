@@ -7,6 +7,9 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+0.6.0
+-----
+
 ## Breaking
 - Dropped support for the `UITableViewRowAction` API in the `TableViewCellModelEditActions`protocol, as `UITableViewRowAction` is deprecated in iOS 13. `TableViewCellModelEditActions` now uses the `UISwipeActionsConfiguration` API instead. ([#167](https://github.com/plangrid/ReactiveLists/pull/167), [@ronaldsmartin](https://github.com/ronaldsmartin))
 
