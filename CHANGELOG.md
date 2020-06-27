@@ -7,6 +7,14 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 NEXT
 ----
 
+0.7.0
+-----
+
+### Changed
+- Introduce `height(forPosition position: TableSectionPosition)` for `TableSectionHeaderFooterViewModel` to facilitate determining height based on relative table position
+- Upgrades SwiftLint
+- Upgrade CI to Xcode 11.5
+
 0.6.0
 -----
 

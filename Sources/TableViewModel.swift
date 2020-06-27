@@ -111,6 +111,19 @@ extension TableViewCellModelEditActions {
     public var trailingSwipeActionConfiguration: UISwipeActionsConfiguration? { return nil }
 }
 
+/// The relative position of the section
+public enum TableSectionPosition {
+
+    /// The first section
+    case first
+
+    /// One of the middle sections
+    case middle
+
+    /// The last section
+    case last
+}
+
 /// Protocol that needs to be implemented by custom header
 /// footer view models.
 public protocol TableSectionHeaderFooterViewModel: ReusableSupplementaryViewModelProtocol {
@@ -119,12 +132,39 @@ public protocol TableSectionHeaderFooterViewModel: ReusableSupplementaryViewMode
     var title: String? { get }
 
     /// The height of the header
+    /// - Note: this will become deprecated in a future release
     var height: CGFloat? { get }
+
+    /// Asks the view model for its height, given the position
+    /// of the section, to which it is tied
+    func height(forPosition position: TableSectionPosition) -> CGFloat?
 
     /// Asks the view model to update the header/footer
     /// view with the content in the model.
     /// - Parameter view: the header/footer view
     func applyViewModelToView(_ view: UIView)
+}
+
+extension TableSectionHeaderFooterViewModel {
+
+    /// Default implementation
+    public func height(forPosition position: TableSectionPosition) -> CGFloat? {
+        return self.height
+    }
+
+    /// Calculates the position given the section and number of sections
+    /// and then calls `height(forPosition:)`
+    func height(forSection section: Int, totalSections: Int) -> CGFloat? {
+        let position: TableSectionPosition
+        if section == 0 {
+            position = .first
+        } else if (totalSections > 1 && section < totalSections - 1) {
+            position = .middle
+        } else {
+            position = .last
+        }
+        return self.height(forPosition: position)
+    }
 }
 
 /// View model for a table view section.
