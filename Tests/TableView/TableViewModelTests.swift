@@ -116,8 +116,8 @@ final class TableViewModelTests: XCTestCase {
             footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"))
 
         XCTAssertEqual(sectionModel.cellViewModels.count, 1)
-        XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
-        XCTAssertEqual(sectionModel.footerViewModel?.height, 43)
+        XCTAssertEqual(sectionModel.headerViewModel?.height(forPosition: .first), 42)
+        XCTAssertEqual(sectionModel.footerViewModel?.height(forPosition: .middle), 43)
         XCTAssertEqual(sectionModel.headerViewModel?.title, "title_header+A")
         XCTAssertEqual(sectionModel.footerViewModel?.title, "title_footer+A")
 
@@ -136,6 +136,24 @@ final class TableViewModelTests: XCTestCase {
             footerInfo?.accessibilityFormat.accessibilityIdentifierForSection(44),
             "access_footer+44"
         )
+    }
+
+    /// Table view sections can be successfully initialized
+    /// using a custom section header type.
+    func testCustomHeaderFooterSectionPosition() {
+        let headerFooter = PositionCapturingTestHeaderFooterViewModel()
+
+        _ = headerFooter.height(forSection: 0, totalSections: 1)
+        XCTAssertEqual(headerFooter.lastPositionSent, .first)
+
+        _ = headerFooter.height(forSection: 1, totalSections: 2)
+        XCTAssertEqual(headerFooter.lastPositionSent, .last)
+
+        _ = headerFooter.height(forSection: 0, totalSections: 0)
+        XCTAssertEqual(headerFooter.lastPositionSent, .first)
+
+        _ = headerFooter.height(forSection: 1, totalSections: 3)
+        XCTAssertEqual(headerFooter.lastPositionSent, .middle)
     }
 
     /// Verify Collection conformace

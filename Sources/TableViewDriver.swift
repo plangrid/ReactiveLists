@@ -291,12 +291,12 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? CGFloat.leastNormalMagnitude
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? CGFloat.leastNormalMagnitude
     }
 
     /// :nodoc:

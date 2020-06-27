@@ -113,6 +113,27 @@ struct TestHeaderFooterViewModel: TableSectionHeaderFooterViewModel {
     }
 }
 
+final class PositionCapturingTestHeaderFooterViewModel: TableSectionHeaderFooterViewModel {
+    let title: String?
+    let height: CGFloat?
+    let viewInfo: SupplementaryViewInfo?
+    var lastPositionSent: TableSectionPosition?
+
+    init() {
+        self.title = nil
+        self.height = nil
+        self.viewInfo = nil
+        self.lastPositionSent = nil
+    }
+
+    func height(forPosition position: TableSectionPosition) -> CGFloat? {
+        self.lastPositionSent = position
+        return nil
+    }
+
+    func applyViewModelToView(_ view: UIView) {}
+}
+
 class TestTableViewSectionHeaderFooter: UITableViewHeaderFooterView {
     var identifier: String?
     var label: String?
