@@ -245,7 +245,7 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionModel = self.tableViewModel?[ifExists: section] else { return 0 }
-        return sectionModel.cellViewModels.count
+        return sectionModel.cellViewModelDataSource.count
     }
 
     /// :nodoc:
@@ -268,6 +268,31 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return self.tableViewModel?.sectionIndexTitles
+    }
+}
+
+extension TableViewDriver: UITableViewDataSourcePrefetching {
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let indexPathsBySection = [Int: [IndexPath]](grouping: indexPaths) { $0.section }
+        let sectionModels = self.tableViewModel?.sectionModels
+        for (section, indexPaths) in indexPathsBySection {
+            sectionModels?[section].cellViewModelDataSource.prefetchRowsAt(
+                indices: indexPaths.lazy.map { $0.row }
+            )
+        }
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        let indexPathsBySection = [Int: [IndexPath]](grouping: indexPaths) { $0.section }
+        let sectionModels = self.tableViewModel?.sectionModels
+        for (section, indexPaths) in indexPathsBySection {
+            sectionModels?[section].cellViewModelDataSource.cancelPrefetchingRowsAt(
+                indices: indexPaths.lazy.map { $0.row }
+            )
+        }
     }
 }
 
