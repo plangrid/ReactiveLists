@@ -205,6 +205,26 @@ public struct TableSectionViewModel: DiffableViewModel {
     /// - Parameters:
     ///   - diffingKey: a `String` key unique to this section that is used to diff sections
     ///     automatically. Pass in `nil` if you are not using automatic diffing on this collection.
+    ///   - cellViewModelDataSource: The datasource for the cell view models contained in this section.
+    ///   - headerViewModel: A header view model for this section (defaults to `nil`).
+    ///   - footerViewModel: A footer view model for this section (defaults to `nil`).
+    public init(
+        diffingKey: String?,
+        cellViewModelDataSource: TableCellViewModelDataSource,
+        headerViewModel: TableSectionHeaderFooterViewModel? = nil,
+        footerViewModel: TableSectionHeaderFooterViewModel? = nil
+    ) {
+        self.cellViewModelDataSource = cellViewModelDataSource
+        self.headerViewModel = headerViewModel
+        self.footerViewModel = footerViewModel
+        self.diffingKey = diffingKey ?? UUID().uuidString
+    }
+
+    /// Initializes a `TableSectionViewModel`.
+    ///
+    /// - Parameters:
+    ///   - diffingKey: a `String` key unique to this section that is used to diff sections
+    ///     automatically. Pass in `nil` if you are not using automatic diffing on this collection.
     ///   - cellViewModels: The cell view models contained in this section.
     ///   - headerViewModel: A header view model for this section (defaults to `nil`).
     ///   - footerViewModel: A footer view model for this section (defaults to `nil`).
@@ -214,10 +234,12 @@ public struct TableSectionViewModel: DiffableViewModel {
         headerViewModel: TableSectionHeaderFooterViewModel? = nil,
         footerViewModel: TableSectionHeaderFooterViewModel? = nil
     ) {
-        self.cellViewModelDataSource = TableCellViewModelDataSource(cellViewModels)
-        self.headerViewModel = headerViewModel
-        self.footerViewModel = footerViewModel
-        self.diffingKey = diffingKey ?? UUID().uuidString
+        self.init(
+            diffingKey: diffingKey,
+            cellViewModelDataSource: TableCellViewModelDataSource(cellViewModels),
+            headerViewModel: headerViewModel,
+            footerViewModel: footerViewModel
+        )
     }
 
     /// Initializes a `TableSectionViewModel`.
@@ -237,10 +259,12 @@ public struct TableSectionViewModel: DiffableViewModel {
         footerTitle: String? = nil,
         footerHeight: CGFloat? = 0
     ) {
-        self.cellViewModelDataSource = TableCellViewModelDataSource(cellViewModels)
-        self.headerViewModel = PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight)
-        self.footerViewModel = PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
-        self.diffingKey = diffingKey ?? UUID().uuidString
+        self.init(
+            diffingKey: diffingKey,
+            cellViewModels: cellViewModels,
+            headerViewModel: PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight),
+            footerViewModel: PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
+        )
     }
 }
 
