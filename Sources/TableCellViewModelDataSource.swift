@@ -14,6 +14,7 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 // 
 
+import DifferenceKit
 import Foundation
 
 public protocol TableCellViewModelDataSourceProtocol: RandomAccessCollection where Element == TableCellViewModel, Index == Int {
@@ -67,5 +68,14 @@ extension Array: TableCellViewModelDataSourceProtocol where Element == TableCell
     public func cancelPrefetchingRowsAt<S: Sequence>(indices: S) where S.Element == Int {}
     public var cellRegistrationInfo: [ViewRegistrationInfo] {
         self.map { $0.registrationInfo }
+    }
+}
+
+extension Array where Element == IndexPath {
+    func indicesBySection() -> AnySequence<(Int, AnySequence<Int>)> {
+        let indexPathsBySection = [Int: [IndexPath]](grouping: self) { $0.section }
+        return AnySequence(indexPathsBySection.lazy.map { section, indexPaths in
+            return (section, AnySequence(indexPaths.lazy.map { $0.row }))
+        })
     }
 }

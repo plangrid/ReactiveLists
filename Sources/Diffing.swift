@@ -56,22 +56,12 @@ public struct AnyDiffableViewModel {
     /// type can be erased
     private let isContentEqualTo: (AnyDiffableViewModel) -> Bool
 
-    /// Initializes a `AnyDiffableViewModel` that wraps a `TableCellViewModel`
-    init(_ model: TableCellViewModel) {
+    /// Initializes a `AnyDiffableViewModel` that wraps a concrete `DiffableViewModel`
+    init(_ model: DiffableViewModel) {
         self.model = model
 
         let differenceIdentifier = model.diffingKey
         /// Only compares diff identifiers. This means we'll never get "reload"-type `Changeset`s
-        self.isContentEqualTo = { source in
-            return differenceIdentifier == source.differenceIdentifier
-        }
-    }
-
-    /// Initializes a `AnyDiffableViewModel` that wraps a `TableCellViewModel`
-    init(_ model: CollectionCellViewModel) {
-        self.model = model
-
-        let differenceIdentifier = model.diffingKey
         self.isContentEqualTo = { source in
             return differenceIdentifier == source.differenceIdentifier
         }
@@ -155,6 +145,74 @@ extension CollectionSectionViewModel: DifferentiableSection {
             cellViewModels: elements.map { $0.model as! CollectionCellViewModel },
             headerViewModel: source.headerViewModel,
             footerViewModel: source.footerViewModel
+        )
+    }
+}
+
+// MARK: - Lazy
+
+/// Placeholder to avoid eager-loading view models for offscreen cells
+private final class DiffableViewModelPlaceholder: DiffableViewModel {
+    private static let diffingKey = UUID().uuidString
+    var diffingKey: DiffingKey { Self.diffingKey }
+    init() {}
+}
+
+private let modelPlaceholder = AnyDiffableViewModel(DiffableViewModelPlaceholder())
+
+struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
+    var differenceIdentifier: String { _sectionModel.differenceIdentifier }
+
+    typealias Collection = Self
+    typealias DifferenceIdentifier = String
+
+    func isContentEqual(to source: DiffableTableSectionViewModel) -> Bool {
+        self._sectionModel.isContentEqual(to: source._sectionModel)
+    }
+
+    var elements: DiffableTableSectionViewModel { self }
+
+    typealias Element = AnyDiffableViewModel
+    typealias Index = Int
+
+    var startIndex: Int { self._sectionModel.startIndex }
+
+    var endIndex: Int { self._sectionModel.endIndex }
+
+    subscript(position: Int) -> AnyDiffableViewModel {
+        if self._visibleIndices.contains(position) {
+            return AnyDiffableViewModel(self._sectionModel[position])
+        } else {
+            return modelPlaceholder
+        }
+    }
+
+    func index(after i: Int) -> Int {
+        return self._sectionModel.index(after: i)
+    }
+
+    fileprivate let _sectionModel: TableSectionViewModel
+
+    private let _visibleIndices: Set<Int>
+
+    var diffingKey: DiffingKey { self._sectionModel.diffingKey }
+
+    init(sectionModel: TableSectionViewModel, visibleIndices: Set<Int>) {
+        self._sectionModel = sectionModel
+        self._visibleIndices = visibleIndices
+    }
+
+    init<C: Swift.Collection>(source: DiffableTableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
+        self._sectionModel = source._sectionModel
+        self._visibleIndices = source._visibleIndices
+    }
+}
+
+extension Array where Element == DiffableTableSectionViewModel {
+    func makeTableViewModel(sectionIndexTitles: [String]?) -> TableViewModel {
+        return TableViewModel(
+            sectionModels: self.map { $0._sectionModel },
+            sectionIndexTitles: sectionIndexTitles
         )
     }
 }

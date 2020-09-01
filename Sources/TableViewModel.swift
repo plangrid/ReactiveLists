@@ -326,6 +326,19 @@ public struct TableViewModel {
             section.cellViewModelDataSource.count > indexPath.row else { return nil }
         return section.cellViewModelDataSource[indexPath.row]
     }
+
+    /// A view of `TableSectionViewModel` used for diffing
+    func sectionModelsForDiffing(inVisibleIndexPaths visibleIndexPaths: [IndexPath]) -> [DiffableTableSectionViewModel] {
+        let visibleIndicesBySection = [Int: AnySequence<Int>](
+            uniqueKeysWithValues: visibleIndexPaths.indicesBySection()
+        ).mapValues { Set($0) }
+        return zip(sectionModels, sectionModels.indices).map { sectionModel, section in
+            DiffableTableSectionViewModel(
+                sectionModel: sectionModel,
+                visibleIndices: visibleIndicesBySection[section, default: Set<Int>()]
+            )
+        }
+    }
 }
 
 // MARK: Private
