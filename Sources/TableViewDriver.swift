@@ -183,7 +183,17 @@ open class TableViewDriver: NSObject {
 
         if self._automaticDiffingEnabled {
 
-            let visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
+            var visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
+            if let firstIndexPath = visibleIndexPaths.first,
+                let newFirstIndexPath = firstIndexPath.previousIndexPath(in: self.tableView) {
+                visibleIndexPaths.insert(newFirstIndexPath, at: 0)
+            }
+
+            if let lastIndexPath = visibleIndexPaths.last,
+                let newLastIndexPath = lastIndexPath.nextIndexPath(in: self.tableView) {
+                visibleIndexPaths.append(newLastIndexPath)
+            }
+
             let old: [DiffableTableSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
             let changeset = StagedChangeset(
                 source: old,
@@ -374,5 +384,53 @@ extension TableViewDriver: UITableViewDelegate {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return self.tableViewModel?[ifExists: indexPath]?.shouldHighlight ?? true
+    }
+}
+
+extension IndexPath {
+    func previousIndexPath(in tableView: UITableView) -> IndexPath? {
+        guard self.section != 0 || self.row != 0 else { return nil }
+        guard self.row == 0 else {
+             return IndexPath(
+                row: self.row - 1,
+                section: self.section
+            )
+        }
+        // search to find a non-empty section
+        var prevSection = self.section - 1
+        while (prevSection >= 0) {
+            let numRows = tableView.numberOfRows(inSection: prevSection)
+            if numRows > 0 {
+                return IndexPath(row: numRows - 1, section: prevSection)
+            } else {
+                prevSection -= 1
+            }
+        }
+        return nil
+    }
+
+    func nextIndexPath(in tableView: UITableView) -> IndexPath? {
+        let numberOfSections = tableView.numberOfSections
+        let numberOfRowsInCurrentSection = tableView.numberOfRows(inSection: self.section)
+        guard self.section != numberOfSections - 1 || self.row != numberOfRowsInCurrentSection - 1 else {
+            return nil
+        }
+        guard self.row != numberOfRowsInCurrentSection - 1 else {
+             return IndexPath(
+                row: self.row + 1,
+                section: self.section
+            )
+        }
+        // search to find a non-empty section
+        var nextSection = self.section + 1
+        while (nextSection < numberOfSections) {
+            let numRows = tableView.numberOfRows(inSection: nextSection)
+            if numRows > 0 {
+                return IndexPath(row: 0, section: nextSection)
+            } else {
+                nextSection += 1
+            }
+        }
+        return nil
     }
 }
