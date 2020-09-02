@@ -204,6 +204,7 @@ open class TableViewDriver: NSObject {
                 ) {
                     self._tableViewModel = $0.makeTableViewModel(sectionIndexTitles: oldModel?.sectionIndexTitles)
                 }
+                self._tableViewModel = newModel
             }
         } else {
             self._tableViewModel = newModel

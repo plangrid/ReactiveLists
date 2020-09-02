@@ -152,13 +152,16 @@ extension CollectionSectionViewModel: DifferentiableSection {
 // MARK: - Lazy
 
 /// Placeholder to avoid eager-loading view models for offscreen cells
-private final class DiffableViewModelPlaceholder: DiffableViewModel {
+private final class DiffableTableCellViewModelPlaceholder: TableCellViewModel {
+    let accessibilityFormat: CellAccessibilityFormat = ""
+    func applyViewModelToCell(_ cell: UITableViewCell) {}
+    let registrationInfo: ViewRegistrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
     private static let diffingKey = UUID().uuidString
-    var diffingKey: DiffingKey { Self.diffingKey }
+    let diffingKey: DiffingKey = DiffableTableCellViewModelPlaceholder.diffingKey
     init() {}
 }
 
-private let modelPlaceholder = AnyDiffableViewModel(DiffableViewModelPlaceholder())
+private let modelPlaceholder = AnyDiffableViewModel(DiffableTableCellViewModelPlaceholder())
 
 struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     var differenceIdentifier: String { _sectionModel.differenceIdentifier }
@@ -203,7 +206,14 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     }
 
     init<C: Swift.Collection>(source: DiffableTableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
-        self._sectionModel = source._sectionModel
+        self._sectionModel = TableSectionViewModel(
+            diffingKey: source._sectionModel.diffingKey,
+            cellViewModelDataSource: TableCellViewModelDataSource(
+                elements.map { $0.model as! TableCellViewModel }
+            ),
+            headerViewModel: source._sectionModel.headerViewModel,
+            footerViewModel: source._sectionModel.footerViewModel
+        )
         self._visibleIndices = source._visibleIndices
     }
 }
