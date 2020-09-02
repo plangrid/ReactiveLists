@@ -161,7 +161,7 @@ private final class DiffableTableCellViewModelProxy: TableCellViewModel {
     /// When true, we allow diffing to access the real model's diffing key, eagerly loading it
     private let _inVisibleBounds: Bool
 
-    /// Lambda to load the model
+    /// Closure to load the model
     private let _modelGetter: () -> TableCellViewModel
 
     /// Lazy reference to the model
@@ -225,6 +225,8 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
         self._sectionModel = TableSectionViewModel(
             diffingKey: source._sectionModel.diffingKey,
             cellViewModelDataSource: TableCellViewModelDataSource(
+                // this will always be used for tables, and
+                // cell models have to be of type TableCellViewModel
                 //swiftlint:disable:next force_cast
                 elements.map { $0.model as! TableCellViewModel }
             ),
