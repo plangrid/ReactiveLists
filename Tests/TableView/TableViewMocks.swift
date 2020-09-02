@@ -25,6 +25,7 @@ class TestTableView: UITableView {
     var callsToInsertRowAtIndexPaths: [(indexPaths: [IndexPath], animation: UITableView.RowAnimation)] = []
     var callsToDeleteSections: [(sections: IndexSet, animation: UITableView.RowAnimation)] = []
     var callsToReloadData = 0
+    var indexPathsForVisibleRowsOverride: [IndexPath]?
 
     /// Setup after init to avoid crashes in iOS 10
     private var _window: UIWindow?
@@ -43,8 +44,11 @@ class TestTableView: UITableView {
     }
 
     override var indexPathsForVisibleRows: [IndexPath]? {
-        return (0..<self.numberOfSections).flatMap { section -> [IndexPath] in
-            (0..<self.numberOfRows(inSection: section)).map { IndexPath(row: $0, section: section) }
+        if let indexPathsForVisibleRowsOverride = self.indexPathsForVisibleRowsOverride {
+            return indexPathsForVisibleRowsOverride
+        }
+        return (0..<self.dataSource!.numberOfSections!(in: self)).flatMap { section -> [IndexPath] in
+            (0..<self.dataSource!.tableView(self, numberOfRowsInSection: section)).map { IndexPath(row: $0, section: section) }
         }
     }
 
