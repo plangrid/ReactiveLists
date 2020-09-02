@@ -49,6 +49,8 @@
 		357B96E9201956760000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		357B96EA2019599C0000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
+		A8069332250046AD0036CA11 /* TableViewLazyDiffingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8069330250042700036CA11 /* TableViewLazyDiffingTest.swift */; };
+		A8D93CAA24FD9BDF00459EBB /* TableCellViewModelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D93CA924FD9BDF00459EBB /* TableCellViewModelDataSource.swift */; };
 		C11B2E5FBD1253C9FFA431A1 /* Pods_ReactiveListsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +137,8 @@
 		932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveListsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		950EFA9B77AA7C8F0696C57B /* Pods-ReactiveLists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.debug.xcconfig"; sourceTree = "<group>"; };
 		978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveLists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8069330250042700036CA11 /* TableViewLazyDiffingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewLazyDiffingTest.swift; sourceTree = "<group>"; };
+		A8D93CA924FD9BDF00459EBB /* TableCellViewModelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellViewModelDataSource.swift; sourceTree = "<group>"; };
 		C984EFFC6B6F170CB9AD8DD3 /* Pods-ReactiveListsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveListsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests.release.xcconfig"; sourceTree = "<group>"; };
 		DFAFA51D8FEF2F413206A2CF /* Pods-ReactiveLists-ReactiveListsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists-ReactiveListsExample/Pods-ReactiveLists-ReactiveListsExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +210,7 @@
 			children = (
 				257A97C62017A80B00164403 /* TableViewDiffingTests.swift */,
 				257A97C52017A80B00164403 /* TableViewDriverTests.swift */,
+				A8069330250042700036CA11 /* TableViewLazyDiffingTest.swift */,
 				257A97C42017A80B00164403 /* TableViewMocks.swift */,
 				257A97C72017A80B00164403 /* TableViewModelTests.swift */,
 				257A97BD2017A5AA00164403 /* TestTableViewModels.swift */,
@@ -269,6 +274,7 @@
 				258E31D21F0D8F3100D6F324 /* SupplementaryViewInfo.swift */,
 				258E31AE1F0D8D9C00D6F324 /* TableViewDriver.swift */,
 				258E31AF1F0D8D9C00D6F324 /* TableViewModel.swift */,
+				A8D93CA924FD9BDF00459EBB /* TableCellViewModelDataSource.swift */,
 				32124A712019312200EE12FC /* Typealiases.swift */,
 				32753F8C201BB8310084DCB1 /* UICollectionView+Extensions.swift */,
 				32753F8E201BB8470084DCB1 /* UITableView+Extensions.swift */,
@@ -394,7 +400,7 @@
 					};
 					258E318E1F0D8CBC00D6F324 = {
 						CreatedOnToolsVersion = 8.3.3;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1150;
 						ProvisioningStyle = Manual;
 					};
 					258E31971F0D8CBC00D6F324 = {
@@ -608,6 +614,7 @@
 				258E31B41F0D8D9C00D6F324 /* TableViewModel.swift in Sources */,
 				258E31D31F0D8F3100D6F324 /* AccessibilityFormats.swift in Sources */,
 				32753F8F201BB8470084DCB1 /* UITableView+Extensions.swift in Sources */,
+				A8D93CAA24FD9BDF00459EBB /* TableCellViewModelDataSource.swift in Sources */,
 				320B8FE82024E654002615F8 /* ReusableCellViewModelProtocol.swift in Sources */,
 				258E31D41F0D8F3100D6F324 /* SupplementaryViewInfo.swift in Sources */,
 				258E31B21F0D8D9C00D6F324 /* CollectionViewModel.swift in Sources */,
@@ -630,6 +637,7 @@
 				257A97DD2017AA9000164403 /* CollectionViewMocks.swift in Sources */,
 				257A97D52017A82900164403 /* TableViewDriverTests.swift in Sources */,
 				257A97C12017A5D300164403 /* TestTableViewModels.swift in Sources */,
+				A8069332250046AD0036CA11 /* TableViewLazyDiffingTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +844,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -857,6 +866,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

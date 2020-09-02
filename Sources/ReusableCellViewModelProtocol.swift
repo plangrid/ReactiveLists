@@ -31,3 +31,9 @@ public protocol ReusableSupplementaryViewModelProtocol {
     /// The registration info for the supplementary view.
     var viewInfo: SupplementaryViewInfo? { get }
 }
+
+struct AnyReusableCellViewModel: ReusableCellViewModelProtocol {
+
+    /// The registration info for the cell.
+    let registrationInfo: ViewRegistrationInfo
+}

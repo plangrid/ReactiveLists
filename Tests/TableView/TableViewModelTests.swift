@@ -97,7 +97,7 @@ final class TableViewModelTests: XCTestCase {
             footerHeight: 43
         )
 
-        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModelDataSource.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height, 42)
         XCTAssertEqual(sectionModel.footerViewModel?.height, 43)
         XCTAssertEqual(sectionModel.headerViewModel?.title, "foo")
@@ -115,7 +115,7 @@ final class TableViewModelTests: XCTestCase {
             headerViewModel: TestHeaderFooterViewModel(height: 42, viewKind: .header, label: "A"),
             footerViewModel: TestHeaderFooterViewModel(height: 43, viewKind: .footer, label: "A"))
 
-        XCTAssertEqual(sectionModel.cellViewModels.count, 1)
+        XCTAssertEqual(sectionModel.cellViewModelDataSource.count, 1)
         XCTAssertEqual(sectionModel.headerViewModel?.height(forPosition: .first), 42)
         XCTAssertEqual(sectionModel.footerViewModel?.height(forPosition: .middle), 43)
         XCTAssertEqual(sectionModel.headerViewModel?.title, "title_header+A")
@@ -162,7 +162,7 @@ final class TableViewModelTests: XCTestCase {
             diffingKey: nil,
             cellViewModels: generateTableCellViewModels()
         )
-        let sectionLabels = section.cellViewModels.compactMap {
+        let sectionLabels = section.cellViewModelDataSource.compactMap {
             ($0 as? TestCellViewModel)?.label
         }
         let sectionLabelsViaCollection = section.compactMap { ($0 as? TestCellViewModel)?.label }

@@ -55,7 +55,7 @@ final class TableViewDiffingTests: XCTestCase {
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths[0].indexPaths, [IndexPath(row: 0, section: 0)])
     }
 
-    func testChangingRowsWithEmptyModles() {
+    func testChangingRowsWithEmptyModels() {
         let initialModel = TableViewModel(
             cellViewModels: []
         )

@@ -183,8 +183,12 @@ open class TableViewDriver: NSObject {
 
         if self._automaticDiffingEnabled {
 
-            let old: [TableSectionViewModel] = oldModel?.sectionModels ?? []
-            let changeset = StagedChangeset(source: old, target: newModel.sectionModels)
+            let visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
+            let old: [DiffableTableSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
+            let changeset = StagedChangeset(
+                source: old,
+                target: newModel.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths)
+            )
             if changeset.isEmpty {
                 self._tableViewModel = newModel
                 self.refreshViews(refreshContext: .contentOnly)
@@ -198,11 +202,9 @@ open class TableViewDriver: NSObject {
                     insertRowsAnimation: self.insertionAnimation,
                     reloadRowsAnimation: self.insertionAnimation
                 ) {
-                    self._tableViewModel = TableViewModel(
-                        sectionModels: $0,
-                        sectionIndexTitles: oldModel?.sectionIndexTitles
-                    )
+                    self._tableViewModel = $0.makeTableViewModel(sectionIndexTitles: oldModel?.sectionIndexTitles)
                 }
+                self._tableViewModel = newModel
             }
         } else {
             self._tableViewModel = newModel
@@ -245,7 +247,7 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionModel = self.tableViewModel?[ifExists: section] else { return 0 }
-        return sectionModel.cellViewModels.count
+        return sectionModel.cellViewModelDataSource.count
     }
 
     /// :nodoc:
@@ -268,6 +270,29 @@ extension TableViewDriver: UITableViewDataSource {
     /// :nodoc:
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return self.tableViewModel?.sectionIndexTitles
+    }
+}
+
+extension TableViewDriver: UITableViewDataSourcePrefetching {
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let sectionModels = self.tableViewModel?.sectionModels
+        for (section, indices) in indexPaths.indicesBySection() {
+            sectionModels?[section].cellViewModelDataSource.prefetchRowsAt(
+                indices: indices
+            )
+        }
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        let sectionModels = self.tableViewModel?.sectionModels
+        for (section, indices) in indexPaths.indicesBySection() {
+            sectionModels?[section].cellViewModelDataSource.cancelPrefetchingRowsAt(
+                indices: indices
+            )
+        }
     }
 }
 

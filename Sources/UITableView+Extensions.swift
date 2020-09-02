@@ -27,7 +27,11 @@ extension UITableView {
 
     func registerViews(for model: TableViewModel) {
         model.sectionModels.forEach {
-            self.registerCellViewModels($0.cellViewModels)
+            self.registerCellViewModels(
+                $0.cellViewModelDataSource.cellRegistrationInfo.lazy.map {
+                    AnyReusableCellViewModel(registrationInfo: $0)
+                }
+            )
 
             if let header = $0.headerViewModel {
                 self.registerSupplementaryViewModel(header)

@@ -158,7 +158,7 @@ extension TableSectionHeaderFooterViewModel {
         let position: TableSectionPosition
         if section == 0 {
             position = .first
-        } else if (totalSections > 1 && section < totalSections - 1) {
+        } else if totalSections > 1 && section < totalSections - 1 {
             position = .middle
         } else {
             position = .last
@@ -171,7 +171,13 @@ extension TableSectionHeaderFooterViewModel {
 public struct TableSectionViewModel: DiffableViewModel {
 
     /// Cells to be shown in this section.
-    public let cellViewModels: [TableCellViewModel]
+    @available(*, deprecated, message: "Use cellViewModelDataSource instead")
+    public var cellViewModels: [TableCellViewModel] {
+        return Array(self.cellViewModelDataSource)
+    }
+
+    /// Datasource for the cells to be shown in this section.
+    public let cellViewModelDataSource: TableCellViewModelDataSource
 
     /// View model for the header of this section.
     public let headerViewModel: TableSectionHeaderFooterViewModel?
@@ -191,7 +197,27 @@ public struct TableSectionViewModel: DiffableViewModel {
 
     /// Returns `true` if this section has zero cell view models, `false` otherwise.
     public var isEmpty: Bool {
-        return self.cellViewModels.isEmpty
+        return self.cellViewModelDataSource.isEmpty
+    }
+
+    /// Initializes a `TableSectionViewModel`.
+    ///
+    /// - Parameters:
+    ///   - diffingKey: a `String` key unique to this section that is used to diff sections
+    ///     automatically. Pass in `nil` if you are not using automatic diffing on this collection.
+    ///   - cellViewModelDataSource: The datasource for the cell view models contained in this section.
+    ///   - headerViewModel: A header view model for this section (defaults to `nil`).
+    ///   - footerViewModel: A footer view model for this section (defaults to `nil`).
+    public init(
+        diffingKey: String?,
+        cellViewModelDataSource: TableCellViewModelDataSource,
+        headerViewModel: TableSectionHeaderFooterViewModel? = nil,
+        footerViewModel: TableSectionHeaderFooterViewModel? = nil
+    ) {
+        self.cellViewModelDataSource = cellViewModelDataSource
+        self.headerViewModel = headerViewModel
+        self.footerViewModel = footerViewModel
+        self.diffingKey = diffingKey ?? UUID().uuidString
     }
 
     /// Initializes a `TableSectionViewModel`.
@@ -208,10 +234,12 @@ public struct TableSectionViewModel: DiffableViewModel {
         headerViewModel: TableSectionHeaderFooterViewModel? = nil,
         footerViewModel: TableSectionHeaderFooterViewModel? = nil
     ) {
-        self.cellViewModels = cellViewModels
-        self.headerViewModel = headerViewModel
-        self.footerViewModel = footerViewModel
-        self.diffingKey = diffingKey ?? UUID().uuidString
+        self.init(
+            diffingKey: diffingKey,
+            cellViewModelDataSource: TableCellViewModelDataSource(cellViewModels),
+            headerViewModel: headerViewModel,
+            footerViewModel: footerViewModel
+        )
     }
 
     /// Initializes a `TableSectionViewModel`.
@@ -231,10 +259,12 @@ public struct TableSectionViewModel: DiffableViewModel {
         footerTitle: String? = nil,
         footerHeight: CGFloat? = 0
     ) {
-        self.cellViewModels = cellViewModels
-        self.headerViewModel = PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight)
-        self.footerViewModel = PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
-        self.diffingKey = diffingKey ?? UUID().uuidString
+        self.init(
+            diffingKey: diffingKey,
+            cellViewModels: cellViewModels,
+            headerViewModel: PlainHeaderFooterViewModel(title: headerTitle, height: headerHeight),
+            footerViewModel: PlainHeaderFooterViewModel(title: footerTitle, height: footerHeight)
+        )
     }
 }
 
@@ -243,22 +273,22 @@ extension TableSectionViewModel: Collection {
 
     /// :nodoc:
     public subscript(position: Int) -> TableCellViewModel {
-        return self.cellViewModels[position]
+        return self.cellViewModelDataSource[position]
     }
 
     /// :nodoc:
     public func index(after i: Int) -> Int {
-        return self.cellViewModels.index(after: i)
+        return self.cellViewModelDataSource.index(after: i)
     }
 
     /// :nodoc:
     public var startIndex: Int {
-        return self.cellViewModels.startIndex
+        return self.cellViewModelDataSource.startIndex
     }
 
     /// :nodoc:
     public var endIndex: Int {
-        return self.cellViewModels.endIndex
+        return self.cellViewModelDataSource.endIndex
     }
 }
 
@@ -317,8 +347,21 @@ public struct TableViewModel {
     public subscript(ifExists indexPath: IndexPath) -> TableCellViewModel? {
         guard indexPath.count >= 2, // In rare cases, we've seen UIKit give us a bad IndexPath
             let section = self[ifExists: indexPath.section],
-            section.cellViewModels.count > indexPath.row else { return nil }
-        return section.cellViewModels[indexPath.row]
+            section.cellViewModelDataSource.count > indexPath.row else { return nil }
+        return section.cellViewModelDataSource[indexPath.row]
+    }
+
+    /// A view of `TableSectionViewModel` used for diffing
+    func sectionModelsForDiffing(inVisibleIndexPaths visibleIndexPaths: [IndexPath]) -> [DiffableTableSectionViewModel] {
+        let visibleIndicesBySection = [Int: AnySequence<Int>](
+            uniqueKeysWithValues: visibleIndexPaths.indicesBySection()
+        ).mapValues { Set($0) }
+        return zip(sectionModels, sectionModels.indices).map { sectionModel, section in
+            DiffableTableSectionViewModel(
+                sectionModel: sectionModel,
+                visibleIndices: visibleIndicesBySection[section, default: Set<Int>()]
+            )
+        }
     }
 }
 

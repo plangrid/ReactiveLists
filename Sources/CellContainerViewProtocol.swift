@@ -43,7 +43,7 @@ protocol CellContainerViewProtocol {
 }
 
 extension CellContainerViewProtocol {
-    func registerCellViewModels(_ cellViewModels: [ReusableCellViewModelProtocol]) {
+    func registerCellViewModels<S: Sequence>(_ cellViewModels: S) where S.Element == ReusableCellViewModelProtocol {
         cellViewModels.forEach {
             self.registerCellViewModel($0)
         }
