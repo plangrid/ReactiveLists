@@ -152,16 +152,40 @@ extension CollectionSectionViewModel: DifferentiableSection {
 // MARK: - Lazy
 
 /// Placeholder to avoid eager-loading view models for offscreen cells
-private final class DiffableTableCellViewModelPlaceholder: TableCellViewModel {
-    let accessibilityFormat: CellAccessibilityFormat = ""
-    func applyViewModelToCell(_ cell: UITableViewCell) {}
-    let registrationInfo: ViewRegistrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
-    private static let diffingKey = UUID().uuidString
-    let diffingKey: DiffingKey = DiffableTableCellViewModelPlaceholder.diffingKey
-    init() {}
-}
+private final class DiffableTableCellViewModelProxy: TableCellViewModel {
 
-private let modelPlaceholder = AnyDiffableViewModel(DiffableTableCellViewModelPlaceholder())
+    private static let placeholderDiffingKey = UUID().uuidString
+
+    private let _inVisibleBounds: Bool
+    private let _modelGetter: () -> TableCellViewModel
+
+    private lazy var model = self._modelGetter()
+
+    init(inVisibleBounds: Bool, modelGetter: @escaping () -> TableCellViewModel) {
+        self._inVisibleBounds = inVisibleBounds
+        self._modelGetter = modelGetter
+    }
+
+    var accessibilityFormat: CellAccessibilityFormat {
+        self.model.accessibilityFormat
+    }
+
+    func applyViewModelToCell(_ cell: UITableViewCell) {
+        self.model.applyViewModelToCell(cell)
+    }
+
+    var registrationInfo: ViewRegistrationInfo {
+        self.model.registrationInfo
+    }
+
+    var diffingKey: DiffingKey {
+        if self._inVisibleBounds {
+            return self.model.diffingKey
+        } else {
+            return Self.placeholderDiffingKey
+        }
+    }
+}
 
 struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     var differenceIdentifier: String { _sectionModel.differenceIdentifier }
@@ -183,11 +207,11 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     var endIndex: Int { self._sectionModel.endIndex }
 
     subscript(position: Int) -> AnyDiffableViewModel {
-        if self._visibleIndices.contains(position) {
-            return AnyDiffableViewModel(self._sectionModel[position])
-        } else {
-            return modelPlaceholder
-        }
+        return AnyDiffableViewModel(
+            DiffableTableCellViewModelProxy(
+                inVisibleBounds: self._visibleIndices.contains(position)
+            ) { self._sectionModel[position] }
+        )
     }
 
     func index(after i: Int) -> Int {
@@ -209,6 +233,7 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
         self._sectionModel = TableSectionViewModel(
             diffingKey: source._sectionModel.diffingKey,
             cellViewModelDataSource: TableCellViewModelDataSource(
+                //swiftlint:disable:next force_cast
                 elements.map { $0.model as! TableCellViewModel }
             ),
             headerViewModel: source._sectionModel.headerViewModel,
