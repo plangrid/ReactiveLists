@@ -94,6 +94,7 @@ open class TableViewDriver: NSObject {
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.prefetchDataSource = self
         self._updateTableViewModel(from: nil, to: tableViewModel)
     }
 
