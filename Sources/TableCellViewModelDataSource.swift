@@ -67,7 +67,7 @@ public struct TableCellViewModelDataSource: RandomAccessCollection {
         self.cellRegistrationInfo = dataSource.cellRegistrationInfo
     }
 
-    // MARK: -  Protocol Implementation
+    // MARK: - Protocol Implementation
 
     /// :nodoc:
     public let cellRegistrationInfo: [ViewRegistrationInfo]

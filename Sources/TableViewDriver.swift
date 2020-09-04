@@ -277,22 +277,34 @@ extension TableViewDriver: UITableViewDataSource {
 extension TableViewDriver: UITableViewDataSourcePrefetching {
 
     /// :nodoc:
+    private func _enumerateCellDataSourcesForPrefetch(
+        indexPaths: [IndexPath],
+        enumerationBlock: (TableCellViewModelDataSource, AnySequence<Int>) -> Void
+    ) {
+        guard let sectionModels = self.tableViewModel?.sectionModels else { return }
+        // if this is called during a batch update, sections can shift
+        // around, which can lead to accessing a bad section
+        let indexIsValid = sectionModels.indices.contains
+        for (section, indices) in indexPaths.indicesBySection() where indexIsValid(section) {
+            enumerationBlock(sectionModels[section].cellViewModelDataSource, indices)
+        }
+    }
+
+    /// :nodoc:
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        let sectionModels = self.tableViewModel?.sectionModels
-        for (section, indices) in indexPaths.indicesBySection() {
-            sectionModels?[section].cellViewModelDataSource.prefetchRowsAt(
-                indices: indices
-            )
+        self._enumerateCellDataSourcesForPrefetch(
+            indexPaths: indexPaths
+        ) { datasource, indices in
+            datasource.prefetchRowsAt(indices: indices)
         }
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        let sectionModels = self.tableViewModel?.sectionModels
-        for (section, indices) in indexPaths.indicesBySection() {
-            sectionModels?[section].cellViewModelDataSource.cancelPrefetchingRowsAt(
-                indices: indices
-            )
+        self._enumerateCellDataSourcesForPrefetch(
+            indexPaths: indexPaths
+        ) { datasource, indices in
+            datasource.cancelPrefetchingRowsAt(indices: indices)
         }
     }
 }
