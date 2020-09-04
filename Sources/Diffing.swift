@@ -218,7 +218,7 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
         self._visibleIndices = visibleIndices
     }
 
-    /// MARK: - Protocol Implementations
+    // MARK: - Protocol Implementations
 
     /// :nodoc:
     init<C: Swift.Collection>(source: DiffableTableSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
