@@ -16,6 +16,7 @@
 
 import DifferenceKit
 import Foundation
+import UIKit
 
 /// A view model that can participate in an automatic diffing algorithm.
 public protocol DiffableViewModel {
