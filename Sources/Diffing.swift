@@ -216,6 +216,8 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     init(sectionModel: TableSectionViewModel, visibleIndices: Set<Int>) {
         self._sectionModel = sectionModel
         self._visibleIndices = visibleIndices
+        self.startIndex = sectionModel.startIndex
+        self.endIndex = sectionModel.endIndex
     }
 
     // MARK: - Protocol Implementations
@@ -228,12 +230,17 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
                 // this will always be used for tables, and
                 // cell models have to be of type TableCellViewModel
                 //swiftlint:disable:next force_cast
-                elements.map { $0.model as! TableCellViewModel }
+                elements.map { $0.model as! TableCellViewModel },
+                // pass through the already-calculated cell registration
+                // info to avoid accidental eager loading of cell models
+                cellRegistrationInfo: source._sectionModel.cellViewModelDataSource.cellRegistrationInfo
             ),
             headerViewModel: source._sectionModel.headerViewModel,
             footerViewModel: source._sectionModel.footerViewModel
         )
         self._visibleIndices = source._visibleIndices
+        self.startIndex = source._sectionModel.startIndex
+        self.endIndex = source._sectionModel.endIndex
     }
 
     /// :nodoc:
@@ -263,10 +270,10 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     typealias Index = Int
 
     /// :nodoc:
-    var startIndex: Int { self._sectionModel.startIndex }
+    let startIndex: Int
 
     /// :nodoc:
-    var endIndex: Int { self._sectionModel.endIndex }
+    let endIndex: Int
 
     /// :nodoc:
     subscript(position: Int) -> AnyDiffableViewModel {
