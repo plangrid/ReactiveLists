@@ -46,12 +46,6 @@ public struct TableCellViewModelDataSource: RandomAccessCollection {
     private let _subscriptBlock: (Int) -> TableCellViewModel
 
     /// :nodoc:
-    private let _startIndexBlock: () -> Int
-
-    /// :nodoc:
-    private let _endIndexBlock: () -> Int
-
-    /// :nodoc:
     private let _prefetchBlock: (AnySequence<Int>) -> Void
 
     /// :nodoc:
@@ -59,12 +53,18 @@ public struct TableCellViewModelDataSource: RandomAccessCollection {
 
     /// Initializes the `TableCellViewModelDataSource` with the provided `TableCellViewModelDataSourceProtocol` implementation
     public init<DataSource: TableCellViewModelDataSourceProtocol>(_ dataSource: DataSource) {
+        self.init(dataSource, cellRegistrationInfo: dataSource.cellRegistrationInfo)
+    }
+
+    /// Used internally by the public init and during diffing
+    /// when cached ``ViewRegistrationInfo` is available
+    init<DataSource: TableCellViewModelDataSourceProtocol>(_ dataSource: DataSource, cellRegistrationInfo: [ViewRegistrationInfo]) {
         self._prefetchBlock = dataSource.prefetchRowsAt
         self._prefetchCancelBlock = dataSource.cancelPrefetchingRowsAt
         self._subscriptBlock = { dataSource[$0] }
-        self._startIndexBlock = { dataSource.startIndex }
-        self._endIndexBlock = { dataSource.endIndex }
-        self.cellRegistrationInfo = dataSource.cellRegistrationInfo
+        self.startIndex = dataSource.startIndex
+        self.endIndex = dataSource.endIndex
+        self.cellRegistrationInfo = cellRegistrationInfo
     }
 
     // MARK: - Protocol Implementation
@@ -92,10 +92,10 @@ public struct TableCellViewModelDataSource: RandomAccessCollection {
     }
 
     /// :nodoc:
-    public var startIndex: Int { self._startIndexBlock() }
+    public let startIndex: Int
 
     /// :nodoc:
-    public var endIndex: Int { self._endIndexBlock() }
+    public let endIndex: Int
 }
 
 extension Array: TableCellViewModelDataSourceProtocol where Element == TableCellViewModel {
