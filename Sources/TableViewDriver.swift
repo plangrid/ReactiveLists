@@ -192,7 +192,6 @@ open class TableViewDriver: NSObject {
             )
             if changeset.isEmpty {
                 self._tableViewModel = newModel
-                self.refreshViews(refreshContext: .contentOnly)
             } else {
                 self.tableView.reload(
                     using: changeset,
@@ -207,6 +206,9 @@ open class TableViewDriver: NSObject {
                 }
                 self._tableViewModel = newModel
             }
+            // always refresh visible cells, in case some
+            // state changed that isn't captured by the diff
+            self.refreshViews(refreshContext: .contentOnly)
         } else {
             self._tableViewModel = newModel
             // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
