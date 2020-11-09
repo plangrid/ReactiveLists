@@ -3,11 +3,11 @@ name: CI
 on: [push]
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_11.5.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_12.1.app/Contents/Developer
   WORKSPACE: ReactiveLists.xcworkspace
   LIBRARY_SCHEME: ReactiveLists
   EXAMPLE_APP_SCHEME: Example
-  IOS_SDK: iphonesimulator13.2
+  IOS_SDK: iphonesimulator14.1
 
 jobs:
   iOS:
@@ -15,7 +15,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: ["OS=13.5,name=iPhone 11"]
+        destination: ["OS=14.1,name=iPhone 11"]
     steps:
       - uses: actions/checkout@v1
       - name: Bundle Install
