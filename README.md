@@ -88,6 +88,13 @@ pod 'ReactiveLists'
 pod 'ReactiveLists', :git => 'https://github.com/plangrid/ReactiveLists.git', :branch => 'master'
 ```
 
+### [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
+
+Select Xcode menu File > Swift Packages > Add Package Dependency... and enter repository URL with GUI.
+
+Repository: https://github.com/plangrid/ReactiveLists
+
+
 ## Contribute
 
 Please read and follow our [Contributing Guide](https://github.com/plangrid/ReactiveLists/blob/master/.github/CONTRIBUTING.md) and our [Code of Conduct](https://github.com/plangrid/ReactiveLists/blob/master/CODE_OF_CONDUCT.md).
