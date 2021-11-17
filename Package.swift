@@ -10,7 +10,7 @@ let package = Package(
         .library(name: "ReactiveLists", targets: ["ReactiveLists"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ra1028/DifferenceKit.git", .upToNextMinor(from: "1.1.3")),
+        .package(url: "https://github.com/ra1028/DifferenceKit.git", .upToNextMinor(from: "1.2.0")),
     ],
     targets: [
         .target(
