@@ -182,6 +182,11 @@ private final class DiffableTableCellViewModelProxy: TableCellViewModel {
         self.model.applyViewModelToCell(cell)
     }
 
+    /// Called before cell display
+    func willDisplay(cell: UITableViewCell) {
+        self.model.willDisplay(cell: cell)
+    }
+
     /// Only accessed during display, so eager-loading is allowed here
     var registrationInfo: ViewRegistrationInfo {
         self.model.registrationInfo
