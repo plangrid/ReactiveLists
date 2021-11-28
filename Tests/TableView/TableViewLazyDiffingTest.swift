@@ -81,6 +81,8 @@ final class LazyUserCell: TableCellViewModel, DiffableViewModel {
 
     func applyViewModelToCell(_ cell: UITableViewCell) {}
 
+    func willDisplay(cell: UITableViewCell) {}
+
     var diffingKey: String {
         self.diffingKeyAccessed = true
         return self.user

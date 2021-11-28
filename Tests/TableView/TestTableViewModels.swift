@@ -52,6 +52,8 @@ struct TestCellViewModel: TableCellViewModel {
         guard let testCell = cell as? TestTableViewCell else { return }
         testCell.label = self.label
     }
+
+    func willDisplay(cell: UITableViewCell) { }
 }
 
 class TestTableViewCell: UITableViewCell {
