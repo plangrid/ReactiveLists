@@ -91,6 +91,9 @@ extension TableCellViewModel {
 
     /// Default implementation, returns `nil`.
     public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
+
+    /// Default implementation
+    func willDisplay(cell: UITableViewCell) { }
 }
 
 /// Protocol that needs to be implemented by table view cell view models
