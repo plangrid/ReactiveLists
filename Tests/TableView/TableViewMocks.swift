@@ -111,6 +111,7 @@ class MockCellViewModel: TableCellViewModel {
     var accessibilityFormat: CellAccessibilityFormat = "_"
     let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
     func applyViewModelToCell(_ cell: UITableViewCell) { }
+    func willDisplay(cell: UITableViewCell) { }
 
     var didSelect: DidSelectClosure?
     var didSelectCalled = false

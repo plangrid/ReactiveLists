@@ -53,6 +53,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// in the cell model and return the updated cell.
     /// - Parameter cell: the cell which contents need to be updated.
     func applyViewModelToCell(_ cell: UITableViewCell)
+
+    /// Invoke when  a cell will be displayed
+    func willDisplay(cell: UITableViewCell)
 }
 
 /// Default implementations for `TableCellViewModel`.
@@ -88,6 +91,9 @@ extension TableCellViewModel {
 
     /// Default implementation, returns `nil`.
     public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
+
+    /// Default implementation
+    public func willDisplay(cell: UITableViewCell) { }
 }
 
 /// Protocol that needs to be implemented by table view cell view models

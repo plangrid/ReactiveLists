@@ -243,6 +243,15 @@ extension TableViewDriver: UITableViewDataSource {
     }
 
     /// :nodoc:
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[ifExists: indexPath] else {
+            fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
+        }
+
+        cellViewModel.willDisplay(cell: cell)
+    }
+
+    /// :nodoc:
     public func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewModel?.sectionModels.count ?? 0
     }
