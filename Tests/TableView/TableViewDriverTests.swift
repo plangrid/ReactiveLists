@@ -278,6 +278,7 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertTrue(defaultCellViewModel.shouldHighlight)
         XCTAssertNil(defaultCellViewModel.commitEditingStyle)
         XCTAssertNil(defaultCellViewModel.didSelect)
+        XCTAssertNil(defaultCellViewModel.didDeselect)
         XCTAssertNil(defaultCellViewModel.accessoryButtonTapped)
         XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
     }

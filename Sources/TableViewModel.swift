@@ -46,6 +46,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// Invoked when a cell has been selected.
     var didSelect: DidSelectClosure? { get }
 
+    /// Invoked when a cell has been deselected.
+    var didDeselect: DidDeselectClosure? { get }
+
     /// Invoked when an accessory button is tapped.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { get }
 
@@ -88,6 +91,9 @@ extension TableCellViewModel {
 
     /// Default implementation, returns `nil`.
     public var didSelect: DidSelectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
+    public var didDeselect: DidDeselectClosure? { return nil }
 
     /// Default implementation, returns `nil`.
     public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
