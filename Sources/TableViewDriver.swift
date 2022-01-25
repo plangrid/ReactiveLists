@@ -374,6 +374,11 @@ extension TableViewDriver: UITableViewDelegate {
     }
 
     /// :nodoc:
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.tableViewModel?[ifExists: indexPath]?.didDeselect?()
+    }
+
+    /// :nodoc:
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         self.tableViewModel?[ifExists: indexPath]?.willBeginEditing?()
     }

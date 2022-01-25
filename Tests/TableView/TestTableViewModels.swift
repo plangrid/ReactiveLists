@@ -30,6 +30,7 @@ struct TestCellViewModel: TableCellViewModel {
     var didEndEditing: DidEndEditingClosure?
     var commitEditingStyle: CommitEditingStyleClosure?
     var didSelectClosure: DidSelectClosure?
+    var didDeselectClosure: DidDeselectClosure?
 
     var diffingKey: DiffingKey {
         return self.label
@@ -39,13 +40,15 @@ struct TestCellViewModel: TableCellViewModel {
          willBeginEditing: WillBeginEditingClosure? = nil,
          didEndEditing: DidEndEditingClosure? = nil,
          commitEditingStyle: CommitEditingStyleClosure? = nil,
-         didSelectClosure: DidSelectClosure? = nil
+         didSelectClosure: DidSelectClosure? = nil,
+         didDeselectClosure: DidDeselectClosure? = nil
     ) {
         self.label = label
         self.willBeginEditing = willBeginEditing
         self.didEndEditing = didEndEditing
         self.commitEditingStyle = commitEditingStyle
         self.didSelectClosure = didSelectClosure
+        self.didDeselectClosure = didDeselectClosure
     }
 
     func applyViewModelToCell(_ cell: UITableViewCell) {
