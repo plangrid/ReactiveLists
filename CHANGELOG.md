@@ -6,6 +6,9 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 NEXT
 ----
+0.8.1
+-----
+- Added support for deselect and willDispaly cells.
 
 0.7.0
 -----
