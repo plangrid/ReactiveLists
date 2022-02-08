@@ -22,7 +22,9 @@ jobs:
         with:
           ruby-version: 3.0
       - name: Install xCode tools
-        run: xcode-select --install
+        run: | 
+          sudo rm -rf /Library/Developer/CommandLineTools
+          xcode-select --install
       - name: Install ffi
         run: gem install ffi -v '1.15.5' --source 'https://rubygems.org/'
       - name: Bundle update
