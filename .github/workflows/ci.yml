@@ -26,8 +26,8 @@ jobs:
       #  run: | 
       #    sudo rm -rf /Library/Developer/CommandLineTools
       #    xcode-select --install
-      # - name: Install ffi
-      #  run: gem install ffi -v '1.15.5' --source 'https://rubygems.org/'
+      - name: Install ffi
+        run: gem install ffi -v '1.15.5' --source 'https://rubygems.org/'
       - name: Bundle update
         run: bundle update
       - name: Bundle Install
