@@ -31,6 +31,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
 
+    /// Whether or not this cell should be selected.
+    var shouldSelect: Bool { get }
+
     /// Whether or not this cell should be indented while editing.
     var shouldIndentWhileEditing: Bool { get }
 
@@ -76,6 +79,9 @@ extension TableCellViewModel {
 
     /// Default implementation, returns `true`.
     public var shouldHighlight: Bool { return true }
+
+    /// Default implementation, returns `true`.
+    public var shouldSelect: Bool { return true }
 
     /// Default implementation, returns `false`.
     public var shouldIndentWhileEditing: Bool { return false }

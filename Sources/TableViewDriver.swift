@@ -374,6 +374,15 @@ extension TableViewDriver: UITableViewDelegate {
     }
 
     /// :nodoc:
+    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let shouldSelect = self.tableViewModel?[ifExists: indexPath]?.shouldSelect, !shouldSelect {
+            return nil
+        }
+
+        return indexPath
+    }
+
+    /// :nodoc:
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         self.tableViewModel?[ifExists: indexPath]?.didDeselect?()
     }
