@@ -46,6 +46,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// Invoked when a cell has been selected.
     var didSelect: DidSelectClosure? { get }
 
+    /// Invoked when a cell has been deselected.
+    var didDeselect: DidDeselectClosure? { get }
+
     /// Invoked when an accessory button is tapped.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { get }
 
@@ -53,6 +56,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// in the cell model and return the updated cell.
     /// - Parameter cell: the cell which contents need to be updated.
     func applyViewModelToCell(_ cell: UITableViewCell)
+
+    /// Invoke when  a cell will be displayed
+    func willDisplay(cell: UITableViewCell)
 }
 
 /// Default implementations for `TableCellViewModel`.
@@ -87,7 +93,13 @@ extension TableCellViewModel {
     public var didSelect: DidSelectClosure? { return nil }
 
     /// Default implementation, returns `nil`.
+    public var didDeselect: DidDeselectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
+
+    /// Default implementation
+    public func willDisplay(cell: UITableViewCell) { }
 }
 
 /// Protocol that needs to be implemented by table view cell view models
