@@ -18,6 +18,8 @@ jobs:
         destination: ["OS=14.1,name=iPhone 11"]
     steps:
       - uses: actions/checkout@v1
+      - name: Bundle update
+        run: bundle update
       - name: Bundle Install
         run: bundle install
       - uses: actions/cache@v1
