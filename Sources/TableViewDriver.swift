@@ -404,4 +404,13 @@ extension TableViewDriver: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return self.tableViewModel?[ifExists: indexPath]?.shouldHighlight ?? true
     }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let shouldSelect = self.tableViewModel?[ifExists: indexPath]?.shouldSelect, !shouldSelect {
+            return nil
+        }
+
+        return indexPath
+    }
 }
