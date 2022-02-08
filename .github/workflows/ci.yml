@@ -18,7 +18,7 @@ jobs:
         destination: ["OS=14.1,name=iPhone 11"]
     steps:
       - uses: actions/checkout@v1
-      - uses: ruby/setup-ruby@v3
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0
       - name: Bundle update
