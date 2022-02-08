@@ -21,6 +21,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0
+      - name: Install ffi
+        run: gem install ffi -v '1.15.5' --source 'https://rubygems.org/'
       - name: Bundle update
         run: bundle update
       - name: Bundle Install
