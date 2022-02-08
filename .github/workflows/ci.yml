@@ -16,17 +16,18 @@ jobs:
     strategy:
       matrix:
         destination: ["OS=14.1,name=iPhone 11"]
+        ruby: [ '2.4', '2.5', '2.6', '2.7', '3.0' ]
     steps:
       - uses: actions/checkout@v1
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0
-      - name: Install xCode tools
-        run: | 
-          sudo rm -rf /Library/Developer/CommandLineTools
-          xcode-select --install
-      - name: Install ffi
-        run: gem install ffi -v '1.15.5' --source 'https://rubygems.org/'
+          ruby-version: ${{ matrix.ruby }}
+      #- name: Install xCode tools
+      #  run: | 
+      #    sudo rm -rf /Library/Developer/CommandLineTools
+      #    xcode-select --install
+      # - name: Install ffi
+      #  run: gem install ffi -v '1.15.5' --source 'https://rubygems.org/'
       - name: Bundle update
         run: bundle update
       - name: Bundle Install
