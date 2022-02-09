@@ -103,8 +103,8 @@ final class TableViewDriverTests: XCTestCase {
         }
 
         parameterize(cases: (0, true), (1, false), (2, false), (9, true)) {
-            let isNil = self._tableViewDataSource.tableView(self._tableView, willSelectRowAt: path($0)) == nil
-            return XCTAssertEqual(isNil, !$1)
+            let indexPath = self._tableViewDataSource.tableView(self._tableView, willSelectRowAt: path($0))
+            return $1 ? XCTAssertNotNil(indexPath) : XCTAssertNil(indexPath)
         }
     }
 
@@ -281,7 +281,7 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertEqual(defaultCellViewModel.editingStyle, .none)
         XCTAssertEqual(defaultCellViewModel.rowHeight, nil)
         XCTAssertTrue(defaultCellViewModel.shouldHighlight)
-        XCTAssertTrue(defaultCellViewModel.shouldSelect)
+        XCTAssertTrue(defaultCellViewModel.shouldSelect(at: IndexPath.init(item: 0, section: 0)))
         XCTAssertNil(defaultCellViewModel.commitEditingStyle)
         XCTAssertNil(defaultCellViewModel.didSelect)
         XCTAssertNil(defaultCellViewModel.didDeselect)
