@@ -7,7 +7,7 @@ env:
   WORKSPACE: ReactiveLists.xcworkspace
   LIBRARY_SCHEME: ReactiveLists
   EXAMPLE_APP_SCHEME: Example
-  IOS_SDK: iphonesimulator14.1
+  IOS_SDK: iphonesimulator14.5
 
 jobs:
   iOS:
