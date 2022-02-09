@@ -21,6 +21,7 @@ struct TestCellViewModel: TableCellViewModel {
     let rowHeight: CGFloat? = 42
     let editingStyle = UITableViewCell.EditingStyle.delete
     let shouldHighlight = false
+    let shouldSelect: Bool = false
     let shouldIndentWhileEditing = false
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
     let registrationInfo = ViewRegistrationInfo(classType: TestTableViewCell.self)
