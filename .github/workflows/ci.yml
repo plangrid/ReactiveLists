@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_12.1.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_12.5.1.app/Contents/Developer
   WORKSPACE: ReactiveLists.xcworkspace
   LIBRARY_SCHEME: ReactiveLists
   EXAMPLE_APP_SCHEME: Example
@@ -18,6 +18,8 @@ jobs:
         destination: ["OS=14.1,name=iPhone 11"]
     steps:
       - uses: actions/checkout@v1
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_12.5.1.app/Contents/Developer'
       - name: Bundle Install
         run: bundle install
       - uses: actions/cache@v1
