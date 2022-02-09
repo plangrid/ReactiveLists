@@ -167,6 +167,7 @@ DEPENDENCIES
   cocoapods (~> 1.9)
   danger (~> 8.0)
   danger-swiftlint (~> 0.12.1)
+  json
   xcpretty
 
 BUNDLED WITH
