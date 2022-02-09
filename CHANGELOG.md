@@ -10,7 +10,6 @@ NEXT
 -----
 - Added support for deselect and willDispaly cells.
 - Added support for should select cell
-- test
 
 0.7.0
 -----
