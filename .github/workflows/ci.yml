@@ -19,8 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Bundle Install
-        run: bundle install
-      - name: Bundle Update
         run: bundle update
       - uses: actions/cache@v1
         with:
