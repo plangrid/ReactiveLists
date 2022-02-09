@@ -103,8 +103,8 @@ final class TableViewDriverTests: XCTestCase {
         }
 
         parameterize(cases: (0, true), (1, false), (2, false), (9, true)) {
-            let isNil = self._tableViewDataSource.tableView(self._tableView, willSelectRowAt: path($0)) != nil
-            return XCTAssertEqual(isNil, $1)
+            let indexPath = self._tableViewDataSource.tableView(self._tableView, willSelectRowAt: path($0))
+            return $1 ? XCTAssertNotNil(indexPath) : XCTAssertNil(indexPath)
         }
     }
 

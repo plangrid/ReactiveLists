@@ -375,11 +375,11 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let shouldSelect = self.tableViewModel?[ifExists: indexPath]?.shouldSelect(at: indexPath), !shouldSelect {
-            return nil
+        guard let model = self.tableViewModel?[ifExists: indexPath], !model.shouldSelect(at: indexPath) else {
+            return indexPath
         }
 
-        return indexPath
+        return nil
     }
 
     /// :nodoc:
