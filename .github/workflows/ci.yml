@@ -15,7 +15,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: ["OS=14.1,name=iPhone 11"]
+        destination: ["OS=14.5,name=iPhone 11"]
     steps:
       - uses: actions/checkout@v1
       - name: Select Xcode version
