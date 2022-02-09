@@ -101,6 +101,11 @@ final class TableViewDriverTests: XCTestCase {
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, shouldHighlightRowAt: path($0)), $1)
             XCTAssertEqual(self._tableViewDataSource.tableView(self._tableView, shouldIndentWhileEditingRowAt: path($0)), $1)
         }
+
+        parameterize(cases: (0, true), (1, false), (2, false), (9, true)) {
+            let isNil = self._tableViewDataSource.tableView(self._tableView, willSelectRowAt: path($0)) == nil
+            return XCTAssertEqual(isNil, !$1)
+        }
     }
 
     /// Table view section headers described in the table view model are converted into views correctly.
@@ -266,6 +271,7 @@ final class TableViewDriverTests: XCTestCase {
             var accessibilityFormat: CellAccessibilityFormat = "_"
             let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
             func applyViewModelToCell(_ cell: UITableViewCell) { }
+            func willDisplay(cell: UITableViewCell) { }
         }
 
         let defaultCellViewModel = DefaultCellViewModel()
@@ -275,8 +281,10 @@ final class TableViewDriverTests: XCTestCase {
         XCTAssertEqual(defaultCellViewModel.editingStyle, .none)
         XCTAssertEqual(defaultCellViewModel.rowHeight, nil)
         XCTAssertTrue(defaultCellViewModel.shouldHighlight)
+        XCTAssertTrue(defaultCellViewModel.shouldSelect)
         XCTAssertNil(defaultCellViewModel.commitEditingStyle)
         XCTAssertNil(defaultCellViewModel.didSelect)
+        XCTAssertNil(defaultCellViewModel.didDeselect)
         XCTAssertNil(defaultCellViewModel.accessoryButtonTapped)
         XCTAssertFalse(defaultCellViewModel.shouldIndentWhileEditing)
     }

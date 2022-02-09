@@ -243,6 +243,15 @@ extension TableViewDriver: UITableViewDataSource {
     }
 
     /// :nodoc:
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[ifExists: indexPath] else {
+            fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
+        }
+
+        cellViewModel.willDisplay(cell: cell)
+    }
+
+    /// :nodoc:
     public func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewModel?.sectionModels.count ?? 0
     }
@@ -362,6 +371,20 @@ extension TableViewDriver: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         self.tableViewModel?[ifExists: indexPath]?.didSelect?()
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let shouldSelect = self.tableViewModel?[ifExists: indexPath]?.shouldSelect, !shouldSelect {
+            return nil
+        }
+
+        return indexPath
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.tableViewModel?[ifExists: indexPath]?.didDeselect?()
     }
 
     /// :nodoc:

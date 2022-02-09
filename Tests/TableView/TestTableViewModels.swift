@@ -21,6 +21,7 @@ struct TestCellViewModel: TableCellViewModel {
     let rowHeight: CGFloat? = 42
     let editingStyle = UITableViewCell.EditingStyle.delete
     let shouldHighlight = false
+    let shouldSelect: Bool = false
     let shouldIndentWhileEditing = false
     let accessibilityFormat: CellAccessibilityFormat = "access-%{section}.%{row}"
     let registrationInfo = ViewRegistrationInfo(classType: TestTableViewCell.self)
@@ -30,6 +31,7 @@ struct TestCellViewModel: TableCellViewModel {
     var didEndEditing: DidEndEditingClosure?
     var commitEditingStyle: CommitEditingStyleClosure?
     var didSelectClosure: DidSelectClosure?
+    var didDeselectClosure: DidDeselectClosure?
 
     var diffingKey: DiffingKey {
         return self.label
@@ -39,19 +41,23 @@ struct TestCellViewModel: TableCellViewModel {
          willBeginEditing: WillBeginEditingClosure? = nil,
          didEndEditing: DidEndEditingClosure? = nil,
          commitEditingStyle: CommitEditingStyleClosure? = nil,
-         didSelectClosure: DidSelectClosure? = nil
+         didSelectClosure: DidSelectClosure? = nil,
+         didDeselectClosure: DidDeselectClosure? = nil
     ) {
         self.label = label
         self.willBeginEditing = willBeginEditing
         self.didEndEditing = didEndEditing
         self.commitEditingStyle = commitEditingStyle
         self.didSelectClosure = didSelectClosure
+        self.didDeselectClosure = didDeselectClosure
     }
 
     func applyViewModelToCell(_ cell: UITableViewCell) {
         guard let testCell = cell as? TestTableViewCell else { return }
         testCell.label = self.label
     }
+
+    func willDisplay(cell: UITableViewCell) { }
 }
 
 class TestTableViewCell: UITableViewCell {
