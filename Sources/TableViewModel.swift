@@ -31,9 +31,6 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// Whether or not this cell should be highlighted.
     var shouldHighlight: Bool { get }
 
-    /// Whether or not this cell should be selected.
-    var shouldSelect: Bool { get }
-
     /// Whether or not this cell should be indented while editing.
     var shouldIndentWhileEditing: Bool { get }
 
@@ -54,6 +51,9 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
 
     /// Invoked when an accessory button is tapped.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { get }
+
+    /// Whether or not this cell should be selected.
+    func shouldSelect(at: IndexPath) -> Bool
 
     /// Asks the cell model to update the `UITableViewCell` with the content
     /// in the cell model and return the updated cell.
@@ -80,9 +80,6 @@ extension TableCellViewModel {
     /// Default implementation, returns `true`.
     public var shouldHighlight: Bool { return true }
 
-    /// Default implementation, returns `true`.
-    public var shouldSelect: Bool { return true }
-
     /// Default implementation, returns `false`.
     public var shouldIndentWhileEditing: Bool { return false }
 
@@ -103,6 +100,9 @@ extension TableCellViewModel {
 
     /// Default implementation, returns `nil`.
     public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
+
+    /// Default implementation, returns `true`.
+    public func shouldSelect(at: IndexPath) -> Bool { return true }
 
     /// Default implementation
     public func willDisplay(cell: UITableViewCell) { }

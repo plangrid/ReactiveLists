@@ -108,10 +108,12 @@ extension TableViewDriver {
 }
 
 class MockCellViewModel: TableCellViewModel {
+    var shouldSelect: Bool = true
     var accessibilityFormat: CellAccessibilityFormat = "_"
     let registrationInfo = ViewRegistrationInfo(classType: UITableViewCell.self)
     func applyViewModelToCell(_ cell: UITableViewCell) { }
     func willDisplay(cell: UITableViewCell) { }
+    func shouldSelect(at: IndexPath) -> Bool { return shouldSelect }
 
     var didSelect: DidSelectClosure?
     var didSelectCalled = false
