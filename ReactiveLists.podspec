@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveLists"
-  s.version = "0.8.1.beta.3"
+  s.version = "0.8.1.beta.4"
 
   s.summary = "React-like API for UITableView and UICollectionView"
   s.homepage = "https://github.com/plangrid/ReactiveLists"
@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.swift_versions = ['4.2', '5.0']
   s.requires_arc = true
 
-  s.dependency 'DifferenceKit', '~> 1.1.0'
+  s.dependency 'DifferenceKit', '~> 1.2.0'
 end
