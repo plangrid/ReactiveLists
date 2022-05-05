@@ -159,7 +159,7 @@ private final class DiffableTableCellViewModelProxy: TableCellViewModel {
     /// There is a scenario where some models that are off screen, are about to come on screen, and when they all share a diffing key
     /// they get mixed up and the StagedChangeset ends up with some unnecessary information.
     /// This was ok on Xcode 12, the DifferenceKit reload, which does a performBatchUpdate, sets the new table data, and modifies the rows, handled the extra info.
-    /// On upgrading to Xcode 13 the extra information in the StagedChangeset caused the performBatchUpdates to associated some cells with the wrong model.
+    /// On upgrading to Xcode 13 the extra information in the StagedChangeset caused the performBatchUpdates to associate some cells with the wrong model.
     private lazy var placeholderDiffingKey = UUID().uuidString
 
     /// When true, we allow diffing to access the real model's diffing key, eagerly loading it
