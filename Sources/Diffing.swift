@@ -155,8 +155,12 @@ extension CollectionSectionViewModel: DifferentiableSection {
 /// which the data source may not have loaded
 private final class DiffableTableCellViewModelProxy: TableCellViewModel {
 
-    /// Static diffing key used when diffing off-screen models
-    private static let placeholderDiffingKey = UUID().uuidString
+    /// Changed from static to instance because it was giving all off screen models the same diffing key.
+    /// There is a scenario where some models that are off screen, are about to come on screen, and when they all share a diffing key
+    /// they get mixed up and the StagedChangeset ends up with some unnecessary information.
+    /// This was ok on Xcode 12, the DifferenceKit reload, which does a performBatchUpdate, sets the new table data, and modifies the rows, handled the extra info.
+    /// On upgrading to Xcode 13 the extra information in the StagedChangeset caused the performBatchUpdates to associated some cells with the wrong model.
+    private lazy var placeholderDiffingKey = UUID().uuidString
 
     /// When true, we allow diffing to access the real model's diffing key, eagerly loading it
     private let _inVisibleBounds: Bool
@@ -197,7 +201,7 @@ private final class DiffableTableCellViewModelProxy: TableCellViewModel {
         if self._inVisibleBounds {
             return self.model.diffingKey
         } else {
-            return Self.placeholderDiffingKey
+            return self.placeholderDiffingKey
         }
     }
 }
