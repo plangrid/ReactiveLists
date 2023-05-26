@@ -30,3 +30,5 @@ public typealias WillBeginEditingClosure = () -> Void
 public typealias DidEndEditingClosure = () -> Void
 /// :nodoc:
 public typealias AccessoryButtonTappedClosure = () -> Void
+/// :nodoc:
+public typealias DidScrollClosure = (UIScrollView) -> Void
