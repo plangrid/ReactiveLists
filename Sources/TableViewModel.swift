@@ -348,6 +348,7 @@ public struct TableViewModel {
     /// - Parameters:
     ///   - sectionModels: the sections that need to be shown in this table view.
     ///   - sectionIndexTitles: the section index titles for this table view.
+    ///   - didScrollClosure: the scroll closure for this table view.
     public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil, defaultRowHeight: CGFloat = 44.0, didScrollClosure: DidScrollClosure? = nil) {
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
