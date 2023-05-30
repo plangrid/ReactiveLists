@@ -15,11 +15,11 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: ["OS=14.5,name=iPhone 11"]
+        destination: ["OS=15.0,name=iPhone 13"]
     steps:
       - uses: actions/checkout@v1
       - name: Select Xcode version
-        run: sudo xcode-select -s '/Applications/Xcode_12.5.1.app/Contents/Developer'
+        run: sudo xcode-select -s '/Applications/Xcode_14.2.app/Contents/Developer'
       - name: Bundle Install
         run: bundle install
       - uses: actions/cache@v1

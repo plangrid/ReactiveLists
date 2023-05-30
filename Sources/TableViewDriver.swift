@@ -414,3 +414,11 @@ extension TableViewDriver: UITableViewDelegate {
         return self.tableViewModel?[ifExists: indexPath]?.shouldHighlight ?? true
     }
 }
+
+extension TableViewDriver: UIScrollViewDelegate {
+    /// :nodoc:
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let tableViewModel = tableViewModel else { return }
+        tableViewModel.didScrollClosure?(scrollView)
+    }
+}

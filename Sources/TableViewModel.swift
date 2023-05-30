@@ -327,16 +327,19 @@ public struct TableViewModel {
         return self.sectionModels.allSatisfy { $0.isEmpty }
     }
 
+    /// Invoked when the tableview is scrolled
+    public var didScrollClosure: DidScrollClosure?
+
     /// Initializes a table view model with one section and the cell models provided
     /// via the initializer.
     ///
     /// - Parameter cellViewModels: the cell models for the only section in this table.
-    public init(cellViewModels: [TableCellViewModel]) {
+    public init(cellViewModels: [TableCellViewModel], didScrollClosure: DidScrollClosure? = nil) {
         let section = TableSectionViewModel(
             diffingKey: "default_section",
             cellViewModels: cellViewModels
         )
-        self.init(sectionModels: [section])
+        self.init(sectionModels: [section], didScrollClosure: didScrollClosure)
     }
 
     /// Initializes a table view model with the sections provided.
@@ -345,10 +348,12 @@ public struct TableViewModel {
     /// - Parameters:
     ///   - sectionModels: the sections that need to be shown in this table view.
     ///   - sectionIndexTitles: the section index titles for this table view.
-    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil, defaultRowHeight: CGFloat = 44.0) {
+    ///   - didScrollClosure: the scroll closure for this table view.
+    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil, defaultRowHeight: CGFloat = 44.0, didScrollClosure: DidScrollClosure? = nil) {
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
         self.defaultRowHeight = defaultRowHeight
+        self.didScrollClosure = didScrollClosure
     }
 
     /// Returns the section model at the specified index or `nil` if no such section exists.
