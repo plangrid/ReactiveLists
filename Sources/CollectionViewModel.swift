@@ -37,6 +37,9 @@ public protocol CollectionCellViewModel: ReusableCellViewModelProtocol, Diffable
     /// in the cell model and return the updated cell.
     /// - Parameter cell: the cell which's content need to be updated.
     func applyViewModelToCell(_ cell: UICollectionViewCell)
+    
+    /// Invoke when  a cell will be displayed
+    func willDisplay(cell: UICollectionViewCell)
 }
 
 /// Default implementations for `CollectionCellViewModel`.
@@ -50,6 +53,9 @@ extension CollectionCellViewModel {
 
     /// Default implementation, returns `nil`.
     public var didDeselect: DidDeselectClosure? { return nil }
+    
+    /// Default implementation, returns `nil`.
+    public func willDisplay(cell: UICollectionViewCell) { }
 }
 
 /// A `FlowLayoutCollectionCellViewModel` is a `CollectionCellViewModel` that will be placed in its
@@ -132,8 +138,29 @@ public struct CollectionViewModel {
     ///
     /// - Parameter indexPath: the index path for the cell that is being retrieved
     public subscript(ifExists indexPath: IndexPath) -> CollectionCellViewModel? {
-        guard let section = self[ifExists: indexPath.section], section.cellViewModels.count > indexPath.item else { return nil }
-        return section.cellViewModels[indexPath.item]
+        guard let section = self[ifExists: indexPath.section] else { return nil }
+
+        if let dataSource = section.cellViewModelDataSource {
+            guard indexPath.count >= 2, // In rare cases, we've seen UIKit give us a bad IndexPath
+                  dataSource.count > indexPath.row else { return nil }
+            return dataSource[indexPath.row]
+        } else {
+            guard section.cellViewModels.count > indexPath.item else { return nil }
+            return section.cellViewModels[indexPath.item]
+        }
+    }
+    
+    /// A view of `TableSectionViewModel` used for diffing
+    func sectionModelsForDiffing(inVisibleIndexPaths visibleIndexPaths: [IndexPath]) -> [DiffableCollectionSectionViewModel] {
+        let visibleIndicesBySection = [Int: AnySequence<Int>](
+            uniqueKeysWithValues: visibleIndexPaths.indicesBySection()
+        ).mapValues { Set($0) }
+        return zip(sectionModels, sectionModels.indices).map { sectionModel, section in
+            DiffableCollectionSectionViewModel(
+                sectionModel: sectionModel,
+                visibleIndices: visibleIndicesBySection[section, default: Set<Int>()]
+            )
+        }
     }
 }
 
@@ -144,6 +171,9 @@ public struct CollectionSectionViewModel: DiffableViewModel {
 
     /// Cells to be shown in this section.
     let cellViewModels: [CollectionCellViewModel]
+
+    /// Datasource for the cells to be shown in this section.
+    public let cellViewModelDataSource: CollectionCellViewModelDataSource?
 
     /// View model for the header of this section.
     let headerViewModel: CollectionSupplementaryViewModel?
@@ -163,6 +193,9 @@ public struct CollectionSectionViewModel: DiffableViewModel {
 
     /// Returns `true` if this section has zero cell view models, `false` otherwise.
     public var isEmpty: Bool {
+        if let cellDataSource = self.cellViewModelDataSource {
+            return cellDataSource.isEmpty
+        }
         return self.cellViewModels.isEmpty
     }
 
@@ -177,10 +210,12 @@ public struct CollectionSectionViewModel: DiffableViewModel {
     public init(
         diffingKey: String?,
         cellViewModels: [CollectionCellViewModel],
+        cellViewModelDataSource: CollectionCellViewModelDataSource? = nil,
         headerViewModel: CollectionSupplementaryViewModel? = nil,
         footerViewModel: CollectionSupplementaryViewModel? = nil
     ) {
         self.cellViewModels = cellViewModels
+        self.cellViewModelDataSource = cellViewModelDataSource
         self.headerViewModel = headerViewModel
         self.footerViewModel = footerViewModel
         self.diffingKey = diffingKey ?? UUID().uuidString
@@ -191,21 +226,33 @@ public struct CollectionSectionViewModel: DiffableViewModel {
 extension CollectionSectionViewModel: Collection {
     /// :nodoc:
     public subscript(position: Int) -> CollectionCellViewModel {
+        if let dataSource = self.cellViewModelDataSource {
+            return dataSource[position]
+        }
         return self.cellViewModels[position]
     }
 
     /// :nodoc:
     public func index(after i: Int) -> Int {
+        if let dataSource = self.cellViewModelDataSource {
+            return dataSource.index(after: i)
+        }
         return self.cellViewModels.index(after: i)
     }
 
     /// :nodoc:
     public var startIndex: Int {
+        if let dataSource = self.cellViewModelDataSource {
+            return dataSource.startIndex
+        }
         return self.cellViewModels.startIndex
     }
 
     /// :nodoc:
     public var endIndex: Int {
+        if let dataSource = self.cellViewModelDataSource {
+            return dataSource.endIndex
+        }
         return self.cellViewModels.endIndex
     }
 }

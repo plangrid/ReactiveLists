@@ -197,6 +197,52 @@ private final class DiffableTableCellViewModelProxy: TableCellViewModel {
     }
 }
 
+private final class DiffableCollectionCellViewModelProxy: CollectionCellViewModel {
+
+    /// Modified again to remove the placeholder diffing key. The model getter is just fetching models that already exist on a section view model, I don't see
+    /// a large efficiency issue there. The placeholder keys on invisible cells can causes issues either way, whether static or dynamic, the diff is only truly accurate
+    /// if each model in the list (visible or not) gets to supply its diffing key
+
+    /// When true, we allow diffing to access the real model's diffing key, eagerly loading it
+    private let _inVisibleBounds: Bool
+
+    /// Closure to load the model
+    private let _modelGetter: () -> CollectionCellViewModel
+
+    /// Lazy reference to the model
+    private lazy var model = self._modelGetter()
+
+    init(inVisibleBounds: Bool, modelGetter: @escaping () -> CollectionCellViewModel) {
+        self._inVisibleBounds = inVisibleBounds
+        self._modelGetter = modelGetter
+    }
+
+    /// Only accessed during display, so eager-loading is allowed here
+    var accessibilityFormat: CellAccessibilityFormat {
+        self.model.accessibilityFormat
+    }
+
+    /// Only called during display, so eager-loading is allowed here
+    func applyViewModelToCell(_ cell: UICollectionViewCell) {
+        self.model.applyViewModelToCell(cell)
+    }
+
+    /// Called before cell display
+    func willDisplay(cell: UICollectionViewCell) {
+        self.model.willDisplay(cell: cell)
+    }
+
+    /// Only accessed during display, so eager-loading is allowed here
+    var registrationInfo: ViewRegistrationInfo {
+        self.model.registrationInfo
+    }
+
+    /// Only allows accessing the real model's diffing key for visible models
+    var diffingKey: DiffingKey {
+        return self.model.diffingKey
+    }
+}
+
 /// A `DifferentiableSection` that ensures we only allow eager-loading
 /// of cells that are known to be on-screen, which avoids forcing
 /// a datasource to potentially load data that hasn't been loaded yet
@@ -290,6 +336,100 @@ struct DiffableTableSectionViewModel: Collection, DifferentiableSection {
     }
 }
 
+/// A `DifferentiableSection` that ensures we only allow eager-loading
+/// of cells that are known to be on-screen, which avoids forcing
+/// a datasource to potentially load data that hasn't been loaded yet
+/// to create new cell models (expensive)
+struct DiffableCollectionSectionViewModel: Collection, DifferentiableSection {
+
+    /// Reference to the original `CollectionSectionViewModel`
+    let _sectionModel: CollectionSectionViewModel
+
+    /// The set of indices in this section, for which we should allow
+    /// diffing to access, since these cells are visible (i.e. won't
+    /// eagerly load data that the data source may not have loaded)
+    private let _visibleIndices: Set<Int>
+
+    /// Initializes a `DiffableTableSectionViewModel` with the
+    /// section model and visibile indices in this section
+    init(sectionModel: CollectionSectionViewModel, visibleIndices: Set<Int>) {
+        self._sectionModel = sectionModel
+        self._visibleIndices = visibleIndices
+        self.startIndex = sectionModel.startIndex
+        self.endIndex = sectionModel.endIndex
+    }
+
+    // MARK: - Protocol Implementations
+
+    /// :nodoc:
+    init<C: Swift.Collection>(source: DiffableCollectionSectionViewModel, elements: C) where C.Element == AnyDiffableViewModel {
+        self._sectionModel = CollectionSectionViewModel(
+            diffingKey: source._sectionModel.diffingKey,
+            cellViewModels: [],
+            cellViewModelDataSource: CollectionCellViewModelDataSource(
+                // this will always be used for tables, and
+                // cell models have to be of type TableCellViewModel
+                //swiftlint:disable:next force_cast
+                elements.map { $0.model as! CollectionCellViewModel },
+                // pass through the already-calculated cell registration
+                // info to avoid accidental eager loading of cell models
+                cellRegistrationInfo: source._sectionModel.cellViewModelDataSource?.cellRegistrationInfo ?? []
+            ),
+            headerViewModel: source._sectionModel.headerViewModel,
+            footerViewModel: source._sectionModel.footerViewModel
+        )
+        self._visibleIndices = source._visibleIndices
+        self.startIndex = source._sectionModel.startIndex
+        self.endIndex = source._sectionModel.endIndex
+    }
+
+    /// :nodoc:
+    var diffingKey: DiffingKey { self._sectionModel.diffingKey }
+
+    /// :nodoc:
+    var differenceIdentifier: String { _sectionModel.differenceIdentifier }
+
+    /// :nodoc:
+    typealias Collection = Self
+
+    /// :nodoc:
+    typealias DifferenceIdentifier = String
+
+    /// :nodoc:
+    func isContentEqual(to source: DiffableCollectionSectionViewModel) -> Bool {
+        self._sectionModel.isContentEqual(to: source._sectionModel)
+    }
+
+    /// :nodoc:
+    var elements: DiffableCollectionSectionViewModel { self }
+
+    /// :nodoc:
+    typealias Element = AnyDiffableViewModel
+
+    /// :nodoc:
+    typealias Index = Int
+
+    /// :nodoc:
+    let startIndex: Int
+
+    /// :nodoc:
+    let endIndex: Int
+
+    /// :nodoc:
+    subscript(position: Int) -> AnyDiffableViewModel {
+        return AnyDiffableViewModel(
+            DiffableCollectionCellViewModelProxy(
+                inVisibleBounds: self._visibleIndices.contains(position)
+            ) { self._sectionModel[position] }
+        )
+    }
+
+    /// :nodoc:
+    func index(after i: Int) -> Int {
+        return self._sectionModel.index(after: i)
+    }
+}
+
 extension Array where Element == DiffableTableSectionViewModel {
 
     /// Creates a new `TableViewModel` from a `[DiffableTableSectionViewModel]`
@@ -298,6 +438,17 @@ extension Array where Element == DiffableTableSectionViewModel {
         return TableViewModel(
             sectionModels: self.map { $0._sectionModel },
             sectionIndexTitles: sectionIndexTitles
+        )
+    }
+}
+
+extension Array where Element == DiffableCollectionSectionViewModel {
+
+    /// Creates a new `CollectionViewModel` from a `[CollectionViewModel]`
+    /// for diffing
+    func makeCollectionViewModel() -> CollectionViewModel {
+        return CollectionViewModel(
+            sectionModels: self.map { $0._sectionModel }
         )
     }
 }
