@@ -20,7 +20,13 @@ extension UICollectionView {
 
     func registerViews(for model: CollectionViewModel) {
         model.sectionModels.forEach {
-            self.registerCellViewModels($0.cellViewModels)
+            if let dataSource = $0.cellViewModelDataSource {
+                self.registerCellViewModels(dataSource.cellRegistrationInfo.lazy.map {
+                    AnyReusableCellViewModel(registrationInfo: $0)
+                })
+            } else {
+                self.registerCellViewModels($0.cellViewModels)
+            }
 
             if let header = $0.headerViewModel {
                 self.registerSupplementaryViewModel(header)

@@ -48,6 +48,8 @@
 		357B96DC2019374E0000443F /* CollectionToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96D9201934C50000443F /* CollectionToolCell.xib */; };
 		357B96E9201956760000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
 		357B96EA2019599C0000443F /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357B96E8201956760000443F /* CollectionViewHeaderView.xib */; };
+		39A211882A5342EE00288547 /* CollectionCellViewModelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A211872A5342EE00288547 /* CollectionCellViewModelDataSource.swift */; };
+		39D64C592A54E4DB0071A7F3 /* CollectionViewLazyDiffingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D64C582A54E4DB0071A7F3 /* CollectionViewLazyDiffingTests.swift */; };
 		7C24B1408A8B3A147C254BCA /* Pods_ReactiveLists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978763204EC113AFD1F7EB54 /* Pods_ReactiveLists.framework */; };
 		A8069332250046AD0036CA11 /* TableViewLazyDiffingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8069330250042700036CA11 /* TableViewLazyDiffingTest.swift */; };
 		A8D93CAA24FD9BDF00459EBB /* TableCellViewModelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D93CA924FD9BDF00459EBB /* TableCellViewModelDataSource.swift */; };
@@ -132,6 +134,8 @@
 		351B0BB420168D2E0034569D /* CollectionViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
 		357B96D9201934C50000443F /* CollectionToolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionToolCell.xib; sourceTree = "<group>"; };
 		357B96E8201956760000443F /* CollectionViewHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderView.xib; sourceTree = "<group>"; };
+		39A211872A5342EE00288547 /* CollectionCellViewModelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModelDataSource.swift; sourceTree = "<group>"; };
+		39D64C582A54E4DB0071A7F3 /* CollectionViewLazyDiffingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLazyDiffingTests.swift; sourceTree = "<group>"; };
 		42A9724B45F9E14DD1B210D1 /* Pods-ReactiveLists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveLists.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveLists/Pods-ReactiveLists.release.xcconfig"; sourceTree = "<group>"; };
 		45132CB591F9F96746AF8E96 /* Pods-ReactiveListsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveListsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveListsTests/Pods-ReactiveListsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		932473A2DAECE0F923C4B570 /* Pods_ReactiveListsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveListsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +230,7 @@
 				257A97DB2017AA3500164403 /* CollectionViewMocks.swift */,
 				257A97CA2017A80B00164403 /* CollectionViewModelTests.swift */,
 				257A97BC2017A5AA00164403 /* TestCollectionViewModels.swift */,
+				39D64C582A54E4DB0071A7F3 /* CollectionViewLazyDiffingTests.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				32753F8C201BB8310084DCB1 /* UICollectionView+Extensions.swift */,
 				32753F8E201BB8470084DCB1 /* UITableView+Extensions.swift */,
 				32E7A1F7201BADE800B90EBC /* ViewRegistrationInfo.swift */,
+				39A211872A5342EE00288547 /* CollectionCellViewModelDataSource.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				TargetAttributes = {
 					2576640A1F29075C00C037E3 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 29VP5K5AJ7;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
@@ -612,6 +619,7 @@
 				32E7A1F8201BADE800B90EBC /* ViewRegistrationInfo.swift in Sources */,
 				258E31B11F0D8D9C00D6F324 /* CollectionViewDriver.swift in Sources */,
 				258E31B41F0D8D9C00D6F324 /* TableViewModel.swift in Sources */,
+				39A211882A5342EE00288547 /* CollectionCellViewModelDataSource.swift in Sources */,
 				258E31D31F0D8F3100D6F324 /* AccessibilityFormats.swift in Sources */,
 				32753F8F201BB8470084DCB1 /* UITableView+Extensions.swift in Sources */,
 				A8D93CAA24FD9BDF00459EBB /* TableCellViewModelDataSource.swift in Sources */,
@@ -631,6 +639,7 @@
 				257A97D82017A82F00164403 /* CollectionViewDriverTests.swift in Sources */,
 				257A97C02017A5D300164403 /* TestCollectionViewModels.swift in Sources */,
 				257A97D92017A82F00164403 /* CollectionViewModelTests.swift in Sources */,
+				39D64C592A54E4DB0071A7F3 /* CollectionViewLazyDiffingTests.swift in Sources */,
 				25B1B0B920195F1C0036545F /* CollectionViewDriverDiffingTests.swift in Sources */,
 				257A97DA2017A83400164403 /* XCTest+Parameterized.swift in Sources */,
 				257A97D42017A82900164403 /* TableViewMocks.swift in Sources */,
@@ -685,7 +694,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 29VP5K5AJ7;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.plangrid.ReactiveListsExample;
@@ -701,7 +710,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 29VP5K5AJ7;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.plangrid.ReactiveListsExample;
@@ -881,7 +890,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.plangrid.ReactiveListsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -898,7 +908,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.plangrid.ReactiveListsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
