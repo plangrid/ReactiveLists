@@ -327,6 +327,11 @@ extension TableViewDriver: UITableViewDelegate {
         guard let tableViewModel = self.tableViewModel else { return 0 }
         return tableViewModel[ifExists: indexPath]?.rowHeight ?? tableViewModel.defaultRowHeight
     }
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let tableViewModel = self.tableViewModel else { return 0 }
+        return tableViewModel[ifExists: indexPath]?.rowHeight ?? tableViewModel.defaultRowHeight
+    }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -340,12 +345,22 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
     }
 
     /// :nodoc:
