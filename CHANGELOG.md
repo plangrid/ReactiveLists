@@ -6,6 +6,11 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 NEXT
 ----
+0.8.1.9
+-----
+- Added UITableViewDelegate calls for estimated row, header, footer heights
+- Changed default header/footer heights from `leastNormalMagnitude` to 0.0 
+
 0.8.1.8
 -----
 - Added support for CollectionView cells lazy-loading.
