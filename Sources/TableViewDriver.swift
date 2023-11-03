@@ -330,7 +330,7 @@ extension TableViewDriver: UITableViewDelegate {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let tableViewModel = self.tableViewModel else { return 0 }
-        return tableViewModel[ifExists: indexPath]?.rowHeight ?? tableViewModel.defaultRowHeight
+        return tableViewModel.defaultRowHeight
     }
 
     /// :nodoc:
