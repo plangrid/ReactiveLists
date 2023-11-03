@@ -6,6 +6,10 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 NEXT
 ----
+0.8.2
+-----
+- Use default row heights for cell estimation
+
 0.8.1.9
 -----
 - Added UITableViewDelegate calls for estimated row, header, footer heights
