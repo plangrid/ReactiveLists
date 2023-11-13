@@ -72,6 +72,8 @@ open class TableViewDriver: NSObject {
 
     private let _automaticDiffingEnabled: Bool
 
+    private let _lightweightDiffing: Bool
+
     /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
     ///
     /// - Parameters:
@@ -82,14 +84,19 @@ open class TableViewDriver: NSObject {
     ///   - automaticDiffingEnabled: defines whether or not this data source updates the table
     ///                              view automatically when cells/sections are moved/inserted/deleted.
     ///                              Defaults to `true`.
+    ///   - lightweightDiffing: when enabled, simply diff the count of rows rather than generating full changesets.
+    ///                         Defaults to `false`.
     public init(
         tableView: UITableView,
         tableViewModel: TableViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
-        automaticDiffingEnabled: Bool = true) {
+        automaticDiffingEnabled: Bool = true,
+        lightweightDiffing: Bool = false
+    ) {
         self._tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffingEnabled
+        self._lightweightDiffing = lightweightDiffing
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         tableView.dataSource = self
@@ -182,40 +189,56 @@ open class TableViewDriver: NSObject {
 
         guard let newModel = newModel else { return }
 
-        if self._automaticDiffingEnabled {
+        if self._automaticDiffingEnabled, self._lightweightDiffing {
+            let old = oldModel?.sectionModels.reduce(into: 0) { $0 += $1.cellViewModels.count }
+            let new = newModel.sectionModels.reduce(into: 0) { $0 += $1.cellViewModels.count }
 
-            let visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
-            let old: [DiffableTableSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
-            let changeset = StagedChangeset(
-                source: old,
-                target: newModel.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths)
-            )
-            if changeset.isEmpty {
-                self._tableViewModel = newModel
-            } else {
-                self.tableView.reload(
-                    using: changeset,
-                    deleteSectionsAnimation: self.deletionAnimation,
-                    insertSectionsAnimation: self.insertionAnimation,
-                    reloadSectionsAnimation: self.insertionAnimation,
-                    deleteRowsAnimation: self.deletionAnimation,
-                    insertRowsAnimation: self.insertionAnimation,
-                    reloadRowsAnimation: self.insertionAnimation
-                ) {
-                    self._tableViewModel = $0.makeTableViewModel(sectionIndexTitles: oldModel?.sectionIndexTitles)
-                }
-                self._tableViewModel = newModel
-            }
-            // always refresh visible cells, in case some
-            // state changed that isn't captured by the diff
-            self.refreshViews(refreshContext: .contentOnly)
-        } else {
             self._tableViewModel = newModel
-            // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
-            // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
-            // beginUpdates() endUpdates()
-            self.tableView.reloadData()
-            self.refreshViews()
+            if old == new {
+                self.refreshViews(refreshContext: .contentOnly)
+            } else {
+                // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
+                // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
+                // beginUpdates() endUpdates()
+                self.tableView.reloadData()
+                self.refreshViews()
+            }
+        } else {
+            if self._automaticDiffingEnabled {
+
+                let visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
+                let old: [DiffableTableSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
+                let changeset = StagedChangeset(
+                    source: old,
+                    target: newModel.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths)
+                )
+                if changeset.isEmpty {
+                    self._tableViewModel = newModel
+                } else {
+                    self.tableView.reload(
+                        using: changeset,
+                        deleteSectionsAnimation: self.deletionAnimation,
+                        insertSectionsAnimation: self.insertionAnimation,
+                        reloadSectionsAnimation: self.insertionAnimation,
+                        deleteRowsAnimation: self.deletionAnimation,
+                        insertRowsAnimation: self.insertionAnimation,
+                        reloadRowsAnimation: self.insertionAnimation
+                    ) {
+                        self._tableViewModel = $0.makeTableViewModel(sectionIndexTitles: oldModel?.sectionIndexTitles)
+                    }
+                    self._tableViewModel = newModel
+                }
+                // always refresh visible cells, in case some
+                // state changed that isn't captured by the diff
+                self.refreshViews(refreshContext: .contentOnly)
+            } else {
+                self._tableViewModel = newModel
+                // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
+                // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
+                // beginUpdates() endUpdates()
+                self.tableView.reloadData()
+                self.refreshViews()
+            }
         }
     }
 

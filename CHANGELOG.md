@@ -6,6 +6,11 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 NEXT
 ----
+0.8.3
+-----
+- Added `lightweightDiffing` option to `TableViewDriver`
+
+----
 0.8.2
 -----
 - Use default row heights for cell estimation
