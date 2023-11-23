@@ -29,6 +29,13 @@ NEXT
 - Added support for deselect and willDispaly cells.
 - Added support for should select cell
 
+0.8.0
+-----
+
+### New
+
+- Added SPM Support
+
 0.7.0
 -----
 
