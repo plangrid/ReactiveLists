@@ -72,6 +72,8 @@ open class TableViewDriver: NSObject {
 
     private let _automaticDiffingEnabled: Bool
 
+    private let _lightweightDiffing: Bool
+
     /// Initializes a data source that drives a `UITableView` based on a `TableViewModel`.
     ///
     /// - Parameters:
@@ -82,14 +84,19 @@ open class TableViewDriver: NSObject {
     ///   - automaticDiffingEnabled: defines whether or not this data source updates the table
     ///                              view automatically when cells/sections are moved/inserted/deleted.
     ///                              Defaults to `true`.
+    ///   - lightweightDiffing: when enabled, simply diff the count of rows rather than generating full changesets.
+    ///                         Defaults to `false`.
     public init(
         tableView: UITableView,
         tableViewModel: TableViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
-        automaticDiffingEnabled: Bool = true) {
+        automaticDiffingEnabled: Bool = true,
+        lightweightDiffing: Bool = false
+    ) {
         self._tableViewModel = tableViewModel
         self.tableView = tableView
         self._automaticDiffingEnabled = automaticDiffingEnabled
+        self._lightweightDiffing = lightweightDiffing
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         tableView.dataSource = self
@@ -182,40 +189,56 @@ open class TableViewDriver: NSObject {
 
         guard let newModel = newModel else { return }
 
-        if self._automaticDiffingEnabled {
+        if self._automaticDiffingEnabled, self._lightweightDiffing {
+            let old = oldModel?.sectionModels.reduce(into: 0) { $0 += $1.cellViewModels.count }
+            let new = newModel.sectionModels.reduce(into: 0) { $0 += $1.cellViewModels.count }
 
-            let visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
-            let old: [DiffableTableSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
-            let changeset = StagedChangeset(
-                source: old,
-                target: newModel.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths)
-            )
-            if changeset.isEmpty {
-                self._tableViewModel = newModel
-            } else {
-                self.tableView.reload(
-                    using: changeset,
-                    deleteSectionsAnimation: self.deletionAnimation,
-                    insertSectionsAnimation: self.insertionAnimation,
-                    reloadSectionsAnimation: self.insertionAnimation,
-                    deleteRowsAnimation: self.deletionAnimation,
-                    insertRowsAnimation: self.insertionAnimation,
-                    reloadRowsAnimation: self.insertionAnimation
-                ) {
-                    self._tableViewModel = $0.makeTableViewModel(sectionIndexTitles: oldModel?.sectionIndexTitles)
-                }
-                self._tableViewModel = newModel
-            }
-            // always refresh visible cells, in case some
-            // state changed that isn't captured by the diff
-            self.refreshViews(refreshContext: .contentOnly)
-        } else {
             self._tableViewModel = newModel
-            // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
-            // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
-            // beginUpdates() endUpdates()
-            self.tableView.reloadData()
-            self.refreshViews()
+            if old == new {
+                self.refreshViews(refreshContext: .contentOnly)
+            } else {
+                // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
+                // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
+                // beginUpdates() endUpdates()
+                self.tableView.reloadData()
+                self.refreshViews()
+            }
+        } else {
+            if self._automaticDiffingEnabled {
+
+                let visibleIndexPaths = tableView.indexPathsForVisibleRows ?? []
+                let old: [DiffableTableSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
+                let changeset = StagedChangeset(
+                    source: old,
+                    target: newModel.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths)
+                )
+                if changeset.isEmpty {
+                    self._tableViewModel = newModel
+                } else {
+                    self.tableView.reload(
+                        using: changeset,
+                        deleteSectionsAnimation: self.deletionAnimation,
+                        insertSectionsAnimation: self.insertionAnimation,
+                        reloadSectionsAnimation: self.insertionAnimation,
+                        deleteRowsAnimation: self.deletionAnimation,
+                        insertRowsAnimation: self.insertionAnimation,
+                        reloadRowsAnimation: self.insertionAnimation
+                    ) {
+                        self._tableViewModel = $0.makeTableViewModel(sectionIndexTitles: oldModel?.sectionIndexTitles)
+                    }
+                    self._tableViewModel = newModel
+                }
+                // always refresh visible cells, in case some
+                // state changed that isn't captured by the diff
+                self.refreshViews(refreshContext: .contentOnly)
+            } else {
+                self._tableViewModel = newModel
+                // We need to call reloadData here to ensure UITableView is in-sync with the data source before we start
+                // making calls to access visible cells. In the automatic diffing case, this is handled by calls to
+                // beginUpdates() endUpdates()
+                self.tableView.reloadData()
+                self.refreshViews()
+            }
         }
     }
 
@@ -240,6 +263,15 @@ extension TableViewDriver: UITableViewDataSource {
             fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
         }
         return tableView.configuredCell(for: cellViewModel, at: indexPath)
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let tableViewModel = self.tableViewModel, let cellViewModel = tableViewModel[ifExists: indexPath] else {
+            fatalError("Table View Model has an invalid configuration: \(String(describing: self.tableViewModel))")
+        }
+
+        cellViewModel.willDisplay(cell: cell)
     }
 
     /// :nodoc:
@@ -318,6 +350,11 @@ extension TableViewDriver: UITableViewDelegate {
         guard let tableViewModel = self.tableViewModel else { return 0 }
         return tableViewModel[ifExists: indexPath]?.rowHeight ?? tableViewModel.defaultRowHeight
     }
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let tableViewModel = self.tableViewModel else { return 0 }
+        return tableViewModel.defaultRowHeight
+    }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -331,12 +368,22 @@ extension TableViewDriver: UITableViewDelegate {
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return self.tableViewModel?[ifExists: section]?.headerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
     }
 
     /// :nodoc:
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? CGFloat.leastNormalMagnitude
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        return self.tableViewModel?[ifExists: section]?.footerViewModel?.height(forSection: section, totalSections: self.numberOfSections(in: tableView)) ?? 0.0
     }
 
     /// :nodoc:
@@ -365,6 +412,20 @@ extension TableViewDriver: UITableViewDelegate {
     }
 
     /// :nodoc:
+    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard let model = self.tableViewModel?[ifExists: indexPath], !model.shouldSelect(at: indexPath) else {
+            return indexPath
+        }
+
+        return nil
+    }
+
+    /// :nodoc:
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.tableViewModel?[ifExists: indexPath]?.didDeselect?()
+    }
+
+    /// :nodoc:
     public func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         self.tableViewModel?[ifExists: indexPath]?.willBeginEditing?()
     }
@@ -389,5 +450,13 @@ extension TableViewDriver: UITableViewDelegate {
     /// :nodoc:
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return self.tableViewModel?[ifExists: indexPath]?.shouldHighlight ?? true
+    }
+}
+
+extension TableViewDriver: UIScrollViewDelegate {
+    /// :nodoc:
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let tableViewModel = tableViewModel else { return }
+        tableViewModel.didScrollClosure?(scrollView)
     }
 }

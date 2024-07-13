@@ -46,13 +46,22 @@ public protocol TableCellViewModel: ReusableCellViewModelProtocol, DiffableViewM
     /// Invoked when a cell has been selected.
     var didSelect: DidSelectClosure? { get }
 
+    /// Invoked when a cell has been deselected.
+    var didDeselect: DidDeselectClosure? { get }
+
     /// Invoked when an accessory button is tapped.
     var accessoryButtonTapped: AccessoryButtonTappedClosure? { get }
+
+    /// Whether or not this cell should be selected.
+    func shouldSelect(at: IndexPath) -> Bool
 
     /// Asks the cell model to update the `UITableViewCell` with the content
     /// in the cell model and return the updated cell.
     /// - Parameter cell: the cell which contents need to be updated.
     func applyViewModelToCell(_ cell: UITableViewCell)
+
+    /// Invoke when  a cell will be displayed
+    func willDisplay(cell: UITableViewCell)
 }
 
 /// Default implementations for `TableCellViewModel`.
@@ -87,7 +96,16 @@ extension TableCellViewModel {
     public var didSelect: DidSelectClosure? { return nil }
 
     /// Default implementation, returns `nil`.
+    public var didDeselect: DidDeselectClosure? { return nil }
+
+    /// Default implementation, returns `nil`.
     public var accessoryButtonTapped: AccessoryButtonTappedClosure? { return nil }
+
+    /// Default implementation, returns `true`.
+    public func shouldSelect(at: IndexPath) -> Bool { return true }
+
+    /// Default implementation
+    public func willDisplay(cell: UITableViewCell) { }
 }
 
 /// Protocol that needs to be implemented by table view cell view models
@@ -309,16 +327,19 @@ public struct TableViewModel {
         return self.sectionModels.allSatisfy { $0.isEmpty }
     }
 
+    /// Invoked when the tableview is scrolled
+    public var didScrollClosure: DidScrollClosure?
+
     /// Initializes a table view model with one section and the cell models provided
     /// via the initializer.
     ///
     /// - Parameter cellViewModels: the cell models for the only section in this table.
-    public init(cellViewModels: [TableCellViewModel]) {
+    public init(cellViewModels: [TableCellViewModel], didScrollClosure: DidScrollClosure? = nil) {
         let section = TableSectionViewModel(
             diffingKey: "default_section",
             cellViewModels: cellViewModels
         )
-        self.init(sectionModels: [section])
+        self.init(sectionModels: [section], didScrollClosure: didScrollClosure)
     }
 
     /// Initializes a table view model with the sections provided.
@@ -327,10 +348,12 @@ public struct TableViewModel {
     /// - Parameters:
     ///   - sectionModels: the sections that need to be shown in this table view.
     ///   - sectionIndexTitles: the section index titles for this table view.
-    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil, defaultRowHeight: CGFloat = 44.0) {
+    ///   - didScrollClosure: the scroll closure for this table view.
+    public init(sectionModels: [TableSectionViewModel], sectionIndexTitles: [String]? = nil, defaultRowHeight: CGFloat = 44.0, didScrollClosure: DidScrollClosure? = nil) {
         self.sectionModels = sectionModels
         self.sectionIndexTitles = sectionIndexTitles
         self.defaultRowHeight = defaultRowHeight
+        self.didScrollClosure = didScrollClosure
     }
 
     /// Returns the section model at the specified index or `nil` if no such section exists.

@@ -55,6 +55,8 @@ public class CollectionViewDriver: NSObject {
     private var _shouldDeselectUponSelection: Bool
 
     private let _automaticDiffingEnabled: Bool
+    
+    private let useDataSource: Bool
 
     // MARK: Initialization
 
@@ -72,14 +74,17 @@ public class CollectionViewDriver: NSObject {
         collectionView: UICollectionView,
         collectionViewModel: CollectionViewModel? = nil,
         shouldDeselectUponSelection: Bool = true,
+        useDataSource: Bool = false,
         automaticDiffingEnabled: Bool = true) {
         self._collectionViewModel = collectionViewModel
         self.collectionView = collectionView
         self._automaticDiffingEnabled = automaticDiffingEnabled
+        self.useDataSource = useDataSource
         self._shouldDeselectUponSelection = shouldDeselectUponSelection
         super.init()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.prefetchDataSource = self
         self._updateCollectionViewModel(from: nil, to: collectionViewModel)
     }
 
@@ -154,14 +159,31 @@ public class CollectionViewDriver: NSObject {
         guard let newModel = newModel else { return }
 
         if self._automaticDiffingEnabled {
+            if self.useDataSource {
+                let visibleIndexPaths = self.collectionView.indexPathsForVisibleItems
+                let old: [DiffableCollectionSectionViewModel] = oldModel?.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths) ?? []
+                let changeset = StagedChangeset<[DiffableCollectionSectionViewModel]>(
+                                source: old,
+                                target: newModel.sectionModelsForDiffing(inVisibleIndexPaths: visibleIndexPaths)
+                            )
 
-            let old: [CollectionSectionViewModel] = oldModel?.sectionModels ?? []
-            let changeset = StagedChangeset(source: old, target: newModel.sectionModels)
-            if changeset.isEmpty {
-                self._collectionViewModel = newModel
+                if changeset.isEmpty {
+                    self._collectionViewModel = newModel
+                } else {
+                    self.collectionView.reload(using: changeset) {
+                        self._collectionViewModel = $0.makeCollectionViewModel()
+                    }
+                    self._collectionViewModel = newModel
+                }
             } else {
-                self.collectionView.reload(using: changeset) {
-                    self._collectionViewModel = CollectionViewModel(sectionModels: $0)
+                let old: [CollectionSectionViewModel] = oldModel?.sectionModels ?? []
+                let changeset = StagedChangeset(source: old, target: newModel.sectionModels)
+                if changeset.isEmpty {
+                    self._collectionViewModel = newModel
+                } else {
+                    self.collectionView.reload(using: changeset) {
+                        self._collectionViewModel = CollectionViewModel(sectionModels: $0)
+                    }
                 }
             }
             self.refreshViews()
@@ -195,6 +217,9 @@ extension CollectionViewDriver: UICollectionViewDataSource {
     /// :nodoc:
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let sectionModel = self.collectionViewModel?[ifExists: section] else { return 0 }
+        if let datasource = sectionModel.cellViewModelDataSource {
+            return datasource.count
+        }
         return sectionModel.cellViewModels.count
     }
 
@@ -223,6 +248,40 @@ extension CollectionViewDriver: UICollectionViewDataSource {
             view = UICollectionReusableView()
         }
         return view
+    }
+}
+
+extension CollectionViewDriver: UICollectionViewDataSourcePrefetching {
+    
+    private func _enumerateCellDataSourcesForPrefetch(
+        indexPaths: [IndexPath],
+        enumerationBlock: (CollectionCellViewModelDataSource, AnySequence<Int>) -> Void
+    ) {
+        guard let sectionModels = self.collectionViewModel?.sectionModels else { return }
+        // if this is called during a batch update, sections can shift
+        // around, which can lead to accessing a bad section
+        let indexIsValid = sectionModels.indices.contains
+        for (section, indices) in indexPaths.indicesBySection() where indexIsValid(section) {
+            guard let dataSource = sectionModels[section].cellViewModelDataSource else { return }
+            enumerationBlock(dataSource, indices)
+        }
+    }
+
+    
+    public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        self._enumerateCellDataSourcesForPrefetch(
+            indexPaths: indexPaths
+        ) { datasource, indices in
+            datasource.prefetchRowsAt(indices: indices)
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        self._enumerateCellDataSourcesForPrefetch(
+            indexPaths: indexPaths
+        ) { datasource, indices in
+            datasource.cancelPrefetchingRowsAt(indices: indices)
+        }
     }
 }
 

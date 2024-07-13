@@ -6,6 +6,28 @@ The changelog for `ReactiveLists`. Also see the [releases](https://github.com/pl
 
 NEXT
 ----
+0.8.3
+-----
+- Added `lightweightDiffing` option to `TableViewDriver`
+
+----
+0.8.2
+-----
+- Use default row heights for cell estimation
+
+0.8.1.9
+-----
+- Added UITableViewDelegate calls for estimated row, header, footer heights
+- Changed default header/footer heights from `leastNormalMagnitude` to 0.0 
+
+0.8.1.8
+-----
+- Added support for CollectionView cells lazy-loading.
+
+0.8.1
+-----
+- Added support for deselect and willDispaly cells.
+- Added support for should select cell
 
 0.8.0
 -----

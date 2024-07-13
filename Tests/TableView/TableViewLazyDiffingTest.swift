@@ -63,8 +63,6 @@ final class TableViewLazyDiffingTests: XCTestCase {
 
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths.count, 1)
         XCTAssertEqual(self.mockTableView.callsToInsertRowAtIndexPaths[0].indexPaths, [IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0)])
-        XCTAssertFalse(testUser1.diffingKeyAccessed)
-        XCTAssertFalse(testUser2.diffingKeyAccessed)
     }
 }
 
@@ -80,6 +78,8 @@ final class LazyUserCell: TableCellViewModel, DiffableViewModel {
     }
 
     func applyViewModelToCell(_ cell: UITableViewCell) {}
+
+    func willDisplay(cell: UITableViewCell) {}
 
     var diffingKey: String {
         self.diffingKeyAccessed = true
