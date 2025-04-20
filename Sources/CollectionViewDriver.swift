@@ -260,8 +260,7 @@ extension CollectionViewDriver: UICollectionViewDataSourcePrefetching {
         guard let sectionModels = self.collectionViewModel?.sectionModels else { return }
         // if this is called during a batch update, sections can shift
         // around, which can lead to accessing a bad section
-        let indexIsValid = sectionModels.indices.contains
-        for (section, indices) in indexPaths.indicesBySection() where indexIsValid(section) {
+        for (section, indices) in indexPaths.indicesBySection() where sectionModels.indices.contains(section) {
             guard let dataSource = sectionModels[section].cellViewModelDataSource else { return }
             enumerationBlock(dataSource, indices)
         }
