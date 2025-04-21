@@ -318,8 +318,7 @@ extension TableViewDriver: UITableViewDataSourcePrefetching {
         guard let sectionModels = self.tableViewModel?.sectionModels else { return }
         // if this is called during a batch update, sections can shift
         // around, which can lead to accessing a bad section
-        let indexIsValid = sectionModels.indices.contains
-        for (section, indices) in indexPaths.indicesBySection() where indexIsValid(section) {
+        for (section, indices) in indexPaths.indicesBySection() where sectionModels.indices.contains(section) {
             enumerationBlock(sectionModels[section].cellViewModelDataSource, indices)
         }
     }
